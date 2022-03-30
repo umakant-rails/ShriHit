@@ -1,0 +1,36 @@
+/*$font-url: 'http://fonts.useso.com/css?family=Lato:400,700,400italic,700italic&subset=latin';*/
+
+$font-name: 'Lato' !default;
+$font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+$font-url: 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin,latin-ext' !default;
+$import-google-fonts: true !default;
+
+$mobile-breakpoint: 320px !default;
+$tablet-breakpoint: 768px !default;
+$computer-breakpoint: 992px !default;
+$large-monitor-breakpoint: 1200px !default;
+$widescreen-monitor-breakpoint: 1920px !default;
+
+@import 'semantic-ui';
+@import 'semantic-ui/collections/menu';
+/*import '@doabit/semantic-ui-sass/src/scss/semantic-ui.scss'*/
+
+body {
+background-color: #FFFFFF;
+}
+.ui.menu .item img.logo {
+margin-right: 1.5em;
+}
+.main.container {
+margin-top: 3em;
+}
+.wireframe {
+margin-top: 2em;
+}
+.ui.footer.segment {
+margin: 5em 0em 0em;
+padding: 5em 0em;
+}
+.logo {
+  padding-right: 2px;
+}
