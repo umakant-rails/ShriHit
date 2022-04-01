@@ -15,7 +15,11 @@
         <a href="#" class="header item">
           Project Name 
         </a>
-        <a href="#" class="item"><i class="home icon"></i>Home</a>
+        <% if current_user.blank? %>
+          <a href="<%= root_path %>" class="item">
+            <i class="home icon"></i>Home
+          </a>
+        <% end %>
         <a href="#" class="item"><i class="mail icon"></i> Contact</a>
         <div class="ui simple dropdown item">
           Dropdown <i class="dropdown icon"></i>
@@ -36,17 +40,35 @@
           </div>
         </div>
         <div class="right menu">
-          <div class="item">
-         <a class="ui basic teal button" href="#"><i class="sign in icon"></i>Log in</a>
-          </div>
-          <div class="item">
-          <a class="ui basic blue button" href="#"><i class="add user icon"></i>Sign up</a>
-          </div>
-          </div>
+          <% if current_user.blank? %>
+            <div class="item">
+              <a class="ui basic teal button" href="<%= new_user_session_path %>">
+                <i class="sign in icon"></i>Log in
+              </a>
+            </div>
+            <div class="item">
+              <a class="ui basic blue button" href="<%= new_user_registration_path %>">
+                <i class="add user icon"></i>Sign up
+              </a>
+            </div>
+          <% else %>
+            <div class="item">
+              <%= form_for(current_user,
+                url: destroy_user_session_path, html: { method: :delete }) do |f| %>
+                <button type="submit" class="ui basic blue button">
+                  <i class="sign out icon"></i> Log out
+                </button>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div class="ui main text container">
+    <div class="ui cstm-container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
   </body>
+
 </html>
