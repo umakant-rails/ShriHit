@@ -1,0 +1,54 @@
+<div class="ui attached inverted menu">
+  <div class="ui container">
+    <a href="<%= root_path %>" class="header item">
+      Project Name 
+    </a>
+    <% if current_user.present? %>
+      <a href="<%= homes_path %>" class="item">
+        <i class="homes icon"></i>Home
+      </a>
+    <% end %>
+    <a href="#" class="item"><i class="mail icon"></i> Contact</a>
+    <div class="ui simple dropdown item">
+      Dropdown <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="#">Link Item</a>
+        <a class="item" href="#">Link Item</a>
+        <div class="divider"></div>
+        <div class="header">Header Item</div>
+        <div class="item">
+          <i class="dropdown icon"></i>
+          Sub Menu
+          <div class="menu">
+            <a class="item" href="#">Link Item</a>
+            <a class="item" href="#">Link Item</a>
+          </div>
+        </div>
+        <a class="item" href="#">Link Item</a>
+      </div>
+    </div>
+    <div class="right menu">
+      <% if current_user.blank? %>
+        <div class="item">
+          <a class="ui basic teal button" href="<%= new_user_session_path %>">
+            <i class="sign in icon"></i>Log in
+          </a>
+        </div>
+        <div class="item">
+          <a class="ui basic blue button" href="<%= new_user_registration_path %>">
+            <i class="add user icon"></i>Sign up
+          </a>
+        </div>
+      <% else %>
+        <div class="item">
+          <%= form_for(current_user,
+            url: destroy_user_session_path, html: { method: :delete }) do |f| %>
+            <button type="submit" class="ui basic blue button">
+              <i class="sign out icon"></i> Log out
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

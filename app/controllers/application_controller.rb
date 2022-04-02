@@ -27,9 +27,9 @@ class ApplicationController < ActionController::Base
 
 	def set_layouts
     if current_user.present?
-      return 'application'
+      return 'user'
     elsif current_user.present?
-      return 'application'
+      return 'user'
     else
       return 'application'
     end
