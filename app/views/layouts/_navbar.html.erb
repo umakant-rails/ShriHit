@@ -1,54 +1,53 @@
-<div class="ui attached inverted menu">
-  <div class="ui container">
-    <a href="<%= root_path %>" class="header item">
-      Project Name 
+<!-- <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #63B3B6;"> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-left: -0.9%;margin-right: -0.9%;"> 
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="/assets/lalji_icon.jpg" alt="ShriHit" class="app-icon">
+      श्रीहित
     </a>
-    <% if current_user.present? %>
-      <a href="<%= homes_path %>" class="item">
-        <i class="homes icon"></i>Home
-      </a>
-    <% end %>
-    <a href="#" class="item"><i class="mail icon"></i> Contact</a>
-    <div class="ui simple dropdown item">
-      Dropdown <i class="dropdown icon"></i>
-      <div class="menu">
-        <a class="item" href="#">Link Item</a>
-        <a class="item" href="#">Link Item</a>
-        <div class="divider"></div>
-        <div class="header">Header Item</div>
-        <div class="item">
-          <i class="dropdown icon"></i>
-          Sub Menu
-          <div class="menu">
-            <a class="item" href="#">Link Item</a>
-            <a class="item" href="#">Link Item</a>
-          </div>
-        </div>
-        <a class="item" href="#">Link Item</a>
-      </div>
-    </div>
-    <div class="right menu">
-      <% if current_user.blank? %>
-        <div class="item">
-          <a class="ui basic teal button" href="<%= new_user_session_path %>">
-            <i class="sign in icon"></i>Log in
-          </a>
-        </div>
-        <div class="item">
-          <a class="ui basic blue button" href="<%= new_user_registration_path %>">
-            <i class="add user icon"></i>Sign up
-          </a>
-        </div>
-      <% else %>
-        <div class="item">
-          <%= form_for(current_user,
-            url: destroy_user_session_path, html: { method: :delete }) do |f| %>
-            <button type="submit" class="ui basic blue button">
-              <i class="sign out icon"></i> Log out
-            </button>
-          <% end %>
-        </div>
-      <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <% if current_user.blank? %>
+          <li class="nav-item">
+            <a class="btn btn-outline-info txt-success" href="<%= new_user_session_path %>">
+              <i class="fa fa-right-to-bracket"></i>
+              Login
+            </a>
+          </li>
+          <li class="nav-item ms-1">
+            <a class="btn btn-outline-info" href="<%= new_user_registration_path %>">
+              <i class="fa-solid fa-user-plus"></i>
+              Signup
+            </a>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= form_for(current_user, url: destroy_user_session_path, html: { method: :delete }) do |f| %>
+              <button type="submit" class="btn btn-outline-info">
+                Log out
+                <i class="fa-solid fa-right-from-bracket"></i>
+              </button>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
-</div>
+</nav>

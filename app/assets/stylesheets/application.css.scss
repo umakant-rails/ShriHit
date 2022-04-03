@@ -1,26 +1,11 @@
-/*$font-url: 'http://fonts.useso.com/css?family=Lato:400,700,400italic,700italic&subset=latin';*/
+@import "bootstrap";
+@import "font-awesome";
+@import 'devise/devise';
 
-$font-name: 'Lato' !default;
-$font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
-$font-url: 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin,latin-ext' !default;
-$import-google-fonts: true !default;
-
-$mobile-breakpoint: 320px !default;
-$tablet-breakpoint: 768px !default;
-$computer-breakpoint: 992px !default;
-$large-monitor-breakpoint: 1200px !default;
-$widescreen-monitor-breakpoint: 1920px !default;
-
-@import 'semantic-ui';
-@import 'semantic-ui/collections/menu';
-/*import '@doabit/semantic-ui-sass/src/scss/semantic-ui.scss'*/
-
-body {
-  background-color: #FFFFFF;
+.app-icon{
+  width:  40px;
+  height: 40px;
+  border-radius: 40px;
+  margin-right:  5px;
+  /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
 }
-.cstm-container{
-  /*margin-top: 3.1em;*/
-}
-
-
-
