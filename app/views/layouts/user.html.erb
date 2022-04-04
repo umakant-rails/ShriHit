@@ -10,9 +10,16 @@
   </head>
 
   <body>
-    <div class="container-fluid">
-      <%= render partial: "layouts/navbar" %>
-      <%= yield %>
+    <div class="wrapper">
+      <%= render partial: "layouts/sidebar" %>
+      <div class="main">
+        <%= render partial: "layouts/navbar1" %>
+        <main class="content">
+          <div class="container-fluid p-0">
+          </div>
+        </main>
+        <%= render partial: "layouts/footbar" %>
+      </div>
     </div>
   </body>
 </html>

@@ -1,3 +1,3 @@
 import 'jquery';
-import "popper"
-import "bootstrap"
+import "popper";
+import "bootstrap";
