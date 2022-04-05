@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  sampraday: MyString
+  biography: MyText
+  birth_date: 2022-04-04
+  death_date: 2022-04-04
+
+two:
+  name: MyString
+  sampraday: MyString
+  biography: MyText
+  birth_date: 2022-04-04
+  death_date: 2022-04-04

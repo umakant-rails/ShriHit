@@ -1,0 +1,38 @@
+<%= form_with(model: article) do |form| %>
+  <div class="mb-3">
+    <label class="form-label">Event Type</label>
+    <%= form.select :article_type_id, options_for_select(@events.collect{|e| [e.name, e.id]}), {:prompt => 'Select Event Type'}, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <label for="article_type" class="form-label">रचना का प्रकार</label>
+    <%= form.select :article_type_id, options_for_select(article_type_hash), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <label for="article_type" class="form-label">लेखक</label>
+      <%= form.select :writer_id, options_for_select(@writers.collect{|w| [w.name, w.id]}), {:prompt => 'लेखक चुने'}, class: 'form-control' %>
+      <p>यदि लेखक का नाम ऊपर की सूची में नहीं है तो कृपया नीचे वाले बॉक्स में नाम टाइप करे.</p>
+      <%= text_field_tag "writer", nil, class: 'form-control' %>
+  </div>
+  <div class="mb-3">
+    <label for="article_type" class="form-label">रचना</label>
+    <%= text_area(:article, :content, cols: 30, rows: 15, class: 'form-control') %>
+  </div>
+  <div class="text-center mt-3">
+    <%#= form.submit class: "btn btn-lg btn-primary form-control" %>
+  </div>
+<% end %>
+   
+
+# <%= form_with(model: article) do |form| %>
+#   <% if article.errors.any? %>
+#     <div style="color: red">
+#       <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+#       <ul>
+#         <% article.errors.each do |error| %>
+#           <li><%= error.full_message %></li>
+#         <% end %>
+#       </ul>
+#     </div>
+#   <% end %>
+# <% end %>

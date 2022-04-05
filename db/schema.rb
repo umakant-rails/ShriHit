@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
 
   create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content"
-    t.string "writer"
+    t.string "writer_id"
     t.integer "user_id"
     t.integer "article_type_id"
     t.integer "event_id"
@@ -63,6 +63,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "writers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.string "sampraday"
+    t.text "biography"
+    t.date "birth_date"
+    t.date "death_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

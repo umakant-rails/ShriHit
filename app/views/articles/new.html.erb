@@ -1,0 +1,47 @@
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      
+      <div class="card-body">
+        <h3>नई रचना</h3>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4">
+          <!-- <h3 class="card-title">New article</h3>
+          <div class="dropdown-divider"></div> -->
+          <%= render "form", article: @article %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<br>
+<div>
+  <%= link_to "Back to articles", articles_path %>
+</div>
+<script type="text/javascript">
+  function initGoogle(){
+    google.load("elements", "1", {
+      packages: "transliteration"
+    });
+    google.setOnLoadCallback(onLoad);
+  }
+  function onLoad() {
+    var options = {
+        sourceLanguage:
+            google.elements.transliteration.LanguageCode.ENGLISH,
+        destinationLanguage:
+            [google.elements.transliteration.LanguageCode.HINDI],
+        shortcutKey: 'ctrl+g',
+        transliterationEnabled: true
+    };
+    var control =
+        new google.elements.transliteration.TransliterationControl(options);
+    control.makeTransliteratable(["writer", "article_content"]);
+  }
+  $(document).ready(function() {
+      console.log('ddddddddddd');
+  });
+</script>
