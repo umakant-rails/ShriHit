@@ -6,7 +6,9 @@ class CreateWriters < ActiveRecord::Migration[7.0]
       t.text :biography
       t.date :birth_date
       t.date :death_date
-
+      t.integer :is_approved
+      t.integer :user_id
+      
       t.timestamps
     end
   end

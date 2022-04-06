@@ -1,2 +1,17 @@
-<div id="<%= dom_id article %>">
-</div>
+<tr>
+	<th scope="row">
+		<%=  1 %>
+	</th>
+	<td>
+		<%= article.hindi_title %>
+	</td>
+	<td>
+		<%= article.writer.name %>
+	</td>
+	<td>
+		<%= article.user.username %>
+	</td>
+	<td>
+		<%= link_to "Show this article", article %>
+	</td>
+</tr>

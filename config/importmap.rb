@@ -11,3 +11,6 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin_all_from "app/javascript/controllers", under: "controllers"
+pin "stimulus-validation", to: "https://ga.jspm.io/npm:stimulus-validation@1.0.1-beta.3/dist/validation-controller.js"
+pin "stimulus", to: "https://ga.jspm.io/npm:stimulus@1.1.1/dist/stimulus.umd.js"
+pin "validate.js", to: "https://ga.jspm.io/npm:validate.js@0.12.0/validate.js"

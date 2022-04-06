@@ -19,22 +19,36 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
 
   create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content"
-    t.string "writer_id"
+    t.integer "writer_id"
     t.integer "user_id"
     t.integer "article_type_id"
-    t.integer "event_id"
+    t.integer "theme_id"
+    t.integer "context_id"
+    t.string "hindi_title"
+    t.string "english_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "contexts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
+    t.integer "is_approved"
+    t.integer "user_id"
+    t.integer "theme_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "themes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "is_approved"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,6 +85,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
     t.text "biography"
     t.date "birth_date"
     t.date "death_date"
+    t.integer "is_approved"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
