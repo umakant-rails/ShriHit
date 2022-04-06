@@ -11,7 +11,25 @@
 	<td>
 		<%= article.user.username %>
 	</td>
-	<td>
-		<%= link_to "Show this article", article %>
+	<td style="display:inline-block">
+		<div class="row">
+			<div class="col-md-2">
+				<%= link_to article do %>
+				  <i class="fa fa-eye"></i>
+				<% end %>
+			</div>
+			<div class="col-md-2">
+				<%= link_to edit_article_path(article) do %>
+				  <i class="fa fa-edit"></i>
+				<% end %>
+			</div>
+				<div class="col-md-2">
+				<%= form_for(article, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+		      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+		        <i class="fa fa-trash" style="color:red;"></i>
+		      </button>
+		    </div>
+     </div>
+    <% end %>
 	</td>
 </tr>
