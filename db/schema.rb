@@ -11,13 +11,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
-  create_table "article_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "article_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "articles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "articles", force: :cascade do |t|
     t.text "content"
     t.integer "writer_id"
     t.integer "user_id"
@@ -30,7 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "contexts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "contexts", force: :cascade do |t|
     t.string "name"
     t.integer "is_approved"
     t.integer "user_id"
@@ -39,13 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "themes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "themes", force: :cascade do |t|
     t.string "name"
     t.integer "is_approved"
     t.integer "user_id"
@@ -53,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username"
     t.string "first_name"
@@ -79,7 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "writers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "writers", force: :cascade do |t|
     t.string "name"
     t.string "sampraday"
     t.text "biography"
