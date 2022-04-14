@@ -1,7 +1,7 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: article, html: {
   'data-target': 'article.form', 'data-action': 'article#submitForm'}) do |form| %>
-  <% article_types, themes, writers, contexts = get_data_for_article_creation %>  
+  <% article_types, themes, authors, contexts = get_data_for_article_creation %>  
   <div class="mb-3" data-target="article.errors">
     <% article.errors.each do |error| %>
       <li><%= error.full_message %></li>
@@ -41,14 +41,14 @@
     <div class="col-md-6">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>लेखक</label>
-          <%= form.select :writer_id, options_for_select(writers), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleWriter', 'data-target': 'article.writerSelect' %>
-          <div data-target='article.writerInput' hidden=true>
+          <%= form.select :author_id, options_for_select(authors), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-target': 'article.authorSelect' %>
+          <div data-target='article.authorInput' hidden=true>
             <div class="row">
               <div class="col-md-8">
-                <%= text_field_tag 'writer', nil, class: 'form-control', placeholder: 'लेखक का नाम टाइप करे.'  %>
+                <%= text_field_tag 'author', nil, class: 'form-control', placeholder: 'लेखक का नाम टाइप करे.'  %>
               </div>
               <div class="col-md-4">
-                <a href="javascript:void(0);" data-action="article#toggleWriter" class="btn btn-primary">सूची  प्रदर्शित करे </a>
+                <a href="javascript:void(0);" data-action="article#toggleAuthor" class="btn btn-primary">सूची  प्रदर्शित करे </a>
               </div>
             </div>
           </div>

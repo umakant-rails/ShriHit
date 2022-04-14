@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article, only: %i[ show edit update destroy ]
-  before_action :create_writer, only: [:create]
+  before_action :create_author, only: [:create]
   before_action :create_context, only: [:create]
 
   # GET /articles or /articles.json
@@ -24,8 +24,9 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    @article = current_user.articles.new(article_params)
     #binding.break
+    @article = current_user.articles.new(article_params)
+    
     respond_to do |format|
       if @article.save
         format.html { redirect_to article_url(@article), notice: "Article was successfully created." }
@@ -68,14 +69,14 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.fetch(:article, {}).permit(:content, :writer_id, :article_type_id, 
+      params.fetch(:article, {}).permit(:content, :author_id, :article_type_id, 
         :theme_id, :context_id, :hindi_title, :english_title)
     end
 
-    def create_writer
-      if params[:writer_id].blank? && params[:writer].present?
-        writer = Writer.create_writer(params[:writer])
-        params[:article][:writer_id] = writer.id 
+    def create_author
+      if params[:author_id].blank? && params[:author].present?
+        author = Author.create_author(params[:author])
+        params[:article][:author_id] = author.id 
       end
     end
 

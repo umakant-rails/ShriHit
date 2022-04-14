@@ -22,13 +22,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
 
   create_table "articles", force: :cascade do |t|
     t.text "content"
-    t.integer "writer_id"
+    t.integer "author_id"
     t.integer "user_id"
     t.integer "article_type_id"
     t.integer "theme_id"
     t.integer "context_id"
     t.string "hindi_title"
     t.string "english_title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.string "sampraday"
+    t.text "biography"
+    t.date "birth_date"
+    t.date "death_date"
+    t.integer "is_approved"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -80,18 +92,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "writers", force: :cascade do |t|
-    t.string "name"
-    t.string "sampraday"
-    t.text "biography"
-    t.date "birth_date"
-    t.date "death_date"
-    t.integer "is_approved"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
 end

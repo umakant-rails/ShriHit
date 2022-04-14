@@ -3,19 +3,19 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="article"
 export default class extends Controller {
   static targets = ['form', 'content', 'articleTypeId', 'errors',
-    'contextSelect', 'contextInput', 'writerSelect', 'writerInput'];
+    'contextSelect', 'contextInput', 'authorSelect', 'authorInput'];
 
   connect() {
   }
 
-  toggleWriter(){
-    let writerValue = this.writerSelectTarget.value;
-    if(writerValue == 'NA' && !this.writerSelectTarget.hidden){
-      this.writerSelectTarget.hidden = true;
-      this.writerInputTarget.hidden = false;
+  toggleAuthor(){
+    let authorValue = this.authorSelectTarget.value;
+    if(authorValue == 'NA' && !this.authorSelectTarget.hidden){
+      this.authorSelectTarget.hidden = true;
+      this.authorInputTarget.hidden = false;
     } else {
-      this.writerSelectTarget.hidden = false;
-      this.writerInputTarget.hidden = true;
+      this.authorSelectTarget.hidden = false;
+      this.authorInputTarget.hidden = true;
     }
   }
   toggleContext(){

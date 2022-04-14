@@ -3,10 +3,12 @@
 		<%= local_assigns[:index] %>
 	</th>
 	<td>
-		<%= article.hindi_title %>
+		<%= link_to article do %>
+			<%= article.hindi_title %>
+		<% end %>
 	</td>
 	<td>
-		<%= article.writer.name %>
+		<%= article.author.name %>
 	</td>
 	<td>
 		<%= article.user.username %>
