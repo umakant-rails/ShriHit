@@ -71,7 +71,8 @@
   </div>
   <div class='mb-3'>
     <label for='article_type' class='form-label'>रचना</label>
-    <%= text_area(:article, :content, cols: 30, rows: 12, class: 'form-control', 'data-target': 'article.content') %>
+    <%#= text_area(:article, :content, cols: 30, rows: 12, class: 'form-control', 'data-target': 'article.content') %>
+    <%= form.text_area :content, class: 'tinymce', 'data-provider': :summernote %>
   </div>
   <div class='text-center mt-3 actions'>
     <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
