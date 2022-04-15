@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
 
   root to: 'welcome#index'
-  #root to: "home#index"
+  #root to: "homes#index"
   
   devise_for :users, controllers: {
     sessions: 'users/sessions',

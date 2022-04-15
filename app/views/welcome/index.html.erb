@@ -1,1 +1,29 @@
-Index page
+<%= render partial: 'search_bar'%>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-7">
+  	<div class="card">
+	  	<div class="card-body">
+		  	<% if @articles.present? %>
+			    <% @articles && @articles.each do | article | %>
+			      <%= render partial: "article", locals: {article: article} %>
+			    <% end %>
+				<% else %>
+					There is no data available now.
+				<% end %>
+		  </div>
+		</div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body h-100" style="min-height: 545px;">
+        <span class="col-md-6 text-start article-title text-primary">
+          रचनाकार / कवि / भक्त सूची 
+        </span>
+        <div class="dropdown-divider"></div>
+					There is no data available now.
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>

@@ -8,11 +8,17 @@
     <%= stylesheet_link_tag "application" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-    <div class="container-fluid">
-      <%= render partial: "layouts/navbar2" %>
-      <%= yield %>
+    <div class="wrapper">
+      <div class="main">
+        <%= render partial: "layouts/navbar2" %>
+        <main class="content">
+          <div class="container-fluid p-0">
+            <%= yield %>
+          </div>
+        </main>
+      </div>
     </div>
   </body>
 </html>
+

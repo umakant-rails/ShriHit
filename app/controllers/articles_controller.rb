@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article, only: %i[ show edit update destroy ]
-  before_action :create_author, :create_context,  only: [:create]
-  #before_action :create_context, only: [:create]
+  before_action :create_author, only: [:create]
+  before_action :create_context, only: [:create]
 
   # GET /articles or /articles.json
   def index
@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    #binding.break
+    # binding.break
     @article = current_user.articles.new(article_params)
     
     respond_to do |format|
@@ -75,15 +75,15 @@ class ArticlesController < ApplicationController
 
     def create_author
       if params[:author_id].blank? && params[:author].present?
-        author = Author.create_author(params[:author])
-        params[:article][:author_id] = author.id 
+        @author = Author.create_author(params[:author], current_user.id)
+        params[:article][:author_id] = @author.id 
       end
     end
 
     def create_context
       if params[:context_id].blank? && params[:context].present?
-        context = Context.create_context(params[:context])
-        params[:article][:context_id] = context.id
+        @context = Context.create_context(params[:context], current_user.id)
+        params[:article][:context_id] = @context.id
       end
     end
 end
