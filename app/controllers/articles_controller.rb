@@ -1,8 +1,8 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article, only: %i[ show edit update destroy ]
-  before_action :create_author, only: [:create]
-  before_action :create_context, only: [:create]
+  before_action :create_author, :create_context,  only: [:create]
+  #before_action :create_context, only: [:create]
 
   # GET /articles or /articles.json
   def index

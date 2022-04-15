@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_14_172856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
 
   create_table "authors", force: :cascade do |t|
     t.string "name"
-    t.string "sampraday"
+    t.string "sampradaya_id"
     t.text "biography"
     t.date "birth_date"
     t.date "death_date"
@@ -56,6 +56,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_01_093505) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sampradayas", force: :cascade do |t|
+    t.string "name"
+    t.string "originator"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

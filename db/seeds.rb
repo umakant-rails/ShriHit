@@ -25,3 +25,8 @@ Context.create!(name: 'श्रृंगार') if Context.where(name: 'श्
 Context.create!(name: 'शरद ऋतु') if Context.where(name: 'शरद ऋतु').blank?
 Context.create!(name: 'वर्षा ऋतु') if Context.where(name: 'वर्षा ऋतु').blank?
 Context.create!(name: 'नौका विहार') if Context.where(name: 'नौका विहार').blank?
+
+Sampradaya.create!(name: 'माध्व सम्प्रदाय') if Sampradaya.where(name: 'माध्व सम्प्रदाय').blank?
+Sampradaya.create!(name: 'वल्लभ सम्प्रदाय') if Sampradaya.where(name: 'वल्लभ सम्प्रदाय').blank?
+Sampradaya.create!(name: 'निम्बार्क सम्प्रदाय') if Sampradaya.where(name: 'निम्बार्क सम्प्रदाय').blank?
+Sampradaya.create!(name: 'रामानंदी संप्रदाय') if Sampradaya.where(name: 'रामानंदी संप्रदाय').blank?

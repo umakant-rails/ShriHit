@@ -1,0 +1,37 @@
+<%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
+<%= form_with(model: author, html: {
+  'data-target': 'author.form', 'data-action': 'author#submitForm'}) do |form| %>
+  <% sampradaya_list = get_sampradaya_list %>   
+  <div class="mb-3" data-target="author.errors">
+    <% author.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+  </div>
+  
+  <div class='mb-3'>
+    <label class='form-label'>नाम</label>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+  <div class='mb-3'>
+    <label class='form-label'>सम्प्रदाय</label>
+    <%= form.select :sampradaya_id, options_for_select(sampradaya_list), {:prompt => 'सम्प्रदाय चुने'}, class: 'form-control', 'data-action': 'change->author#toggleSampradaya', 'data-target': 'author.sampradayaSelect'%>
+    <div data-target='author.sampradayaInput' hidden=true>
+      <div class="row">
+        <div class="col-md-9">
+          <%= text_field_tag 'context', nil, class: 'form-control', placeholder: 'सम्प्रदाय का नाम टाइप करे.' %>
+        </div>
+          <div class="col-md-3">
+            <a href="javascript:void(0);" data-action="author#toggleSampradaya" class="btn btn-primary">सूची प्रदर्शित करे </a>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.text_area :biography, class: 'tinymce' %>
+  </div>
+
+  <div class='text-center mt-3 actions'>
+    <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+  </div>
+<% end %>

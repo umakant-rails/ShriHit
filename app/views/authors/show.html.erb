@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <span class="col-md-6 text-start article-title text-primary">
+            रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.name %> )
+          </span>
+          <span class="col-md-6 text-end text-primary author-mark-txt"> 
+            ( योगदानकर्ता : <%= @author.user.username %> )
+          </span>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller= 'article'>
+          <div class="article-content">
+            <% if @author.biography.present? %>
+              <%= raw @author.biography %>
+            <% else %>
+              There is no biography.
+            <% end %>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="row">
+          <div class="col-md-2">
+            <%= link_to "Edit this author", edit_author_path(@author) %> 
+          </div>
+          <div class="col-md-2">
+            <%= link_to "Back to authors", authors_path %>
+          </div>
+          <div class="col-md-2" style="margin: -5px 0 0px 0;padding: 0;">
+            <%= button_to("Destroy this author", author_path(@author), method: :delete, :class => "btn btn-link") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>

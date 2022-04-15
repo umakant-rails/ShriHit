@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-body">
+        <h3>नया रचनाकार</h3>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller= 'author'>
+          <!-- <h3 class="card-title">New article</h3>
+          <div class="dropdown-divider"></div> -->
+          <%= render "form", author: @author %>
+        </div>
+      </div>
+    </div>
+    <%= link_to "Back to Authors", authors_path %>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<% content_for :head do %>
+  <%#= javascript_import_module_tag "article-custom" %>
+<% end %>

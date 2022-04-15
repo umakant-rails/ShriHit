@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-body h-100">
+        <span class="col-md-6 text-start article-title text-primary">
+          रचनाकार/कवि/भक्त सूची  
+        </span>
+        <div class="dropdown-divider"></div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S. No.</th>
+              <th scope="col">रचनाकार/कवि/भक्त</th>
+              <th scope="col">सम्प्रदाय</th>
+              <th scope="col">जन्म तिथि</th>
+              <th scope="col">मृत्यु तिथि</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @authors.present? %>
+              <% @authors.each_with_index do |author, index| %>
+                <%= render partial: 'author', locals: {author: author, index: (index + 1) } %>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="6">
+                  <center>There is no data.</center>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%= link_to "New Author", new_author_path %>
+  </div>
+  <div class="col-md-1"></div>
+</div>

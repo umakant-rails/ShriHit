@@ -5,5 +5,7 @@
 import { application } from "./application"
 
 import ArticleController from "./article_controller"
-application.register("article", ArticleController)
+import AuthorController from "./author_controller";
 
+application.register("article", ArticleController);
+application.register("author", AuthorController);
