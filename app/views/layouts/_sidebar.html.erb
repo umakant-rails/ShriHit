@@ -12,15 +12,14 @@
           </span>
         </a>
       </li>
-      <li class="sidebar-header">
-        रचनाये 
-      </li>
-      <li class="sidebar-item">
+      <li class="sidebar-item <%= set_active(request.fullpath, new_article_path) %>">
         <a class="sidebar-link" href="<%= new_article_path %>">
           <span class="align-middle">
             नई रचना जोड़े
           </span>
         </a>
+      </li>
+      <li class="sidebar-item <%= set_active(request.fullpath, articles_path) %>">
         <a class="sidebar-link" href="<%= articles_path %>">
           <span class="align-middle">
             रचना सूची
@@ -29,12 +28,14 @@
       </li>
       <hr>
       <!-- <div class="dropdown-divider"></div> -->
-      <li class="sidebar-item">
+      <li class="sidebar-item <%= set_active(request.fullpath, new_author_path) %>">
         <a class="sidebar-link" href="<%= new_author_path %>">
           <span class="align-middle">
             रचनाकार जोड़े
           </span>
         </a>
+      </li>
+      <li class="sidebar-item <%= set_active(request.fullpath, authors_path) %>">
         <a class="sidebar-link" href="<%= authors_path %>">
           <span class="align-middle">
             रचनाकार सूची
@@ -42,12 +43,14 @@
         </a>
       </li>
       <hr>
-      <li class="sidebar-item">
+      <li class="sidebar-item <%= set_active(request.fullpath, new_theme_path) %>">
         <a class="sidebar-link" href="<%= new_theme_path %>">
           <span class="align-middle">
             उत्सव जोड़े
           </span>
         </a>
+      </li>
+      <li class="sidebar-item <%= set_active(request.fullpath, themes_path) %>">
         <a class="sidebar-link" href="<%= themes_path %>">
           <span class="align-middle">
             उत्सव सूची
@@ -61,11 +64,15 @@
             रचना का प्रकार / प्रसंग जोड़े 
           </span>
         </a>
+      </li>
+      <li class="sidebar-item">
         <a class="sidebar-link" href="<%= articles_path %>">
           <span class="align-middle">
             प्रसंग जोड़े 
           </span>
         </a>
+      </li>
+      <li class="sidebar-item">
         <a class="sidebar-link" href="<%= articles_path %>">
           <span class="align-middle">
             प्रसंग जोड़े 
