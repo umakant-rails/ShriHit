@@ -4,28 +4,26 @@
     <div class="card">
       <div class="card-body h-100">
         <span class="col-md-6 text-start article-title text-primary">
-          रचना सूची 
+          उत्सव सूची 
         </span>
         <div class="dropdown-divider"></div>
         <table class="table">
           <thead>
             <tr>
               <th scope="col">S. No.</th>
-              <th scope="col">रचना</th>
-              <th scope="col">लेखक</th>
-              <th scope="col">योगदानकर्ता</th>
+              <th scope="col">उत्सव नाम</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <% @articles.each_with_index do |article, index| %>
-              <%= render partial: 'article', locals: {article: article, index: (index + 1) } %>
+            <% @themes.each_with_index do |theme, index| %>
+              <%= render partial: 'theme', locals: {theme: theme, index: (index + 1) } %>
             <% end %>
           </tbody>
         </table>
       </div>
     </div>
-    <%= link_to "New article", new_article_path %>
+    <%= link_to "New themes", new_theme_path %>
   </div>
   <div class="col-md-1"></div>
 </div>
