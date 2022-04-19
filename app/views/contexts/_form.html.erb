@@ -1,0 +1,23 @@
+<%= form_with(model: context, html: {
+  'data-target': 'context.form', 'data-action': 'context#submitForm'}) do |form| %>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">  
+      <div class="mb-3" data-target="context.errors">
+        <% context.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </div>
+      
+      <div class='mb-3'>
+        <label class='form-label'>नाम</label>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class='text-center mt-3 actions'>
+        <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+<% end %>
