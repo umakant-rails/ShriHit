@@ -5,10 +5,14 @@
       <div class="card-body h-100">
         <div class="row">
           <div class="col-md-9">
-            <input type="text" class="form-control" placeholder="type here for searching" style="border-radius: 8px;"/>
+            <div data-controller="autocomplete welcome" data-autocomplete-url-value="/autocomplete_term">
+              <input type="text" id="search_term" name="search_term" class="form-control" data-autocomplete-target="input" />
+              <input type="hidden" id="serach_text" name="search_text" data-autocomplete-target="hidden"/>
+              <ul class="list-group" data-autocomplete-target="results"></ul>
+            </div>
           </div>
           <div class="col-md-3">
-            <input type="button" value="Search" class="form-control btn btn-primary"/>
+            <input type="button" value="Search" class="form-control btn btn-primary" data-controller="welcome" data-action="click->welcome#searchTerm"/>
           </div>
       </div>
     </div>

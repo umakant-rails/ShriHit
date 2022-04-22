@@ -1,12 +1,12 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [:search]
+  before_action :authenticate_user!
   before_action :set_article, only: %i[ show edit update destroy ]
   before_action :create_author, only: [:create]
   before_action :create_context, only: [:create]
 
   # GET /articles or /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.all.order("created_at DESC")
   end
 
   # GET /articles/1 or /articles/1.json
@@ -59,16 +59,6 @@ class ArticlesController < ApplicationController
       format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  def search
-    search_term = params[:q]
-    @articles = Article.where("LOWER(english_title) like ?", "%#{search_term.downcase}%")
-    respond_to do |format|
-      format.html {}
-      format.json { head :no_content }
-    end
-    render layout: false
   end
 
   private
