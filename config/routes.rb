@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  resources :themes
-  resources :articles
-  
 
   root to: 'welcome#index'
   #root to: "homes#index"
@@ -13,7 +10,10 @@ Rails.application.routes.draw do
   }
 
   resources :homes, only: [:index]
-  resources :articles
+  resources :articles do
+    get 'search', on: :collection
+  end
+  resources :themes
   resources :authors
   resources :article_types
   resources :contexts
