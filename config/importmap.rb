@@ -7,9 +7,9 @@ pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "layout", to: "layout.js", preload: true
 # pin "transliteration", to: "transliteration.js", preload: true
 # pin "summernote", to: "https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js", preload: true
-# pin "tinymce", to: "https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js", preload: true
+pin "tinymce", to: "https://cdn.tiny.cloud/1/kiyvmpswx8cau4dzmwljz1gop78rrcdkiyicarl0u5z5f7np/tinymce/5/tinymce.min.js", preload: true
 
-pin "tinymce", to: "tinymce.min.js", preload: true
+# pin "tinymce", to: "tinymce.min.js", preload: true
 pin "@hotwired/turbo-rails", to: "turbo.min.js", preload: true
 pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 #pin "@hotwired/stimulus", to: "https://ga.jspm.io/npm:@hotwired/stimulus@3.0.1/dist/stimulus.js"

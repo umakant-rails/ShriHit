@@ -13,7 +13,7 @@ $(document).ready(function(){
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["article_hindi_title", "context", "author", "article_content"]);
+    control.makeTransliteratable(["article_hindi_title", "context", "author", "article_content_ifr"]);
   }
   google.setOnLoadCallback(onLoad);
 });
