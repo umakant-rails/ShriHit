@@ -1,0 +1,23 @@
+<%= form_with(model: article_type, html: {
+  'data-target': 'article_type.form', 'data-action': 'article_type#submitForm'}) do |form| %>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">  
+      <div class="mb-3" data-target="article_type.errors">
+        <% article_type.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </div>
+      
+      <div class='mb-3'>
+        <label class='form-label'>नाम</label>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class='text-center mt-3 actions'>
+        <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+<% end %>

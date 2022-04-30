@@ -8,7 +8,7 @@
 		<% end %>
 	</td>
 	<td>
-		<%= author.sampradaya.name %>
+		<%= author.sampradaya.present? ? author.sampradaya.name : '-' %>
 	</td>
 	<td>
 		<%= author.birth_date.blank? ? '-' : author.birth_date %>

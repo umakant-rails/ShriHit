@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-body h-100">
+        <span class="col-md-6 text-start article-title text-primary">
+          रचना प्रकार सूची 
+        </span>
+        <div class="dropdown-divider"></div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">S. No.</th>
+              <th scope="col">रचना प्रकार नाम</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @article_types.each_with_index do |article_type, index| %>
+              <%= render partial: 'article_type', locals: {article_type: article_type, index: (index + 1) } %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%= link_to "New article type", new_article_type_path %>
+  </div>
+  <div class="col-md-1"></div>
+</div>

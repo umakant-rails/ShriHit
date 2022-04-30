@@ -3,20 +3,16 @@
   <div class="col-md-10">
     <div class="card">
       <div class="card-body">
-        <h3>नई रचना</h3>
+        <h3>प्रसंग</h3>
         <div class="dropdown-divider"></div>
-        <div class="m-sm-4" data-controller= 'article'>
+        <div class="m-sm-4" data-controller= 'author'>
           <!-- <h3 class="card-title">New article</h3>
           <div class="dropdown-divider"></div> -->
-          <%= render "form", article: @article %>
+          <%= render "form", context: @context %>
         </div>
       </div>
     </div>
-    <%= link_to "Back to articles", articles_path %>
+    <%= link_to "Back to contexts", contexts_path %>
   </div>
   <div class="col-md-1"></div>
 </div>
-<% content_for :head do %>
-  <%= javascript_import_module_tag "article-custom" %>
-  <%= javascript_import_module_tag "google-custom" %>
-<% end %>

@@ -2,10 +2,14 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import ArticleController from "./article_controller"
+import { Autocomplete } from "stimulus-autocomplete";
+import WelcomeController from "./welcome_controller";
+import ArticleController from "./article_controller";
 import AuthorController from "./author_controller";
 
+application.register('autocomplete', Autocomplete);
+application.register("welcome", WelcomeController);
 application.register("article", ArticleController);
 application.register("author", AuthorController);

@@ -1,6 +1,6 @@
 <nav id="sidebar" class="sidebar js-sidebar">
   <div class="sidebar-content js-simplebar">
-    <a class="sidebar-brand" href="index.html">
+    <a class="sidebar-brand" href="<%= root_path %>">
       <span class="align-middle">श्रीहित</span>
     </a>
     <ul class="sidebar-nav">
@@ -12,73 +12,126 @@
           </span>
         </a>
       </li>
-      <li class="sidebar-item <%= set_active(request.fullpath, new_article_path) %>">
-        <a class="sidebar-link" href="<%= new_article_path %>">
-          <span class="align-middle">
-            नई रचना जोड़े
-          </span>
-        </a>
-      </li>
-      <li class="sidebar-item <%= set_active(request.fullpath, articles_path) %>">
-        <a class="sidebar-link" href="<%= articles_path %>">
-          <span class="align-middle">
-            रचना सूची
-          </span>
-        </a>
-      </li>
-      <hr>
-      <!-- <div class="dropdown-divider"></div> -->
-      <li class="sidebar-item <%= set_active(request.fullpath, new_author_path) %>">
-        <a class="sidebar-link" href="<%= new_author_path %>">
-          <span class="align-middle">
-            रचनाकार जोड़े
-          </span>
-        </a>
-      </li>
-      <li class="sidebar-item <%= set_active(request.fullpath, authors_path) %>">
-        <a class="sidebar-link" href="<%= authors_path %>">
-          <span class="align-middle">
-            रचनाकार सूची
-          </span>
-        </a>
-      </li>
-      <hr>
-      <li class="sidebar-item <%= set_active(request.fullpath, new_theme_path) %>">
-        <a class="sidebar-link" href="<%= new_theme_path %>">
-          <span class="align-middle">
-            उत्सव जोड़े
-          </span>
-        </a>
-      </li>
-      <li class="sidebar-item <%= set_active(request.fullpath, themes_path) %>">
-        <a class="sidebar-link" href="<%= themes_path %>">
-          <span class="align-middle">
-            उत्सव सूची
-          </span>
-        </a>
-      </li>
-      <hr>
+      <div class="dropdown-divider"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="<%= articles_path %>">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#ariclelist"   role="button" aria-expanded="false" aria-controls="ariclelist">
           <span class="align-middle">
-            रचना का प्रकार / प्रसंग जोड़े 
+            रचना
           </span>
         </a>
       </li>
+      <div class="collapse <%= show_collapse_item(request.fullpath, new_article_path, articles_path) %>" id="ariclelist">
+        <li class="sidebar-item <%= set_active(request.fullpath, new_article_path) %>">
+          <a class="sidebar-link" href="<%= new_article_path %>">
+            <span class="align-middle">
+              नई रचना जोड़े
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-item <%= set_active(request.fullpath, articles_path) %>">
+          <a class="sidebar-link" href="<%= articles_path %>">
+            <span class="align-middle">
+              रचना सूची
+            </span>
+          </a>
+        </li>
+      </div>
+      <div class="dropdown-divider"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="<%= articles_path %>">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#authorlist"   role="button" aria-expanded="false" aria-controls="authorlist">
           <span class="align-middle">
-            प्रसंग जोड़े 
+            रचनाकार
           </span>
         </a>
       </li>
+      <div class="collapse <%= show_collapse_item(request.fullpath, new_author_path, authors_path) %>" id="authorlist">
+        <li class="sidebar-item <%= set_active(request.fullpath, new_author_path) %>">
+          <a class="sidebar-link" href="<%= new_author_path %>">
+            <span class="align-middle">
+              रचनाकार जोड़े
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-item <%= set_active(request.fullpath, authors_path) %>">
+          <a class="sidebar-link" href="<%= authors_path %>">
+            <span class="align-middle">
+              रचनाकार सूची
+            </span>
+          </a>
+        </li>
+      </div>
+      <div class="dropdown-divider"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" href="<%= articles_path %>">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#themelist"   role="button" aria-expanded="false" aria-controls="themelist">
           <span class="align-middle">
-            प्रसंग जोड़े 
+            उत्सव
           </span>
         </a>
       </li>
+      <div class="collapse  <%= show_collapse_item(request.fullpath, new_theme_path, themes_path) %>" id="themelist">
+        <li class="sidebar-item <%= set_active(request.fullpath, new_theme_path) %>">
+          <a class="sidebar-link" href="<%= new_theme_path %>">
+            <span class="align-middle">
+              उत्सव जोड़े
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-item <%= set_active(request.fullpath, themes_path) %>">
+          <a class="sidebar-link" href="<%= themes_path %>">
+            <span class="align-middle">
+              उत्सव सूची
+            </span>
+          </a>
+        </li>
+      </div>
+      <div class="dropdown-divider"></div>
+      <li class="sidebar-item">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#articletypelist"   role="button" aria-expanded="false" aria-controls="articletypelist">
+          <span class="align-middle">
+            रचना प्रकार
+          </span>
+        </a>
+      </li>
+      <div class="collapse  <%= show_collapse_item(request.fullpath, new_article_type_path, article_types_path) %>" id="articletypelist">
+        <li class="sidebar-item <%= set_active(request.fullpath, new_article_type_path) %>">
+          <a class="sidebar-link" href="<%= new_article_type_path %>">
+            <span class="align-middle">
+              रचना प्रकार जोड़े
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-item <%= set_active(request.fullpath, article_types_path) %>">
+          <a class="sidebar-link" href="<%= article_types_path %>">
+            <span class="align-middle">
+              रचना प्रकार सूची
+            </span>
+          </a>
+        </li>
+      </div>
+      <div class="dropdown-divider"></div>
+      <li class="sidebar-item">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#contextlist"   role="button" aria-expanded="false" aria-controls="contextlist">
+          <span class="align-middle">
+            प्रसंग
+          </span>
+        </a>
+      </li>
+      <div class="collapse  <%= show_collapse_item(request.fullpath, new_context_path, contexts_path) %>" id="contextlist">
+        <li class="sidebar-item <%= set_active(request.fullpath, new_context_path) %>">
+          <a class="sidebar-link" href="<%= new_context_path %>">
+            <span class="align-middle">
+              प्रसंग जोड़े
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-item <%= set_active(request.fullpath, contexts_path) %>">
+          <a class="sidebar-link" href="<%= contexts_path %>">
+            <span class="align-middle">
+              प्रसंग सूची
+            </span>
+          </a>
+        </li>
+      </div>
     </ul> 
   </div>
 </nav>
