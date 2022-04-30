@@ -5,7 +5,7 @@ pin "jquery", to: "https://ga.jspm.io/npm:jquery@3.6.0/dist/jquery.js", preload:
 pin "popper", to: 'popper.js', preload: true
 pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "layout", to: "layout.js", preload: true
-# pin "transliteration", to: "transliteration.I.js", preload: true
+# pin "transliteration", to: "transliteration.js", preload: true
 # pin "summernote", to: "https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js", preload: true
 # pin "tinymce", to: "https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js", preload: true
 
@@ -21,4 +21,5 @@ pin "validate.js", to: "https://ga.jspm.io/npm:validate.js@0.12.0/validate.js"
 pin "stimulus-autocomplete", to: "https://ga.jspm.io/npm:stimulus-autocomplete@3.0.2/src/autocomplete.js"
 
 pin "article-custom";
+pin "google-custom";
 
