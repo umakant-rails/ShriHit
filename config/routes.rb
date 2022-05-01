@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     passwords: 'users/passwords'
   }
 
+  resources :user_profiles
+
   resources :homes, only: [:index]
   resources :articles
   resources :themes

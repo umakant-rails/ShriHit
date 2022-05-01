@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<div class="card">
+			<div class="card-body" id="article-list">
+				<h3>User Profile</h3>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller= 'article'>
+          <%= render "form", user_profile: @user_profile %>
+        </div>
+		  </div>
+		</div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/user-profile-custom" %>
+<% end %>
