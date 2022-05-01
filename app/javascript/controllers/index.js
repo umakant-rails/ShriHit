@@ -8,8 +8,10 @@ import { Autocomplete } from "stimulus-autocomplete";
 import WelcomeController from "./welcome_controller";
 import ArticleController from "./article_controller";
 import AuthorController from "./author_controller";
+import FlatpickrController from "./flatpickr_controller";
 
 application.register('autocomplete', Autocomplete);
 application.register("welcome", WelcomeController);
 application.register("article", ArticleController);
 application.register("author", AuthorController);
+application.register("flatpickr", FlatpickrController)

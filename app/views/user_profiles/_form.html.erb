@@ -58,7 +58,13 @@
     <div class="col-md-6"> 
       <div class='mb-3'>
         <label class='form-label'>जन्म दिनांक</label>
-        <%= form.text_field :date_of_birth, class: 'form-control' %>
+        <%= form.text_field :date_of_birth,
+          placeholder: 'Select Date of Birth',
+          data: {
+            controller: "flatpickr",
+            flatpickr_alt_format: t("date.formats.long")
+          } 
+        %>
       </div>
     </div>
   </div>
