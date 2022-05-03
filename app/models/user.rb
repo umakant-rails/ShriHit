@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :articles
   has_many :authors
   has_many :article_types
+  has_one :user_profile
 
   private 
   

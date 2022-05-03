@@ -10,6 +10,7 @@ class CreateUserProfiles < ActiveRecord::Migration[7.0]
       t.date    :date_of_birth
       t.string  :facebook_url
       t.string  :youtube_url
+      t.integer :user_id
       
       t.timestamps
     end
