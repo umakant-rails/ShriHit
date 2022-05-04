@@ -8,10 +8,11 @@ class UserProfilesController < ApplicationController
 
   def create
     update_user
+    #binding.break
+    @user_profile = current_user.build_user_profile(user_profile_params)
 
-    @user_profile = current_user.user_profile.new(user_profile_params)
     respond_to do |format|
-      if @article.save
+      if @user_profile.save
         format.html { redirect_to user_profile_url(@user_profile), notice: "User Profile was successfully created." }
         format.json { render :show, status: :created, location: @user_profile }
       else

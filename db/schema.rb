@@ -85,10 +85,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_082914) do
 
   create_table "user_profiles", force: :cascade do |t|
     t.text "biography"
-    t.integer "mobile"
+    t.string "mobile"
     t.text "address"
     t.string "city"
-    t.integer "pincode"
+    t.string "pincode"
     t.integer "state_id"
     t.date "date_of_birth"
     t.string "facebook_url"

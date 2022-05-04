@@ -1,10 +1,21 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
-<%= form_with(model: user_profile, html: {
-  'data-target': 'article.form', 'data-action': 'article#submitForm'}) do |form| %>
-  <div class="mb-3" data-target="article.errors">
-    <% user_profile.errors.each do |error| %>
-      <li><%= error.full_message %></li>
-    <% end %>
+<%= form_with(model: user_profile, html: {'data-target': 'userprofile.form',}) do |form| %>
+  <!-- <div class="mb-3">
+    <div class="alert alert-danger" role="alert"  data-target="userprofile.errors">
+      <% user_profile.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="alert alert-danger alert-dismissible fade show" style="display: <%= user_profile.errors.present? ? 'block' : 'none' %>;" role="alert">
+      <div id="alert-message-span" data-target="userprofile.errors">
+        <% user_profile.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </div>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-6"> 
@@ -24,7 +35,7 @@
     <div class="col-md-6"> 
       <div class='mb-3'>
         <label class='form-label'>मोबाइल</label>
-        <%= form.text_field :mobile, class: 'form-control' %>
+        <%= form.text_field :mobile, class: 'form-control', 'data-action': 'keydown->userprofile#validateMobile keyup->userprofile#validateMobile onblur->userprofile#validateMobile', 'data-target': 'userprofile.mobile' %>
       </div>
     </div>
     <div class="col-md-6"> 
@@ -44,7 +55,7 @@
     <div class="col-md-6"> 
       <div class='mb-3'>
         <label class='form-label'>पिनकोड</label>
-        <%= form.text_field :pincode, class: 'form-control' %>
+        <%= form.text_field :pincode, class: 'form-control', 'data-action': 'keydown->userprofile#validatePincode keyup->userprofile#validatePincode onblur->userprofile#validatePincode', 'data-target': 'userprofile.pincode' %>
       </div>
     </div>
   </div>
