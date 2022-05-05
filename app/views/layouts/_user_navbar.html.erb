@@ -139,20 +139,29 @@
         </a>
 
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-          <img src="/assets/lalji_icon.jpg" class="avatar img-fluid rounded me-1" alt="<%= current_user.username %>" /> 
+          <!-- <img src="/assets/lalji_icon.jpg" class="avatar img-fluid rounded me-1" alt="<%= current_user.username %>" /> --> 
+          <i class="fa-solid fa-user" style="font-size:18px;"></i>&nbsp;&nbsp;
           <span class="text-dark"><%= current_user.username %></span>
         </a>
         <div class="dropdown-menu dropdown-menu-end">
-          <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-          <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+          <a class="dropdown-item" href="<%= user_profile_path(current_user) %>">
+            <i class="fa-solid fa-user"></i>  Profile
+          </a>
+          <a class="dropdown-item" href="#">
+            <i class="fa-solid fa-chart-pie"></i> Analytics
+          </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-          <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+          <a class="dropdown-item" href="index.html">
+            <i class="fa-solid fa-gear"></i> Settings & Privacy
+          </a>
+          <a class="dropdown-item" href="#">
+            <i class="fa-solid fa-circle-question"></i> Help Center
+          </a>
           <div class="dropdown-divider"></div>
           <% if current_user.present? %>
             <%= form_for(current_user, url: destroy_user_session_path, html: { method: :delete }) do |f| %>
               <button type="submit" class="btn dropdown-item">
-                Log out
+                <i class="fa-solid fa-right-from-bracket"></i> Log out
               </button>
             <% end %>
           <% end %>

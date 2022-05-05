@@ -1,0 +1,6 @@
+<% if alert.present? || notice.present? %>
+  <div class="alert alert-<%= notice.present? ? 'info' : 'danger'%> alert-dismissible fade show" role="alert">
+    <%= alert.present? ? alert : notice %>
+    <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
+  </div>
+<% end %>

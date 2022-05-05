@@ -4,6 +4,7 @@
 @import 'css/style';
 @import 'articles';
 @import 'welcome';
+@import 'user_profile';
 
 .app-icon{
   width:  40px;
@@ -11,4 +12,13 @@
   border-radius: 40px;
   margin-right:  5px;
   /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
+}
+
+.collapse{
+  .sidebar-item{
+    .sidebar-link, a.sidebar-link{
+      background: #2b3947 !important;
+      border:  1px solid #222e3c;
+    }
+  }
 }

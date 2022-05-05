@@ -1,0 +1,107 @@
+<%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
+<%= form_with(model: user_profile, html: {'data-target': 'userprofile.form',}) do |form| %>
+  <!-- <div class="mb-3">
+    <div class="alert alert-danger" role="alert"  data-target="userprofile.errors">
+      <% user_profile.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="alert alert-danger alert-dismissible fade show" style="display: <%= user_profile.errors.present? ? 'block' : 'none' %>;" role="alert">
+      <div id="alert-message-span" data-target="userprofile.errors">
+        <% user_profile.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </div>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>प्रथम नाम</label>
+        <%= text_field_tag :first_name, '', class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>अंतिम नाम</label>
+        <%= text_field_tag :last_name, '', class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>मोबाइल</label>
+        <%= form.text_field :mobile, class: 'form-control', 'data-action': 'keydown->userprofile#validateMobile keyup->userprofile#validateMobile onblur->userprofile#validateMobile', 'data-target': 'userprofile.mobile' %>
+      </div>
+    </div>
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>पता</label>
+        <%= form.text_field :address, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>नगर</label>
+        <%= form.text_field :city, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>पिनकोड</label>
+        <%= form.text_field :pincode, class: 'form-control', 'data-action': 'keydown->userprofile#validatePincode keyup->userprofile#validatePincode onblur->userprofile#validatePincode', 'data-target': 'userprofile.pincode' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>राज्य</label>
+        <%= form.select :state_id, options_for_select(get_states), {:prompt => 'राज्य चुने'}, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>जन्म दिनांक</label>
+        <%= form.text_field :date_of_birth,
+          placeholder: 'Select Date of Birth',
+          data: {
+            controller: "flatpickr",
+            flatpickr_alt_format: t("date.formats.long")
+          } 
+        %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>फेसबुक प्रोफाइल URL</label>
+        <%= form.text_field :facebook_url, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-md-6"> 
+      <div class='mb-3'>
+        <label class='form-label'>यूट्यूब प्रोफाइल URL</label>
+        <%= form.text_field :youtube_url, class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12"> 
+      <div class='mb-3'>
+        <label class='form-label'>जीवन-वृत्तांत</label>
+        <%= form.text_area :biography, class: 'form-control tinymce' %>
+      </div>
+    </div>
+  </div>
+  <div class='text-center mt-3 actions'>
+    <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+  </div>
+<% end %>

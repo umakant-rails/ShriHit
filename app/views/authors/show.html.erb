@@ -5,7 +5,7 @@
       <div class="card-body">
         <div class="row">
           <span class="col-md-6 text-start article-title text-primary">
-            रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.name %> )
+            रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.present? ? @author.sampradaya.name : 'सम्प्रदाय - NA' %> )
           </span>
           <span class="col-md-6 text-end text-primary author-mark-txt"> 
             ( योगदानकर्ता : <%= @author.user.username %> )
