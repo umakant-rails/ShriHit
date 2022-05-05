@@ -41,20 +41,20 @@ State.create!(name: "Udisa") if State.where(name: "Udisa").blank?
 State.create!(name: "Asam") if State.where(name: "Asam").blank?
 State.create!(name: "Goa") if State.where(name: "Goa").blank?
 
-ArticleType.create!(name: 'पद') if ArticleType.where(name: 'पद').blank?
-ArticleType.create!(name: 'कवित्त') if ArticleType.where(name: 'कवित्त').blank?
-ArticleType.create!(name: 'सवैया') if ArticleType.where(name: 'सवैया').blank?
-ArticleType.create!(name: 'दोहा') if ArticleType.where(name: 'दोहा').blank?
+ArticleType.create!(name: 'पद', user_id: 1) if ArticleType.where(name: 'पद').blank?
+ArticleType.create!(name: 'कवित्त', user_id: 1) if ArticleType.where(name: 'कवित्त').blank?
+ArticleType.create!(name: 'सवैया', user_id: 1) if ArticleType.where(name: 'सवैया').blank?
+ArticleType.create!(name: 'दोहा', user_id: 1) if ArticleType.where(name: 'दोहा').blank?
 
-Theme.create!(name: 'व्याहुला') if Theme.where(name: 'व्याहुला').blank?
-Theme.create!(name: 'जन्मोत्सव') if Theme.where(name: 'जन्मोत्सव').blank?
-Theme.create!(name: 'होली') if Theme.where(name: 'होली').blank?
+Theme.create!(name: 'व्याहुला', user_id: 1) if Theme.where(name: 'व्याहुला').blank?
+Theme.create!(name: 'जन्मोत्सव', user_id: 1) if Theme.where(name: 'जन्मोत्सव').blank?
+Theme.create!(name: 'होली', user_id: 1) if Theme.where(name: 'होली').blank?
  
-Context.create!(name: 'वन विहार') if Context.where(name: 'वन विहार').blank?
-Context.create!(name: 'श्रृंगार') if Context.where(name: 'श्रृंगार').blank?
-Context.create!(name: 'शरद ऋतु') if Context.where(name: 'शरद ऋतु').blank?
-Context.create!(name: 'वर्षा ऋतु') if Context.where(name: 'वर्षा ऋतु').blank?
-Context.create!(name: 'नौका विहार') if Context.where(name: 'नौका विहार').blank?
+Context.create!(name: 'वन विहार', user_id: 1) if Context.where(name: 'वन विहार').blank?
+Context.create!(name: 'श्रृंगार', user_id: 1) if Context.where(name: 'श्रृंगार').blank?
+Context.create!(name: 'शरद ऋतु', user_id: 1) if Context.where(name: 'शरद ऋतु').blank?
+Context.create!(name: 'वर्षा ऋतु', user_id: 1) if Context.where(name: 'वर्षा ऋतु').blank?
+Context.create!(name: 'नौका विहार', user_id: 1) if Context.where(name: 'नौका विहार').blank?
 
 Sampradaya.create!(name: 'माध्व सम्प्रदाय') if Sampradaya.where(name: 'माध्व सम्प्रदाय').blank?
 Sampradaya.create!(name: 'वल्लभ सम्प्रदाय') if Sampradaya.where(name: 'वल्लभ सम्प्रदाय').blank?
