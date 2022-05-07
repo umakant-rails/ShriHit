@@ -4,14 +4,22 @@
     <div class="card">
       <div class="card-body h-100">
         <span class="col-md-6 text-start article-title text-primary">
-          उत्सव 
+          चैप्टर/प्रकरण 
         </span>
         <div class="dropdown-divider"></div>
         <div class="row mb-3">
           <div class="col-md-12"> 
+            <div class='profile-title'>चैप्टर/प्रकरण का नाम</div>
+            <div class='profile-content'>
+              <%= @theme_chapter.name %>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-md-12"> 
             <div class='profile-title'>उत्सव का नाम</div>
             <div class='profile-content'>
-              <%= @theme.name %>
+              <%= @theme_chapter.theme.name %>
             </div>
           </div>
         </div>
@@ -19,20 +27,20 @@
           <div class="col-md-12"> 
             <div class='profile-title'>योगदानकर्ता का नाम</div>
             <div class='profile-content'>
-              <%= @theme.user.username %>
+              <%= @theme_chapter.user.username %>
             </div>
           </div>
         </div>
         <div class="dropdown-divider"></div>
         <div class="row">
-          <div class="col-md-2">
-            <%= link_to "Edit this Theme", edit_theme_path(@theme) %> 
+          <div class="col-md-3">
+            <%= link_to "Edit this Theme Chapter", edit_theme_chapter_path(@theme_chapter) %> 
           </div>
-          <div class="col-md-2">
-            <%= link_to "Back to Themes", themes_path %>
+          <div class="col-md-3">
+            <%= link_to "Back to Theme Chapters", theme_chapter_path %>
           </div>
-          <div class="col-md-2" style="margin: -5px 0 0px 0;padding: 0;">
-            <%= button_to("Destroy this Theme", theme_path(@theme), method: :delete, :class => "btn btn-link") %>
+          <div class="col-md-3" style="margin: -5px 0 0px 0;padding: 0;">
+            <%= button_to("Destroy this Theme Chapter", theme_chapter_path(@theme_chapter), method: :delete, :class => "btn btn-link") %>
           </div>
         </div>
       </div>

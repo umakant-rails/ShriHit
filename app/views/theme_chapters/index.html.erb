@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-body h-100">
+        <span class="col-md-6 text-start article-title text-primary">
+          उत्सव सूची 
+        </span>
+        <div class="dropdown-divider"></div>
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col" class="col-sm-1">S. No.</th>
+              <th scope="col" class="col-sm-5">चैप्टर/प्रकरण का नाम</th>
+              <th scope="col" class="col-sm-2">उत्सव का नाम</th>
+              <th scope="col" class="col-sm-2">Created By</th>
+              <th scope="col" class="col-sm-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% unless @theme_chapters.blank? %>
+              <% @theme_chapters.each_with_index do |theme_chapter, index| %>
+                <%= render partial: 'theme_chapter', locals: {theme_chapter: theme_chapter, index: (index + 1) } %>
+              <% end %>
+            <% else %>
+            <td colspan="5">
+              <center>There is no data available now.</center>
+            </td>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <%= link_to "New Theme Chapter", new_theme_chapter_path %>
+  </div>
+  <div class="col-md-1"></div>
+</div>

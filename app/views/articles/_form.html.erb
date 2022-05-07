@@ -1,19 +1,27 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: article, html: {
   'data-target': 'article.form', 'data-action': 'article#submitForm'}) do |form| %>
-  <% article_types, themes, authors, contexts = get_data_for_article_creation %>  
+  <% article_types, authors, contexts = get_data_for_article_creation %>  
   <div class="mb-3" data-target="article.errors">
     <% article.errors.each do |error| %>
       <li><%= error.full_message %></li>
     <% end %>
   </div>
   <div class="row">
-    <div class="col-md-6"> 
+    <!-- <div class="col-md-6"> 
       <div class='mb-3'>
         <label class='form-label'>उत्सव</label>
-        <%= form.select :theme_id, options_for_select(themes), {:prompt => 'उत्सव चुने'}, class: 'form-control' %>
+        <%#= form.select :theme_id, options_for_select(themes), {:prompt => 'उत्सव चुने'}, class: 'form-control' %>
+      </div>
+    </div> -->
+    <div class="col-md-12">
+      <div class='mb-3'>
+        <label for='article_type' class='form-label'>रचना का प्रकार</label>
+        <%= form.select :article_type_id, options_for_select(article_types), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-target': 'article.articleTypeId' %>
       </div>
     </div>
+  </div>
+  <div class="row">
     <div class="col-md-6">
       <div class='mb-3'>
         <label class='form-label'>प्रसंग</label>
@@ -28,14 +36,6 @@
               </div>
             </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class='mb-3'>
-        <label for='article_type' class='form-label'>रचना का प्रकार</label>
-        <%= form.select :article_type_id, options_for_select(article_types), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-target': 'article.articleTypeId' %>
       </div>
     </div>
     <div class="col-md-6">

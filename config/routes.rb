@@ -18,10 +18,13 @@ Rails.application.routes.draw do
 
   resources :homes, only: [:index]
   resources :articles
-  resources :themes
+  resources :themes do
+    get '/theme_chapters/new' => 'theme_chapters#new', as: :new_theme_chapter#, on: :member   
+  end
   resources :authors
   resources :article_types
   resources :contexts
+  resources :theme_chapters
 
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

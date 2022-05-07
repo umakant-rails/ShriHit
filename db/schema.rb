@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_01_082914) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_07_104727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -26,7 +26,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_082914) do
     t.integer "author_id"
     t.integer "user_id"
     t.integer "article_type_id"
-    t.integer "theme_id"
     t.integer "context_id"
     t.string "hindi_title"
     t.string "english_title"
@@ -71,6 +70,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_082914) do
 
   create_table "states", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "theme_articles", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "theme_id"
+    t.integer "chapter_id"
+    t.integer "article_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "theme_chapters", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.integer "theme_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

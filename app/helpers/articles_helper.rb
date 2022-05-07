@@ -10,11 +10,10 @@ module ArticlesHelper
   end
   def get_data_for_article_creation
     article_types = ArticleType.all.collect{|e| [e.name, e.id]}
-    themes = Theme.all.collect{|e| [e.name, e.id]}
     authors = Author.all.collect{|e| [e.name, e.id]}
     contexts = Context.all.collect{|e| [e.name, e.id]}
     contexts.push(['प्रसंग का नाम टाइप करे', 'NA'])
     authors.push(['लेखक का नाम टाइप करे', 'NA'])
-    return article_types, themes, authors, contexts
+    return article_types, authors, contexts
   end
 end

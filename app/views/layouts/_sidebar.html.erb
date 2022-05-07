@@ -68,7 +68,7 @@
           </span>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_item(request.fullpath, new_theme_path, themes_path) %>" id="themelist">
+      <div class="collapse  <%= show_collapse_item(request.fullpath, new_theme_path, themes_path, new_theme_chapter_path, theme_chapters_path) %>" id="themelist">
         <li class="sidebar-item <%= set_active(request.fullpath, new_theme_path) %>">
           <a class="sidebar-link" href="<%= new_theme_path %>">
             <span class="align-middle">
@@ -80,6 +80,20 @@
           <a class="sidebar-link" href="<%= themes_path %>">
             <span class="align-middle">
               उत्सव सूची
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-item <%= set_active(request.fullpath, new_theme_chapter_path) %>">
+          <a class="sidebar-link" href="<%= new_theme_chapter_path %>">
+            <span class="align-middle">
+              उत्सव का चैप्टर/प्रकरण जोड़े
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-item <%= set_active(request.fullpath, theme_chapters_path) %>">
+          <a class="sidebar-link" href="<%= theme_chapters_path %>">
+            <span class="align-middle">
+              उत्सव के चैप्टर/प्रकरण सूची
             </span>
           </a>
         </li>

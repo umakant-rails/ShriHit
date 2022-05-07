@@ -3,32 +3,34 @@
 		<%= local_assigns[:index] %>
 	</th>
 	<td>
-		<%= link_to theme do %>
-			<%= theme.name %>
+		<%= link_to theme_chapter do %>
+			<%= theme_chapter.name %>
 		<% end %>
 	</td>
 	<td>
-		<a href="<%= theme_new_theme_chapter_path(theme) %>">
-			<i class="fa-solid fa-circle-plus text-primary"></i>
-		</a>
+		<%= link_to theme_chapter do %>
+			<%= theme_chapter.theme.name %>
+		<% end %>
 	</td>
 	<td>
-		<i class="fa-solid fa-file-circle-plus text-primary"></i>
+		<%= link_to theme_chapter do %>
+			<%= theme_chapter.user.username %>
+		<% end %>
 	</td>
 	<td>
 		<div class="row">
 			<div class="col-md-1">
-				<%= link_to theme do %>
+				<%= link_to theme_chapter do %>
 				  <i class="fa fa-eye"></i>
 				<% end %>
 			</div>
 			<div class="col-md-1">
-				<%= link_to edit_theme_path(theme) do %>
+				<%= link_to edit_theme_chapter_path(theme_chapter) do %>
 				  <i class="fa fa-edit"></i>
 				<% end %>
 			</div>
 			<div class="col-md-1">
-				<%= form_for(theme, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+				<%= form_for(theme_chapter, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
 		      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
 		        <i class="fa fa-trash" style="color:red;"></i>
 		      </button>
