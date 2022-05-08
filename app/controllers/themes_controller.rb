@@ -1,25 +1,21 @@
 class ThemesController < ApplicationController
-  before_action :set_theme, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :set_theme, only: %i[ show edit update destroy, add_articles_page ]
 
-  # GET /themes or /themes.json
   def index
     @themes = Theme.all
   end
 
-  # GET /themes/1 or /themes/1.json
   def show
   end
 
-  # GET /themes/new
   def new
     @theme = Theme.new
   end
 
-  # GET /themes/1/edit
   def edit
   end
 
-  # POST /themes or /themes.json
   def create
     @theme = Theme.new(theme_params)
 
@@ -34,7 +30,6 @@ class ThemesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /themes/1 or /themes/1.json
   def update
     respond_to do |format|
       if @theme.update(theme_params)
@@ -47,7 +42,6 @@ class ThemesController < ApplicationController
     end
   end
 
-  # DELETE /themes/1 or /themes/1.json
   def destroy
     @theme.destroy
 
@@ -55,6 +49,42 @@ class ThemesController < ApplicationController
       format.html { redirect_to themes_url, notice: "Theme was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def add_articles_page
+    @article_types = ArticleType.all
+    @contexts = Context.all
+    @authors = Author.all
+    @articles = Article.all
+    @theme_chapters = @theme.theme_chapters
+  end
+
+  def search_article
+    @article = Article.find(params[:article_id])
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+    render layout: false
+  end
+
+  def search_term
+    search_term = params[:search][:term]
+    indexx = search_term.index(":")
+    search_term = indexx.nil? ? search_term.strip : search_term[0, indexx].strip
+
+    @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
+      "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+
+    respond_to do |format|
+      format.html {}
+      format.json { head :no_content }
+    end
+    render layout: false
+  end
+
+  def add_articles_in_theme
+  
   end
 
   private

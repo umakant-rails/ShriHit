@@ -3,19 +3,17 @@
   <div class="col-md-10">
     <div class="card">
       <div class="card-body">
-        <h3>नया रचना प्रकार</h3>
+        <h3>खंड/प्रकरण अद्यतन प्रपत्र</h3>
         <div class="dropdown-divider"></div>
         <div class="m-sm-4" data-controller= 'article'>
           <!-- <h3 class="card-title">New article</h3>
           <div class="dropdown-divider"></div> -->
-          <%= render "form", article_type: @article_type %>
+          <%= render "form", theme_chapter: @theme_chapter %>
         </div>
       </div>
     </div>
-    <%= link_to "Back to article types", article_types_path %>
+    <%= link_to "Show this theme", @theme_chapter %> |
+    <%= link_to "Back to themes", theme_chapters_path %>
   </div>
   <div class="col-md-1"></div>
 </div>
-<% content_for :head do %>
-  <%= javascript_import_module_tag "custom/article-type-custom" %>
-<% end %>

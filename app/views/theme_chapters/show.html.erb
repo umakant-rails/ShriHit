@@ -4,12 +4,12 @@
     <div class="card">
       <div class="card-body h-100">
         <span class="col-md-6 text-start article-title text-primary">
-          चैप्टर/प्रकरण 
+          खंड/प्रकरण 
         </span>
         <div class="dropdown-divider"></div>
         <div class="row mb-3">
           <div class="col-md-12"> 
-            <div class='profile-title'>चैप्टर/प्रकरण का नाम</div>
+            <div class='profile-title'>खंड/प्रकरण का नाम</div>
             <div class='profile-content'>
               <%= @theme_chapter.name %>
             </div>
@@ -37,7 +37,7 @@
             <%= link_to "Edit this Theme Chapter", edit_theme_chapter_path(@theme_chapter) %> 
           </div>
           <div class="col-md-3">
-            <%= link_to "Back to Theme Chapters", theme_chapter_path %>
+            <%= link_to "Back to Theme Chapters", theme_chapters_path %>
           </div>
           <div class="col-md-3" style="margin: -5px 0 0px 0;padding: 0;">
             <%= button_to("Destroy this Theme Chapter", theme_chapter_path(@theme_chapter), method: :delete, :class => "btn btn-link") %>

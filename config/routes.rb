@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   resources :homes, only: [:index]
   resources :articles
   resources :themes do
-    get '/theme_chapters/new' => 'theme_chapters#new', as: :new_theme_chapter#, on: :member   
+    get '/theme_chapters/new' => 'theme_chapters#new', as: :new_theme_chapter#, on: :member 
+    get '/add_articles_page' => "themes#add_articles_page", as: :add_articles_page , on: :member 
+    get '/search_article/:article_id' => "themes#search_article", as: :search_article, on: :collection
+    get '/search_term' => "themes#search_term", as: :search_term, on: :collection
   end
   resources :authors
   resources :article_types

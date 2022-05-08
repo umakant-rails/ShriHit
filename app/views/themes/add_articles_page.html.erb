@@ -1,0 +1,47 @@
+<div class="" data-controller="themechapter">
+	<div class="row">
+	  <!-- <div class="col-md-1"></div> -->
+	  <div class="col-md-12">
+	    <div class="card">
+	      <div class="card-body h-100">
+	        <span class="col-md-6 text-start article-title text-primary">
+	          उत्सव (<span class="text-success"><%= @theme.name %></span>) में रचनाये जोड़े 
+	        </span>
+	        <div class="dropdown-divider"></div>
+	         <%= render 'search_options' %>
+	      </div>
+	    </div>
+	  </div>
+	  <!-- <div class="col-md-1"></div> -->
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="card">
+		    <div class="card-body h-100">
+		    	<div class="row">
+			    	<ul class="list-group list-group-flush" id="theme-article-list">
+				      <%@articles && @articles.each_with_index do |article, index|%>
+							  <li class="list-group-item"><%= index+1%>. <%= article.hindi_title %></li>
+			        <% end %>
+						</ul>
+					</div>
+		    </div>
+		  </div>
+		</div>
+		<div class="col-md-6">
+			<div class="card">
+		    <div class="card-body h-100">
+		    	<div class="row">
+		    		<% if @theme_chapters.present? %>
+			    		<%= select_tag 'theme_chapters_name', options_from_collection_for_select(@theme_chapters, "id", "name"), :prompt => "खंड/प्रकरण चुने", class:"form-control" %>
+			    	<% else %>
+			    	<div class="theme-chapter-bdr">
+			    		आपने इस उत्सव (<%= @theme.name %>) में कोई खंड/प्रकरण नहीं जोड़ा है अगर आप खंड/प्रकरण जोड़ना चाहते है तो यहाँ <a href="<%= theme_new_theme_chapter_path(@theme) %>">click</a> करे 
+			    	</div>
+			    	<% end %>
+			    </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+</div>

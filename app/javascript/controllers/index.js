@@ -11,6 +11,7 @@ import ArticleController from "./article_controller";
 import AuthorController from "./author_controller";
 import FlatpickrController from "./flatpickr_controller";
 import UserProfileController from "./user_profile_controller";
+import ThemeChapterController from "./theme_chapter_controller";
 
 application.register('application', ApplicationController);
 application.register('autocomplete', Autocomplete);
@@ -19,3 +20,4 @@ application.register("article", ArticleController);
 application.register("author", AuthorController);
 application.register("flatpickr", FlatpickrController);
 application.register("userprofile", UserProfileController);
+application.register("themechapter", ThemeChapterController);

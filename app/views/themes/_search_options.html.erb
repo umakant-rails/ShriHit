@@ -1,0 +1,40 @@
+<div class="row mb-2">
+	<div class="col-md-2">
+		<label class="col-form-label">Search Option</label>
+	</div>
+	<div class="col-md-10">
+		<div class="row">
+    	<div class="col-md-4">
+    		<%= select_tag 'article_type', options_from_collection_for_select(@article_types, "id", "name"), :prompt => "रचना प्रकार चुने", class:"form-control", 'data-target': 'themechapter.articleType' %>
+    	</div>
+    	<div class="col-md-4">
+    		<%= select_tag 'context_name', options_from_collection_for_select(@contexts, "id", "name"), :prompt => "प्रसंग चुने", class:"form-control", 'data-target': 'themechapter.contextName' %>
+    	</div>
+    	<div class="col-md-4">
+    		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-target': 'themechapter.authorName' %>
+    	</div>
+    </div>
+  </div>
+</div>
+<div class="row">
+	<div class="col-md-2" style="padding-right: 0px;">
+		<button class="btn btn-primary" data-action="click->themechapter#toggleSearchOptions">
+  		Toggle Search Option
+  	</button>
+	</div>
+	<div class="col-md-10">
+    <div class="row">
+    	<div class="col-md-9">
+    		<%#= text_field_tag 'article_search_term', '', class: 'form-control', 'data-target': 'themechapter.articleSearchTerm', disabled: true %>
+    		<div data-controller="autocomplete" data-autocomplete-url-value="/autocomplete_term">
+          <input type="text" id="article_search_term" name="article_search_term" class="form-control" data-autocomplete-target='input' data-target="articleSearchTerm" disabled=true/>
+          <input type="hidden" id="serach_text" name="search_text" data-autocomplete-target="hidden"/>
+          <ul class="list-group" data-autocomplete-target="results"></ul>
+        </div>
+  		</div>
+  		<div class="col-md-3">
+  			<input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-target='themechapter.searchTermArticleBtn' disabled=true data-action="click->themechapter#searchTerm"/>
+  		</div>
+    </div>
+  </div>
+</div>

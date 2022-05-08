@@ -1,4 +1,5 @@
 class ThemeChaptersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_theme_chapter, only: %i[ show edit update destroy ]
 
   def index
@@ -24,8 +25,31 @@ class ThemeChaptersController < ApplicationController
     end
   end
 
+  def edit
+  end
+  
+  def update
+    respond_to do |format|
+      if @theme_chapter.update(theme_chapter_params)
+        format.html { redirect_to theme_chapter_url(@theme_chapter), notice: "Theme Chapter was successfully updated." }
+        format.json { render :show, status: :ok, location: @theme_chapter }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @theme_chapter.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @theme_chapter.destroy
+
+    respond_to do |format|
+      format.html { redirect_to theme_chapters_url, notice: "Theme Chapter was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_theme_chapter
       @theme_chapter = ThemeChapter.find(params[:id])
     end
