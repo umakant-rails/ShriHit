@@ -10,7 +10,8 @@ class User < ApplicationRecord
   has_many :themes
   has_many :theme_chapters
   has_one  :user_profile, dependent: :destroy, :foreign_key => "user_id"
-
+  has_many :theme_articles
+  
   private 
   
   def fullname

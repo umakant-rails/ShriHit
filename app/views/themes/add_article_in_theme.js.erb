@@ -1,0 +1,4 @@
+$("#theme-article-list").html("<%= escape_javascript(render partial: 'article', :collection => @articles, :as => :article)%>");
+$("#theme-added-article-list").html("<%= escape_javascript(render partial: 'article', :collection => @added_articles, :as => :article)%>");
+$("#successAlert").html("उत्सव में रचना सफलतापूर्वक जोड़ दी गई है.");
+$("#successAlert").parent().css("display", "block");

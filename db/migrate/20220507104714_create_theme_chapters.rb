@@ -4,7 +4,9 @@ class CreateThemeChapters < ActiveRecord::Migration[7.0]
       t.string  :name
       t.integer :user_id
       t.integer :theme_id
-
+      t.boolean :is_default, default: true
+      t.integer :display_index
+      
       t.timestamps
     end
   end

@@ -8,7 +8,7 @@ class ThemeChaptersController < ApplicationController
 
   def new
     @themes = current_user.themes
-    @theme_chapter = ThemeChapter.new
+    @theme_chapter = ThemeChapter.new(is_default: false)
   end
 
   def create
@@ -56,7 +56,7 @@ class ThemeChaptersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def theme_chapter_params
-      params.fetch(:theme_chapter, {}).permit(:name, :theme_id)
+      params.fetch(:theme_chapter, {}).permit(:name, :theme_id, :is_default)
     end
 
 end

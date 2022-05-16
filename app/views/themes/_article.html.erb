@@ -1,1 +1,8 @@
-<li class="list-group-item"><%= article_counter+1%>. <%= article.hindi_title %></li>
+<li class="list-group-item">
+  <span class="fLeft" id="aritcle-title-<%= article.id %>">
+    <%= article.hindi_title %>    
+  </span>
+  <span class="fRight add-article-in-theme" data-action="click->themechapter#addArticlesInTheme" data-id="<%= article.id %>">
+    <i class="fa-solid fa-angle-right pull-right"></i>
+  </span>
+</li>

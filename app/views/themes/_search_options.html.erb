@@ -4,15 +4,18 @@
 	</div>
 	<div class="col-md-10">
 		<div class="row">
-    	<div class="col-md-4">
-    		<%= select_tag 'article_type', options_from_collection_for_select(@article_types, "id", "name"), :prompt => "रचना प्रकार चुने", class:"form-control", 'data-target': 'themechapter.articleType' %>
+    	<div class="col-md-3">
+    		<%= select_tag 'article_type', options_from_collection_for_select(@article_types, "id", "name"), :prompt => "रचना प्रकार चुने", class:"form-control", 'data-target': 'themechapter.articleType', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
     	</div>
-    	<div class="col-md-4">
-    		<%= select_tag 'context_name', options_from_collection_for_select(@contexts, "id", "name"), :prompt => "प्रसंग चुने", class:"form-control", 'data-target': 'themechapter.contextName' %>
+    	<div class="col-md-3">
+    		<%= select_tag 'context_name', options_from_collection_for_select(@contexts, "id", "name"), :prompt => "प्रसंग चुने", class:"form-control", 'data-target': 'themechapter.contextName', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
     	</div>
-    	<div class="col-md-4">
-    		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-target': 'themechapter.authorName' %>
+    	<div class="col-md-3">
+    		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-target': 'themechapter.authorName', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
     	</div>
+    	<div class="col-md-3">
+  			<input type="button" id="search_article_btn" value="Clear Filter" class="form-control btn btn-primary" data-target='themechapter.clearFiltersBtn' data-action="click->themechapter#clearFiltersAndGetArticles"/>
+  		</div>
     </div>
   </div>
 </div>
@@ -33,7 +36,8 @@
         </div>
   		</div>
   		<div class="col-md-3">
-  			<input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-target='themechapter.searchTermArticleBtn' disabled=true data-action="click->themechapter#searchTerm"/>
+  			<!-- <input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-target='themechapter.searchTermArticleBtn' disabled=true data-action="click->themechapter#searchTerm"/> -->
+  			<input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-target='themechapter.searchTermArticleBtn' disabled=true data-action="click->themechapter#searchArticleByTerm"/>
   		</div>
     </div>
   </div>

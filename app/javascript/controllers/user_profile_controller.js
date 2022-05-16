@@ -19,11 +19,11 @@ export default class extends ApplicationController {
     if(isValid == null && mobileValue.length<=10){
       error = "Only number is allowed for mobile.";
       this.mobileTarget.value = mobileValue.substr(0, mobileValue.length-1);
-      super.showError(this.errorsTarget, error);
+      super.showErrorByElement(this.errorsTarget, error);
     } else if(isValid == null && mobileValue.length>10){
       error = "Only 10 digit allowed to mobile number.";
       this.mobileTarget.value = mobileValue.substr(0, 10);
-      super.showError(this.errorsTarget, error);
+      super.showErrorByElement(this.errorsTarget, error);
     }
   }
 
@@ -36,11 +36,11 @@ export default class extends ApplicationController {
     if(isValid == null && pincodeValue.length<=10){
       error = "Only number is allowed for pincode.";
       this.pincodeTarget.value = pincodeValue.substr(0, pincodeValue.length-1);
-      super.showError(this.errorsTarget, error);
+      super.showErrorByElement(this.errorsTarget, error);
     } else if(isValid == null && pincodeValue.length>10){
       error = "Only 6 digit allowed to pincode.";
       this.pincodeTarget.value = pincodeValue.substr(0, 10);
-      super.showError(this.errorsTarget, error);
+      super.showErrorByElement(this.errorsTarget, error);
     }
   }
 

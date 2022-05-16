@@ -1,5 +1,28 @@
 .theme-chapter-bdr{
-  border: 1px solid lightgray;
+  border: 3px solid #fc5203;
   border-radius: 5px;
   padding: 4px 4px;
+  margin-top: -15px;  
+}
+.add-article-in-theme{
+  font-size: 16px;
+  border: 1px solid lightgray;
+  margin-right: -17px;
+  margin-top: -9px;
+  margin-bottom: -7px;
+  padding: 6px 10px;
+  background: #3b7ddd;
+  color: white;
+}
+.add-article-in-theme:hover{
+  cursor:pointer;
+}
+.chapter-article-header{
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: -12px;
+}
+.theme-chapter-name{
+  border: 3px solid #fc5203;
+  border-radius: 5px; 
 }

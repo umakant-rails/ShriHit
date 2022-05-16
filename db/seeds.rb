@@ -49,6 +49,9 @@ ArticleType.create!(name: 'दोहा', user_id: 1) if ArticleType.where(name:
 Theme.create!(name: 'व्याहुला', user_id: 1) if Theme.where(name: 'व्याहुला').blank?
 Theme.create!(name: 'जन्मोत्सव', user_id: 1) if Theme.where(name: 'जन्मोत्सव').blank?
 Theme.create!(name: 'होली', user_id: 1) if Theme.where(name: 'होली').blank?
+Theme.all.each{ | theme |
+  ThemeChapter.create(user_id:1, theme_id: theme.id, name: "#{theme.name}_विविध _प्रकरण") if ThemeChapter.where(name: "#{theme.name}_विविध _प्रकरण").blank?
+}
  
 Context.create!(name: 'वन विहार', user_id: 1) if Context.where(name: 'वन विहार').blank?
 Context.create!(name: 'श्रृंगार', user_id: 1) if Context.where(name: 'श्रृंगार').blank?

@@ -1,6 +1,6 @@
 class ThemesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_theme, only: %i[ show edit update destroy, add_articles_page ]
+  before_action :set_theme, only: %i[ show edit update destroy add_articles_page add_article_in_theme ]
 
   def index
     @themes = Theme.all
@@ -17,10 +17,13 @@ class ThemesController < ApplicationController
   end
 
   def create
-    @theme = Theme.new(theme_params)
+    @theme = current_user.themes.new(theme_params)
 
     respond_to do |format|
       if @theme.save
+        current_user.theme_chapters.create(
+          {theme_id: @theme.id, name:"#{@theme.name}_विविध _प्रकरण", is_default: true}
+        )
         format.html { redirect_to theme_url(@theme), notice: "Theme was successfully created." }
         format.json { render :show, status: :created, location: @theme }
       else
@@ -59,8 +62,8 @@ class ThemesController < ApplicationController
     @theme_chapters = @theme.theme_chapters
   end
 
-  def search_article
-    @article = Article.find(params[:article_id])
+  def search_articles
+    get_articles_by_params
     respond_to do |format|
       format.html {}
       format.js {}
@@ -68,33 +71,47 @@ class ThemesController < ApplicationController
     render layout: false
   end
 
-  def search_term
-    search_term = params[:search][:term]
-    indexx = search_term.index(":")
-    search_term = indexx.nil? ? search_term.strip : search_term[0, indexx].strip
+  def add_article_in_theme
+    @theme_article = current_user.theme_articles.new(theme_article_params)
 
-    @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
-      "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    if @theme_article.save
+      get_articles_by_params
+    end
 
     respond_to do |format|
       format.html {}
-      format.json { head :no_content }
+      format.js {}
     end
     render layout: false
   end
 
-  def add_articles_in_theme
-  
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
+   
+    def get_articles_by_params
+      if params[:search_type] == 'by_attribute'
+        @articles = Article.by_attributes(params[:author_id], params[:context_id], 
+          params[:article_type_id], params[:theme_chapter_id]
+        )
+      elsif params[:search_type] == 'by_id'
+        @articles = Article.by_id(params[:article_id])
+      elsif params[:search_type] == 'by_term'
+        @articles = Article.by_search_term(params[:term])
+      else
+        @articles = Article.order("created_at desc")
+      end
+      @added_articles = Article.joins(:theme_articles)._chapter_articles(params[:theme_chapter_id])
+      @articles = @articles._except_chapter_articles(params[:theme_chapter_id])   
+    end
+    
     def set_theme
       @theme = Theme.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def theme_params
       params.fetch(:theme, {}).permit(:name)
+    end
+
+    def theme_article_params
+      params.fetch(:theme_article, {}).permit(:article_id, :theme_chapter_id, :theme_id, :user_id)
     end
 end

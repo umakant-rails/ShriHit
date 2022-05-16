@@ -1,0 +1,2 @@
+$("#theme-article-list").html("<%= escape_javascript(render partial: 'article', :collection => @articles, :as => :article)%>");
+$("#theme-added-article-list").html("<%= escape_javascript(render partial: 'article', :collection => @added_articles, :as => :article)%>");

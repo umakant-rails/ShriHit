@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   resources :themes do
     get '/theme_chapters/new' => 'theme_chapters#new', as: :new_theme_chapter#, on: :member 
     get '/add_articles_page' => "themes#add_articles_page", as: :add_articles_page , on: :member 
-    get '/search_article/:article_id' => "themes#search_article", as: :search_article, on: :collection
+    post '/add_article_in_theme' => 'themes#add_article_in_theme', as: :add_article_in_theme, on: :member 
+    get '/search_articles' => "themes#search_articles", as: :search_article, on: :collection
     get '/search_term' => "themes#search_term", as: :search_term, on: :collection
   end
   resources :authors

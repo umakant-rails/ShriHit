@@ -4,3 +4,11 @@
     <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
   </div>
 <% end %>
+<div class="alert alert-danger alert-dismissible fade show" style="display:none;" role="alert" data-controller="application" >
+  <div id="errorsAlert" data-application-target="errorsAlert"></div>
+  <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
+</div>
+<div class="alert alert-success alert-dismissible fade show" style="display:none;" role="alert" data-controller="application" >
+  <div id="successAlert" data-application-target="successAlert"></div>
+  <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
+</div>

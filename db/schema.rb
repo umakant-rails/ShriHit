@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_07_104727) do
   create_table "theme_articles", force: :cascade do |t|
     t.integer "user_id"
     t.integer "theme_id"
-    t.integer "chapter_id"
+    t.integer "theme_chapter_id"
     t.integer "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -87,6 +87,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_07_104727) do
     t.string "name"
     t.integer "user_id"
     t.integer "theme_id"
+    t.boolean "is_default", default: true
+    t.integer "display_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
