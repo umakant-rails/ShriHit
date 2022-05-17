@@ -12,7 +12,7 @@
 			      </div>
 			      <div class="col-md-4">
 			    		<% if @theme_chapters.present? %>
-				    		<%= select_tag 'theme_chapters_name', options_from_collection_for_select(@theme_chapters, "id", "name"), prompt: "खंड/प्रकरण चुने", class:"form-control theme-chapter-name", 'data-target': 'themechapter.themeChapter' %>
+				    		<%= select_tag 'theme_chapters_name', options_from_collection_for_select(@theme_chapters, "id", "name"), prompt: "खंड/प्रकरण चुने", class:"form-control theme-chapter-name", 'data-target': 'themechapter.themeChapter', 'data-action': 'change->themechapter#searchArticlesByChapter' %>
 				    	<% else %>
 					    	<div class="theme-chapter-bdr">
 					    		आपने इस उत्सव (<%= @theme.name %>) में कोई खंड/प्रकरण नहीं जोड़ा है अगर आप खंड/प्रकरण जोड़ना चाहते है तो यहाँ <a href="<%= theme_new_theme_chapter_path(@theme) %>">click</a> करे 

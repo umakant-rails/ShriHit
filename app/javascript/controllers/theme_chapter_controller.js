@@ -17,6 +17,15 @@ export default class extends ApplicationController {
       super.showErrorsByLayout("कृपया पहले खंड/प्रकरण चुने. खंड/प्रकरण चुनना आवश्यक है.");
     }
   }
+  
+  searchArticlesByChapter(event){
+    let chapterId = event.currentTarget.value;//this.themeChapterTarget.value;
+    var searchParams = {
+      search_type: 'no_attrs',
+      theme_chapter_id: chapterId
+    }
+    this.getArticles(searchParams);
+  }
 
   toggleSearchOptions(){
     // let searchBoxStatus = $("#article_search_term").is(':disabled');
@@ -110,26 +119,20 @@ export default class extends ApplicationController {
     }
   }
 
-  addArticlesInTheme(event){
+  additionOrDeletionOfArticles(actionType, articleId, themeArticleId){
     if(this.hasThemeChapterTarget && this.themeChapterTarget.value.length == 0){
       super.showErrorsByLayout("कृपया पहले खंड/प्रकरण चुने. खंड/प्रकरण चुनना आवश्यक है.");
       return;
     }
 
     //Required data to add a article in theme
-    let articleId = event.currentTarget.dataset.id;
-    let chapterId = this.themeChapterTarget.value;
-    let themeId = this.themeTarget.dataset.themeId;
-    let crsfToken = this.csrfTokenTarget.value;
-    var requiredParams = {
-      theme_article: {
-        article_id: articleId,
-        theme_chapter_id: chapterId,
-        theme_id: themeId
-      },
-      theme_chapter_id: chapterId,
-      authenticity_token: crsfToken
-    }
+    let requiredParams = {};
+    let themeId = this.hasThemeTarget ? this.themeTarget.dataset.themeId : '';
+    let themeChapterId = this.hasThemeChapterTarget ? this.themeChapterTarget.value : '';
+    let crsfToken = this.hasCsrfTokenTarget ? this.csrfTokenTarget.value : '';
+
+    requiredParams.theme_chapter_id = themeChapterId;
+    requiredParams.authenticity_token = crsfToken;
 
     //Required data to get article with existing filters
     let searchBoxStatus = this.articleTypeTarget.disabled;
@@ -141,15 +144,32 @@ export default class extends ApplicationController {
       requiredParams.context_id = this.contextNameTarget.value;
       requiredParams.author_id = this.authorNameTarget.value;
       requiredParams.search_type = "by_attribute";
-    } else if(articleId != '') {
+    } else if(searchArticleId != '') {
       requiredParams.article_id = searchArticleId;
       requiredParams.search_type = "by_id";
     } else if (searchTerm != '') {
       requiredParams.term = searchTerm;
       requiredParams.search_type = "by_term";
     }
+    if(actionType == 'addition'){
+      requiredParams.theme_article = { 
+        theme_chapter_id: themeChapterId,
+        theme_id: themeId, article_id: articleId
+      };
+      this.addArticleInTheme(themeId, requiredParams);
+    } else {
+      requiredParams.theme_article_id = themeArticleId;
+      this.removeArticleFromTheme(themeId, requiredParams);
+    }
+  }
 
-    this.addArticleInTheme(themeId, requiredParams);
+  addArticlesInTheme(event){
+    let articleId = event.currentTarget.dataset.id;
+    this.additionOrDeletionOfArticles('addition', articleId, null);
+  }
+  removeArticlesFromTheme(event){
+    let themeArticleId = event.currentTarget.dataset.id;
+    this.additionOrDeletionOfArticles('removal', null, themeArticleId);
   }
 
   /* start - js requet to get data block */
@@ -161,8 +181,17 @@ export default class extends ApplicationController {
       data: params,
       dataType: 'script',
       success: function(data){
-      }, 
-      error: function(error){
+      }
+    });
+  }
+
+  removeArticleFromTheme(themeId, params){
+    $.ajax({
+      type: "post",
+      url: '/themes/'+themeId+'/remove_article_from_theme',
+      data: params,
+      dataType: 'script',
+      success: function(data){
       }
     });
   }

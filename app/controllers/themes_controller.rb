@@ -72,10 +72,33 @@ class ThemesController < ApplicationController
   end
 
   def add_article_in_theme
-    @theme_article = current_user.theme_articles.new(theme_article_params)
+    if current_user.theme_articles.where(theme_article_params).blank?
+      @theme_article = current_user.theme_articles.new(theme_article_params)
+      if @theme_article.save
+        get_articles_by_params 
+        flash[:success] = "उत्सव में रचना सफलतापूर्वक जोड़ दी गई है."
+      else
+        flash[:error] = "उत्सव में रचना जोड़ने की प्रकिया असफल हो गई है."
+      end
+    else
+      flash[:error] = "उत्सव में रचना पहले से जुडी हुई है."
+    end
 
-    if @theme_article.save
+    respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+    render layout: false
+  end
+
+  def remove_article_from_theme
+    @theme_article = current_user.theme_articles.find(params[:theme_article_id])
+
+    if @theme_article.destroy
       get_articles_by_params
+      flash[:success] = "उत्सव से रचना सफलतापूर्वक हटा दी गई है."
+    else
+      flash[:error] = "उत्सव में रचना हटाने की प्रकिया असफल हो गई है."
     end
 
     respond_to do |format|
@@ -99,7 +122,8 @@ class ThemesController < ApplicationController
       else
         @articles = Article.order("created_at desc")
       end
-      @added_articles = Article.joins(:theme_articles)._chapter_articles(params[:theme_chapter_id])
+
+      @added_articles = ThemeArticle.joins(:article).where({theme_articles: {theme_chapter_id: params[:theme_chapter_id]}})
       @articles = @articles._except_chapter_articles(params[:theme_chapter_id])   
     end
     

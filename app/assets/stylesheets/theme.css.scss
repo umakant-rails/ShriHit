@@ -4,7 +4,7 @@
   padding: 4px 4px;
   margin-top: -15px;  
 }
-.add-article-in-theme{
+.add-article-icon{
   font-size: 16px;
   border: 1px solid lightgray;
   margin-right: -17px;
@@ -15,6 +15,19 @@
   color: white;
 }
 .add-article-in-theme:hover{
+  cursor:pointer;
+}
+.added-article-icon{
+  font-size: 16px;
+  border: 1px solid lightgray;
+  margin-right: -17px;
+  margin-top: -9px;
+  margin-bottom: -7px;
+  padding: 6px 10px;
+  background: #fc5203;
+  color: white;
+}
+.added-article-icon:hover{
   cursor:pointer;
 }
 .chapter-article-header{
