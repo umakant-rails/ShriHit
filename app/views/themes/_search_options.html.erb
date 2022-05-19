@@ -29,11 +29,31 @@
     <div class="row">
     	<div class="col-md-9">
     		<%#= text_field_tag 'article_search_term', '', class: 'form-control', 'data-target': 'themechapter.articleSearchTerm', disabled: true %>
-    		<div data-controller="autocomplete" data-autocomplete-url-value="/autocomplete_term">
-          <input type="text" id="article_search_term" name="article_search_term" class="form-control" data-autocomplete-target='input' data-target="articleSearchTerm" disabled=true/>
-          <input type="hidden" id="serach_text" name="search_text" data-autocomplete-target="hidden"/>
-          <ul class="list-group" data-autocomplete-target="results"></ul>
-        </div>
+    		<div class="input-group ms-3">
+    			<div class="col-md-2 p-0">
+            <div class="row">
+              <input type="button" value="इंग्लिश"class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-themechapter-target="languageBtn" disabled=true/>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" data-vl="इंग्लिश" data-action="click->themechapter#selectLang" href="#">इंग्लिश</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" data-vl="हिंदी" data-action="click->themechapter#selectLang" href="#">हिंदी</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+	    		<div data-controller="autocomplete" id="english_search_block" class="col-md-10 p-0" data-autocomplete-url-value="/autocomplete_term?search_in=english">
+	          <input type="text" id="english_article_search_term" name="article_search_term" class="form-control" data-autocomplete-target='input' data-target="articleSearchTerm" disabled=true/>
+	          <input type="hidden" id="english_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+	          <ul class="list-group" data-autocomplete-target="results"></ul>
+	        </div>
+	        <div data-controller="autocomplete" id="hindi_search_block" style="display:none;" class="col-md-10 p-0" data-autocomplete-url-value="/autocomplete_term?search_in=hindi">
+	          <input type="text" id="hindi_article_search_term" name="article_search_term" class="form-control" data-autocomplete-target='input' data-target="articleSearchTerm" disabled=true/>
+	          <input type="hidden" id="hindi_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+	          <ul class="list-group" data-autocomplete-target="results"></ul>
+	        </div>
+	      </div>
   		</div>
   		<div class="col-md-3">
   			<!-- <input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-target='themechapter.searchTermArticleBtn' disabled=true data-action="click->themechapter#searchTerm"/> -->

@@ -2,10 +2,22 @@ import { Controller } from "@hotwired/stimulus";
 import { Autocomplete } from "stimulus-autocomplete";
 
 export default class extends Controller {
-  static targets = [];
+  static targets = ['languageBtn'];
 
   connect() {
     document.addEventListener("autocomplete.change", this.autocomplete.bind(this));
+  }
+
+  selectLang(){
+    let vl = event.currentTarget.dataset.vl;
+    this.languageBtnTarget.value = vl;
+    if(this.languageBtnTarget.value == "हिंदी") {
+      $("#english_search_block").hide();
+      $("#hindi_search_block").show();  
+    } else {
+      $("#hindi_search_block").hide();
+      $("#english_search_block").show();
+    }
   }
 
   autocomplete(event) {
@@ -17,16 +29,32 @@ export default class extends Controller {
       dataType: 'script',
       success: function(data){
       }
-    }); 
+    });
   }
 
   searchTerm(){
-    let term = $("#search_term").val();
+    let term;
+    let searchIn;
+    let searchParams;
+    let searchType = this.languageBtnTarget.value;
+    let articleId = (searchType == "हिंदी")? $("#hindi_serach_text").val() : $("#english_serach_text").val();
+    if(articleId != "" && articleId != undefined){
+      searchParams = {article_id: articleId, search_type: "by_id"};
+    } else {
+      if(this.languageBtnTarget.value == "हिंदी"){
+        term = $("#hindi_search_term").val();
+        searchIn = "hindi";
+      } else{
+        term = $("#english_search_term").val();
+        searchIn = "english";
+      }
+      searchParams = {term: term, search_in: searchIn, search_type: "by_term"};
+    }
 
     if(term == "") {
       location.reload();
     } else {
-      var searchParams = {search: {term: term}};
+
       $.ajax({
         type: "get",
         url: '/search_term',

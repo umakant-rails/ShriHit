@@ -118,7 +118,12 @@ class ThemesController < ApplicationController
       elsif params[:search_type] == 'by_id'
         @articles = Article.by_id(params[:article_id])
       elsif params[:search_type] == 'by_term'
-        @articles = Article.by_search_term(params[:term])
+        search_term = params[:term]
+        if params[:search_in] == "english"
+          @articles = Article.by_search_english_term(search_term)
+        else
+          @articles = Article.by_search_hindi_term(search_term)
+        end
       else
         @articles = Article.order("created_at desc")
       end

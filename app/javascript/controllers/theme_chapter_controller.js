@@ -5,7 +5,7 @@ import ApplicationController from "./application_controller";
 export default class extends ApplicationController {
 
   static targets = ['theme', 'csrfToken', 'articleType', 'contextName', 'authorName', 'searchTermArticleBtn',
-  'clearFiltersBtn', 'themeChapter'];
+  'clearFiltersBtn', 'languageBtn', 'themeChapter'];
 
   connect(){
     document.addEventListener("autocomplete.change", this.autocomplete.bind(this));
@@ -30,6 +30,10 @@ export default class extends ApplicationController {
   toggleSearchOptions(){
     // let searchBoxStatus = $("#article_search_term").is(':disabled');
     // console.log(this.articleTypeTarget.disabled);
+    if(this.hasThemeChapterTarget && this.themeChapterTarget.value.length == 0){
+      super.showErrorsByLayout("कृपया पहले खंड/प्रकरण चुने. खंड/प्रकरण चुनना आवश्यक है.");
+      return;
+    }
     let searchBoxStatus = this.articleTypeTarget.disabled;
 
     if(searchBoxStatus == false){
@@ -37,17 +41,34 @@ export default class extends ApplicationController {
       this.contextNameTarget.disabled = true;
       this.authorNameTarget.disabled = true;
       this.clearFiltersBtnTarget.disabled = true;
-      $("#article_search_term").prop('disabled', false);
+      $("#english_article_search_term").prop('disabled', false);
+      $("#hindi_article_search_term").prop('disabled', false);
       this.searchTermArticleBtnTarget.disabled = false;
+      this.languageBtnTarget.disabled = false;
       this.clearFilters();
     } else {
       this.articleTypeTarget.disabled = false
       this.contextNameTarget.disabled = false;
       this.authorNameTarget.disabled = false;
       this.clearFiltersBtnTarget.disabled = false;
-      $("#article_search_term").prop('disabled', true);
-      $("#article_search_term").val("");
+      $("#english_article_search_term").prop('disabled', true);
+      $("#hindi_article_search_term").prop('disabled', true);
+      $("#english_article_search_term").val("");
+      $("#hindi_article_search_term").val("");
+      this.languageBtnTarget.disabled = true;
       this.searchTermArticleBtnTarget.disabled = true;
+    }
+  }
+
+  selectLang(){
+    let vl = event.currentTarget.dataset.vl;
+    this.languageBtnTarget.value = vl;
+    if(this.languageBtnTarget.value == "हिंदी") {
+      $("#english_search_block").hide();
+      $("#hindi_search_block").show();  
+    } else {
+      $("#hindi_search_block").hide();
+      $("#english_search_block").show();
     }
   }
 
@@ -105,14 +126,33 @@ export default class extends ApplicationController {
   }
 
   searchArticleByTerm(){
-    let term = $("#article_search_term").val();
+    let term, searchIn, articleId;
+    if(this.languageBtnTarget.value == "हिंदी"){
+      term = $("#hindi_article_search_term").val();
+      articleId = $("#hindi_serach_text").val();
+      searchIn = "hindi";
+    } else {
+      term = $("#english_article_search_term").val();
+      articleId = $("#english_serach_text").val();
+      searchIn = "english";
+    }
+
     let chapterId = this.themeChapterTarget.value;
     if(term == "") {
       location.reload();
+    } else if (term.indexOf(":") >= 0){
+      console.log(articleId);
+      let searchParams = {
+        search_type: 'by_id',
+        article_id: articleId,
+        theme_chapter_id: chapterId
+      }
+      this.getArticles(searchParams);
     } else {
       var searchParams = {
         term: term,
         theme_chapter_id: chapterId,
+        search_in: searchIn,
         search_type: 'by_term',
       }
       this.getArticles(searchParams);
@@ -127,6 +167,7 @@ export default class extends ApplicationController {
 
     //Required data to add a article in theme
     let requiredParams = {};
+    let searchType = this.languageBtnTarget.value;
     let themeId = this.hasThemeTarget ? this.themeTarget.dataset.themeId : '';
     let themeChapterId = this.hasThemeChapterTarget ? this.themeChapterTarget.value : '';
     let crsfToken = this.hasCsrfTokenTarget ? this.csrfTokenTarget.value : '';
@@ -136,7 +177,7 @@ export default class extends ApplicationController {
 
     //Required data to get article with existing filters
     let searchBoxStatus = this.articleTypeTarget.disabled;
-    let searchArticleId = $("#serach_text").val();
+    let searchArticleId = (searchType == "हिंदी")? $("#hindi_serach_text").val() : $("#english_serach_text").val();
     let searchTerm = $("#article_search_term").val();
 
     if(searchBoxStatus == false){

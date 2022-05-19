@@ -1,18 +1,39 @@
-<div class="row">
+<div class="row" data-controller="welcome">
   <div class="col-md-1"></div>
   <div class="col-md-10">
     <div class="card">
       <div class="card-body h-100">
         <div class="row">
           <div class="col-md-7">
-            <div data-controller="autocomplete welcome" data-autocomplete-url-value="/autocomplete_term">
-              <input type="text" id="search_term" name="search_term" class="form-control" data-autocomplete-target="input" />
-              <input type="hidden" id="serach_text" name="search_text" data-autocomplete-target="hidden"/>
-              <ul class="list-group" data-autocomplete-target="results"></ul>
+            <div class="input-group ms-3">
+              <div class="col-md-2">
+                <div class="row">
+                  <input type="button" value="इंग्लिश"class="btn btn-primary dropdown-toggle row" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-welcome-target="languageBtn"/>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a class="dropdown-item" data-vl="इंग्लिश" data-action="click->welcome#selectLang" href="#">इंग्लिश</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" data-vl="हिंदी" data-action="click->welcome#selectLang" href="#">हिंदी</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div data-controller="autocomplete" class="col-md-10" data-autocomplete-url-value="/autocomplete_term?search_in=english" id="english_search_block" data-autocomplete-delay-value="200">
+                <input type="text" id="english_search_term" name="search_term" class="form-control" data-autocomplete-target="input" />
+                <input type="hidden" id="english_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+                <ul class="list-group" data-autocomplete-target="results"></ul>
+              </div>
+              <div data-controller="autocomplete" class="col-md-10" data-autocomplete-url-value="/autocomplete_term?search=hindi" data-autocomplete-submit-on-enter-value="true" id="hindi_search_block" data-autocomplete-delay-value="300" style="display: none;">
+                <input type="text" id="hindi_search_term" name="search_term" class="form-control" data-autocomplete-target="input" />
+                <input type="hidden" id="hindi_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+                <ul class="list-group" data-autocomplete-target="results"></ul>
+                <div class="mt-1 text-danger" style="display:none;">हिंदी में रिकॉर्ड सर्च करने के लिए टाइप करने के बाद एंटर बटन प्रेस करे.</div>
+              </div>
             </div>
           </div>
           <div class="col-md-2">
-            <input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-controller="welcome" data-action="click->welcome#searchTerm"/>
+            <input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-action="click->welcome#searchTerm"/>
           </div>
           <div class="col-md-3 view-icon-div">
             <a href="javascript:void(0);"> 

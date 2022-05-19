@@ -6,9 +6,14 @@ class WelcomeController < ApplicationController
   end
 
   def autocomplete_term
-    search_term = params[:q]
-    @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
-      "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    search_term = params[:q].strip
+
+    if params[:search_in] == "english"
+      @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
+        "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    else
+      @articles = Article.where("content like ?", "%#{search_term}%")
+    end
     respond_to do |format|
       format.html {}
       format.json { head :no_content }
@@ -17,12 +22,18 @@ class WelcomeController < ApplicationController
   end
 
   def search_term
-    search_term = params[:search][:term]
-    indexx = search_term.index(":")
-    search_term = indexx.nil? ? search_term.strip : search_term[0, indexx].strip
+    search_term = params[:term]
     
-    @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
-      "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    # @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
+    #   "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    if params[:search_type] == "by_id"
+     @articles = Article.where(id: params[:article_id])
+    elsif params[:search_type] == "by_term" && params[:search_in] == "hindi"
+      @articles = Article.where("content like ?", "%#{search_term}%")
+    else
+      @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
+        "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    end
 
     respond_to do |format|
       format.html {}

@@ -14,8 +14,10 @@ class Article < ApplicationRecord
   scope :by_context, ->(context_id) { where('context_id = ?', context_id) }
   scope :by_article_type, ->(article_type_id) { where('article_type_id = ?', article_type_id) }
   scope :by_id, ->(id){ where("articles.id = ? ", id)}
-  scope :by_search_term, ->(term) {where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
+  scope :by_search_english_term, ->(term) {where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
       "%#{term.downcase}%", "%#{term.downcase}%")}
+  scope :by_search_hindi_term, ->(term) {where("content like ? ",
+     "%#{term}%")}
 
   # Scope for Article and ThemeArticle join operation
   scope :_theme_articles, ->(theme_id){
@@ -46,5 +48,4 @@ class Article < ApplicationRecord
     end
     return self.where(query) #._except_chapter_articles(selected_chapter_id) #where("theme_chapter_id is null or theme_chapter_id != ?", selected_chapter_id)
   end
-
 end
