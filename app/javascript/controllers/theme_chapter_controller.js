@@ -28,8 +28,6 @@ export default class extends ApplicationController {
   }
 
   toggleSearchOptions(){
-    // let searchBoxStatus = $("#article_search_term").is(':disabled');
-    // console.log(this.articleTypeTarget.disabled);
     if(this.hasThemeChapterTarget && this.themeChapterTarget.value.length == 0){
       super.showErrorsByLayout("कृपया पहले खंड/प्रकरण चुने. खंड/प्रकरण चुनना आवश्यक है.");
       return;
@@ -60,7 +58,7 @@ export default class extends ApplicationController {
     }
   }
 
-  selectLang(){
+  selectSearchLang(){
     let vl = event.currentTarget.dataset.vl;
     this.languageBtnTarget.value = vl;
     if(this.languageBtnTarget.value == "हिंदी") {

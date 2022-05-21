@@ -10,7 +10,7 @@ $(document).ready(function(){
     };
     var control =
       new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["hindi_search_term"]);
+    control.makeTransliteratable(["hindi_article_search_term"]);
   }
   google.setOnLoadCallback(onLoad);
 });

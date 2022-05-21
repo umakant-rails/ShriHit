@@ -16,24 +16,8 @@ class Article < ApplicationRecord
   scope :by_id, ->(id){ where("articles.id = ? ", id)}
   scope :by_search_english_term, ->(term) {where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
       "%#{term.downcase}%", "%#{term.downcase}%")}
-  scope :by_search_hindi_term, ->(term) {where("content like ? ",
-     "%#{term}%")}
+  scope :by_search_hindi_term, ->(term) {where("content like ? ", "%#{term.strip}%")}
 
-  # Scope for Article and ThemeArticle join operation
-  scope :_theme_articles, ->(theme_id){
-    where({theme_articles: {theme_id: theme_id}})
-  }
-  # Scope for Article and ThemeChapter join operation
-  scope :_chapter_articles, ->(theme_chapter_id) { 
-    where({theme_articles: {theme_chapter_id: theme_chapter_id}})
-  }
-
-  scope :_except_theme_articles, -> (theme_id) {
-    where.not(id: ThemeArticle.where(theme_id: theme_id).pluck(:id))
-  }
-  scope :_except_chapter_articles, -> (theme_chapter_id) {
-    where.not(id: ThemeArticle.where(theme_chapter_id: theme_chapter_id).pluck(:article_id))
-  }
 
   def self.by_attributes(author_id, context_id, article_type_id, selected_chapter_id)
     query = ""
@@ -46,6 +30,35 @@ class Article < ApplicationRecord
     if article_type_id.present?
       query += query.blank? ? "article_type_id = #{article_type_id}" : " and article_type_id = #{article_type_id}"
     end
-    return self.where(query) #._except_chapter_articles(selected_chapter_id) #where("theme_chapter_id is null or theme_chapter_id != ?", selected_chapter_id)
+    return Article.where(query) #._except_chapter_articles(selected_chapter_id) #where("theme_chapter_id is null or theme_chapter_id != ?", selected_chapter_id)
+  end
+
+  def self.theme_chapters(theme_chapter_id)
+    ThemeArticle.joins(:article).where({theme_articles: {theme_chapter_id: theme_chapter_id}})
+  end
+
+  def self.get_articles_by_params(params)
+    articles, added_articles = [], []
+    if params[:search_type] == 'by_attribute'
+      articles = self.by_attributes(params[:author_id], params[:context_id], 
+        params[:article_type_id], params[:theme_chapter_id]
+      )
+    elsif params[:search_type] == 'by_id'
+      articles = Article.by_id(params[:article_id])
+    elsif params[:search_type] == 'by_term'
+      search_term = params[:term]
+      if params[:search_in] == "english"
+        articles = Article.by_search_english_term(search_term)
+      else
+        articles = Article.by_search_hindi_term(search_term)
+      end
+    else
+      articles = Article.order("created_at desc")
+    end
+
+    added_articles = Article.theme_chapters(params[:theme_chapter_id]) if params[:theme_chapter_id].present?
+    #articles = @articles._except_chapter_articles(params[:theme_chapter_id])
+    articles = articles.where.not(id: added_articles.pluck(:article_id))
+    return added_articles, articles
   end
 end

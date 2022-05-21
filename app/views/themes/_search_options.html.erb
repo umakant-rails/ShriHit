@@ -1,47 +1,45 @@
-<div class="row mb-2">
+<div class="row">
 	<div class="col-md-2">
-		<label class="col-form-label">Search Option</label>
+		<div class="row mb-2">
+			<label class="form-control">Search Options</label>
+		</div>
+		<div class="row">
+			<button class="btn btn-primary form-control" data-action="click->themechapter#toggleSearchOptions">
+	  		Toggle Search Option
+	  	</button>
+		</div>
 	</div>
 	<div class="col-md-10">
-		<div class="row">
-    	<div class="col-md-3">
+		<div class="row mb-2">
+    	<div class="col-md-2">
     		<%= select_tag 'article_type', options_from_collection_for_select(@article_types, "id", "name"), :prompt => "रचना प्रकार चुने", class:"form-control", 'data-target': 'themechapter.articleType', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
     	</div>
-    	<div class="col-md-3">
+    	<div class="col-md-2">
     		<%= select_tag 'context_name', options_from_collection_for_select(@contexts, "id", "name"), :prompt => "प्रसंग चुने", class:"form-control", 'data-target': 'themechapter.contextName', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
     	</div>
     	<div class="col-md-3">
     		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-target': 'themechapter.authorName', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
     	</div>
     	<div class="col-md-3">
+    		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-target': 'themechapter.authorName', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
+    	</div>
+    	<div class="col-md-2">
   			<input type="button" id="search_article_btn" value="Clear Filter" class="form-control btn btn-primary" data-target='themechapter.clearFiltersBtn' data-action="click->themechapter#clearFiltersAndGetArticles"/>
   		</div>
     </div>
-  </div>
-</div>
-<div class="row">
-	<div class="col-md-2" style="padding-right: 0px;">
-		<button class="btn btn-primary" data-action="click->themechapter#toggleSearchOptions">
-  		Toggle Search Option
-  	</button>
-	</div>
-	<div class="col-md-10">
     <div class="row">
-    	<div class="col-md-9">
-    		<%#= text_field_tag 'article_search_term', '', class: 'form-control', 'data-target': 'themechapter.articleSearchTerm', disabled: true %>
-    		<div class="input-group ms-3">
-    			<div class="col-md-2 p-0">
-            <div class="row">
-              <input type="button" value="इंग्लिश"class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-themechapter-target="languageBtn" disabled=true/>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" data-vl="इंग्लिश" data-action="click->themechapter#selectLang" href="#">इंग्लिश</a>
-                </li>
-                <li>
-                  <a class="dropdown-item" data-vl="हिंदी" data-action="click->themechapter#selectLang" href="#">हिंदी</a>
-                </li>
-              </ul>
-            </div>
+    	<div class="col-md-10">
+    		<div class="row">
+    			<div class="col-md-2 mr-0 pe-0">
+            <input type="button" value="इंग्लिश"class="btn btn-primary dropdown-toggle form-control search-lbl" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-themechapter-target="languageBtn" disabled=true/>
+            <ul class="dropdown-menu col-md-2">
+              <li>
+                <a class="dropdown-item" data-vl="इंग्लिश" data-action="click->themechapter#selectSearchLang" href="#">इंग्लिश</a>
+              </li>
+              <li>
+                <a class="dropdown-item" data-vl="हिंदी" data-action="click->themechapter#selectSearchLang" href="#">हिंदी</a>
+              </li>
+            </ul>
           </div>
 	    		<div data-controller="autocomplete" id="english_search_block" class="col-md-10 p-0" data-autocomplete-url-value="/autocomplete_term?search_in=english">
 	          <input type="text" id="english_article_search_term" name="article_search_term" class="form-control" data-autocomplete-target='input' data-target="articleSearchTerm" disabled=true/>
@@ -55,10 +53,9 @@
 	        </div>
 	      </div>
   		</div>
-  		<div class="col-md-3">
-  			<!-- <input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-target='themechapter.searchTermArticleBtn' disabled=true data-action="click->themechapter#searchTerm"/> -->
+  		<div class="col-md-2">
   			<input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-target='themechapter.searchTermArticleBtn' disabled=true data-action="click->themechapter#searchArticleByTerm"/>
   		</div>
     </div>
-  </div>
+	</div>
 </div>

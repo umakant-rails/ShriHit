@@ -63,7 +63,8 @@ class ThemesController < ApplicationController
   end
 
   def search_articles
-    get_articles_by_params
+    @added_articles, @articles = Article.get_articles_by_params(params)
+    #get_articles_by_params
     respond_to do |format|
       format.html {}
       format.js {}
@@ -75,7 +76,8 @@ class ThemesController < ApplicationController
     if current_user.theme_articles.where(theme_article_params).blank?
       @theme_article = current_user.theme_articles.new(theme_article_params)
       if @theme_article.save
-        get_articles_by_params 
+        #get_articles_by_params
+        @added_articles, @articles = Article.get_articles_by_params(params)
         flash[:success] = "उत्सव में रचना सफलतापूर्वक जोड़ दी गई है."
       else
         flash[:error] = "उत्सव में रचना जोड़ने की प्रकिया असफल हो गई है."
@@ -95,7 +97,8 @@ class ThemesController < ApplicationController
     @theme_article = current_user.theme_articles.find(params[:theme_article_id])
 
     if @theme_article.destroy
-      get_articles_by_params
+      # get_articles_by_params
+      @added_articles, @articles = Article.get_articles_by_params(params)
       flash[:success] = "उत्सव से रचना सफलतापूर्वक हटा दी गई है."
     else
       flash[:error] = "उत्सव में रचना हटाने की प्रकिया असफल हो गई है."
@@ -109,28 +112,6 @@ class ThemesController < ApplicationController
   end
 
   private
-   
-    def get_articles_by_params
-      if params[:search_type] == 'by_attribute'
-        @articles = Article.by_attributes(params[:author_id], params[:context_id], 
-          params[:article_type_id], params[:theme_chapter_id]
-        )
-      elsif params[:search_type] == 'by_id'
-        @articles = Article.by_id(params[:article_id])
-      elsif params[:search_type] == 'by_term'
-        search_term = params[:term]
-        if params[:search_in] == "english"
-          @articles = Article.by_search_english_term(search_term)
-        else
-          @articles = Article.by_search_hindi_term(search_term)
-        end
-      else
-        @articles = Article.order("created_at desc")
-      end
-
-      @added_articles = ThemeArticle.joins(:article).where({theme_articles: {theme_chapter_id: params[:theme_chapter_id]}})
-      @articles = @articles._except_chapter_articles(params[:theme_chapter_id])   
-    end
     
     def set_theme
       @theme = Theme.find(params[:id])

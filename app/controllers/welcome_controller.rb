@@ -1,8 +1,12 @@
 class WelcomeController < ApplicationController
 
   def index
-    @articles = Article.all.order("created_at DESC").limit(10)
-    @authors = Author.all.order("created_at DESC").limit(10)  
+    # @articles = Article.all.order("created_at DESC").limit(10)
+    # @authors = Author.all.order("created_at DESC").limit(10)
+    @article_types = ArticleType.all
+    @contexts = Context.all
+    @authors = Author.all
+    @articles = Article.all
   end
 
   def autocomplete_term
@@ -22,22 +26,25 @@ class WelcomeController < ApplicationController
   end
 
   def search_term
-    search_term = params[:term]
-    
-    # @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
-    #   "%#{search_term.downcase}%", "%#{search_term.downcase}%")
-    if params[:search_type] == "by_id"
-     @articles = Article.where(id: params[:article_id])
-    elsif params[:search_type] == "by_term" && params[:search_in] == "hindi"
-      @articles = Article.where("content like ?", "%#{search_term}%")
-    else
-      @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
-        "%#{search_term.downcase}%", "%#{search_term.downcase}%")
-    end
+    # search_term = params[:term]
+    # if params[:search_type] == "by_id"
+    #  @articles = Article.where(id: params[:article_id])
+    # elsif params[:search_type] == "by_term" && params[:search_in] == "hindi"
+    #   @articles = Article.where("content like ?", "%#{search_term}%")
+    # else
+    #   @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
+    #     "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    # end
 
+    # respond_to do |format|
+    #   format.html {}
+    #   format.json { head :no_content }
+    # end
+    # render layout: false
+    @added_articles, @articles = Article.get_articles_by_params(params)
     respond_to do |format|
       format.html {}
-      format.json { head :no_content }
+      format.js {}
     end
     render layout: false
   end
