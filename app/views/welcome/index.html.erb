@@ -1,15 +1,15 @@
 <%#= render partial: 'search_bar'%>
 <div class="row">
-	<div class="card">
+	<div class="card" style="border: 2px solid gray;">
 		<div class="card-body" data-controller="search">
 			<%= render partial: 'search_options'%>
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-9 ps-0">
 		<div class="card">
-			<div class="card-body" id="article-list">
+			<div class="card-body h-100" id="article-list">
 				<% if @articles.present? %>
 					<% @articles && @articles.each do | article | %>
 						<%= render partial: "article", locals: {article: article} %>
@@ -20,7 +20,7 @@
 		  </div>
 		</div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3 ps-0 pe-0">
     <div class="card">
       <div class="card-body h-100" style="min-height: 545px;">
         <span class="col-md-6 text-start article-title text-primary">

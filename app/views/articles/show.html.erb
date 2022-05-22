@@ -20,18 +20,20 @@
             ( रचनाकार/लेखक - श्री : <%= @article.author.name %> जी )
           </div>
         </div>
-        <div class="dropdown-divider"></div>
-        <div class="row">
-          <div class="col-md-2">
-            <%= link_to "Edit this article", edit_article_path(@article) %> 
+        <% if current_user.present? %>
+          <div class="dropdown-divider"></div>
+          <div class="row">
+            <div class="col-md-2">
+              <%= link_to "Edit this article", edit_article_path(@article) %> 
+            </div>
+            <div class="col-md-2">
+              <%= link_to "Back to articles", articles_path %>
+            </div>
+            <div class="col-md-2" style="margin: -5px 0 0px 0;padding: 0;">
+              <%= button_to("Destroy this article", article_path(@article), method: :delete, :class => "btn btn-link") %>
+            </div>
           </div>
-          <div class="col-md-2">
-            <%= link_to "Back to articles", articles_path %>
-          </div>
-          <div class="col-md-2" style="margin: -5px 0 0px 0;padding: 0;">
-            <%= button_to("Destroy this article", article_path(@article), method: :delete, :class => "btn btn-link") %>
-          </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,1 +1,83 @@
-Index page
+<div class="row">
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body h-100">
+				Index page
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="card">
+			<div class="card-body h-100">
+				Index page
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-9">
+		<div class="card">
+			<div class="card-body h-400">
+				<span class="col-md-6 text-start article-title text-primary">
+          रचना सूची 
+        </span>
+        <div class="dropdown-divider"></div>
+        <table class="table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">S. No.</th>
+              <th scope="col">रचना</th>
+              <th scope="col">लेखक</th>
+              <th scope="col">योगदानकर्ता</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<% if @articles.present? %>
+	            <% @articles.each_with_index do |article, index| %>
+	              <%= render partial: 'article', locals: {article: article, index: (index + 1) } %>
+	            <% end %>
+            <% else %>
+	            <td colspan="4">
+	            	अभी रिकॉर्ड उपलब्ध नहीं है.
+	            </td>
+            <% end %>
+						<% if @articles.length > 5 %>
+							<tr>
+								<td colspan="4">
+									<a href="<%= articles_path %>" class="fRight">Read More...</a>
+								</td>
+							</tr>
+						<% end %>
+          </tbody>
+        </table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-body h-400">
+        <span class="col-md-6 text-start article-title text-primary">
+          रचनाकार / कवि / भक्त सूची 
+        </span>
+        <div class="dropdown-divider"></div>
+          <ul class="list-group">
+          	<% if @authors.present? %>
+	          	<% @authors.each do |author| %>
+								<li class="list-group-item">
+								  <a href="<%= authors_path(author) %>">
+								    <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
+								    <%= author.name %>
+									</a>
+								</li>
+							<% end %>
+						<% else %>
+							<li class="list-group-item">
+								अभी रिकॉर्ड उपलब्ध नहीं है.
+							</li>
+						<% end %> 
+					</ul>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>
