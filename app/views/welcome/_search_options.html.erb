@@ -21,7 +21,7 @@
     		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-target': 'search.authorName', 'data-action': 'change->search#searchArticlesByAttrs' %>
     	</div>
     	<div class="col-md-3">
-    		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-target': 'search.authorName', 'data-action': 'change->search#searchArticlesByAttrs' %>
+				<%= select_tag 'contributor_name', options_from_collection_for_select(@contributors, "id", "username"), :prompt => "योगदानकर्ता चुने", class:"form-control", 'data-target': 'search.contributorName', 'data-action': 'change->search#searchArticlesByAttrs' %>
     	</div>
     	<div class="col-md-2">
   			<input type="button" id="search_article_btn" value="Clear Filter" class="form-control btn btn-primary" data-target='search.clearFiltersBtn' data-action="click->search#clearFiltersAndGetArticles"/>

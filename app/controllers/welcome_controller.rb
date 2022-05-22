@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
     @contexts = Context.all
     @authors = Author.all
     @articles = Article.all
+    @contributors = User.all
   end
 
   def autocomplete_term

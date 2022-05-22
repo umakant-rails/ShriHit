@@ -10,13 +10,69 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="<%= root_path %>">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            रचना प्रकार
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
+            <% @article_types && @article_types.each do |article_type| %>
+              <li>
+                <a class="dropdown-item" href="<%= article_type.id %>">
+                  <%= article_type.name %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            रचना प्रसंग
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
+            <% @contexts && @contexts.each do |context| %>
+              <li>
+                <a class="dropdown-item" href="<%= context.id %>">
+                  <%= context.name %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            रचनाकार/लेखक
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
+            <% @authors && @authors.each do |author| %>
+              <li>
+                <a class="dropdown-item" href="<%= author.id %>">
+                  <%= author.name %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            योगदानकर्ता
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
+            <% @contributors && @contributors.each do |contributor| %>
+              <li>
+                <a class="dropdown-item" href="<%= contributor.id %>">
+                  <%= contributor.username %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">संत जीवनी</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="#">भक्ति ग्रन्थ/वाणी</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>

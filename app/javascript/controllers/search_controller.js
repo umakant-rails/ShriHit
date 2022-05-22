@@ -6,7 +6,7 @@ import ApplicationController from "./application_controller";
 // Connects to data-controller="article"
 export default class extends ApplicationController {
 
-  static targets = ['articleType', 'contextName', 'authorName', 'searchTermArticleBtn',
+  static targets = ['articleType', 'contextName', 'authorName', 'contributorName', 'searchTermArticleBtn',
   'clearFiltersBtn', 'languageBtn'];
 
   connect(){
@@ -67,13 +67,15 @@ export default class extends ApplicationController {
   }
 
   searchArticlesByAttrs(){
-    let article_type = this.articleTypeTarget.value;
-    let context_name = this.contextNameTarget.value
-    let author_name = this.authorNameTarget.value;
+    let articleType = this.articleTypeTarget.value;
+    let contextName = this.contextNameTarget.value
+    let authorName = this.authorNameTarget.value;
+    let contributorName = this.contributorNameTarget.value;
     var searchParams = {
-      article_type_id: article_type, 
-      context_id: context_name,
-      author_id: author_name,
+      article_type_id: articleType, 
+      context_id: contextName,
+      author_id: authorName,
+      contributor_id: contributorName,
       search_type: 'by_attribute'
     };
     this.getArticles(searchParams);

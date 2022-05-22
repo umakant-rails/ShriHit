@@ -19,7 +19,7 @@ class Article < ApplicationRecord
   scope :by_search_hindi_term, ->(term) {where("content like ? ", "%#{term.strip}%")}
 
 
-  def self.by_attributes(author_id, context_id, article_type_id, selected_chapter_id)
+  def self.by_attributes(author_id, context_id, article_type_id, selected_chapter_id, contributor_id)
     query = ""
     if author_id.present?
       query += "author_id = #{author_id}"
@@ -29,6 +29,9 @@ class Article < ApplicationRecord
     end
     if article_type_id.present?
       query += query.blank? ? "article_type_id = #{article_type_id}" : " and article_type_id = #{article_type_id}"
+    end
+    if contributor_id.present?
+      query += query.blank? ? "user_id = #{contributor_id}" : " and user_id = #{contributor_id}"
     end
     return Article.where(query) #._except_chapter_articles(selected_chapter_id) #where("theme_chapter_id is null or theme_chapter_id != ?", selected_chapter_id)
   end
@@ -41,7 +44,7 @@ class Article < ApplicationRecord
     articles, added_articles = [], []
     if params[:search_type] == 'by_attribute'
       articles = self.by_attributes(params[:author_id], params[:context_id], 
-        params[:article_type_id], params[:theme_chapter_id]
+        params[:article_type_id], params[:theme_chapter_id], params[:contributor_id]
       )
     elsif params[:search_type] == 'by_id'
       articles = Article.by_id(params[:article_id])
