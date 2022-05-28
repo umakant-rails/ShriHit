@@ -30,6 +30,22 @@ Rails.application.routes.draw do
   resources :contexts
   resources :theme_chapters
 
+  namespace :admin do
+    resources :dashboards, only: [:index] do
+    end
+    resources :authors, only: [:index, :update] do
+      get '/approve' => "authors#approve", as: :approve, on: :member
+      get '/reject' => "authors#reject", as: :reject, on: :member
+      post '/merge' => "authors#merge", as: :merge_in, on: :member
+      #get '/update' => "authors#approve", as: :approve, on: :member
+    end
+    resources :contexts, only: [:index, :update] do
+      get '/approve' => "contexts#approve", as: :approve, on: :member
+      get '/reject' => "contexts#reject", as: :reject, on: :member
+      post '/merge' => "contexts#merge", as: :merge_in, on: :member
+      #get '/update' => "authors#approve", as: :approve, on: :member
+    end
+  end
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

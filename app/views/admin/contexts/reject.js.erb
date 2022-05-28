@@ -1,0 +1,9 @@
+$(".alert").hide();
+<% if flash[:success].present? %>
+	$("#pending_context_list").html("<%= escape_javascript(render 'context', contexts_pending: @contexts_pending, contexts_approved: @contexts_approved)%>");
+	$("#successAlert").html("<%= flash[:success] %>");
+	$("#successAlert").parent().css("display", "block");
+<% elsif flash[:error].present? %>
+	$("#errorsAlert").html("<%= flash[:error] %>");
+	$("#errorsAlert").parent().css("display", "block");
+<% end %>

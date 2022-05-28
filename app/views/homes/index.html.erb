@@ -32,7 +32,7 @@
             </tr>
           </thead>
           <tbody>
-          	<% if @articles.present? %>
+						<% if @articles.present? %>
 	            <% @articles.each_with_index do |article, index| %>
 	              <%= render partial: 'article', locals: {article: article, index: (index + 1) } %>
 	            <% end %>
@@ -60,8 +60,8 @@
           रचनाकार / कवि / भक्त सूची 
         </span>
         <div class="dropdown-divider"></div>
-          <ul class="list-group">
-          	<% if @authors.present? %>
+	        <ul class="list-group">
+	        	<% if @authors.present? %>
 	          	<% @authors.each do |author| %>
 								<li class="list-group-item">
 								  <a href="<%= authors_path(author) %>">

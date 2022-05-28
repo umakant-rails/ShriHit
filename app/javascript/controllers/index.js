@@ -13,6 +13,7 @@ import FlatpickrController from "./flatpickr_controller";
 import UserProfileController from "./user_profile_controller";
 import ThemeChapterController from "./theme_chapter_controller";
 import SearchController from "./search_controller";
+import DashboardController from "./dashboard_controller";
 
 application.register('application', ApplicationController);
 application.register('autocomplete', Autocomplete);
@@ -23,3 +24,4 @@ application.register("flatpickr", FlatpickrController);
 application.register("userprofile", UserProfileController);
 application.register("themechapter", ThemeChapterController);
 application.register("search", SearchController);
+application.register("dashboard", DashboardController);

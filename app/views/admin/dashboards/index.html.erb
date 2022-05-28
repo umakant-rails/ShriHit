@@ -1,0 +1,127 @@
+<div class="row">
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-body h-400">
+				<%= pie_chart @contexts_by_approval, title: "प्रसंग रिपोर्ट" %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="card">
+			<div class="card-body h-400">
+				<%= line_chart @articles_by_count, xtitle: "Date", ytitle: "रचना संख्या", title: "रचनायें: समय आधारित रिपोर्ट" %>
+				<%#= column_chart @article_by_counts, xtitle: "Date", ytitle: "रचना संख्या" %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-body h-400">
+				<%= pie_chart @articles_by_type, title: "रचनायें: प्रकार आधारित रिपोर्ट" %>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="card">
+			<div class="card-body h-400">
+				<%= column_chart @artcles_by_context, title: "रचनायें: प्रसंग आधारित रिपोर्ट	" %>
+				<%#= column_chart @article_by_counts, xtitle: "Date", ytitle: "रचना संख्या" %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row" data-controller="dashboard">
+	<div class="col-md-6">
+		<%#= render "pending_contexts", contexts_pending: @contexts_pending,
+			contexts_approved: @contexts_approved %>
+		<div class="card">
+			<div class="card-body h-400">
+				<span class="col-md-6 text-start article-title text-primary">
+		      लंबित प्रसंग सूची 
+		    </span>
+		    <div class="dropdown-divider"></div>
+		    <table class="table">
+		      <thead class="table-dark ps-0 pe-0">
+		        <tr>
+		          <th scope="col">S. No.</th>
+		          <th scope="col">नए प्रसंग</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		      	<% if @contexts_pending.present? %>
+		          <% @contexts_pending.limit(5).each_with_index do |context, index| %>
+		            <tr>
+		              <td><%= index+1 %></td>
+		              <td>
+		              	<%= context.name %>
+		              </td>
+		              
+		          	</tr>
+		          <% end %>
+		        <% else %>
+		          <td colspan="4">
+		          	अभी रिकॉर्ड उपलब्ध नहीं है.
+		          </td>
+		        <% end %>
+						<% if @contexts_pending.length > 5 %>
+							<tr>
+								<td colspan="5">
+									<a href="<%= admin_contexts_path %>" class="fRight">
+										स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे 
+									</a>
+								</td>
+							</tr>
+						<% end %>
+		      </tbody>
+		    </table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<%#= render "pending_authors", authors_pending: @authors_pending,
+			authors_approved: @authors_approved %>
+		<div class="card">
+		<div class="card-body h-400">
+	    <span class="col-md-6 text-start article-title text-primary">
+	      लंबित रचनाकार / कवि / भक्त सूची 
+	    </span>
+	    <div class="dropdown-divider"></div>
+	    <table class="table">
+	      <thead class="table-dark">
+	        <tr>
+	          <th scope="col">S. No.</th>
+	          <th scope="col">नए रचनाकार</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	      	<% if @authors_pending.present? %>
+	          <% @authors_pending.limit(5).each_with_index do |author, index| %>
+	            <tr>
+	            	<td><%= index +1 %></td>
+	            	<td>
+	            		<%= author.name %> </td>
+	            </tr>
+	          <% end %>
+	        <% else %>
+	          <td colspan="3">
+	          	अभी रिकॉर्ड उपलब्ध नहीं है.
+	          </td>
+	        <% end %>
+					<% if @authors_pending.length > 5 %>
+						<tr>
+							<td colspan="5">
+								<a href="<%= admin_authors_path %>" class="fRight">
+									स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे
+								</a>
+							</td>
+						</tr>
+					<% end %>
+	      </tbody>
+	    </table>
+		</div>
+	</div>
+	</div>
+</div>

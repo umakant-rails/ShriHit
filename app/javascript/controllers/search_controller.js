@@ -6,7 +6,7 @@ import ApplicationController from "./application_controller";
 // Connects to data-controller="article"
 export default class extends ApplicationController {
 
-  static targets = ['articleType', 'contextName', 'authorName', 'contributorName', 'searchTermArticleBtn',
+  static targets = ['articleType', 'contextName', 'authorName', 'contributorName', 'contributorName', 'searchTermArticleBtn',
   'clearFiltersBtn', 'languageBtn'];
 
   connect(){
@@ -21,6 +21,7 @@ export default class extends ApplicationController {
       this.articleTypeTarget.disabled = true;
       this.contextNameTarget.disabled = true;
       this.authorNameTarget.disabled = true;
+      this.contributorNameTarget.disabled = true;
       this.clearFiltersBtnTarget.disabled = true;
       $("#english_article_search_term").prop('disabled', false);
       $("#hindi_article_search_term").prop('disabled', false);
@@ -31,13 +32,15 @@ export default class extends ApplicationController {
       this.articleTypeTarget.disabled = false
       this.contextNameTarget.disabled = false;
       this.authorNameTarget.disabled = false;
+      this.contributorNameTarget.disabled = false;
       this.clearFiltersBtnTarget.disabled = false;
       $("#english_article_search_term").prop('disabled', true);
       $("#hindi_article_search_term").prop('disabled', true);
-      $("#english_article_search_term").val("");
-      $("#hindi_article_search_term").val("");
+      // $("#english_article_search_term").val("");
+      // $("#hindi_article_search_term").val("");
       this.languageBtnTarget.disabled = true;
       this.searchTermArticleBtnTarget.disabled = true;
+      this.clearFilters();
     }
   }
 
@@ -64,6 +67,9 @@ export default class extends ApplicationController {
     this.articleTypeTarget.value = '';
     this.contextNameTarget.value = '';
     this.authorNameTarget.value = '';
+    this.contributorNameTarget.value = '';
+    $("#english_article_search_term").val("");
+    $("#hindi_article_search_term").val("");
   }
 
   searchArticlesByAttrs(){

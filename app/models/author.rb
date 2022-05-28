@@ -5,7 +5,9 @@ class Author < ApplicationRecord
   belongs_to :sampradaya, optional: true
 
   validates :name, presence: true
-
+  scope :pending_for_approval, ->() { where(is_approved: nil) }
+  scope :approved, ->() { where(is_approved: true) }
+  
   def self.create_author(name, user_id)
     author = self.where(name: name).first
     return (author.present? ? author : self.create!(name: name, user_id: user_id))

@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create!([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create!(name: "Luke", movie: movies.first)
+Role.create!(name: 'Super Admin') if Role.where(name: 'Super Admin').blank?
 Role.create!(name: 'Admin') if Role.where(name: 'Admin').blank?
 Role.create!(name: 'Contributor') if Role.where(name: 'Contributor').blank?
 User.create!(username: 'umakant005', email: 'umakantrajpoot@gmail.com', 
@@ -53,13 +54,25 @@ Theme.all.each{ | theme |
   ThemeChapter.create(user_id:1, theme_id: theme.id, name: "#{theme.name}_विविध _प्रकरण") if ThemeChapter.where(name: "#{theme.name}_विविध _प्रकरण").blank?
 }
  
+Context.create!(name: 'विविध', user_id: 1) if Context.where(name: 'विविध').blank?
 Context.create!(name: 'वन विहार', user_id: 1) if Context.where(name: 'वन विहार').blank?
 Context.create!(name: 'श्रृंगार', user_id: 1) if Context.where(name: 'श्रृंगार').blank?
 Context.create!(name: 'शरद ऋतु', user_id: 1) if Context.where(name: 'शरद ऋतु').blank?
 Context.create!(name: 'वर्षा ऋतु', user_id: 1) if Context.where(name: 'वर्षा ऋतु').blank?
 Context.create!(name: 'नौका विहार', user_id: 1) if Context.where(name: 'नौका विहार').blank?
 
+Sampradaya.create!(name: 'अज्ञात') if Sampradaya.where(name: 'अज्ञात').blank?
 Sampradaya.create!(name: 'माध्व सम्प्रदाय') if Sampradaya.where(name: 'माध्व सम्प्रदाय').blank?
 Sampradaya.create!(name: 'वल्लभ सम्प्रदाय') if Sampradaya.where(name: 'वल्लभ सम्प्रदाय').blank?
 Sampradaya.create!(name: 'निम्बार्क सम्प्रदाय') if Sampradaya.where(name: 'निम्बार्क सम्प्रदाय').blank?
 Sampradaya.create!(name: 'रामानंदी संप्रदाय') if Sampradaya.where(name: 'रामानंदी संप्रदाय').blank?
+
+Author.create!(name: 'सूरदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'सूरदास').blank?
+Author.create!(name: 'कुम्भनदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'कुम्भनदास').blank?
+Author.create!(name: 'चतुर्भुजदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'चतुर्भुजदास').blank?
+Author.create!(name: 'छीतस्वामी', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'छीतस्वामी').blank?
+Author.create!(name: 'गोविंदस्वामी', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'गोविंदस्वामी').blank?
+Author.create!(name: 'कृष्णदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'कृष्णदास').blank?
+Author.create!(name: 'नंददास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'नंददास').blank?
+Author.create!(name: 'परमानन्ददास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'परमानन्ददास').blank?
+Author.create!(name: 'अज्ञात', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'अज्ञात').blank?

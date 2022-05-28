@@ -1,0 +1,42 @@
+<div class="row" data-controller="dashboard">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+		    <span class="col-md-6 text-start article-title text-primary">
+		      लंबित रचनाकार / कवि / भक्त सूची 
+		    </span>
+		    <div class="dropdown-divider"></div>
+      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-target="dashboard.csrfToken">
+      	<div id="pending_author_list">
+	      	<%= render "author", authors_pending: @authors_pending, authors_approved: @authors_approved %>
+	      </div>
+	      <!-- Modal -->
+	      <div class="modal fade" id="updateAuthorPopup" tabindex="-1" aria-labelledby="updateAuthorPopupLabel" aria-hidden="true">
+	        <div class="modal-dialog">
+	          <div class="modal-content">
+	            <div class="modal-header">
+	              <h3 class="modal-title" id="exampleModalLabel">
+	                लेखक का नाम अपडेट करे 
+	              </h3>
+	              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	            </div>
+	            <div class="modal-body">
+	              <div class="mb-3">
+	                <label for="formFile" class="form-label">लेखक का नया नाम</label>
+	                <%= text_field_tag 'update_author_name', '', class:"form-control", 'data-dashboard-target': 'newAuthorName' %>
+	              </div>
+	            </div>
+	            <div class="modal-footer">
+	              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	              <button type="button" data-dashboard-target="saveAuthorBtn" data-index="<%=  %>" data-action="click->dashboard#updateAuthor" class="btn btn-primary">Save changes</button>
+	            </div>
+	          </div>
+	        </div>
+		    </div>
+			</div>
+		</div>
+	</div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/dashboard/author-custom" %>
+<% end %>

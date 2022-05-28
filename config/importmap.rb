@@ -7,6 +7,7 @@ pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "layout", to: "layout.js", preload: true
 # pin "transliteration", to: "transliteration.js", preload: true
 # pin "summernote", to: "https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote-lite.min.js", preload: true
+pin "tinymce", to: "tinymce.min.js", preload: true
 pin "tinymce", to: "https://cdn.tiny.cloud/1/kiyvmpswx8cau4dzmwljz1gop78rrcdkiyicarl0u5z5f7np/tinymce/5/tinymce.min.js", preload: true
 
 # pin "tinymce", to: "tinymce.min.js", preload: true
@@ -20,6 +21,8 @@ pin "validate.js", to: "https://ga.jspm.io/npm:validate.js@0.12.0/validate.js"
 pin "stimulus-autocomplete", to: "https://ga.jspm.io/npm:stimulus-autocomplete@3.0.2/src/autocomplete.js"
 pin "stimulus-flatpickr", to: "https://ga.jspm.io/npm:stimulus-flatpickr@3.0.0-0/dist/index.m.js"
 pin "flatpickr", to: "https://ga.jspm.io/npm:flatpickr@4.6.13/dist/esm/index.js"
+pin "chartkick", to: "chartkick.js"
+pin "Chart.bundle", to: "Chart.bundle.js"
 
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/custom", under: "custom"
