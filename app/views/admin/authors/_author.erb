@@ -15,8 +15,8 @@
         	<td><%= index +1 %></td>
         	<td data-dashboard-target="authorForApproval" data-vl="<%= author.id %>"><%= author.name %> </td>
         	<td>
-        		<input type="button" value="स्वीकृत"  data-index="<%= index %>" data-action="click->dashboard#approveAuthor"  class="btn btn-primary"/>
-          	<input type="button" value="अस्वीकृत"  data-index="<%= index %>" data-action="click->dashboard#rejectAuthor" class="btn btn-danger"/>
+        		<input type="button" value="स्वीकृत"  data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="click->dashboard#approveAuthor"  class="btn btn-primary"/>
+          	<input type="button" value="अस्वीकृत"  data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="click->dashboard#rejectAuthor" class="btn btn-danger"/>
           </td>
           <td>
           	<% if authors_approved.present? %>
@@ -25,7 +25,7 @@
             			<%= select_tag 'context_id', options_from_collection_for_select(authors_approved, "id", "name"), :prompt => "प्रसंग चुने", class:"form-control", 'data-dashboard-target': 'authorMergeIn' %>
             		</div>
             		<div class="col-md-4">
-            			<input type="button" value="विलय करें" data-index="<%= index %>" data-action="click->dashboard#mergeAuthor" class="btn btn-primary"/>
+            			<input type="button" value="विलय करें" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="click->dashboard#mergeAuthor" class="btn btn-primary"/>
             		</div>
             	</div>
           	<% else %>
@@ -33,7 +33,7 @@
           	<% end %>
           </td>
           <td>
-            <button type="button" class="btn btn-primary" data-index="<%= index %>" data-action="dashboard#setAuthorIndexInPopup" data-bs-toggle="modal" data-bs-target="#updateAuthorPopup">
+            <button type="button" class="btn btn-primary" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="dashboard#setAuthorIndexInPopup" data-bs-toggle="modal" data-bs-target="#updateAuthorPopup">
               अपडेट करें
             </button>
           </td>

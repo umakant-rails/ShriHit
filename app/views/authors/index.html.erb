@@ -32,6 +32,7 @@
             <% end %>
           </tbody>
         </table>
+        <%= paginate @authors, remote: true %>
       </div>
     </div>
     <%= link_to "New Author", new_author_path %>

@@ -15,7 +15,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-9">
+	<div class="col-md-8">
 		<div class="card">
 			<div class="card-body h-400">
 				<span class="col-md-6 text-start article-title text-primary">
@@ -33,7 +33,7 @@
           </thead>
           <tbody>
 						<% if @articles.present? %>
-	            <% @articles.each_with_index do |article, index| %>
+	            <% @articles.limit(10).each_with_index do |article, index| %>
 	              <%= render partial: 'article', locals: {article: article, index: (index + 1) } %>
 	            <% end %>
             <% else %>
@@ -41,7 +41,7 @@
 	            	अभी रिकॉर्ड उपलब्ध नहीं है.
 	            </td>
             <% end %>
-						<% if @articles.length > 5 %>
+						<% if @articles.length > 10 %>
 							<tr>
 								<td colspan="4">
 									<a href="<%= articles_path %>" class="fRight">Read More...</a>
@@ -53,30 +53,44 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-4">
 		<div class="card">
 			<div class="card-body h-400">
         <span class="col-md-6 text-start article-title text-primary">
           रचनाकार / कवि / भक्त सूची 
         </span>
         <div class="dropdown-divider"></div>
-	        <ul class="list-group">
-	        	<% if @authors.present? %>
-	          	<% @authors.each do |author| %>
-								<li class="list-group-item">
-								  <a href="<%= authors_path(author) %>">
-								    <i class="fa-solid fa-user"></i>&nbsp;&nbsp;
-								    <%= author.name %>
-									</a>
-								</li>
-							<% end %>
-						<% else %>
-							<li class="list-group-item">
-								अभी रिकॉर्ड उपलब्ध नहीं है.
-							</li>
-						<% end %> 
-					</ul>
-        </div>
+        <table class="table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">S. No.</th>
+              <th scope="col">लेखक</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<% if @authors.present? %>
+	          	<% @authors.limit(10).each_with_index do |author, index| %>
+	          		<tr>
+		          		<td><%= index + 1 %></td>
+		          		<td><%= author.name %></td>
+		          	</tr>
+	          	<% end %>
+	          	<%if @authors.length > 10 %>
+	          		<tr>
+									<td colspan="2">
+										<a href="<%= authors_path %>" class="fRight">Read More...</a>
+									</td>
+								</tr>
+	          	<% end %>
+	          <% else %>
+		          <tr>
+		          	<td colspan="2">
+		          		अभी रिकॉर्ड उपलब्ध नहीं है.
+		          	</td>
+		          </tr>
+	          <% end %>
+          </tbody>
+        </table>
 			</div>
 		</div>
 	</div>

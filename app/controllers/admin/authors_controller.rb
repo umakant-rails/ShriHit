@@ -6,6 +6,10 @@ class Admin::AuthorsController < ApplicationController
     set_pending_records
   end
 
+  def pending_authors
+    set_pending_records
+  end
+
   def approve
     @author = Author.find(params[:id])
 
@@ -68,7 +72,7 @@ class Admin::AuthorsController < ApplicationController
   def update
     @author = Author.find(params[:id])
 
-    if @author.update(name: params[:updated_name])
+    if @author.update(name: params[:updated_name], is_approved: true)
       set_pending_records
       flash[:success] = "लेखक का नाम सफलतापूर्वक बदल दिया गया है"
     else
@@ -79,7 +83,7 @@ class Admin::AuthorsController < ApplicationController
   private
 
     def set_pending_records
-      @authors_pending = Author.pending_for_approval
+      @authors_pending = Author.pending_for_approval.page(params[:page])
       @authors_approved = Author.approved
     end
 

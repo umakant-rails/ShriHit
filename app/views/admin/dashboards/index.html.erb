@@ -66,15 +66,13 @@
 		          	अभी रिकॉर्ड उपलब्ध नहीं है.
 		          </td>
 		        <% end %>
-						<% if @contexts_pending.length > 5 %>
-							<tr>
-								<td colspan="5">
-									<a href="<%= admin_contexts_path %>" class="fRight">
-										स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे 
-									</a>
-								</td>
-							</tr>
-						<% end %>
+						<tr>
+							<td colspan="5">
+								<a href="<%= pending_contexts_admin_contexts_path %>" class="fRight">
+									स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे 
+								</a>
+							</td>
+						</tr>
 		      </tbody>
 		    </table>
 			</div>
@@ -110,15 +108,13 @@
 	          	अभी रिकॉर्ड उपलब्ध नहीं है.
 	          </td>
 	        <% end %>
-					<% if @authors_pending.length > 5 %>
-						<tr>
-							<td colspan="5">
-								<a href="<%= admin_authors_path %>" class="fRight">
-									स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे
-								</a>
-							</td>
-						</tr>
-					<% end %>
+					<tr>
+						<td colspan="5">
+							<a href="<%= pending_authors_admin_authors_path %>" class="fRight">
+								स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे
+							</a>
+						</td>
+					</tr>
 	      </tbody>
 	    </table>
 		</div>

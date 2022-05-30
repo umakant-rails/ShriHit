@@ -6,9 +6,13 @@ class Admin::ContextsController < ApplicationController
     set_pending_records
   end
 
+  def pending_contexts
+    set_pending_records
+  end
+
   def approve
     @context = Context.find(params[:id])
-    if @context.update(is_approved: true)
+    if @context.update!(is_approved: true)
       set_pending_records
       flash[:success] = "प्रसंग को सफलतापूर्वक स्वीकृत कर दिया है"
     else
@@ -34,6 +38,7 @@ class Admin::ContextsController < ApplicationController
 
     if !merge_failed
       set_pending_records
+      #redirect_to action: 'pending_contexts'
       flash[:success] = "प्रसंग को सफलतापूर्वक अस्वीकृत कर दिया है"
     else
       flash[:error] = "प्रसंग को अस्वीकृत करने प्रकिया असफल हो गई है"
@@ -59,6 +64,7 @@ class Admin::ContextsController < ApplicationController
     
     if !merge_failed 
       set_pending_records
+      #redirect_to action: 'pending_contexts'
       flash[:success] = "प्रसंग को सफलतापूर्वक विलय कर दिया है"
     else
       flash[:error] = "प्रसंग को विलय करने प्रकिया असफल हो गई है"
@@ -67,8 +73,8 @@ class Admin::ContextsController < ApplicationController
 
   def update
     @context = Context.find(params[:id])
-
-    if @context.update(name: params[:updated_name])
+    if @context.update(name: params[:updated_name], is_approved: true)
+      #redirect_to action: 'pending_contexts'
       set_pending_records
       flash[:success] = "प्रसंग का नाम सफलतापूर्वक बदल दिया गया है"
     else
@@ -80,8 +86,7 @@ class Admin::ContextsController < ApplicationController
   private
 
     def set_pending_records
-      #binding.break
-      @contexts_pending = Context.pending_for_approval
+      @contexts_pending = Context.pending_for_approval.page(params[:page])
       @contexts_approved = Context.approved
     end
 

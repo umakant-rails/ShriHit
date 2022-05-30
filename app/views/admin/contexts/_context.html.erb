@@ -15,8 +15,8 @@
           <td><%= index+1 %></td>
           <td data-dashboard-target="contextForApproval" data-vl="<%= context.id %>"><%= context.name %></td>
           <td>
-          	<input type="button" value="स्वीकृत" data-index="<%= index %>" data-action="click->dashboard#approveContext" class="btn btn-primary"/>
-          	<input type="button" value="अस्वीकृत" data-index="<%= index %>" data-action="click->dashboard#rejectContext" class="btn btn-danger"/>
+          	<input type="button" value="स्वीकृत" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="click->dashboard#approveContext" class="btn btn-primary"/>
+          	<input type="button" value="अस्वीकृत" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="click->dashboard#rejectContext" class="btn btn-danger"/>
           </td>
           <td>
           	<% if contexts_approved.present? %>
@@ -25,17 +25,23 @@
             			<%= select_tag 'context_id', options_from_collection_for_select(contexts_approved, "id", "name"), :prompt => "प्रसंग चुने", class:"form-control", 'data-dashboard-target': 'contextMergeIn' %>
             		</div>
             		<div class="col-md-4">
-            			<input type="button" value="विलय करें" data-index="<%= index %>" data-action="click->dashboard#mergeContext" class="btn btn-primary"/>
+            			<input type="button" value="विलय करें" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="click->dashboard#mergeContext" class="btn btn-primary"/>
             		</div>
             	</div>
             <% else %>
             	विलय करने के लिए अभी कोई डाटा उपलब्ध नहीं है.
             <% end %> 
+            <!-- <a href="<%= merge_admin_context_path(context.id)%>" class="btn btn-primary">
+              विलय करें
+            </a> -->
           </td>
           <td>
-          	<button type="button" class="btn btn-primary" data-index="<%= index %>" data-action="dashboard#setContextIndexInPopup" data-bs-toggle="modal" data-bs-target="#updateContextPopup">
+          	<button type="button" class="btn btn-primary" data-index="<%= index %>" data-page="<%= params[:page] %>" data-action="dashboard#setContextIndexInPopup" data-bs-toggle="modal" data-bs-target="#updateContextPopup">
               अपडेट करें
             </button>
+            <!-- <a href="<%= edit_admin_context_path(context.id)%>" class="btn btn-primary">
+              अपडेट करें
+            </a> -->
           </td>
       	</tr>
       <% end %>
@@ -46,4 +52,3 @@
     <% end %>
   </tbody>
 </table>
-		      

@@ -53,6 +53,7 @@ gem 'popper_js', '~> 2.9.3'
 gem 'font-awesome-sass', '~> 6.1.1'
 gem "chartkick"
 gem "groupdate"
+gem 'kaminari'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

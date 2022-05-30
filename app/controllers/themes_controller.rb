@@ -3,7 +3,7 @@ class ThemesController < ApplicationController
   before_action :set_theme, only: %i[ show edit update destroy add_articles_page add_article_in_theme ]
 
   def index
-    @themes = Theme.all
+    @themes = current_user.themes
   end
 
   def show

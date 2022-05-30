@@ -23,6 +23,7 @@
             <% end %>
           </tbody>
         </table>
+        <%= paginate @articles, remote: true %>
       </div>
     </div>
     <%= link_to "New article", new_article_path %>

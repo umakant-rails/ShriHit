@@ -3,7 +3,7 @@ class AuthorsController < ApplicationController
   before_action :set_author, only: %i[ show edit update destroy ]
 
   def index
-    @authors = Author.all
+    @authors = current_user.authors.page(params[:page])
   end
 
   def new

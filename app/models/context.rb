@@ -5,6 +5,7 @@ class Context < ApplicationRecord
 
   scope :pending_for_approval, ->() { where(is_approved: nil) }
   scope :approved, ->() { where(is_approved: true) }
+  paginates_per 10
 
   def self.create_context(name, user_id)
     context = self.where(name: name).first
