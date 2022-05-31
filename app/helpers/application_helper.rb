@@ -1,23 +1,18 @@
 module ApplicationHelper
 
-  def set_active(path_params, path_string)
-    if (path_params == path_string)
-      return "active"
-    elsif !path_params.index('new') && path_params.index(path_string) != nil
-      return "active"
+  def show_collapse_items(controller)
+    if params[:controller] == "theme_chapters"
+      return controller == "themes" ? 'show' : nil
+    else
+      return (controller == params[:controller]) ? 'show' : nil
     end
   end
 
-  def show_collapse_item(path_params, path_string1, path_string2, path_string3=nil, path_string4=nil)
-    result1 = set_active(path_params, path_string1)
-    result2 = set_active(path_params, path_string2)
-
-    result3 = path_string3.blank? ? nil :  set_active(path_params, path_string3)
-    result4 = path_string4.blank? ? nil :  set_active(path_params, path_string4)
-
-
-    if [result1, result2, result3, result4].index("active") != nil # (result1 == "active") || (result2 == "active")
-      return "show"
+  def set_active(controller, action)
+    if params[:action] == "new" && action == "new"
+      return controller == params[:controller] ? 'active' : nil
+    elsif params[:action] != "new" && action == "others"
+      return (controller == params[:controller]) ? 'active' : nil
     end
   end
 

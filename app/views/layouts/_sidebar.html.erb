@@ -4,7 +4,7 @@
       <span class="align-middle">श्रीहित</span>
     </a>
     <ul class="sidebar-nav">
-      <% if current_user.is_admin %>
+      <% if current_user.is_admin || current_user.is_super_admin%>
         <li class="sidebar-item">
           <a class="sidebar-link" href="<%= admin_dashboards_path %>">
             <span class="align-middle">
@@ -22,15 +22,15 @@
           </span>
         </a>
       </li>
-      <div class="collapse <%= show_collapse_item(request.fullpath, new_article_path, articles_path) %>" id="ariclelist">
-        <li class="sidebar-item <%= set_active(request.fullpath, new_article_path) %>">
+      <div class="collapse <%= show_collapse_items("articles") %>" id="ariclelist">
+        <li class="sidebar-item <%= set_active("articles", "new") %>">
           <a class="sidebar-link" href="<%= new_article_path %>">
             <span class="align-middle">
               नई रचना जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active(request.fullpath, articles_path) %>">
+        <li class="sidebar-item <%= set_active("articles", "others") %>">
           <a class="sidebar-link" href="<%= articles_path %>">
             <span class="align-middle">
               रचना सूची
@@ -46,15 +46,15 @@
           </span>
         </a>
       </li>
-      <div class="collapse <%= show_collapse_item(request.fullpath, new_author_path, authors_path) %>" id="authorlist">
-        <li class="sidebar-item <%= set_active(request.fullpath, new_author_path) %>">
+      <div class="collapse <%= show_collapse_items("authors") %>" id="authorlist">
+        <li class="sidebar-item <%= set_active("authors", "new") %>">
           <a class="sidebar-link" href="<%= new_author_path %>">
             <span class="align-middle">
               रचनाकार जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active(request.fullpath, authors_path) %>">
+        <li class="sidebar-item <%= set_active("authors", "others") %>">
           <a class="sidebar-link" href="<%= authors_path %>">
             <span class="align-middle">
               रचनाकार सूची
@@ -70,29 +70,29 @@
           </span>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_item(request.fullpath, new_theme_path, themes_path, new_theme_chapter_path, theme_chapters_path) %>" id="themelist">
-        <li class="sidebar-item <%= set_active(request.fullpath, new_theme_path) %>">
+      <div class="collapse  <%= show_collapse_items("themes") %>" id="themelist">
+        <li class="sidebar-item <%= set_active("themes", "new") %>">
           <a class="sidebar-link" href="<%= new_theme_path %>">
             <span class="align-middle">
               उत्सव जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active(request.fullpath, themes_path) %>">
+        <li class="sidebar-item <%= set_active("themes", "others") %>">
           <a class="sidebar-link" href="<%= themes_path %>">
             <span class="align-middle">
               उत्सव सूची
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active(request.fullpath, new_theme_chapter_path) %>">
+        <li class="sidebar-item <%= set_active("theme_chapters", "new") %>">
           <a class="sidebar-link" href="<%= new_theme_chapter_path %>">
             <span class="align-middle">
               उत्सव का खंड/प्रकरण जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active(request.fullpath, theme_chapters_path) %>">
+        <li class="sidebar-item <%= set_active("theme_chapters", "others") %>">
           <a class="sidebar-link" href="<%= theme_chapters_path %>">
             <span class="align-middle">
               उत्सव के खंड/प्रकरण सूची
@@ -108,15 +108,15 @@
           </span>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_item(request.fullpath, new_article_type_path, article_types_path) %>" id="articletypelist">
-        <li class="sidebar-item <%= set_active(request.fullpath, new_article_type_path) %>">
+      <div class="collapse  <%= show_collapse_items("article_types") %>" id="articletypelist">
+        <li class="sidebar-item <%= set_active("article_types", "new") %>">
           <a class="sidebar-link" href="<%= new_article_type_path %>">
             <span class="align-middle">
               रचना प्रकार जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active(request.fullpath, article_types_path) %>">
+        <li class="sidebar-item <%= set_active("article_types", "others") %>">
           <a class="sidebar-link" href="<%= article_types_path %>">
             <span class="align-middle">
               रचना प्रकार सूची
@@ -132,15 +132,15 @@
           </span>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_item(request.fullpath, new_context_path, contexts_path) %>" id="contextlist">
-        <li class="sidebar-item <%= set_active(request.fullpath, new_context_path) %>">
+      <div class="collapse  <%= show_collapse_items("contexts") %>" id="contextlist">
+        <li class="sidebar-item <%= set_active("contexts", "new") %>">
           <a class="sidebar-link" href="<%= new_context_path %>">
             <span class="align-middle">
               प्रसंग जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active(request.fullpath, contexts_path) %>">
+        <li class="sidebar-item <%= set_active("contexts", "others") %>">
           <a class="sidebar-link" href="<%= contexts_path %>">
             <span class="align-middle">
               प्रसंग सूची

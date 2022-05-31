@@ -16,8 +16,16 @@
             </tr>
           </thead>
           <tbody>
-            <% @article_types.each_with_index do |article_type, index| %>
-              <%= render partial: 'article_type', locals: {article_type: article_type, index: (index + 1) } %>
+            <% if @article_types.present? %>
+              <% @article_types.each_with_index do |article_type, index| %>
+                <%= render partial: 'article_type', locals: {article_type: article_type, index: (index + 1) } %>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="3">
+                  <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+                </td>
+              </tr>
             <% end %>
           </tbody>
         </table>

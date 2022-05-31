@@ -3,7 +3,7 @@ class ContextsController < ApplicationController
 
   # GET /contexts or /contexts.json
   def index
-    @contexts = Context.all
+    @contexts = current_user.contexts.all
   end
 
   # GET /contexts/1 or /contexts/1.json

@@ -16,9 +16,17 @@
             </tr>
           </thead>
           <tbody>
-            <% @contexts.each_with_index do |context, index| %>
-              <%= render partial: 'context', locals: {context: context, index: (index + 1) } %>
-            <% end %>
+            <% if @contexts.present? %>
+              <% @contexts.each_with_index do |context, index| %>
+                <%= render partial: 'context', locals: {context: context, index: (index + 1) } %>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="3">
+                  <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+                </td>
+              </tr>
+            <% end %> 
           </tbody>
         </table>
       </div>

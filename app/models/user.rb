@@ -16,8 +16,7 @@ class User < ApplicationRecord
 
 
   def is_admin
-    # self.role.name == "Admin"
-    return true
+    self.role.name == "Admin"
   end
   
   def is_super_admin
