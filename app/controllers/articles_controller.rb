@@ -24,7 +24,6 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    # binding.break
     @article = current_user.articles.new(article_params)
     
     respond_to do |format|

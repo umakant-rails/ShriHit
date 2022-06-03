@@ -8,6 +8,8 @@ class CreateArticles < ActiveRecord::Migration[7.0]
       t.integer :context_id
       t.string  :hindi_title
       t.string  :english_title
+      t.string  :video_link
+      t.text	:interpretation
       t.timestamps
     end
   end

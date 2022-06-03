@@ -28,7 +28,7 @@ $(document).ready(function(){
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["author_name", "author_biography_ifr"]);
+    control.makeTransliteratable(["author_name", "sampradaya", "author_biography_ifr"]);
   }
   google.setOnLoadCallback(onLoad);
 

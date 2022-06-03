@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card" style="border: 2px solid gray;">
+      <div class="card-body" data-controller="search">
+        <%= render partial: 'public/shared/search_by_term'%>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10 ps-0">
+    <div class="card">
+      <div class="card-body h-100" id="article-list">
+        <% if @articles.present? %>
+          <% @articles && @articles.each do | article | %>
+            <%= render partial: "public/shared/article", locals: {article: article} %>
+          <% end %>
+        <% else %>
+          There is no data available now.
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/welcome-custom" %>
+<% end %>

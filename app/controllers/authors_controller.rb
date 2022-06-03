@@ -31,6 +31,10 @@ class AuthorsController < ApplicationController
   end
 
   def update
+    if params[:author][:sampradaya_id].blank? && params[:sampradaya].present?
+      sampradaya = Sampradaya.create(name: params[:sampradaya])
+      params[:author][:sampradaya_id] = sampradaya.id
+    end
     respond_to do |format|
       if @author.update(author_params)
         format.html { redirect_to author_url(@author), notice: "Author was successfully updated." }

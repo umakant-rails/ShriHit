@@ -3,20 +3,29 @@
 	<div class="col-md-10">
 		<div class="card">
 			<div class="card-body" id="article-list">
-				<h3>User Profile</h3>
+				<div class="row">
+					<div class="col-md-8">
+						<h3>User Profile</h3>
+					</div>
+					<div class="col-md-4">
+						<a href="<%= edit_user_profile_path(current_user)%>" class="fRight btn btn-primary">
+							Edit User Profile
+						</a>
+					</div>
+				</div>
         <div class="dropdown-divider"></div>
         <div class="m-sm-4">
           <div class="row mb-3">
 				    <div class="col-md-6"> 
 				      <div class='profile-title'>प्रथम नाम</div>
 				      <div class='profile-content'>
-				        <%= current_user.first_name.present? ? current_user.first_name : 'Not Available' %>
+				        <%= @user_profile.first_name.present? ? @user_profile.first_name : 'Not Available' %>
 				      </div>
 				    </div>
 				    <div class="col-md-6"> 
 				      <div class='profile-title'>अंतिम नाम</div>
 				      <div class='profile-content'>
-				        <%= current_user.last_name.present? ? current_user.last_name : 'Not Available' %>
+				        <%= @user_profile.last_name.present? ? @user_profile.last_name : 'Not Available' %>
 				      </div>
 				    </div>
 				  </div>
@@ -80,7 +89,11 @@
 				    <div class="col-md-12"> 
 				      <div class='profile-title'>जीवन-वृत्तांत</div>
 				      <div class="profile-content">
-				        <%= raw @user_profile.biography %>
+				      	<% if @user_profile.biography.present? %>
+				        	<%= raw @user_profile.biography %>
+				        <% else %>
+				        	अभी जीवन वृतांत उपलब्ध नहीं है
+				        <% end %>
 				      </div>
 				    </div>
 				  </div>

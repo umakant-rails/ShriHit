@@ -1,0 +1,54 @@
+<%#= render partial: 'search_bar'%>
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-body h-100" style="min-height: 545px;">
+        <span class="col-md-6 text-start article-title text-primary">
+          रचनाकार / कवि / भक्त सूची 
+        </span>
+        <div class="dropdown-divider"></div>
+        <table class="table">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">नाम    </th>
+              <th scope="col">सम्प्रदाय</th>
+              <th scope="col">रचनायें</th>
+              <th scope="col">योगदानकर्ता</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <% if @authors.present? %>
+              <% @authors.each_with_index do | author, index | %>
+                <tr>
+                  <th scope="row"><%= index + 1 %></th>
+                  <td>
+                    <a href="<%= public_author_path(author)%>">
+                      <%= author.name %>
+                    </a>
+                  </td>
+                  <td><%= author.sampradaya.present? ? author.sampradaya.name : '-' %></td>
+                  <td>रचनाये देखें</td>
+                  <td>
+                    <a href="<%= public_user_profile_path(author.user.id) %>">
+                      <%= author.user.username %>
+                    </a>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="5">
+                  There is no data available now.
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @authors, remote: true%>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>

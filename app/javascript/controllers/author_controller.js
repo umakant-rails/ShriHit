@@ -23,8 +23,7 @@ export default class extends Controller {
 
   toggleSampradaya(){
     let sampradayaValue = this.sampradayaSelectTarget.value;
-    console.log(sampradayaValue);
-    if(sampradayaValue == 'NA' && !this.sampradayaSelectTarget.hidden){
+    if(sampradayaValue == '' && !this.sampradayaSelectTarget.hidden){
       this.sampradayaSelectTarget.hidden = true;
       this.sampradayaInputTarget.hidden = false;
     } else {

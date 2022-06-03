@@ -8,7 +8,6 @@ class UserProfilesController < ApplicationController
 
   def create
     update_user
-    #binding.break
     @user_profile = current_user.build_user_profile(user_profile_params)
 
     respond_to do |format|
@@ -31,6 +30,18 @@ class UserProfilesController < ApplicationController
   def edit
   end
 
+  def update
+    respond_to do |format|
+      if @user_profile.update(user_profile_params)
+        format.html { redirect_to user_profile_url(@user_profile), notice: "User Profile was successfully updated." }
+        format.json { render :show, status: :ok, location: @user_profile }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @theme.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
     def set_user_profile
@@ -46,7 +57,7 @@ class UserProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_profile_params
-      params.fetch(:user_profile, {}).permit(:biography, :mobile, :address, :city, :pincode, 
+      params.fetch(:user_profile, {}).permit(:first_name, :last_name, :biography, :mobile, :address, :city, :pincode, 
         :state_id, :facebook_url, :youtube_url, :date_of_birth)
     end
 end

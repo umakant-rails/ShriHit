@@ -5,14 +5,7 @@
     </a>
     <ul class="sidebar-nav">
       <% if current_user.is_admin || current_user.is_super_admin%>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="<%= admin_dashboards_path %>">
-            <span class="align-middle">
-              <i class="fa fa-dashboard"></i>
-              Dashboard
-            </span>
-          </a>
-        </li>
+        <%= render partial: "layouts/admin_side_bar" %>
       <% end %>
       <div class="dropdown-divider"></div>
       <li class="sidebar-item">

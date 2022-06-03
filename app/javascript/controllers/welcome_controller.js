@@ -54,7 +54,6 @@ export default class extends Controller {
     if(term == "") {
       location.reload();
     } else {
-
       $.ajax({
         type: "get",
         url: '/search_term',

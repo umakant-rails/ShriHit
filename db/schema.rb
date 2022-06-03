@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_22_042835) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_07_104727) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "article_types", force: :cascade do |t|
     t.string "name"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -29,6 +29,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_042835) do
     t.integer "context_id"
     t.string "hindi_title"
     t.string "english_title"
+    t.string "video_link"
+    t.text "interpretation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,16 +41,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_042835) do
     t.text "biography"
     t.date "birth_date"
     t.date "death_date"
-    t.integer "is_approved"
+    t.boolean "is_approved", default: false
     t.integer "user_id"
+    t.boolean "is_saint", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_saint", default: false
   end
 
   create_table "contexts", force: :cascade do |t|
     t.string "name"
-    t.integer "is_approved"
+    t.boolean "is_approved", default: false
     t.integer "user_id"
     t.integer "theme_id"
     t.datetime "created_at", null: false
@@ -96,13 +98,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_042835) do
 
   create_table "themes", force: :cascade do |t|
     t.string "name"
-    t.integer "is_approved"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "user_profiles", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
     t.text "biography"
     t.string "mobile"
     t.text "address"
@@ -120,8 +123,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_22_042835) do
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "username"
-    t.string "first_name"
-    t.string "last_name"
     t.integer "role_id"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

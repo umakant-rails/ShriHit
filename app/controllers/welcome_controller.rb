@@ -1,12 +1,10 @@
 class WelcomeController < ApplicationController
 
   def index
-    # @articles = Article.all.order("created_at DESC").limit(10)
-    # @authors = Author.all.order("created_at DESC").limit(10)
-    @article_types = ArticleType.all
-    @contexts = Context.all
-    @authors = Author.all
-    @articles = Article.all
+    @article_types = ArticleType.order("name ASC")
+    @contexts = Context.order("name ASC")
+    @authors = Author.order("name ASC")
+    @articles = Article.order("created_at DESC")
     @contributors = User.all
   end
 

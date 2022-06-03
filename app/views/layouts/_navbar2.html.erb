@@ -14,12 +14,12 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            रचना प्रकार
+            रचना (प्रकार)
           </a>
           <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
             <% @article_types && @article_types.each do |article_type| %>
               <li>
-                <a class="dropdown-item" href="<%= article_type.id %>">
+                <a class="dropdown-item" href="<%= articles_by_type_public_articles_path(article_type.name) %>">
                   <%= article_type.name %>
                 </a>
               </li>
@@ -28,12 +28,12 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            रचना प्रसंग
+            रचना (प्रसंग)
           </a>
           <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
             <% @contexts && @contexts.each do |context| %>
               <li>
-                <a class="dropdown-item" href="<%= context.id %>">
+                <a class="dropdown-item" href="<%= articles_by_context_public_articles_path(context.name) %>">
                   <%= context.name %>
                 </a>
               </li>
@@ -47,7 +47,7 @@
           <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
             <% @authors && @authors.each do |author| %>
               <li>
-                <a class="dropdown-item" href="<%= author.id %>">
+                <a class="dropdown-item" href="<%= public_author_path(author) %>">
                   <%= author.name %>
                 </a>
               </li>
@@ -61,7 +61,7 @@
           <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
             <% @contributors && @contributors.each do |contributor| %>
               <li>
-                <a class="dropdown-item" href="<%= contributor.id %>">
+                <a class="dropdown-item" href="<%= public_user_profile_path(contributor.id) %>">
                   <%= contributor.username %>
                 </a>
               </li>
@@ -75,7 +75,7 @@
           <a class="nav-link" href="#">भक्ति ग्रन्थ/वाणी</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="<%= public_about_path %>">About</a>
         </li>
       </ul>
       <ul class="navbar-nav">
