@@ -18,7 +18,8 @@ class Article < ApplicationRecord
   scope :by_search_english_term, ->(term) {where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
       "%#{term.downcase}%", "%#{term.downcase}%")}
   scope :by_search_hindi_term, ->(term) {where("content like ? ", "%#{term.strip}%")}
-
+  scope :approved, ->(){ where(is_approved: true) }
+  scope :pending_for_approval, ->(){ where(is_approved: nil) }
 
   def self.by_attributes(author_id, context_id, article_type_id, selected_chapter_id, contributor_id)
     query = ""

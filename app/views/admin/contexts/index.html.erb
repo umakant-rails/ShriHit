@@ -1,4 +1,4 @@
-<div class="row" data-controller="dashboard">
+<div class="row" data-controller="admin-context">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body h-400">
@@ -6,7 +6,7 @@
 		      लंबित प्रसंग सूची 
 		    </span>
 		    <div class="dropdown-divider"></div>  
-      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-target="dashboard.csrfToken">
+      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-context-target="csrfToken">
       	<div id="pending_context_list">
       		<%= render "context", contexts_pending: @contexts_pending, contexts_approved: @contexts_approved %>
       	</div>
@@ -23,12 +23,12 @@
 	            <div class="modal-body">
 	              <div class="mb-3">
 	                <label for="formFile" class="form-label">प्रसंग का नया नाम</label>
-	                <%= text_field_tag 'update_context_name', '', class:"form-control", 'data-dashboard-target': 'newContextName' %>
+	                <%= text_field_tag 'update_context_name', '', class:"form-control", 'data-admin-context-target': 'newContextName' %>
 	              </div>
 	            </div>
 	            <div class="modal-footer">
 	              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	              <button type="button" data-dashboard-target="saveContextBtn" data-index="" data-action="click->dashboard#updateContext" class="btn btn-primary">Save changes</button>
+	              <button type="button" data-admin-context-target="saveContextBtn" data-index="" data-action="click->admin-context#updateContext" class="btn btn-primary">Save changes</button>
 	            </div>
 	          </div>
 	        </div>

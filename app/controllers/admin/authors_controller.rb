@@ -6,7 +6,7 @@ class Admin::AuthorsController < ApplicationController
     set_pending_records
   end
 
-  def pending_authors
+  def pending
     set_pending_records
   end
 

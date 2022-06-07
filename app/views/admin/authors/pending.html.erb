@@ -1,4 +1,4 @@
-<div class="row" data-controller="dashboard">
+<div class="row" data-controller="admin-author">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body h-400">
@@ -6,7 +6,7 @@
 		      लंबित रचनाकार / कवि / भक्त सूची 
 		    </span>
 		    <div class="dropdown-divider"></div>
-      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-target="dashboard.csrfToken">
+      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-author-target="csrfToken">
       	<div id="pending_author_list">
 	      	<%= render "author", authors_pending: @authors_pending, authors_approved: @authors_approved %>
 	      </div>
@@ -26,12 +26,12 @@
 	            <div class="modal-body">
 	              <div class="mb-3">
 	                <label for="formFile" class="form-label">लेखक का नया नाम</label>
-	                <%= text_field_tag 'update_author_name', '', class:"form-control", 'data-dashboard-target': 'newAuthorName' %>
+	                <%= text_field_tag 'update_author_name', '', class:"form-control", 'data-admin-author-target': 'newAuthorName' %>
 	              </div>
 	            </div>
 	            <div class="modal-footer">
 	              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	              <button type="button" data-dashboard-target="saveAuthorBtn" data-index="<%=  %>" data-action="click->dashboard#updateAuthor" class="btn btn-primary">Save changes</button>
+	              <button type="button" data-admin-author-target="saveAuthorBtn" data-index="<%=  %>" data-action="click->admin-author#updateAuthor" class="btn btn-primary">Save changes</button>
 	            </div>
 	          </div>
 	        </div>

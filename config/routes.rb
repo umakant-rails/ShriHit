@@ -32,14 +32,21 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :dashboards, only: [:index] do
     end
+    resources :articles, only: [:index, :update] do
+      get "/approved" => "articles#approved", as: :approved_articles, on: :collection
+      get "/pending" => "articles#pending", as: :pending_articles, on: :collection
+      get "/approve" => "articles#approve", as: :approve, on: :member
+      get "/reject" => "articles#reject", as: :reject, on: :member
+      post "/merge" => "articles#merge", as: :merge, on: :member
+    end
     resources :authors, only: [:index, :update] do
-      get "/pending_authors" => "authors#pending_authors", as: :pending_authors, on: :collection
+      get "/pending" => "authors#pending", as: :pending_authors, on: :collection
       get "/approve" => "authors#approve", as: :approve, on: :member
       get "/reject" => "authors#reject", as: :reject, on: :member
       post "/merge" => "authors#merge", as: :merge, on: :member
     end
     resources :contexts, only: [:index, :update] do
-      get "/pending_contexts" => "contexts#pending_contexts", as: :pending_contexts, on: :collection
+      get "/pending" => "contexts#pending", as: :pending_contexts, on: :collection
       get "/approve" => "contexts#approve", as: :approve, on: :member
       get "/reject" => "contexts#reject", as: :reject, on: :member
       post "/merge" => "contexts#merge", as: :merge, on: :member

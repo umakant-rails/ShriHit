@@ -10,34 +10,34 @@
 <li class="sidebar-item">
   <a class="sidebar-link" data-bs-toggle="collapse" href="#contentForApproval" role="button" aria-expanded="false" aria-controls="contentForApproval">
     <span class="align-middle">
-      Approve To New Contents
+      Pending Contents
     </span>
   </a>
 </li>
-<div class="collapse <%= show_collapse_items("articles") %>" id="contentForApproval">
-  <li class="sidebar-item <%= set_active("articles", "new") %>">
-    <a class="sidebar-link" href="<%= new_article_path %>">
+<div class="collapse <%= show_admin_collapse_items("pending") %>" id="contentForApproval">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles", "pending") %>">
+    <a class="sidebar-link" href="<%= pending_articles_admin_articles_path %>">
       <span class="align-middle">
         रचना
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("articles", "others") %>">
-    <a class="sidebar-link" href="<%= articles_path %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors", "pending") %>">
+    <a class="sidebar-link" href="<%= pending_authors_admin_authors_path %>">
       <span class="align-middle">
         रचनाकार
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("articles", "others") %>">
+  <!-- <li class="sidebar-item <%= set_active("articles", "others") %>">
     <a class="sidebar-link" href="<%= articles_path %>">
       <span class="align-middle">
         रचना प्रकार
       </span>
     </a>
-  </li>
-  <li class="sidebar-item <%= set_active("articles", "others") %>">
-    <a class="sidebar-link" href="<%= articles_path %>">
+  </li> -->
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/contexts", "pending") %>">
+    <a class="sidebar-link" href="<%= pending_contexts_admin_contexts_path %>">
       <span class="align-middle">
         प्रसंग
       </span>
@@ -67,13 +67,13 @@
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("articles", "others") %>">
+  <!-- <li class="sidebar-item <%= set_active("articles", "others") %>">
     <a class="sidebar-link" href="<%= articles_path %>">
       <span class="align-middle">
         रचना प्रकार
       </span>
     </a>
-  </li>
+  </li> -->
   <li class="sidebar-item <%= set_active("articles", "others") %>">
     <a class="sidebar-link" href="<%= articles_path %>">
       <span class="align-middle">

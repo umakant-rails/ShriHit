@@ -6,7 +6,7 @@ class Admin::ContextsController < ApplicationController
     set_pending_records
   end
 
-  def pending_contexts
+  def pending
     set_pending_records
   end
 
@@ -81,7 +81,7 @@ class Admin::ContextsController < ApplicationController
       flash[:error] = "प्रसंग का नाम बदलने की प्रकिया असफल हो गई है"
     end
   end
-
+ 
 
   private
 

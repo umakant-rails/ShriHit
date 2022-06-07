@@ -41,10 +41,10 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="author_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             रचनाकार/लेखक
           </a>
-          <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
+          <ul class="dropdown-menu" aria-labelledby="author_nav_link">
             <% @authors && @authors.each do |author| %>
               <li>
                 <a class="dropdown-item" href="<%= public_author_path(author) %>">
@@ -55,10 +55,10 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="contributor_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             योगदानकर्ता
           </a>
-          <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
+          <ul class="dropdown-menu" aria-labelledby="contributor_nav_link">
             <% @contributors && @contributors.each do |contributor| %>
               <li>
                 <a class="dropdown-item" href="<%= public_user_profile_path(contributor.id) %>">
