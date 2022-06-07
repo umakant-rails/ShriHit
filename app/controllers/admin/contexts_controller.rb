@@ -6,6 +6,10 @@ class Admin::ContextsController < ApplicationController
     set_pending_records
   end
 
+  def approved
+    @contexts_approved = Context.approved.page(params[:page])
+  end
+
   def pending
     set_pending_records
   end

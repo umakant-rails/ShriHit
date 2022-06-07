@@ -6,21 +6,17 @@
 		      लंबित रचना सूची 
 		    </span>
 		    <div class="btn-group fRight">
-				  <button class="btn btn-secondary">
-				  	<a href="<%= approved_articles_admin_articles_path %>" class="text-white">
-					  	Approved
-					  </a>
-					</button>
-				  <button type="button" class="btn btn-primary">
-				  	<a href="javascript:void(0);" class="text-white">
-					  	Pending
-					  </a>
-				  </button>
+			  	<a href="<%= approved_articles_admin_articles_path %>" class="text-white btn btn-secondary">
+				  	Approved
+				  </a>
+			  	<a href="javascript:void(0);" class="text-white btn btn-primary">
+				  	Pending
+				  </a>
 				</div>
 		    <div class="dropdown-divider"></div>
       	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-article-target="csrfToken">
       	<div id="pending_article_list">
-	      	<%= render "article", articles_pending: @articles_pending %>
+	      	<%= render "article", articles: @articles_pending %>
 	      </div>
 	      <div id="paginate-block">
       		<%= paginate @articles_pending, remote: true %>

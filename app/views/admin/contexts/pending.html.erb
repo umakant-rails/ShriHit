@@ -5,6 +5,14 @@
 				<span class="col-md-6 text-start article-title text-primary">
 		      लंबित प्रसंग सूची 
 		    </span>
+		    <div class="btn-group fRight">
+			  	<a href="<%= approved_contexts_admin_contexts_path %>" class="text-white btn btn-secondary">
+				  	Approved
+				  </a>
+			  	<a href="javascript:void(0);" class="text-white btn btn-primary">
+				  	Pending
+				  </a>
+				</div>
 		    <div class="dropdown-divider"></div>  
       	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-context-target="csrfToken">
       	<div id="pending_context_list">

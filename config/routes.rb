@@ -40,12 +40,14 @@ Rails.application.routes.draw do
       post "/merge" => "articles#merge", as: :merge, on: :member
     end
     resources :authors, only: [:index, :update] do
+      get "/approved" => "authors#approved", as: :approved_authors, on: :collection
       get "/pending" => "authors#pending", as: :pending_authors, on: :collection
       get "/approve" => "authors#approve", as: :approve, on: :member
       get "/reject" => "authors#reject", as: :reject, on: :member
       post "/merge" => "authors#merge", as: :merge, on: :member
     end
     resources :contexts, only: [:index, :update] do
+      get "/approved" => "contexts#approved", as: :approved_contexts, on: :collection
       get "/pending" => "contexts#pending", as: :pending_contexts, on: :collection
       get "/approve" => "contexts#approve", as: :approve, on: :member
       get "/reject" => "contexts#reject", as: :reject, on: :member

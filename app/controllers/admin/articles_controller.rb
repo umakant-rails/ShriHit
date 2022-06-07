@@ -6,7 +6,7 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def approved
-    @articles_pending = Article.approved.page(params[:page])
+    @articles_approved = Article.approved.page(params[:page])
   end
 
   def pending

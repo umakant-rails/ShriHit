@@ -6,6 +6,10 @@ class Admin::AuthorsController < ApplicationController
     set_pending_records
   end
 
+  def approved
+    @authors_approved = Author.approved.page(params[:page])
+  end
+
   def pending
     set_pending_records
   end
