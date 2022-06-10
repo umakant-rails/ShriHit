@@ -1,0 +1,30 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">S. No.</th>
+      <th scope="col">नए रचनाकार</th>
+      <th scope="col">सम्प्रदाय</th>
+      <th scope="col">योगदानकर्ता</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if authors.present? %>
+      <% authors.each_with_index do |author, index| %>
+        <tr>
+          <td><%= index +1 %></td>
+          <td><%= author.name %> </td>
+          <td>
+            <%= author.sampradaya.present? ? author.sampradaya.name : "-"%>
+          </td>
+          <td>
+            <%= author.user.username %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="3">
+        अभी रिकॉर्ड उपलब्ध नहीं है.
+      </td>
+    <% end %>
+  </tbody>
+</table>

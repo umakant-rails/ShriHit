@@ -1,0 +1,40 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">S. No.</th>
+      <th scope="col">नई रचना</th>
+      <th scope="col">रचनाकार</th>
+      <th scope="col">रचना प्रकार</th>
+      <th scope="col">योगदानकर्ता</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if articles.present? %>
+      <% articles.each_with_index do |article, index| %>
+        <tr>
+        	<td><%= index +1 %></td>
+        	<td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
+            <a href="<%= article_path(article.id) %>">
+              <%= article.hindi_title %> 
+            </a>
+          </td>
+          <td>
+            <a href="<%= author_path(article.author.id) %>">
+              <%= article.author.name %>
+            </a>
+          </td>
+        	<td>
+            <%= article.article_type.name %> 
+          </td>
+          <td>
+            <%= article.user.username %> 
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="3">
+      	अभी रिकॉर्ड उपलब्ध नहीं है.
+      </td>
+    <% end %>
+  </tbody>
+</table>

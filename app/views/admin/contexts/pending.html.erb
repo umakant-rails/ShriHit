@@ -16,7 +16,7 @@
 		    <div class="dropdown-divider"></div>  
       	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-context-target="csrfToken">
       	<div id="pending_context_list">
-      		<%= render "context", contexts_pending: @contexts_pending, contexts_approved: @contexts_approved %>
+      		<%= render "context_pending", contexts_pending: @contexts_pending, contexts_approved: @contexts_approved %>
       	</div>
       	<div id="paginate-block">
       		<%#= page_entries_info @contexts_pending %>

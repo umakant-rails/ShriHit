@@ -3,40 +3,40 @@
 		<div class="card">
 			<div class="card-body h-400">
 		    <span class="col-md-6 text-start article-title text-primary">
-		      लंबित रचनाकार / कवि / भक्त सूची 
+		      रचनाकार / कवि / भक्त सूची 
 		    </span>
 		    <div class="dropdown-divider"></div>
       	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-author-target="acsrfToken">
-      	<div id="pending_author_list">
-	      	<%= render "author", authors_pending: @authors_pending, authors_approved: @authors_approved %>
+      	<div id="author_list">
+	      	<table class="table">
+					  <thead class="table-dark">
+					    <tr>
+					      <th scope="col">S. No.</th>
+					      <th scope="col">नए रचनाकार</th>
+					      <th scope="col">स्वीकृत/अस्वीकृत</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <% if @authors.present? %>
+					      <% @authors.each_with_index do |author, index| %>
+					        <tr class="<%= "text-success" if author.is_approved %>">
+					        	<td><%= index +1 %></td>
+					        	<td data-admin-author-target="authorForApproval" data-vl="<%= author.id %>"><%= author.name %>
+					        	</td>
+					        	<td>
+					        		<%= author.is_approved? ? "स्वीकृत" : "अस्वीकृत" %>
+					          </td>
+					        </tr>
+					      <% end %>
+					    <% else %>
+					      <td colspan="3">
+					      	अभी रिकॉर्ड उपलब्ध नहीं है.
+					      </td>
+					    <% end %>
+					  </tbody>
+					</table>
 	      </div>
-	      <!-- Modal -->
-	      <div class="modal fade" id="updateAuthorPopup" tabindex="-1" aria-labelledby="updateAuthorPopupLabel" aria-hidden="true">
-	        <div class="modal-dialog">
-	          <div class="modal-content">
-	            <div class="modal-header">
-	              <h3 class="modal-title" id="exampleModalLabel">
-	                लेखक का नाम अपडेट करे 
-	              </h3>
-	              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	            </div>
-	            <div class="modal-body">
-	              <div class="mb-3">
-	                <label for="formFile" class="form-label">लेखक का नया नाम</label>
-	                <%= text_field_tag 'update_author_name', '', class:"form-control", 'data-admin-author-target': 'newAuthorName' %>
-	              </div>
-	            </div>
-	            <div class="modal-footer">
-	              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	              <button type="button" data-admin-author-target="saveAuthorBtn" data-index="<%=  %>" data-action="click->admin-author#updateAuthor" class="btn btn-primary">Save changes</button>
-	            </div>
-	          </div>
-	        </div>
-		    </div>
 			</div>
 		</div>
 	</div>
 </div>
-<% content_for :head do %>
-  <%= javascript_import_module_tag "custom/dashboard/author-custom" %>
-<% end %>

@@ -3,7 +3,7 @@ class Admin::AuthorsController < ApplicationController
   before_action :verify_admin
 
   def index
-    set_pending_records
+    @authors = Author.order("created_at DESC").page(params[:page])
   end
 
   def approved

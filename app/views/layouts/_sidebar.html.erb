@@ -3,19 +3,22 @@
     <a class="sidebar-brand" href="<%= homes_path %>">
       <span class="align-middle">श्रीहित</span>
     </a>
-    <ul class="sidebar-nav">
+    <ul class="sidebar-nav" data-controller="sidebar">
       <% if current_user.is_admin || current_user.is_super_admin%>
         <%= render partial: "layouts/admin_side_bar" %>
       <% end %>
       <div class="dropdown-divider"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" data-bs-toggle="collapse" href="#ariclelist"   role="button" aria-expanded="false" aria-controls="ariclelist">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#aricleList" role="button"  
+          aria-expanded="false" aria-controls="aricleList" data-id="aricleList"
+          data-action="click->sidebar#toggleTab">
           <span class="align-middle">
             रचना
           </span>
+          <i class="fa-solid fa-angle-right"></i>
         </a>
       </li>
-      <div class="collapse <%= show_collapse_items("articles") %>" id="ariclelist">
+      <div class="collapse <%= show_collapse_items("articles") %>" data-sidebar-target="anchorListBlock" id="aricleList">
         <li class="sidebar-item <%= set_active("articles", "new") %>">
           <a class="sidebar-link" href="<%= new_article_path %>">
             <span class="align-middle">
@@ -33,13 +36,15 @@
       </div>
       <div class="dropdown-divider"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" data-bs-toggle="collapse" href="#authorlist"   role="button" aria-expanded="false" aria-controls="authorlist">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#authorList"   role="button" aria-expanded="false" aria-controls="authorList" data-id="authorList"
+          data-action="click->sidebar#toggleTab">
           <span class="align-middle">
             रचनाकार
           </span>
+          <i class="fa-solid fa-angle-right"></i>
         </a>
       </li>
-      <div class="collapse <%= show_collapse_items("authors") %>" id="authorlist">
+      <div class="collapse <%= show_collapse_items("authors") %>" data-sidebar-target="anchorListBlock" id="authorList">
         <li class="sidebar-item <%= set_active("authors", "new") %>">
           <a class="sidebar-link" href="<%= new_author_path %>">
             <span class="align-middle">
@@ -57,13 +62,15 @@
       </div>
       <div class="dropdown-divider"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" data-bs-toggle="collapse" href="#themelist"   role="button" aria-expanded="false" aria-controls="themelist">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#themeList"   role="button" aria-expanded="false" aria-controls="themeList" data-id="themeList"
+          data-action="click->sidebar#toggleTab">
           <span class="align-middle">
             उत्सव
           </span>
+          <i class="fa-solid fa-angle-right"></i>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_items("themes") %>" id="themelist">
+      <div class="collapse  <%= show_collapse_items("themes") %>" data-sidebar-target="anchorListBlock" id="themeList">
         <li class="sidebar-item <%= set_active("themes", "new") %>">
           <a class="sidebar-link" href="<%= new_theme_path %>">
             <span class="align-middle">
@@ -95,13 +102,15 @@
       </div>
       <div class="dropdown-divider"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" data-bs-toggle="collapse" href="#articletypelist"   role="button" aria-expanded="false" aria-controls="articletypelist">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#articleTypeList" role="button" aria-expanded="false" aria-controls="articleTypeList" data-id="articleTypeList"
+          data-action="click->sidebar#toggleTab">
           <span class="align-middle">
             रचना प्रकार
           </span>
+          <i class="fa-solid fa-angle-right"></i>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_items("article_types") %>" id="articletypelist">
+      <div class="collapse  <%= show_collapse_items("article_types") %>" data-sidebar-target="anchorListBlock" id="articleTypeList">
         <li class="sidebar-item <%= set_active("article_types", "new") %>">
           <a class="sidebar-link" href="<%= new_article_type_path %>">
             <span class="align-middle">
@@ -119,13 +128,15 @@
       </div>
       <div class="dropdown-divider"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" data-bs-toggle="collapse" href="#contextlist"   role="button" aria-expanded="false" aria-controls="contextlist">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#contextList"   role="button" aria-expanded="false" aria-controls="contextList" data-id="contextList"
+          data-action="click->sidebar#toggleTab">
           <span class="align-middle">
             प्रसंग
           </span>
+          <i class="fa-solid fa-angle-right"></i>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_items("contexts") %>" id="contextlist">
+      <div class="collapse  <%= show_collapse_items("contexts") %>" data-sidebar-target="anchorListBlock" id="contextList">
         <li class="sidebar-item <%= set_active("contexts", "new") %>">
           <a class="sidebar-link" href="<%= new_context_path %>">
             <span class="align-middle">

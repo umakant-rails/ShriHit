@@ -16,7 +16,7 @@
 		    <div class="dropdown-divider"></div>
       	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-article-target="csrfToken">
       	<div id="pending_article_list">
-	      	<%= render "article", articles: @articles_pending %>
+	      	<%= render "article_pending", articles: @articles_pending %>
 	      </div>
 	      <div id="paginate-block">
       		<%= paginate @articles_pending, remote: true %>

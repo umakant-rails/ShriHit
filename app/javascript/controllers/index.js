@@ -17,6 +17,7 @@ import SearchController from "./search_controller";
 import AdminAuthorController from "./admin/author_controller";
 import AdminContextController from "./admin/context_controller";
 import AdminArticleController from "./admin/article_controller";
+import SidebarController from "./sidebar_controller";
 
 application.register('application', ApplicationController);
 application.register('autocomplete', Autocomplete);
@@ -30,4 +31,5 @@ application.register("search", SearchController);
 application.register("admin-author", AdminAuthorController);
 application.register("admin-context", AdminContextController);
 application.register("admin-article", AdminArticleController);
+application.register("sidebar", SidebarController);
 //application.register("dashboard", DashboardController);

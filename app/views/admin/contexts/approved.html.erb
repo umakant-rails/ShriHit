@@ -15,32 +15,7 @@
 				</div>
 		    <div class="dropdown-divider"></div>
       	<div id="pending_article_list">
-	      	<table class="table">
-					  <thead class="table-dark">
-					    <tr>
-					      <th scope="col">S. No.</th>
-					      <th scope="col">प्रसंग</th>
-					      <th scope="col">योगदानकर्ता</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <% if @contexts_approved.present? %>
-					      <% @contexts_approved.each_with_index do |context, index| %>
-					        <tr>
-					        	<td><%= index +1 %></td>
-					        	<td><%= context.name %> </td>
-					        	<td>
-					        		<%= context.user.username %>
-					          </td>
-					        </tr>
-					      <% end %>
-					    <% else %>
-					      <td colspan="3">
-					      	अभी रिकॉर्ड उपलब्ध नहीं है.
-					      </td>
-					    <% end %>
-					  </tbody>
-					</table>
+	      	<%= render "context_approved", contexts: @contexts_approved %>
 	      </div>
 	      <div id="paginate-block">
       		<%= paginate @contexts_approved, remote: true %>

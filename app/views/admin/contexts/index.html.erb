@@ -3,36 +3,40 @@
 		<div class="card">
 			<div class="card-body h-400">
 				<span class="col-md-6 text-start article-title text-primary">
-		      लंबित प्रसंग सूची 
+		      प्रसंग सूची 
 		    </span>
 		    <div class="dropdown-divider"></div>  
       	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-context-target="csrfToken">
-      	<div id="pending_context_list">
-      		<%= render "context", contexts_pending: @contexts_pending, contexts_approved: @contexts_approved %>
+      	<div id="context_list">
+      		<table class="table">
+					  <thead class="table-dark ps-0 pe-0">
+					    <tr>
+					      <th scope="col">S. No.</th>
+					      <th scope="col">नए प्रसंग</th>
+					      <th scope="col">स्वीकृत/अस्वीकृत</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <% if @contexts.present? %>
+					      <% @contexts.each_with_index do |context, index| %>
+					        <tr class="<%= "text-success" if context.is_approved %>">
+					          <td><%= index+1 %></td>
+					          <td data-admin-context-target="contextForApproval" data-vl="<%= context.id %>">
+					          	<%= context.name %>
+					          </td>
+					          <td>
+					          	<%= context.is_approved? ? "स्वीकृत" : "अस्वीकृत" %>
+					          </td>
+					      	</tr>
+					      <% end %>
+					    <% else %>
+					      <td colspan="4">
+					      	अभी रिकॉर्ड उपलब्ध नहीं है.
+					      </td>
+					    <% end %>
+					  </tbody>
+					</table>
       	</div>
-      	<!-- Modal -->
-	      <div class="modal fade" id="updateContextPopup" tabindex="-1" aria-labelledby="updateContextPopupLabel" aria-hidden="true">
-	        <div class="modal-dialog">
-	          <div class="modal-content">
-	            <div class="modal-header">
-	              <h3 class="modal-title" id="exampleModalLabel">
-	                प्रसंग का नाम अपडेट करे 
-	              </h3>
-	              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	            </div>
-	            <div class="modal-body">
-	              <div class="mb-3">
-	                <label for="formFile" class="form-label">प्रसंग का नया नाम</label>
-	                <%= text_field_tag 'update_context_name', '', class:"form-control", 'data-admin-context-target': 'newContextName' %>
-	              </div>
-	            </div>
-	            <div class="modal-footer">
-	              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	              <button type="button" data-admin-context-target="saveContextBtn" data-index="" data-action="click->admin-context#updateContext" class="btn btn-primary">Save changes</button>
-	            </div>
-	          </div>
-	        </div>
-	      </div>
 			</div>
 		</div>
 	</div>

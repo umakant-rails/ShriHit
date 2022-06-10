@@ -2,7 +2,8 @@ class Admin::ArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_admin
 
-  def index    
+  def index
+    @articles = Article.order("created_at DESC").page(params[:page])
   end
 
   def approved

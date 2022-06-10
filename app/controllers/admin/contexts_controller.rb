@@ -3,7 +3,7 @@ class Admin::ContextsController < ApplicationController
   before_action :verify_admin
 
   def index
-    set_pending_records
+    @contexts = Context.order("created_at DESC").page(params[:page])
   end
 
   def approved

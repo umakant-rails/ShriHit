@@ -15,7 +15,7 @@
 				</div>
 		    <div class="dropdown-divider"></div>
       	<div id="pending_article_list">
-	      	<%= render "article", articles: @articles_approved %>
+	      	<%= render "article_approved", articles: @articles_approved %>
 	      </div>
 	      <div id="paginate-block">
       		<%= paginate @articles_approved, remote: true %>
