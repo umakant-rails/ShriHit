@@ -46,6 +46,7 @@ ArticleType.create!(name: 'पद', user_id: 1) if ArticleType.where(name: 'प�
 ArticleType.create!(name: 'कवित्त', user_id: 1) if ArticleType.where(name: 'कवित्त').blank?
 ArticleType.create!(name: 'सवैया', user_id: 1) if ArticleType.where(name: 'सवैया').blank?
 ArticleType.create!(name: 'दोहा', user_id: 1) if ArticleType.where(name: 'दोहा').blank?
+ArticleType.create!(name: 'भजन', user_id: 1) if ArticleType.where(name: 'भजन').blank?
 
 Theme.create!(name: 'व्याहुला', user_id: 1) if Theme.where(name: 'व्याहुला').blank?
 Theme.create!(name: 'जन्मोत्सव', user_id: 1) if Theme.where(name: 'जन्मोत्सव').blank?

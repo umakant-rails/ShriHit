@@ -11,7 +11,7 @@
     <div class="col-md-12">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>रचना का प्रकार</label>
-        <%= form.select :article_type_id, options_for_select(article_types), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-target': 'article.articleTypeId' %>
+        <%= form.select :article_type_id, options_for_select(article_types), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-target': 'article.articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
       </div>
     </div>
   </div>
