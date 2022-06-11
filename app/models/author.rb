@@ -6,7 +6,7 @@ class Author < ApplicationRecord
   paginates_per 10
 
   validates :name, presence: true
-  scope :pending_for_approval, ->() { where(is_approved: false) }
+  scope :pending, ->() { where(is_approved: false) }
   scope :approved, ->() { where(is_approved: true) }
   
   def self.create_author(name, user_id)

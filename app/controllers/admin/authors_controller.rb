@@ -84,10 +84,16 @@ class Admin::AuthorsController < ApplicationController
     end
   end
 
+  def report
+    @articles_by_author = Author.joins(:articles).group(:name).count
+    @approved_articles = Author.joins(:articles).where(articles: {is_approved: true}).group(:name).count
+    @pending_articles = Author.joins(:articles).where(articles: {is_approved: nil}).group(:name).count
+  end
+
   private
 
     def set_pending_records
-      @authors_pending = Author.pending_for_approval.page(params[:page])
+      @authors_pending = Author.pending.page(params[:page])
       @authors_approved = Author.approved
     end
 

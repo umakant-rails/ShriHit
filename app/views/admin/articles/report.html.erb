@@ -1,0 +1,43 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-50">
+		    <span class="col-md-6 text-start article-title text-primary">
+		      रचना रिपोर्ट्स 
+		    </span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body h-400">
+						<%= pie_chart @articles_approval_data, donut: true, title: "रचनायें: स्वीकृत/अस्वीकृत आधारित रिपोर्ट" %>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body h-400">
+						<%= pie_chart @articles_by_type, donut: true, title: "रचनायें: रचना प्रकार आधारित रिपोर्ट" %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-body h-400">
+				<%= column_chart @articles, donut: true, title: "रचनायें: साप्ताहिक रिपोर्ट", xtitle: "सप्ताह", ytitle: "रचना संख्या" %>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-body h-400">
+		    <%= line_chart @articles_by_author, xtitle: "रचनाकार", ytitle: "रचना संख्या", title: "रचनायें: रचनाकार आधारित रिपोर्ट" %>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-body h-400">
+		    <%= column_chart @articles_by_context, xtitle: "प्रसंग", ytitle: "रचना संख्या", title: "रचनायें: प्रसंग आधारित रिपोर्ट" %>
+			</div>
+		</div>
+	</div>
+</div>
+

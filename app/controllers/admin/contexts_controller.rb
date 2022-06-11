@@ -86,11 +86,16 @@ class Admin::ContextsController < ApplicationController
     end
   end
  
+  def report
+    @articles_by_context = Context.joins(:articles).group(:name).count
+    @approved_articles = Context.joins(:articles).where(articles: {is_approved: true}).group(:name).count
+    @pending_articles = Context.joins(:articles).where(articles: {is_approved: nil}).group(:name).count
+  end
 
   private
 
     def set_pending_records
-      @contexts_pending = Context.pending_for_approval.page(params[:page])
+      @contexts_pending = Context.pending.page(params[:page])
       @contexts_approved = Context.approved
     end
 

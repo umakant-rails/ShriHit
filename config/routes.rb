@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :articles, only: [:index, :update] do
       get "/approved" => "articles#approved", as: :approved_articles, on: :collection
       get "/pending" => "articles#pending", as: :pending_articles, on: :collection
+      get "/report" => "articles#report", as: :report_articles, on: :collection
       get "/approve" => "articles#approve", as: :approve, on: :member
       get "/reject" => "articles#reject", as: :reject, on: :member
       post "/merge" => "articles#merge", as: :merge, on: :member
@@ -42,6 +43,7 @@ Rails.application.routes.draw do
     resources :authors, only: [:index, :update] do
       get "/approved" => "authors#approved", as: :approved_authors, on: :collection
       get "/pending" => "authors#pending", as: :pending_authors, on: :collection
+      get "/report" => "authors#report", as: :report_authors, on: :collection
       get "/approve" => "authors#approve", as: :approve, on: :member
       get "/reject" => "authors#reject", as: :reject, on: :member
       post "/merge" => "authors#merge", as: :merge, on: :member
@@ -49,6 +51,7 @@ Rails.application.routes.draw do
     resources :contexts, only: [:index, :update] do
       get "/approved" => "contexts#approved", as: :approved_contexts, on: :collection
       get "/pending" => "contexts#pending", as: :pending_contexts, on: :collection
+      get "/report" => "contexts#report", as: :report_contexts, on: :collection
       get "/approve" => "contexts#approve", as: :approve, on: :member
       get "/reject" => "contexts#reject", as: :reject, on: :member
       post "/merge" => "contexts#merge", as: :merge, on: :member

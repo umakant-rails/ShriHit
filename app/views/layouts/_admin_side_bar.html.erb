@@ -12,7 +12,7 @@
     aria-expanded="false" aria-controls="appContent" data-id="appContent" 
     data-action="click->sidebar#toggleTab">
     <span class="align-middle">
-      App Contents
+      App विषय-सूची
     </span>
     <i class="fa-solid fa-angle-right"></i>
   </a>
@@ -46,7 +46,7 @@
   <a class="sidebar-link" data-bs-toggle="collapse" href="#pendingContent" role="button" aria-expanded="false" aria-controls="pendingContent" data-id="pendingContent" 
     data-action="click->sidebar#toggleTab">
     <span class="align-middle">
-      Pending Contents
+      लंबित विषय-सूची
     </span>
     <i class="fa-solid fa-angle-right"></i>
   </a>
@@ -81,7 +81,7 @@
     aria-expanded="false" aria-controls="approvedContent" data-id="approvedContent" 
     data-action="click->sidebar#toggleTab">
     <span class="align-middle">
-      Approved Contents
+      स्वीकृत विषय-सूची
     </span>
     <i class="fa-solid fa-angle-right"></i>
   </a>
@@ -115,32 +115,58 @@
   <a class="sidebar-link" data-bs-toggle="collapse" href="#adminReports" role="button" aria-expanded="false" aria-controls="adminReports" data-id="adminReports" 
     data-action="click->sidebar#toggleTab">
     <span class="align-middle">
-      Reports
+      रिपोर्ट्स
     </span>
     <i class="fa-solid fa-angle-right"></i>
   </a>
 </li>
-<div class="collapse <%= show_admin_collapse_items("reports") %>" 
+<div class="collapse <%= show_admin_collapse_items("report") %>" 
   data-sidebar-target="anchorListBlock" id="adminReports">
-  <li class="sidebar-item <%= set_active("articles", "new") %>">
-    <a class="sidebar-link" href="<%= new_article_path %>">
+  <li class="sidebar-item <%= set_active("admin/articles", "report") %>">
+    <a class="sidebar-link" href="<%= report_articles_admin_articles_path %>">
       <span class="align-middle">
         रचना
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("articles", "others") %>">
-    <a class="sidebar-link" href="<%= articles_path %>">
+  <li class="sidebar-item <%= set_active("admin/authors", "report") %>">
+    <a class="sidebar-link" href="<%= report_authors_admin_authors_path %>">
       <span class="align-middle">
         रचनाकार
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("articles", "others") %>">
-    <a class="sidebar-link" href="<%= articles_path %>">
+  <li class="sidebar-item <%= set_active("admin/contexts", "report") %>">
+    <a class="sidebar-link" href="<%= report_contexts_admin_contexts_path %>">
       <span class="align-middle">
         प्रसंग
       </span>
     </a>
   </li>
 </div>
+<div class="dropdown-divider"></div>
+  <li class="sidebar-item">
+    <a class="sidebar-link" data-bs-toggle="collapse" href="#contextList"   role="button" aria-expanded="false" aria-controls="contextList" data-id="contextList"
+      data-action="click->sidebar#toggleTab">
+      <span class="align-middle">
+        प्रसंग
+      </span>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+  </li>
+  <div class="collapse  <%= show_collapse_items("contexts") %>" data-sidebar-target="anchorListBlock" id="contextList">
+    <li class="sidebar-item <%= set_active("contexts", "new") %>">
+      <a class="sidebar-link" href="<%= new_context_path %>">
+        <span class="align-middle">
+          प्रसंग जोड़े
+        </span>
+      </a>
+    </li>
+    <li class="sidebar-item <%= set_active("contexts", "others") %>">
+      <a class="sidebar-link" href="<%= contexts_path %>">
+        <span class="align-middle">
+          प्रसंग सूची
+        </span>
+      </a>
+    </li>
+  </div>

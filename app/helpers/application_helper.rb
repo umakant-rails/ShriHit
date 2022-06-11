@@ -1,7 +1,9 @@
 module ApplicationHelper
 
   def show_admin_collapse_items(admin_action)
-    return (admin_action == params[:action]) ? "show" : nil
+    if ["admin/contexts", "admin/authors", "admin/articles"].index(params[:controller]) != nil
+      return params[:controller].index("admin") != nil && (admin_action == params[:action]) ? "show" : nil
+    end
   end
   
   def set_admin_lnk_active(controller, action)
