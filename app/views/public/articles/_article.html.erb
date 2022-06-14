@@ -8,7 +8,7 @@
     <a href="<%= public_user_profile_path(article.user.id) %>">
       ( योगदानकर्ता : <%= article.user.username %> )
     </a> |
-    <a href="<%= public_user_profile_path(article.user.id) %>" >
+    <a href="<%= export_pdf_public_article_path(article.id, format: :pdf) %>" target="_blank" >
       <i class="fa-solid fa-file-export"></i>
     </a>
   </span>

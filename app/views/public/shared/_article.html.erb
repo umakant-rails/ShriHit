@@ -21,7 +21,7 @@
         <%if article.author.name != "अज्ञात"  %>
           ( रचनाकार/लेखक - श्री <%= article.author.name %> जी )
         <% else %>
-          <%= article.author.name %>
+          ( रचनाकार/लेखक - <%= article.author.name %> )
         <% end %>
       </a>
     </div>

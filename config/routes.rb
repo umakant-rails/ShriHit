@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  root to: "welcome#index"
+  #root to: "welcome#index"
   #root to: "homes#index"
-  
+  root to: "public/articles#index"
+
   get "/autocomplete_term", to: "welcome#autocomplete_term"
   get "/search_term", to: "welcome#search_term"
   get "/search_article/:id", to: "welcome#search_article"
@@ -63,10 +64,20 @@ Rails.application.routes.draw do
     resources :articles, only: [:index, :show] do
       get "/type/:article_type" => "articles#articles_by_type", as: :articles_by_type, on: :collection
       get "/contexts/:context_name" => "articles#articles_by_context", as: :articles_by_context, on: :collection
+      get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
+      get "/search_term" => "articles#search_term", as: :search_term, on: :collection
+      #get "/search_article/:id" => "articles#search_article", as: :search_article, on: :collection
+      get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
     end
     resources :user_profiles, only: [:index, :show] do
     end
     get "/about" => "abouts#about", as: :about
+  end
+
+  namespace :public_page do
+    resources :export, only: [:index] do
+      get "/export_pdf" => "export#article_pdf", as: :export_pdf, on: :member
+    end
   end
 
 end

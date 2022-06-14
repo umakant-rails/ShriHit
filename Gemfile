@@ -54,16 +54,18 @@ gem 'font-awesome-sass', '~> 6.1.1'
 gem "chartkick"
 gem "groupdate"
 gem 'kaminari'
+gem 'wicked_pdf'
+gem "wkhtmltopdf-binary", group: :development
+gem "wkhtmltopdf-heroku", group: :production
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "web-console"  
 end
 
-group :development do
+group :production do
   # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
-
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 

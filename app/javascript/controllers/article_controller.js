@@ -31,12 +31,15 @@ export default class extends Controller {
 
   setBhajanContext(event){
     let selectedArticleType = event.target.options[event.target.selectedIndex].text;;
-    if(selectedArticleType != "भजन") return;
-    var options = this.contextSelectTarget.options;
-    for(let i=0; i<options.length; i++){
-      if(options[i].text.trim() == "विविध"){
-        //this.contextSelectTarget.value = options[i].value;
-        this.contextSelectTarget.selectedIndex = i;
+    if(selectedArticleType != "भजन") {
+      this.contextSelectTarget.selectedIndex = 0;
+    } else {
+      let options = this.contextSelectTarget.options;
+      for(let i=0; i<options.length; i++){
+        if(options[i].text.trim() == "विविध"){
+          //this.contextSelectTarget.value = options[i].value;
+          this.contextSelectTarget.selectedIndex = i;
+        }
       }
     }
   }
