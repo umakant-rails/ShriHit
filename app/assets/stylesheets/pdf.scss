@@ -3,20 +3,34 @@ div.nobreak:before { clear:both; }
 div.nobreak{ page-break-inside: avoid; }
 
 .pdf-page{
-  height:13410px;
-  border: 2px solid black;
+  height:1320px;
+  border: 1px solid black;
   margin-bottom: 25px;
 }
 
+/* start pdf header/footer css */
+  .header{
+    padding: 6px 0px;
+    color:  #306EFF;
+  }
+  .footer{
+    padding: 6px 0px;
+    color:  #306EFF;
+  }
+/* end pdf header/footer css */
+.title-image{
+  color: #306EFF;
+}
 body{
   /*background: #f5f7fb;*/
-  background-image: url("./assets/shrihit.png");
+  /*background: blue;
+  background: url("./assets/shrihit1.png") 10px 0px repeat;*/
 }
 .dropdown-divider{
   border-top: 1px solid gray;
   margin: 8px 0px;
 }
-#content{
+#container{
   width: 100%;
   background: #FFF;
   /*border: 1px solid lightgray;*/
@@ -28,7 +42,7 @@ body{
   background: #3b7ddd;
   color: #FFF;
   padding: 6px 4px;
-  border-radius: 4px;
+  /*border-radius: 4px;*/
   border: 1px solid #3b7ddd;
   font-size: 22px;
   font-weight: bold;
@@ -36,6 +50,8 @@ body{
 .article-content{
   font-size: 18px;
   padding: 10px 20px;
+/*  background-image: url(/assets/shrihit1.png) 10px 0px repeat; */
+  background-image: url('/assets/lalji_icon.jpg'); 
 }
 .article-author{
   font-size: 18px;

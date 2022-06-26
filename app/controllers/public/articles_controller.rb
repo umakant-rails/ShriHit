@@ -28,26 +28,28 @@ class Public::ArticlesController < Public::AppController
       format.html
       format.pdf do
         render pdf: @article.english_title,
+          save_to_file: @article.english_title,
           template: "public/articles/article_pdf",
           layout: "pdf_layout",
-          margin: {top: 8, bottom: 8, left: 10, right: 10},
+          margin: {top: 14, bottom: 14, left: 10, right: 10},
           title:  @article.english_title,
-          header:  {
-            # html: {
-            #   template: 'public/articles/pdf_content/pdf_header',
-            #   layout:   'pdf_layout'
-            # },
-            left:  'श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित', 
-            center:'श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित', 
-            right: 'श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित',
-            font_size: 8
+          header: {
+            html: {
+              template: 'public/articles/pdf_content/header',
+              layout:   'pdf_plain'
+            },
+            line: true,
+            spacing: 4
           },
-          footer:  {
-            left:  'श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित', 
-            center:'श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित', 
-            right: 'श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित श्रीहित', 
-            font_size: 8 
+          footer: {
+            html: {
+              template: 'public/articles/pdf_content/footer',
+              layout:   'pdf_plain'
+            },
+            line: true,
+            spacing: 4
           },
+          background: true,
           show_as_html: false,
           page_size: "A4",
           encoding:"UTF-8",

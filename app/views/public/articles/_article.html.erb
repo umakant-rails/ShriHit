@@ -6,7 +6,7 @@
   </span>
   <span class="col-md-6 text-end text-primary author-mark-txt"> 
     <a href="<%= public_user_profile_path(article.user.id) %>">
-      ( योगदानकर्ता : <%= article.user.username %> )
+      ( योगदानकर्ता : <%= article.user.username.capitalize %> )
     </a> |
     <a href="<%= export_pdf_public_article_path(article.id, format: :pdf) %>" target="_blank" >
       <i class="fa-solid fa-file-export"></i>
