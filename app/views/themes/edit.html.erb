@@ -17,3 +17,6 @@
   </div>
   <div class="col-md-1"></div>
 </div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/theme-custom" %>
+<% end %>

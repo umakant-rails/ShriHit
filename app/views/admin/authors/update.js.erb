@@ -1,7 +1,7 @@
 $(".alert").hide();
 bootstrap.Modal.getInstance("#updateAuthorPopup").hide();
 <% if @authors_pending.present? && flash[:success].present? %>
-	$("#pending_author_list").html("<%= escape_javascript(render 'author', authors_pending: @authors_pending, authors_approved: @authors_approved)%>");
+	$("#pending_author_list").html("<%= escape_javascript(render 'author_pending', authors_pending: @authors_pending, authors_approved: @authors_approved)%>");
 	$("#successAlert").html("<%= flash[:success] %>");
 	$("#successAlert").parent().css("display", "block");
 <% elsif @authors_pending.present? && flash[:error].present? %>

@@ -3,7 +3,7 @@ import ApplicationController from "../application_controller";
 
 export default class extends ApplicationController {
   static targets = ['contextForApproval', 'contextApprovedBtn', 'contextRejectBtn', 'contextMergeBtn', 
-  'contextMergeIn', 'newContextName', 'saveContextBtn'];
+  'contextMergeIn', 'newContextName', 'saveContextBtn', 'csrfToken'];
   
   connect(){
     this.params = {};

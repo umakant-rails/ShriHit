@@ -32,15 +32,10 @@
           </div>
         </div>
         <div class="dropdown-divider"></div>
-        <div class="row">
-          <div class="col-md-3">
-            <%= link_to "Edit this Theme Chapter", edit_theme_chapter_path(@theme_chapter) %> 
-          </div>
-          <div class="col-md-3">
-            <%= link_to "Back to Theme Chapters", theme_chapters_path %>
-          </div>
-          <div class="col-md-3" style="margin: -5px 0 0px 0;padding: 0;">
-            <%= button_to("Destroy this Theme Chapter", theme_chapter_path(@theme_chapter), method: :delete, :class => "btn btn-link") %>
+        <div class="">
+          <%= link_to "Edit this Theme Chapter", edit_theme_chapter_path(@theme_chapter) %> | 
+          <%= link_to "Back to Theme Chapters", theme_chapters_path %> | 
+          <%= button_to("Destroy this Theme Chapter", theme_chapter_path(@theme_chapter), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
           </div>
         </div>
       </div>

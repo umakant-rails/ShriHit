@@ -9,7 +9,7 @@
 	</td>
 	<td>
 		<%= link_to theme_chapter do %>
-			<%= theme_chapter.theme.name %>
+			<%= theme_chapter.theme.present? ? theme_chapter.theme.name : '-' %>
 		<% end %>
 	</td>
 	<td>

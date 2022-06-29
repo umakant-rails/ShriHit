@@ -15,10 +15,12 @@ class Public::ArticlesController < Public::AppController
 
   def articles_by_type
     @articles = Article.joins(:article_type).where(article_types: {name: params[:article_type]})
+      .page(params[:page]).per(5)
   end
 
   def articles_by_context
     @articles = Article.joins(:context).where("contexts.name = ?",params[:context_name])
+      .page(params[:page]).per(5)
   end
 
   def article_pdf

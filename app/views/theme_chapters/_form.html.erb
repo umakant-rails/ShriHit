@@ -1,11 +1,12 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: theme_chapter, html: {
-  'data-target': 'article.form', 'data-action': 'article#submitForm'}) do |form| %> 
+  'data-article-target': 'form', 'data-action': 'article#submitForm'}) do |form| %> 
   <% themes = get_themes_hash%>
-  <div class="mb-3" data-target="article.errors">
+  <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= theme_chapter.errors.present? ? 'block' : 'none' %>;" role="alert">
     <% theme_chapter.errors.each do |error| %>
       <li><%= error.full_message %></li>
     <% end %>
+    <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
   </div>
   <div class="row">
     <div class="col-md-12"> 

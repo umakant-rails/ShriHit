@@ -1,9 +1,9 @@
 <div class="alert alert-danger alert-dismissible fade show" style="display: <%= resource.errors.present? ? 'block' : 'none' %>;" role="alert">
-  <div id="alert-message-span" data-target="userprofile.errors">
+  <div id="alert-message-span" data-userprofile-target="errors">
     <% resource.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </div>
-  <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
+  <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: :12px;"></button>
 </div>
 

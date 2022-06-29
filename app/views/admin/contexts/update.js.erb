@@ -1,7 +1,7 @@
 $(".alert").hide();
 bootstrap.Modal.getInstance("#updateContextPopup").hide();
 <% if @contexts_pending.present? && flash[:success].present? %>
-	$("#pending_context_list").html("<%= escape_javascript(render 'context', contexts_pending: @contexts_pending, contexts_approved: @contexts_approved)%>");
+	$("#pending_context_list").html("<%= escape_javascript(render 'context_pending', contexts_pending: @contexts_pending, contexts_approved: @contexts_approved)%>");
 	//$("#paginate-block").html("<%= escape_javascript(paginate @contexts_pending, remote: true) %>");
 	$("#successAlert").html("<%= flash[:success] %>");
 	$("#successAlert").parent().css("display", "block");

@@ -1,14 +1,15 @@
 <%= form_with(model: theme, html: {
-  'data-target': 'theme.form', 'data-action': 'theme#submitForm'}) do |form| %>
+  'data-theme-target': 'form', 'data-action': 'theme#submitForm'}) do |form| %>
   <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-      <div class="mb-3" data-target="theme.errors">
+      <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= theme.errors.present? ? 'block' : 'none' %>;" role="alert">
         <% theme.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
+        <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
       </div>
-      
+
       <div class='mb-3'>
         <label class='form-label'>नाम</label>
         <%= form.text_field :name, class: 'form-control' %>

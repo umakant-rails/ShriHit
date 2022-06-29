@@ -1,7 +1,7 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
-<%= form_with(model: user_profile, html: {'data-target': 'userprofile.form',}) do |form| %>
+<%= form_with(model: user_profile, html: {'data-userprofile-target': 'form',}) do |form| %>
   <!-- <div class="mb-3">
-    <div class="alert alert-danger" role="alert"  data-target="userprofile.errors">
+    <div class="alert alert-danger" role="alert"  data-userprofile-target="errors">
       <% user_profile.errors.each do |error| %>
         <li><%= error.full_message %></li>
       <% end %>
@@ -9,12 +9,12 @@
   </div> -->
   <div class="row">
     <div class="alert alert-danger alert-dismissible fade show" style="display: <%= user_profile.errors.present? ? 'block' : 'none' %>;" role="alert">
-      <div id="alert-message-span" data-target="userprofile.errors">
+      <div id="alert-message-span" data-userprofile-target="errors">
         <% user_profile.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </div>
-      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" style="font-size:  12px;" aria-label="Close"></button>
     </div>
   </div>
   <div class="row">
@@ -35,7 +35,7 @@
     <div class="col-md-6"> 
       <div class='mb-3'>
         <label class='form-label'>मोबाइल</label>
-        <%= form.text_field :mobile, class: 'form-control', 'data-action': 'keydown->userprofile#validateMobile keyup->userprofile#validateMobile onblur->userprofile#validateMobile', 'data-target': 'userprofile.mobile' %>
+        <%= form.text_field :mobile, class: 'form-control', 'data-action': 'keydown->userprofile#validateMobile keyup->userprofile#validateMobile onblur->userprofile#validateMobile', 'data-userprofile-target': 'mobile' %>
       </div>
     </div>
     <div class="col-md-6"> 
@@ -55,7 +55,7 @@
     <div class="col-md-6"> 
       <div class='mb-3'>
         <label class='form-label'>पिनकोड</label>
-        <%= form.text_field :pincode, class: 'form-control', 'data-action': 'keydown->userprofile#validatePincode keyup->userprofile#validatePincode onblur->userprofile#validatePincode', 'data-target': 'userprofile.pincode' %>
+        <%= form.text_field :pincode, class: 'form-control', 'data-action': 'keydown->userprofile#validatePincode keyup->userprofile#validatePincode onblur->userprofile#validatePincode', 'data-userprofile-target': 'pincode' %>
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
     <div class="col-md-6"> 
       <div class='mb-3'>
         <label class='form-label'>राज्य</label>
-        <%= form.select :state_id, options_for_select(get_states), {:prompt => 'राज्य चुने'}, class: 'form-control' %>
+        <%= form.select :state_id, options_for_select(get_states, selected: user_profile.state_id), {:prompt => 'राज्य चुने'}, class: 'form-control' %>
       </div>
     </div>
     <div class="col-md-6"> 

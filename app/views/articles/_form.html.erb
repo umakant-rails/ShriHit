@@ -1,17 +1,18 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: article, html: {
-  'data-target': 'article.form', 'data-action': 'article#submitForm'}) do |form| %>
+  'data-article-target': 'form', 'data-action': 'article#submitForm'}) do |form| %>
   <% article_types, authors, contexts = get_data_for_article_creation %>  
-  <div class="mb-3" data-target="article.errors">
+  <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display: <%= article.errors.present? ? 'block' : 'none' %>;" role="alert">
     <% article.errors.each do |error| %>
       <li><%= error.full_message %></li>
     <% end %>
+    <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>रचना का प्रकार</label>
-        <%= form.select :article_type_id, options_for_select(article_types), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-target': 'article.articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
+        <%= form.select :article_type_id, options_for_select(article_types, selected: article.article_type_id), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-article-target': 'articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
       </div>
     </div>
   </div>
@@ -19,8 +20,8 @@
     <div class="col-md-6">
       <div class='mb-3'>
         <label class='form-label'>प्रसंग</label>
-        <%= form.select :context_id, options_for_select(contexts), {:prompt => 'प्रसंग चुने'}, class: 'form-control', 'data-action': 'change->article#toggleContext', 'data-target': 'article.contextSelect'%>
-        <div data-target='article.contextInput' hidden=true>
+        <%= form.select :context_id, options_for_select(contexts, selected: article.context_id), {:prompt => 'प्रसंग चुने'}, class: 'form-control', 'data-action': 'change->article#toggleContext', 'data-article-target': 'contextSelect'%>
+        <div data-article-target='contextInput' hidden=true>
           <div class="row">
             <div class="col-md-8">
               <%= text_field_tag 'context', nil, class: 'form-control', placeholder: 'प्रसंग का नाम टाइप करे.' %>
@@ -35,8 +36,8 @@
     <div class="col-md-6">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>लेखक</label>
-          <%= form.select :author_id, options_for_select(authors), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-target': 'article.authorSelect' %>
-          <div data-target='article.authorInput' hidden=true>
+          <%= form.select :author_id, options_for_select(authors, selected: article.author_id), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-article-target': 'authorSelect' %>
+          <div data-article-target='authorInput' hidden=true>
             <div class="row">
               <div class="col-md-8">
                 <%= text_field_tag 'author', nil, class: 'form-control', placeholder: 'लेखक का नाम टाइप करे.'  %>
@@ -65,7 +66,7 @@
   </div>
   <div class='mb-3'>
     <label for='article_type' class='form-label'>रचना</label>
-    <%#= text_area(:article, :content, cols: 30, rows: 12, class: 'form-control', 'data-target': 'article.content') %>
+    <%#= text_area(:article, :content, cols: 30, rows: 12, class: 'form-control', 'data-article-target': 'content') %>
     <%= form.text_area :content, class: 'tinymce', 'data-provider': :summernote %>
   </div>
   <div class='text-center mt-3 actions'>
