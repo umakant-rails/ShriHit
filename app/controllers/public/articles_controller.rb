@@ -29,8 +29,8 @@ class Public::ArticlesController < Public::AppController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: @article.english_title,
-          save_to_file: @article.english_title,
+        render pdf: @article.hindi_title,
+          save_to_file: @article.hindi_title,
           template: "public/articles/article_pdf",
           layout: "pdf_layout",
           margin: {top: 14, bottom: 14, left: 10, right: 10},

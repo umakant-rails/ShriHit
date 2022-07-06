@@ -1,8 +1,16 @@
 class ApplicationController < ActionController::Base
 	layout :set_layouts
 	before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_required_data, if: :devise_controller?
 
   private
+
+  def set_required_data
+    @article_types = ArticleType.order("name ASC")
+    @contexts = Context.order("name ASC")
+    @authors = Author.order("name ASC")
+    @contributors = User.order("username ASC")
+  end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, 

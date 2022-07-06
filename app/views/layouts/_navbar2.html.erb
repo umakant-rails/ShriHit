@@ -64,7 +64,7 @@
             <% @contributors && @contributors.each do |contributor| %>
               <li>
                 <a class="dropdown-item" href="<%= public_user_profile_path(contributor.id) %>">
-                  <%= contributor.username %>
+                  <%= contributor.username.capitalize %>
                 </a>
               </li>
             <% end %>

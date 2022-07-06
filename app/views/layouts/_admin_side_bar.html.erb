@@ -145,28 +145,28 @@
   </li>
 </div>
 <div class="dropdown-divider"></div>
-  <li class="sidebar-item">
-    <a class="sidebar-link" data-bs-toggle="collapse" href="#contextList"   role="button" aria-expanded="false" aria-controls="contextList" data-id="contextList"
-      data-action="click->sidebar#toggleTab">
+<li class="sidebar-item">
+  <a class="sidebar-link" data-bs-toggle="collapse" href="#articleTypeList" role="button" aria-expanded="false" aria-controls="articleTypeList" data-id="articleTypeList"
+    data-action="click->sidebar#toggleTab">
+    <span class="align-middle">
+      रचना प्रकार
+    </span>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</li>
+<div class="collapse  <%= show_collapse_items("article_types") %>" data-sidebar-target="anchorListBlock" id="articleTypeList">
+  <li class="sidebar-item <%= set_active("article_types", "new") %>">
+    <a class="sidebar-link" href="<%= new_article_type_path %>">
       <span class="align-middle">
-        प्रसंग
+        रचना प्रकार जोड़े
       </span>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
   </li>
-  <div class="collapse  <%= show_collapse_items("contexts") %>" data-sidebar-target="anchorListBlock" id="contextList">
-    <li class="sidebar-item <%= set_active("contexts", "new") %>">
-      <a class="sidebar-link" href="<%= new_context_path %>">
-        <span class="align-middle">
-          प्रसंग जोड़े
-        </span>
-      </a>
-    </li>
-    <li class="sidebar-item <%= set_active("contexts", "others") %>">
-      <a class="sidebar-link" href="<%= contexts_path %>">
-        <span class="align-middle">
-          प्रसंग सूची
-        </span>
-      </a>
-    </li>
-  </div>
+  <li class="sidebar-item <%= set_active("article_types", "others") %>">
+    <a class="sidebar-link" href="<%= article_types_path %>">
+      <span class="align-middle">
+        रचना प्रकार सूची
+      </span>
+    </a>
+  </li>
+</div>

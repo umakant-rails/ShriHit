@@ -1,4 +1,4 @@
-class Admin::AuthorsController < ApplicationController
+class Admin::AuthorsController < Admin::AppController
   before_action :authenticate_user!
   before_action :verify_admin
 
@@ -7,7 +7,7 @@ class Admin::AuthorsController < ApplicationController
   end
 
   def approved
-    @authors_approved = Author.approved.page(params[:page])
+    @authors_approved = Author.approved.order("created_at DESC").page(params[:page])
   end
 
   def pending
@@ -93,8 +93,8 @@ class Admin::AuthorsController < ApplicationController
   private
 
     def set_pending_records
-      @authors_pending = Author.pending.page(params[:page])
-      @authors_approved = Author.approved
+      @authors_pending = Author.pending.order("created_at DESC").page(params[:page])
+      #@authors_approved = Author.approved.order("created_at DESC")
     end
 
     def verify_admin

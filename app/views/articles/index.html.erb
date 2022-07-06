@@ -14,12 +14,21 @@
               <th scope="col">रचना</th>
               <th scope="col">लेखक</th>
               <th scope="col">योगदानकर्ता</th>
+              <th scope="col">स्वीकृत/अस्वीकृत</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <% @articles.each_with_index do |article, index| %>
-              <%= render partial: 'article', locals: {article: article, index: (index + 1) } %>
+            <% if @articles.present? %>
+              <% @articles.each_with_index do |article, index| %>
+                <%= render partial: 'article', locals: {article: article, index: (index + 1) } %>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="5">
+                  <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+                </td>
+              </tr>
             <% end %>
           </tbody>
         </table>

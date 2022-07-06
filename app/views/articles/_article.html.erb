@@ -11,7 +11,10 @@
 		<%= article.author.name %>
 	</td>
 	<td>
-		<%= article.user.username %>
+		<%= article.user.username.capitalize %>
+	</td>
+	<td>
+		<%= article.is_approved ? 'स्वीकृत' : 'लंबित' %>
 	</td>
 	<td style="display:inline-block">
 		<div class="row">

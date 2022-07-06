@@ -1,4 +1,4 @@
-class Admin::ArticlesController < ApplicationController
+class Admin::ArticlesController < Admin::AppController
   before_action :authenticate_user!
   before_action :verify_admin
 
@@ -7,7 +7,7 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def approved
-    @articles_approved = Article.approved.page(params[:page])
+    @articles_approved = Article.approved.order("created_at DESC").page(params[:page])
   end
 
   def pending
@@ -47,7 +47,7 @@ class Admin::ArticlesController < ApplicationController
   private
 
     def set_pending_records
-      @articles_pending = Article.pending.page(params[:page])
+      @articles_pending = Article.pending.order("created_at DESC").page(params[:page])
     end
 
     def verify_admin

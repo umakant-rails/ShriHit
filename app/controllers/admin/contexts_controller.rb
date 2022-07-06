@@ -1,4 +1,4 @@
-class Admin::ContextsController < ApplicationController
+class Admin::ContextsController < Admin::AppController
   before_action :authenticate_user!
   before_action :verify_admin
 
@@ -7,7 +7,7 @@ class Admin::ContextsController < ApplicationController
   end
 
   def approved
-    @contexts_approved = Context.approved.page(params[:page])
+    @contexts_approved = Context.approved.order("created_at DESC").page(params[:page])
   end
 
   def pending
@@ -95,8 +95,8 @@ class Admin::ContextsController < ApplicationController
   private
 
     def set_pending_records
-      @contexts_pending = Context.pending.page(params[:page])
-      @contexts_approved = Context.approved
+      @contexts_pending = Context.pending.order("created_at DESC").page(params[:page])
+      #@contexts_approved = Context.approved.order("created_at DESC")
     end
 
     def verify_admin
