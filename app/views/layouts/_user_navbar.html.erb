@@ -5,31 +5,37 @@
         <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
           <div class="position-relative">
             <i class="fa-regular fa-bell"></i>
-            <span class="indicator"><%= @notifications.length %></span>
+            <span class="indicator"><%= @notifications.present? ? @notifications.length : 0 %></span>
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown">
           <div class="dropdown-menu-header">
-            <%= @notifications.length %> New Notifications
+            <%= @notifications.present? ? @notifications.length : 0 %> New Notifications
           </div>
-          <div class="list-group">
-            <% @notifications.each do | notification |%>
-              <a href="#" class="list-group-item">
-                <div class="row g-0 align-items-center">
-                  <div class="col-2">
-                    <i class="text-danger" data-feather="alert-circle"></i>
+          <% if @notifications.present? %>
+            <div class="list-group">
+              <% @notifications.each do | notification |%>
+                <a href="#" class="list-group-item">
+                  <div class="row g-0 align-items-center">
+                    <div class="col-2">
+                      <i class="text-danger" data-feather="alert-circle"></i>
+                    </div>
+                    <div class="col-10">
+                      <div class="text-dark"><%= notification[:key1] %></div>
+                      <div class="text-muted small mt-1"><%= notification[:key2] %></div>
+                    </div>
                   </div>
-                  <div class="col-10">
-                    <div class="text-dark"><%= notification[:key1] %></div>
-                    <div class="text-muted small mt-1"><%= notification[:key2] %></div>
-                  </div>
-                </div>
-              </a>
-            <% end %>
-          </div>
-          <div class="dropdown-menu-footer">
-            <a href="#" class="text-muted">Show all notifications</a>
-          </div>
+                </a>
+              <% end %>
+            </div>
+            <div class="dropdown-menu-footer">
+              <a href="#" class="text-muted">Show all notifications</a>
+            </div>
+          <% else %>
+            <div class="dropdown-menu-footer">
+              अभी कोई नोटिफिकेशन उपलब्ध नहीं है 
+            </div>
+          <% end %>
         </div>
       </li>
       <li class="nav-item dropdown">

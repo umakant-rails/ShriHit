@@ -1,7 +1,18 @@
-<p>Hello <%= @resource.email %>!</p>
-
-<p>Your account has been locked due to an excessive number of unsuccessful sign in attempts.</p>
-
-<p>Click the link below to unlock your account:</p>
-
-<p><%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token) %></p>
+<div class="mb-2">
+  <strong>
+    Hello <%= @resource.username %>
+  </strong>
+</div>
+<div class="mb-2">
+  Your account has been locked due to an excessive number of unsuccessful sign in attempts.
+</div>
+<div class="mb-2">
+  Click the link below to unlock your account:
+</div>
+<div class="mb-5">
+  <%= link_to 'Unlock my account', unlock_url(@resource, unlock_token: @token) , class: 'confirm-btn'%>
+</div>
+<div class="mb-1">
+  Regards,<br/>
+  <strong>ShriHit Team</strong>
+</div>
