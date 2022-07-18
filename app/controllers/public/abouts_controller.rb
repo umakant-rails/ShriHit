@@ -1,4 +1,4 @@
-class Public::AboutsController < Public::AppController
+class Public::AboutsController < ApplicationController
 
   def about
   end

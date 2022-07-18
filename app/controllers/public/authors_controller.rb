@@ -1,4 +1,4 @@
-class Public::AuthorsController < Public::AppController
+class Public::AuthorsController < ApplicationController
 
   def index
     @authors = Author.order("name ASC").page(params[:page])

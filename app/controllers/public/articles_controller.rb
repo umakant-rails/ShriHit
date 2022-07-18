@@ -1,4 +1,4 @@
-class Public::ArticlesController < Public::AppController
+class Public::ArticlesController < ApplicationController
   layout :set_layout
 
   def index

@@ -1,4 +1,4 @@
-class Admin::DashboardsController < Admin::AppController
+class Admin::DashboardsController < ApplicationController
   before_action :authenticate_user!
 
   def index
