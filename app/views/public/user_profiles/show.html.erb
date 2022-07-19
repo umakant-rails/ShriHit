@@ -1,104 +1,100 @@
 <div class="row">
-	<div class="col-md-1"></div>
-	<div class="col-md-10">
-		<div class="card">
-			<div class="card-body" id="article-list">
-				<h3>User Profile</h3>
-        <div class="dropdown-divider"></div>
-        <div class="m-sm-4">
-        	<% if @user_profile.present? %>
-	          <div class="row mb-3">
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>प्रथम नाम</div>
-					      <div class='profile-content'>
-					        <%= @user_profile.first_name.present? ? @user_profile.first_name.capitalize : 'Not Available' %>
-					      </div>
-					    </div>
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>अंतिम नाम</div>
-					      <div class='profile-content'>
-					        <%= @user_profile.last_name.present? ? @user_profile.last_name.capitalize : 'Not Available' %>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="row mb-3">
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>मोबाइल</div>
-					      <div class="profile-content">
-					        <%= @user_profile.mobile.present? ? @user_profile.mobile : 'Not Available' %>
-					      </div>
-					    </div>
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>पता</div>
-					      <div class="profile-content">
-					        <%= @user_profile.address.present? ? @user_profile.address.capitalize : 'Not Available' %>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="row mb-3">
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>नगर</div>
-					      <div class="profile-content">
-					        <%= @user_profile.city.present? ? @user_profile.city.capitalize : 'Not Available' %>
-					      </div>
-					    </div>
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>पिनकोड</div>
-					      <div class="profile-content">
-					        <%= @user_profile.pincode.present? ? @user_profile.pincode : 'Not Available' %>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="row mb-3">
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>राज्य</div>
-				        <div class="profile-content">
-					        <%= @user_profile.state.present? ? @user_profile.state.name : 'Not Available' %>
-					      </div>
-					    </div>
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>जन्म दिनांक</div>
-					      <div class="profile-content">
-					        <%= @user_profile.date_of_birth.present? ? @user_profile.date_of_birth : 'Not Available' %>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="row mb-3">
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>फेसबुक प्रोफाइल URL</div>
-					      <div class="profile-content">
-					        <%= @user_profile.facebook_url.present? ? @user_profile.facebook_url: 'Not Available' %>
-					      </div>
-					    </div>
-					    <div class="col-md-6"> 
-					      <div class='profile-title'>यूट्यूब प्रोफाइल URL</div>
-					      <div class="profile-content">
-					        <%= @user_profile.youtube_url.present? ? @user_profile.youtube_url : 'Not Available' %>
-					      </div>
-					    </div>
-					  </div>
-					  <div class="row mb-3">
-					    <div class="col-md-12"> 
-					      <div class='profile-title'>जीवन-वृत्तांत</div>
-					      <div class="profile-content">
-					      	<% if @user_profile.biography.present? %>
-					        	<%= raw @user_profile.biography %>
-					        <% else %>
-					        	अभी जीवन वृतांत उपलब्ध नहीं है 
-					        <% end %>
-					      </div>
-					    </div>
-					  </div>
-					<% else %>
-						<div class="row mb-3">
-					    <div class="col-md-12">
-					    	इस उपयोगकर्ता की प्रोफाइल उपलब्ध नहीं है | 
-					    </div>
-					  </div>
-					<% end %>
-        </div>
-		  </div>
-		</div>
-  </div>
-  <div class="col-md-1"></div>
+	<div class="card">
+		<div class="card-body" id="article-list">
+			<h3>User Profile</h3>
+      <div class="dropdown-divider"></div>
+      <div class="m-sm-4">
+      	<% if @user_profile.present? %>
+          <div class="row mb-3">
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>प्रथम नाम</div>
+				      <div class='profile-content'>
+				        <%= @user_profile.first_name.present? ? @user_profile.first_name.capitalize : 'Not Available' %>
+				      </div>
+				    </div>
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>अंतिम नाम</div>
+				      <div class='profile-content'>
+				        <%= @user_profile.last_name.present? ? @user_profile.last_name.capitalize : 'Not Available' %>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="row mb-3">
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>मोबाइल</div>
+				      <div class="profile-content">
+				        <%= @user_profile.mobile.present? ? @user_profile.mobile : 'Not Available' %>
+				      </div>
+				    </div>
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>पता</div>
+				      <div class="profile-content">
+				        <%= @user_profile.address.present? ? @user_profile.address.capitalize : 'Not Available' %>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="row mb-3">
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>नगर</div>
+				      <div class="profile-content">
+				        <%= @user_profile.city.present? ? @user_profile.city.capitalize : 'Not Available' %>
+				      </div>
+				    </div>
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>पिनकोड</div>
+				      <div class="profile-content">
+				        <%= @user_profile.pincode.present? ? @user_profile.pincode : 'Not Available' %>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="row mb-3">
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>राज्य</div>
+			        <div class="profile-content">
+				        <%= @user_profile.state.present? ? @user_profile.state.name : 'Not Available' %>
+				      </div>
+				    </div>
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>जन्म दिनांक</div>
+				      <div class="profile-content">
+				        <%= @user_profile.date_of_birth.present? ? @user_profile.date_of_birth : 'Not Available' %>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="row mb-3">
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>फेसबुक प्रोफाइल URL</div>
+				      <div class="profile-content">
+				        <%= @user_profile.facebook_url.present? ? @user_profile.facebook_url: 'Not Available' %>
+				      </div>
+				    </div>
+				    <div class="col-md-6"> 
+				      <div class='profile-title'>यूट्यूब प्रोफाइल URL</div>
+				      <div class="profile-content">
+				        <%= @user_profile.youtube_url.present? ? @user_profile.youtube_url : 'Not Available' %>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="row mb-3">
+				    <div class="col-md-12"> 
+				      <div class='profile-title'>जीवन-वृत्तांत</div>
+				      <div class="profile-content">
+				      	<% if @user_profile.biography.present? %>
+				        	<%= raw @user_profile.biography %>
+				        <% else %>
+				        	अभी जीवन वृतांत उपलब्ध नहीं है 
+				        <% end %>
+				      </div>
+				    </div>
+				  </div>
+				<% else %>
+					<div class="row mb-3">
+				    <div class="col-md-12">
+				    	इस उपयोगकर्ता की प्रोफाइल उपलब्ध नहीं है | 
+				    </div>
+				  </div>
+				<% end %>
+      </div>
+	  </div>
+	</div>
 </div>

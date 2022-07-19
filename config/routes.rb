@@ -72,6 +72,8 @@ Rails.application.routes.draw do
     resources :user_profiles, only: [:index, :show] do
     end
     get "/about" => "abouts#about", as: :about
+    resources :suggestions, only: [:index, :new, :create, :show]
+    #get "/suggestions/new" => "suggestions#new", as: :suggestions
   end
 
   namespace :public_page do

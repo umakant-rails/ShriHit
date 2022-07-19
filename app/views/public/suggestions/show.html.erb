@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-body">
+        <div class="card article-type-title" style="">
+          सुझाव : <%= @suggestion.title %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="suggestion-description" data-controller= ''>
+          <%= raw @suggestion.description %>
+        </div>
+        <div class="dropdown-divider"></div>
+          <span class="sgstion-user">
+            Username: <span class="username"><strong><%= @suggestion.username %></strong></span>
+          </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1"></div>
+</div>

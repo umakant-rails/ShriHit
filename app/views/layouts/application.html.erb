@@ -10,6 +10,7 @@
     <script defer src="/assets/transliteration.js"></script>
     <%= yield(:head) %>
   </head>
+
   <body>
     <div class="wrapper">
       <div class="main">
@@ -17,7 +18,13 @@
         <%= render partial: "layouts/alert_message" %>
         <main class="content">
           <div class="container-fluid p-0" style="font-size: 18px;">
-            <%= yield %>
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-10">
+                <%= yield %>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
           </div>
         </main>
       </div>
