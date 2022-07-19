@@ -13,31 +13,41 @@
         </div>
         <div class="dropdown-divider"></div>
         <div class="suggestion-container" data-controller= ''>
-          <%if @suggestions.present? %>
-            <%@suggestions.each_with_index do | suggestion, ind |%>
-              <div class="suggestion-item">
-                <%= ind + 1 %>. <%= link_to suggestion.title, public_suggestion_path(suggestion), class: "" %>
-                <div class="row sgstion-user-index">
-                  <span class="sgstion-user">
-                    username: <span class="username"><strong><%= suggestion.username %></strong></span>
-                  </span>
-                </div>
-              </div>
-              <div class="suggestion-item">
-                <%= ind + 1 %>. <%= link_to suggestion.title, public_suggestion_path(suggestion), class: "" %>
-                <div class="row sgstion-user-index">
-                  <span class="sgstion-user">
-                    username: <span class="username"><strong><%= suggestion.username %></strong></span>
-                  </span>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-            कोई सुझाव उपलब्ध नहीं है 
-          <% end %>
+          <table class="table">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">सुझाव</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% page = params[:page].blank? ?  0 : (params[:page].to_i - 1)%>
+              <% if @suggestions.present? %>
+                <% @suggestions.each_with_index do | suggestion, index | %>
+                  <tr class="suggestion-item">
+                    <th scope="row"><%= (page * @page_size) + (index + 1) %></th>
+                    <td>
+                      <a href="<%= public_suggestion_path(suggestion)%>">
+                        <%= suggestion.title %>
+                      </a>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td colspan="2">
+                    कोई सुझाव उपलब्ध नहीं है
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-1"></div>
+</div>
+<div class="row">
+  <%= paginate @suggestions, remote: true %>
 </div>

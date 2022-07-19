@@ -4,7 +4,7 @@ class Public::ArticlesController < ApplicationController
   def index
     @article_types = ArticleType.order("name ASC")
     @contexts = Context.order("name ASC")
-    @authors = Author.order("name ASC")
+    @authors = Author.order("name ASC").limit(10)
     @articles = Article.order("created_at DESC")
     @contributors = User.all
   end
@@ -14,13 +14,15 @@ class Public::ArticlesController < ApplicationController
   end
 
   def articles_by_type
+    @page_size = 10
     @articles = Article.joins(:article_type).where(article_types: {name: params[:article_type]})
-      .page(params[:page]).per(5)
+      .page(params[:page]).per(10)
   end
 
   def articles_by_context
+    @page_size = 10
     @articles = Article.joins(:context).where("contexts.name = ?",params[:context_name])
-      .page(params[:page]).per(5)
+      .page(params[:page]).per(10)
   end
 
   def article_pdf

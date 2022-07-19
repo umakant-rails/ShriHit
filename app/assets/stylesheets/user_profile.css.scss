@@ -1,11 +1,12 @@
-.profile-title {
-	background: #3b7ddd; //#f5f7fb;
-	color: white;
-	font-size: 15px;
-	padding: 8px 4px;
-	border-bottom: 1px solid gray;
-	font-weight: bold;
-}
+
 .profile-content{
 	padding: 5px 4px;
+}
+.profile-title{
+	font-size: 18px;
+	font-weight: bold;
+	color:  #3b7ddd;
+	padding:  4px 10px;
+	border: 1px solid #3b7ddd;
+	border-radius: 4px;
 }

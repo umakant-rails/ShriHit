@@ -6,18 +6,13 @@
   </div>
 </div> -->
 <div class="row">
-  <div class="card article-type-title">
+  <div class="card page-subject-header">
     <%= params[:context_name] %> ( प्रसंग प्रकार ) : रचना सूची
   </div>
   <div class="card">
     <div class="card-body h-100" id="article-list">
-      <% if @articles.present? %>
-        <% @articles && @articles.each do | article | %>
-          <%= render partial: "public/shared/article", locals: {article: article} %>
-        <% end %>
-      <% else %>
-        There is no data available now.
-      <% end %>
+      <% page = params[:page].blank? ?  0 : (params[:page].to_i - 1)%>
+      <%= render partial: "public/shared/article", locals: {articles: @articles, page: page, page_size: @page_size} %>
     </div>
   </div>
 </div>
