@@ -1,2 +1,2 @@
-$("#comment-"+<%= @comment.id %>).html("<%= @comment.comment %>").show();
-$("#edit-textarea-"+<%= @comment.id %>).text("<%= @comment.comment %>").hide();
+$("#comment-"+<%= @comment.id %>).html("<%= raw(j  @comment.comment) %>").show();
+$("#edit-textarea-"+<%= @comment.id %>).text("<%= raw(j @comment.comment) %>").hide();

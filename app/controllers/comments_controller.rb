@@ -37,9 +37,9 @@ class CommentsController < ApplicationController
       if @comment.update(comment_params)
         flash[:success] = "Comment was successfully updated." 
         format.js {}
-        format.json { render :show, status: :ok, location: @article }
+        format.json {}
       else
-        format.js { render json: @article.errors, status: :unprocessable_entity }
+        format.js { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
