@@ -1,0 +1,10 @@
+$("#comment-body-"+<%= params[:id] %>).remove();
+let comment_elements = $("#comment-section").find(".d-flex").length;
+if(comment_elements == 0){
+  $("#comment-section").html(`<div class="d-flex">
+      <div class="no-comment-msg">
+        There is not comment available now.
+      </div>
+    </div>`
+  );
+}

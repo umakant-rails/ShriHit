@@ -1,0 +1,110 @@
+<div class="d-flex" id="comment-body-<%= comment.id %>" style="margin-left:8px;">
+  <img src="/assets/lalji_icon.jpg" width="36" height="36" class="rounded-circle me-2" alt="Charles Hall">
+  <div class="flex-grow-1 mb-1 mt-1 <%= (parent_name == "Article") ? 'article-comment-block' : 'reply-comment' %>">
+    <div class="comment-usrname">
+      <strong><%= comment.user.username.capitalize %></strong>
+      <div class="float-end comment-usrname-row-time">
+        <%= "#{date_format_by_hour_n_day(comment.created_at)}" %>
+      </div>
+    </div>
+
+    <div class="comment-usrnm-subhead text-muted">
+      <%= "#{date_format_by_day_n_month(comment.created_at)} #{comment.created_at.strftime("%H:%M %p")}" %>
+    </div>
+    <div class="text-muted mt-1 comment-txt" id="comment-<%= comment.id %>" data-comment-target="commentTxt">
+      <%= comment.comment %>
+    </div>
+    <% if current_user && current_user.present? %>
+      <textarea class="form-control article-comment-input" rows="1" id="edit-textarea-<%= comment.id %>" data-comment-target="editComment" placeholder="Type here..." style="display:none;">
+        <%= comment.comment %>
+      </textarea>
+      <div class="edit-reply-icon-div" id="edit-reply-<%= comment.id %>">
+        <a href="javascript:void(0);"
+          class="btn ps-0 pe-0 text-primary"
+          id="edit-btn-<%= comment.id %>"
+          data-comment_id="<%= comment.id %>"
+          data-action="click->comment#openEditCommentBox"
+          data-comment-target="editButton"
+        >
+          <i class="fa-solid fa-pen-to-square"></i>
+          Edit
+        </a>
+        <a href="javascript:void(0);"
+          class="btn ps-0 pe-0 hide  text-primary"
+          id="update-btn-<%= comment.id %>"
+          data-comment_id="<%= comment.id %>"
+          data-parent_id="<%= parent.id %>"
+          data-parent_name="<%= parent_name %>"
+          data-action="click->comment#submitUpdatedComment"
+          data-comment-target="updateButton"
+        >
+          <i class="fa-solid fa-paper-plane"></i>
+          Submit
+        </a> |
+        <a href="javascript:void(0);"
+          class="btn ps-0 pe-0  text-primary"
+          id="reply-btn-<%= comment.id %>"
+          data-comment_id="<%= comment.id %>"
+          data-comment-target="replyButton"
+          data-action="click->comment#openReplyCommentBox"
+        >
+          <i class="fa-solid fa-reply"></i>
+          Reply
+        </a> |
+        <a href="javascript:void(0);"
+          class="btn ps-0 pe-0  text-danger"
+          id="delete-btn-<%= comment.id %>"
+          data-comment_id="<%= comment.id %>"
+          data-parent_id="<%= parent.id %>"
+          data-parent_name="<%= parent_name %>"
+          data-comment-target="deleteButton"
+          data-action="click->comment#deleteComment"
+        >
+          <i class="fa-solid fa-trash"></i>
+          Delete
+        </a> |
+        <a href="javascript:void(0);" class="btn ps-0 pe-0  text-secondary">
+          <i class="fa-solid fa-flag"></i>
+        </a>
+        <!-- |
+        <a href="javascript:void(0);" class="btn ps-0 pe-0  text-primary">
+           <%#= "#{date_format_by_day_n_month(comment.created_at)} #{comment.created_at.strftime("%H:%M %p")}" %>
+        </a> -->
+      </div>
+      <div class="reply-block row" id="reply-block-<%= comment.id %>" style="display:none;">
+        <div class="col-md-10">
+          <textarea class="form-control article-comment-input" rows="2"
+            id="reply-textarea-<%= comment.id %>"
+            data-comment-target="replyComment"
+            placeholder="Type here..."
+            style="background: <%= (level == 2) ? '#FFF' : '' %>;"></textarea>
+        </div>
+        <div class="col-md-2 btn-block">
+          <button class="btn btn-sm btn-primary"
+            data-comment_id="<%= comment.id %>"
+            data-action="click->comment#submitRepliedComment"
+            data-parent_id="<%= (level == 1 ) ? comment.id : parent.id %>"
+            data-parent_name="<%= comment.class.name %>"
+          >
+            Comment
+          </button>
+          <button class="btn btn-sm btn-outline-secondary"
+            data-action="click->comment#cancelRepliedComment"
+            data-parent_id="<%= (level == 1 ) ? comment.id : parent.id %>"
+            data-parent_name="<%= comment.class.name %>"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    <% end %>
+    <% if comment.comments.present? %>
+      <% comment.comments.each do | cmt | %>
+        
+          <%= render partial: "comments/comment", locals: {comment: cmt, 
+            parent: comment, parent_name: comment.class.name, level: 2 } %>
+        
+      <% end %>
+    <% end %>
+  </div>
+</div>

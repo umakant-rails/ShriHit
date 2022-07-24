@@ -9,10 +9,14 @@
     </tr>
   </thead>
   <tbody>
+    <% 
+      page = articles.current_page - 1
+      page_size = articles.limit_value
+    %>
     <% if articles.present? %>
       <% articles.each_with_index do |article, index| %>
         <tr>
-        	<td><%= index +1 %></td>
+        	<td><%= (page * page_size) + (index + 1) %></td>
         	<td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
             <a href="<%= article_path(article.id) %>">
               <%= article.hindi_title %> 

@@ -11,6 +11,7 @@ class Public::ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comments = @article.comments.order("created_at DESC")
   end
 
   def articles_by_type
@@ -93,7 +94,7 @@ class Public::ArticlesController < ApplicationController
       if params[:action] == "article_pdf"
         return "pdf_layout"
       else
-        return 'application'
+        return "application";
       end
     end
 end

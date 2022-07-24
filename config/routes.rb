@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :user_profiles
   resources :homes, only: [:index]
   resources :articles
+  resources :comments
+
   resources :themes do
     get "/theme_chapters/new" => "theme_chapters#new", as: :new_theme_chapter#, on: :member
     get "/add_articles_page" => "themes#add_articles_page", as: :add_articles_page , on: :member

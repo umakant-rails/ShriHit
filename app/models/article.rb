@@ -6,6 +6,8 @@ class Article < ApplicationRecord
   belongs_to :article_type
   has_many :theme_articles
   has_many :theme_chapters
+  has_many :comments, as: :commentable
+  
   paginates_per 10
 
   validates :content, :article_type_id, :author_id, :context_id,

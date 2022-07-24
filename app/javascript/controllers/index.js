@@ -18,6 +18,7 @@ import AdminAuthorController from "./admin/author_controller";
 import AdminContextController from "./admin/context_controller";
 import AdminArticleController from "./admin/article_controller";
 import SidebarController from "./sidebar_controller";
+import CommentController from "./comment_controller";
 
 application.register('application', ApplicationController);
 application.register('autocomplete', Autocomplete);
@@ -32,4 +33,5 @@ application.register("admin-author", AdminAuthorController);
 application.register("admin-context", AdminContextController);
 application.register("admin-article", AdminArticleController);
 application.register("sidebar", SidebarController);
+application.register("comment", CommentController);
 //application.register("dashboard", DashboardController);

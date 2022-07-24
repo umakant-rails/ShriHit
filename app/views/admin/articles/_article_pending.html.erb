@@ -6,16 +6,20 @@
       <th scope="col">रचनाकार</th>
       <th scope="col">रचना प्रकार</th>
       <th scope="col">योगदानकर्ता</th>
-      <% if action_name == "pending" %>
+      <%# if action_name == "pending" %>
         <th scope="col">स्वीकृत/अस्वीकृत</th>
-      <% end %>
+      <%# end %>
     </tr>
   </thead>
   <tbody>
+    <% 
+      page = articles.current_page - 1
+      page_size = articles.limit_value
+    %>
     <% if articles.present? %>
       <% articles.each_with_index do |article, index| %>
         <tr>
-        	<td><%= index +1 %></td>
+        	<td><%= (page * page_size) + (index + 1) %></td>
         	<td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
             <a href="<%= article_path(article.id) %>">
               <%= article.hindi_title %> 
@@ -32,12 +36,12 @@
           <td>
             <%= article.user.username %> 
           </td>
-          <% if action_name == "pending" %>
+          <%# if action_name == "pending" %>
             <td>
           		<input type="button" value="स्वीकृत" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action-name="approve" data-action="click->admin-article#approveOrApproveArticle"  class="btn btn-primary"/>
             	<input type="button" value="अस्वीकृत" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action-name="reject" data-action="click->admin-article#approveOrApproveArticle" class="btn btn-danger"/>
             </td>
-          <% end %>
+          <%# end %>
         </tr>
       <% end %>
     <% else %>

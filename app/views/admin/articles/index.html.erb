@@ -20,11 +20,15 @@
 					    </tr>
 					  </thead>
 					  <tbody>
+					  	<% 
+					  		page = (@articles.current_page - 1)
+					  		per_page = @articles.limit_value 
+					  	%>
 					    <% if @articles.present? %>
 					      <% @articles.each_with_index do |article, index| %>
 					      	<% approved_cls = article.is_approved ? "text-success" : "" %>
 					        <tr class="<%= approved_cls %>">
-					        	<td><%= index +1 %></td>
+					        	<td><%= (page * per_page) + (index + 1) %></td>
 					        	<td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
 					            <a href="<%= article_path(article.id) %>" class="<%= approved_cls %>">
 					              <%= article.hindi_title %> 

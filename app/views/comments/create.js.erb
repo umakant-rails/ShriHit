@@ -1,0 +1,15 @@
+<% if params[:parent_name] == "Article" %>
+  // $("#comment-"+<%= @comment.id %>).html("<%= @comment.comment %>").show();
+  // $("#edit-textarea-"+<%= @comment.id %>).text("<%= @comment.comment %>").hide();
+  $("#article_new_comment").text("");
+  $("#comment-section").before(
+    `<%= escape_javascript(render 'comments/comment', comment: @comment,
+      parent: @comment.commentable,
+      parent_name: @comment.commentable.class.name, level: 1) %>`);
+<% else %>
+  $("#reply-block-"+ <%= params[:comment_id_to_append_element] %>).hide();
+  $("#comment-body-" + <%= params[:comment_id_to_append_element] %>).after(
+    `<%= escape_javascript(render 'comments/comment', comment: @comment,
+      parent: @comment.commentable,
+      parent_name: @comment.commentable.class.name, level: 2) %>`);
+<% end %>

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	layout :set_layouts
 	before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_public_data, if: :is_user_not_present?
+  before_action :set_public_data
   before_action :set_admin_data, if: :is_user_admin_or_super_admin?
   private
 

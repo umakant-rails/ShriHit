@@ -1,0 +1,49 @@
+.article-comment-block{
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 5px;
+}
+.article-comment-input{
+  border-bottom: 1px solid lightgray;
+  border-radius: 10px;
+  background: #f6f7f9;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.btm-bdr{
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 8px;
+}
+.comment-usrname{
+  font-size: 14px;
+}
+.comment-usrnm-subhead{
+  font-size: 12px;
+  margin-top: 2px;
+}
+.comment-usrname-row-time{
+  font-size: 12px;
+}
+.comment-txt{
+  font-size: 15px;
+}
+.edit-reply-icon-div{
+  margin-top: 5px;
+}
+.reply-comment{
+  border: 1px solid #e0e4eb;
+  background: #f3f4f7; /*#F0F2F5;*/
+  border-radius: 10px;
+  padding: 7px;
+}
+reply-block.btn-block{
+  padding-top: 5px
+}
+.btn-block button{
+  width: 100%;
+}
+.no-comment-msg{
+  font-size: 15px;
+  margin-left: 15px;
+}
+.hide{display: none;}
+.show{display: block;}
