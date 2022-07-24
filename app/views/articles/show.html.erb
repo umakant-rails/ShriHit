@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-10" data-controller="comment">
     <div class="card">
       <div class="card-body">
         <div class="row">
@@ -12,7 +12,7 @@
           </span>
         </div>
         <div class="dropdown-divider"></div>
-        <div class="m-sm-4" data-controller= 'article'>
+        <div class="ms-4" data-controller= 'article'>
           <div class="article-content">
             <%= raw @article.content %>
           </div>
@@ -21,15 +21,69 @@
           </div>
         </div>
         <% if current_user.present? %>
-          <div class="dropdown-divider"></div>
-          <div class="">
+          <div class="ms-4">
             <%= link_to "Edit this article", edit_article_path(@article) %> | 
             <%= link_to "Back to articles", articles_path %> | 
             <%= button_to("Destroy this article", article_path(@article), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
           </div>
         <% end %>
+      
+        <div class="ms-4 ms-2">
+            <!-- <div class="row mb-2">
+              <div class="ps-0" style="color:#6c757d;">
+                Comment
+              </div>
+            </div> -->
+            <div class="row ms-0">
+              <div class="col-md-9 ps-0 mb-2">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" data-comment-target="csrfToken">
+                <textarea class="form-control article-comment-input" rows="2" id="article_new_comment" data-article_id="<%= @article.id %>" data-comment-target="newComment" placeholder="Type here..."></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-9 ps-0">
+                <button class="btn btn-sm btn-outline-secondary fRight" <%= current_user.present? ? '' : 'disabled' %> data-action="click->comment#cancelNewComment">
+                  Cancel
+                </button>
+                <button class="btn btn-sm btn-primary fRight me-2" 
+                  <%= current_user.present? ? '' : 'disabled' %> 
+                  data-parent_id="<%= @article.id %>"
+                  data-parent_name="<%= @article.class.name %>"
+                  data-action="click->comment#submitNewComment"
+                >
+                  Comment
+                </button>  
+              </div>
+            </div>
+          </div>
+        <div class="ms-4">
+          <div class="row mb-2 ms-0">
+            <div class="ps-0" style="color:#6c757d;">
+              Comments
+            </div>
+          </div>
+        </div>
+        <div class="ms-4">
+          <div class="row mb-2 ms-0" id="comment-section">
+            <% if @comments.present? %>
+              <% @comments.each do | comment | %>
+                <%= render partial: "comments/comment", locals: {comment: comment, 
+                  parent: @article, parent_name: @article.class.name, level: 1} %>
+              <% end %>
+            <% else %>
+              <div class="d-flex">
+                <div class="no-comment-msg">
+                  There is not comment available now.
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="col-md-1"></div>
 </div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/comment-custom" %>
+<% end %>

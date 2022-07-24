@@ -46,6 +46,8 @@ class CommentsController < ApplicationController
 
   def destroy
     respond_to do |format|
+      @comment_children = @comment.comments.pluck(:id)
+      @comment.comments.destroy_all
       if @comment.destroy
         flash[:success] = "Comment was successfully deleted." 
         format.js {}

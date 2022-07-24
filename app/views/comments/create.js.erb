@@ -1,15 +1,31 @@
 <% if params[:parent_name] == "Article" %>
   // $("#comment-"+<%= @comment.id %>).html("<%= @comment.comment %>").show();
   // $("#edit-textarea-"+<%= @comment.id %>).text("<%= @comment.comment %>").hide();
-  $("#article_new_comment").text("");
-  $("#comment-section").before(
-    `<%= escape_javascript(render 'comments/comment', comment: @comment,
+  $("#article_new_comment").val("");
+  var comment_elements = $("#comment-section").find(".no-comment-msg").length;
+  if(comment_elements == 1){
+    $("#comment-section").html(
+     `<%= escape_javascript(render 'comments/comment', comment: @comment,
       parent: @comment.commentable,
       parent_name: @comment.commentable.class.name, level: 1) %>`);
+  } else {
+    $("#comment-section").before(
+     `<%= escape_javascript(render 'comments/comment', comment: @comment,
+      parent: @comment.commentable,
+      parent_name: @comment.commentable.class.name, level: 1) %>`);
+  }
 <% else %>
   $("#reply-block-"+ <%= params[:comment_id_to_append_element] %>).hide();
-  $("#comment-body-" + <%= params[:comment_id_to_append_element] %>).after(
+  var is_true = $("#reply-block-" + <%= params[:comment_id_to_append_element] %>).parent().hasClass("article-comment-block");
+  if(is_true){
+    $("#reply-block-" + <%= params[:comment_id_to_append_element] %>).after(
     `<%= escape_javascript(render 'comments/comment', comment: @comment,
       parent: @comment.commentable,
       parent_name: @comment.commentable.class.name, level: 2) %>`);
+  } else {
+    $("#comment-body-" + <%= params[:comment_id_to_append_element] %>).after(
+    `<%= escape_javascript(render 'comments/comment', comment: @comment,
+      parent: @comment.commentable,
+      parent_name: @comment.commentable.class.name, level: 2) %>`);
+  } 
 <% end %>
