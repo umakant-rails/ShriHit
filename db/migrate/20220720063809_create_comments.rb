@@ -4,7 +4,7 @@ class CreateComments < ActiveRecord::Migration[7.0]
       t.text :comment
       t.integer :user_id
       t.references :commentable, polymorphic: true, null: false
-
+      t.integer :depth, default: 0
       t.timestamps
     end
   end

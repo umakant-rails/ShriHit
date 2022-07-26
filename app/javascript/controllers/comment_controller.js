@@ -21,8 +21,8 @@ export default class extends Controller {
         $("#update-btn-" + this.displayTextArea.commentId).addClass('hide');
         $("#comment-" + this.displayTextArea.commentId).show()
       } else {
-        if(this.displayTextArea.id) 
-          $(this.displayTextArea.id).hide();
+        // if(this.displayTextArea.id) 
+        //   $(this.displayTextArea.id).hide();
 
         $("#edit-btn-"+commentId).addClass('hide');
         $("#update-btn-"+commentId).removeClass('hide');
@@ -137,12 +137,14 @@ export default class extends Controller {
     let comment = $("#reply-textarea-" + commentId).val();
     let parentId = event.target.dataset.parent_id;
     let parentName = event.target.dataset.parent_name;
+    let depth = event.target.dataset.depth;
     let csrfToken = this.csrfTokenTarget.value;
 
     let params = {comment: {}}; 
       params.comment.comment = comment;
       params.parent_id = parentId;
       params.parent_name = parentName;
+      params.comment.depth = depth;
       params.comment_id_to_append_element = commentId;
       params.authenticity_token = csrfToken;
     let url = "/comments";

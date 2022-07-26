@@ -62,7 +62,7 @@ class CommentsController < ApplicationController
     end
 
     def comment_params
-      params.fetch(:comment, {}).permit(:comment, :user_id)
+      params.fetch(:comment, {}).permit(:comment, :user_id, :depth)
     end
 
 end

@@ -64,6 +64,7 @@
               <button class="btn btn-sm btn-primary fRight me-2" 
                 <%= current_user.present? ? '' : 'disabled' %> 
                 data-parent_id="<%= @article.id %>"
+                data-depth="0"
                 data-parent_name="<%= @article.class.name %>"
                 data-action="click->comment#submitNewComment"
               >
@@ -84,8 +85,10 @@
           <div class="row mb-2 ms-0" id="comment-section">
             <% if @comments.present? %>
               <% @comments.each do | comment | %>
+              <div class="parent-comment-body">
                 <%= render partial: "comments/comment", locals: {comment: comment, 
                   parent: @article, parent_name: @article.class.name, level: 1} %>
+              </div>
               <% end %>
             <% else %>
               <div class="d-flex">

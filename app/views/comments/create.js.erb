@@ -16,16 +16,32 @@
   }
 <% else %>
   $("#reply-block-"+ <%= params[:comment_id_to_append_element] %>).hide();
-  var is_true = $("#reply-block-" + <%= params[:comment_id_to_append_element] %>).parent().hasClass("article-comment-block");
-  if(is_true){
-    $("#reply-block-" + <%= params[:comment_id_to_append_element] %>).after(
-    `<%= escape_javascript(render 'comments/comment', comment: @comment,
-      parent: @comment.commentable,
-      parent_name: @comment.commentable.class.name, level: 2) %>`);
-  } else {
-    $("#comment-body-" + <%= params[:comment_id_to_append_element] %>).after(
-    `<%= escape_javascript(render 'comments/comment', comment: @comment,
-      parent: @comment.commentable,
-      parent_name: @comment.commentable.class.name, level: 2) %>`);
-  } 
+  <% if(@parent.commentable.class.name == "Article") %>
+    var element =  $("#reply-block-"+<%= @parent.id %>).closest(".article-comment")[0];
+    if($(element).siblings().length == 0){
+      $(element).after(
+        `<%= escape_javascript(render 'comments/comment', comment: @comment,
+        parent: @comment,
+        parent_name: @comment.class.name, level: 2) %>`);
+    } else {
+      $(element).siblings().last().after(
+        `<%= escape_javascript(render 'comments/comment', comment: @comment,
+        parent: @comment,
+        parent_name: @comment.class.name, level: 2) %>`);
+    }
+  <% else %>
+    var reply_comment = $("#reply-block-"+<%= @parent.id %>).closest(".reply-comment")[0];
+    if($(reply_comment).siblings().length == 0){
+      $(reply_comment).after(
+        `<%= escape_javascript(render 'comments/comment', comment: @comment,
+        parent: @comment,
+        parent_name: @comment.class.name, level: 2) %>`);
+    } else {
+      $(reply_comment).siblings().last().after(
+        `<%= escape_javascript(render 'comments/comment', comment: @comment,
+        parent: @comment,
+        parent_name: @comment.class.name, level: 2) %>`);
+    }
+  <% end %>
+  $("#reply-textarea-"+<%= @parent.id %>).val("");
 <% end %>

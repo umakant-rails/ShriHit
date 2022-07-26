@@ -28,29 +28,29 @@
           <%= comment.comment %>
         </textarea>
         <div class="edit-reply-icon-div" id="edit-reply-<%= comment.id %>">
-          <% if current_user.id == comment.user_id %>
-            <a href="javascript:void(0);"
-              class="btn ps-0 pe-0 text-primary"
-              id="edit-btn-<%= comment.id %>"
-              data-comment_id="<%= comment.id %>"
-              data-action="click->comment#openEditCommentBox"
-              data-comment-target="editButton"
-            >
-              <i class="fa-solid fa-pen-to-square"></i>
-              Edit
-            </a>
-            <a href="javascript:void(0);"
-              class="btn ps-0 pe-0 hide  text-primary"
-              id="update-btn-<%= comment.id %>"
-              data-comment_id="<%= comment.id %>"
-              data-parent_id="<%= parent.id %>"
-              data-parent_name="<%= parent_name %>"
-              data-action="click->comment#submitUpdatedComment"
-              data-comment-target="updateButton"
-            >
-              <i class="fa-solid fa-paper-plane"></i>
-              Submit
-            </a> 
+          <% if current_user.id == comment.user_id %>  
+      	    <a href="javascript:void(0);"
+      	      class="btn ps-0 pe-0 text-primary"
+      	      id="edit-btn-<%= comment.id %>"
+      	      data-comment_id="<%= comment.id %>"
+      	      data-action="click->comment#openEditCommentBox"
+      	      data-comment-target="editButton"
+      	    >
+      	      <i class="fa-solid fa-pen-to-square"></i>
+      	      Edit
+      	    </a>
+      	    <a href="javascript:void(0);"
+      	      class="btn ps-0 pe-0 hide  text-primary"
+      	      id="update-btn-<%= comment.id %>"
+      	      data-comment_id="<%= comment.id %>"
+      	      data-parent_id="<%= parent.id %>"
+      	      data-parent_name="<%= parent_name %>"
+      	      data-action="click->comment#submitUpdatedComment"
+      	      data-comment-target="updateButton"
+      	    >
+      	      <i class="fa-solid fa-paper-plane"></i>
+      	      Submit
+      	    </a>
           <% end %>
           <a href="javascript:void(0);"
             class="btn ps-0 pe-0  text-primary"
@@ -108,9 +108,9 @@
     </div>
     <% if comment.comments.present? %>
       <% comment.comments.order("created_At ASC").each do | cmt | %>
-        <%#= render partial: "comments/comment", locals: {comment: cmt, 
-          parent: cmt, parent_name: cmt.class.name, level: 2 } %>
         <%= render partial: "comments/comment", locals: {comment: cmt, 
+          parent: cmt, parent_name: cmt.class.name, level: 2 } %>
+        <%#= render partial: "comments/comment", locals: {comment: cmt, 
         parent: comment, parent_name: comment.class.name, level: 2 } %>
       <% end %>
     <% end %>
