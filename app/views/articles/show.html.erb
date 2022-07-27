@@ -4,12 +4,34 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <span class="col-md-6 text-start article-title text-primary">
-            रचना (<%= @article.article_type.name %>) : <%= @article.hindi_title %>
-          </span>
-          <span class="col-md-6 text-end text-primary author-mark-txt"> 
-            ( योगदानकर्ता : <%= @article.user.username.capitalize %> )
-          </span>
+          <div class="col-md-8">
+            <a href="<%= public_article_path (@article) %>" class="article-title text-primary">
+              रचना : <%= @article.hindi_title %>
+            </a>
+            <div class="contributer-text">
+              (योगदानकर्ता : 
+                <strong>
+                  <%= link_to @article.user.username.capitalize, public_user_profile_path(@article.user.id) %>
+                </strong>, 
+                Created at : 
+                <strong class="text-primary">
+                  <%= @article.created_at.strftime("%B %d, %Y")%>
+                </strong>,
+                रचना प्रकार - 
+                <strong class="text-primary">
+                  <%= @article.article_type.name %>
+                </strong>
+              )
+            </div>
+          </div>
+          <div class="col-md-4 text-end text-primary author-mark-txt"> 
+            <%= link_to(export_pdf_public_article_path(@article.id, format: :pdf), class: "export-pdf", target: "_blank") do %>
+              <!-- <i class="fa-solid fa-file-export"></i>
+              <i class="fa-solid fa-file-pdf"></i> -->
+              <!-- <i class="fas fa-file-pdf"></i> -->
+              <i class="fas fa-file-download"></i>
+            <% end %>
+          </div>
         </div>
         <div class="dropdown-divider"></div>
         <div class="ms-4" data-controller= 'article'>
@@ -67,8 +89,10 @@
           <div class="row mb-2 ms-0" id="comment-section">
             <% if @comments.present? %>
               <% @comments.each do | comment | %>
-                <%= render partial: "comments/comment", locals: {comment: comment, 
-                  parent: @article, parent_name: @article.class.name, level: 1} %>
+                <div class="parent-comment-body">
+                  <%= render partial: "comments/comment", locals: {comment: comment, 
+                    parent: @article, parent_name: @article.class.name, level: 1} %>
+                </div>
               <% end %>
             <% else %>
               <div class="d-flex">

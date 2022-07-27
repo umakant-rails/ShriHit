@@ -23,12 +23,30 @@ class ApplicationController < ActionController::Base
     @authors_new  = Author.where("created_at > ? ", current_user.last_sign_in_at)
     @articles_new = Article.where("created_at > ? ", current_user.last_sign_in_at)
 
-    @notifications.push({key1: "रचनायें", key2: "#{@articles_pending.length} रचनायें स्वीकृत हेतु लंबित है"}) if @articles_pending.present?
-    @notifications.push({key1: "रचनायें", key2: "#{@articles_new.length} नई रचनायें दर्ज की गई है"}) if @articles_new.present?
-    @notifications.push({key1: "प्रसंग", key2: "#{@contexts_pending.length} प्रसंग स्वीकृत हेतु लंबित है"}) if @contexts_pending.present?
-    @notifications.push({key1: "प्रसंग", key2: "#{@contexts_new.length} नए प्रसंग दर्ज किये गए है"}) if @contexts_new.present?
-    @notifications.push({key1: "रचनाकार", key2: "#{@authors_pending.length} रचनाकार स्वीकृत हेतु लंबित है"}) if @authors_pending.present?
-    @notifications.push({key1: "रचनाकार", key2: "#{@authors_new.length} नए रचनाकार दर्ज किये गए है"}) if @authors_new.present?
+    @notifications.push({
+      key_name_hindi: "रचनायें", key_name_eng: "Article", 
+      status_type: 'Pending', quantity: "#{@articles_pending.length} रचनायें स्वीकृत हेतु लंबित है"
+    }) if @articles_pending.present?
+    @notifications.push({
+      key_name_hindi: "रचनायें", key_name_eng: "Article", 
+      status_type: 'New', quantity: "#{@articles_new.length} नई रचनायें दर्ज की गई है"
+    }) if @articles_new.present?
+    @notifications.push({
+      key_name_hindi: "प्रसंग", key_name_eng: "Context", 
+      status_type: 'Pending', quantity: "#{@contexts_pending.length} प्रसंग स्वीकृत हेतु लंबित है"
+    }) if @contexts_pending.present?
+    @notifications.push({
+      key_name_hindi: "प्रसंग", key_name_eng: "Context", 
+      status_type: 'New', quantity: "#{@contexts_new.length} नए प्रसंग दर्ज किये गए है"
+    }) if @contexts_new.present?
+    @notifications.push({
+      key_name_hindi: "रचनाकार", key_name_eng: "Author", 
+      status_type: 'Pending', quantity: "#{@authors_pending.length} रचनाकार स्वीकृत हेतु लंबित है"
+    }) if @authors_pending.present?
+    @notifications.push({
+      key_name_hindi: "रचनाकार", key_name_eng: "Author", 
+      status_type: 'New', quantity: "#{@authors_new.length} नए रचनाकार दर्ज किये गए है"
+    }) if @authors_new.present?
   end
 
   def is_user_not_present?

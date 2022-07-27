@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_20_063809) do
     t.integer "user_id"
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
+    t.integer "depth", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"

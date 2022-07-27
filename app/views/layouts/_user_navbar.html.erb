@@ -1,5 +1,80 @@
 <nav class="navbar navbar-expand navbar-light navbar-bg">
   <div class="navbar-collapse collapse">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="<%= root_path %>">
+          <i class="fa-solid fa-house"></i>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          रचना (प्रकार)
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
+          <% @article_types && @article_types.each do |article_type| %>
+            <li>
+              <a class="dropdown-item" href="<%= articles_by_type_public_articles_path(article_type.name) %>">
+                <%= article_type.name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          रचना (प्रसंग)
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
+          <% @contexts && @contexts.each do |context| %>
+            <li>
+              <a class="dropdown-item" href="<%= articles_by_context_public_articles_path(context.name) %>">
+                <%= context.name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="author_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          रचनाकार/लेखक
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="author_nav_link">
+          <% @authors && @authors.each do |author| %>
+            <li>
+              <a class="dropdown-item" href="<%= public_author_path(author) %>">
+                <%= author.name %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="contributor_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          योगदानकर्ता
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="contributor_nav_link">
+          <% @contributors && @contributors.each do |contributor| %>
+            <li>
+              <a class="dropdown-item" href="<%= public_user_profile_path(contributor.id) %>">
+                <%= contributor.username.capitalize %>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">संत जीवनी</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">भक्ति ग्रन्थ/वाणी</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= public_suggestions_path %>">नए सुझाव</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= public_about_path %>">About</a>
+      </li>
+    </ul>
     <ul class="navbar-nav navbar-align">
       <li class="nav-item dropdown">
         <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
@@ -15,14 +90,17 @@
           <% if @notifications.present? %>
             <div class="list-group">
               <% @notifications.each do | notification |%>
-                <a href="#" class="list-group-item">
+                <a href="<%= get_pending_link(notification[:key_name_eng]) %>" class="list-group-item">
                   <div class="row g-0 align-items-center">
                     <div class="col-2">
                       <i class="text-danger" data-feather="alert-circle"></i>
                     </div>
                     <div class="col-10">
-                      <div class="text-dark"><%= notification[:key1] %></div>
-                      <div class="text-muted small mt-1"><%= notification[:key2] %></div>
+                      <div class="text-dark"><%= notification[:key_name_hindi] %></div>
+                      <div class="text-muted small mt-1">
+                        <%= notification[:quantity] %>
+                        <%#= link_to notification[:quantity], get_pending_link(notification[:key_name_eng]) %>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -110,7 +188,8 @@
           <i class="align-middle" data-feather="settings"></i>
         </a>
 
-        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+        <a class="nav-link dropdown-toggle d-none d-sm-inline-block text-primary" 
+          href="#" data-bs-toggle="dropdown">
           <!-- <img src="/assets/lalji_icon.jpg" class="avatar img-fluid rounded me-1" alt="<%= current_user.username %>" /> --> 
           <i class="fa-solid fa-user" style="font-size:18px;"></i>&nbsp;&nbsp;
           <span class="text-dark"><%= current_user.username.capitalize %></span>

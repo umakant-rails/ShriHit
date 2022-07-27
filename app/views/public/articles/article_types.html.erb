@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="card">
+    <div class="card-body h-100" style="min-height: 545px;">
+      <div class="row page-subject-header">
+        रचना प्रकार सूची
+      </div>
+      <div class="dropdown-divider"></div>
+      <table class="table">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">नाम    </th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <% page = params[:page].blank? ? 0 : (params[:page].to_i - 1)%>
+          <% if @article_types.present? %>
+            <% @article_types.each_with_index do | article_type, index | %>
+              <tr>
+                <th scope="row"><%= (page * 10) + (index + 1) %></th>
+                <td>
+                  <a href="<%= articles_by_type_public_articles_path(article_type.name) %>">
+                    <%= article_type.name %>
+                  </a>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="5">
+                There is no data available now.
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @article_types, remote: true%>
+    </div>
+  </div>
+</div>

@@ -28,4 +28,14 @@ module ApplicationHelper
     end
   end
 
+  def get_pending_link(model_name)
+    if(model_name == "Article")
+      return pending_articles_admin_articles_path
+    elsif (model_name == "Context")
+      return pending_contexts_admin_contexts_path
+    elsif (model_name == "Author")
+      return pending_authors_admin_authors_path
+    end
+  end
+
 end

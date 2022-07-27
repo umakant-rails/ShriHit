@@ -1,0 +1,109 @@
+<!-- <footer class="footer">
+  <div class="container-fluid">
+    <div class="row text-muted">
+      <div class="col-6 text-start">
+        <p class="mb-0">
+          <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>ShriHit</strong></a> &copy;
+        </p>
+      </div>
+      <div class="col-6 text-end">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a class="text-muted" href="https://adminkit.io/" target="_blank">Support</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-muted" href="https://adminkit.io/" target="_blank">Help Center</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-muted" href="https://adminkit.io/" target="_blank">Privacy</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-muted" href="https://adminkit.io/" target="_blank">Terms</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer> -->
+<footer class="footer border-top pt-5 my5">
+  <div class="container">
+    <div class="row row-cols-5 mx-1">
+      <div class="col">
+        <a href="<%= root_path %>" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+           <img src="/assets/lalji_icon.jpg" alt="ShriHit" class="footer-icon">
+        </a>
+      </div>
+
+      <div class="col">
+      </div>
+
+      <div class="col">
+        <h4>
+          <strong>प्रसंग</strong>
+        </h4>
+        <ul class="nav flex-column">
+          <% @contexts.limit(5).each do | context | %>
+            <li class="nav-item mb-2">
+              <%= link_to context.name, articles_by_context_public_articles_path(context.name), class: "nav-link p-0 text-muted" %>
+            </li>
+          <% end %>
+          <% if @contexts.length > 5 %>
+            <li class="nav-item mb-2">
+              <%= link_to "View more ...", article_contexts_public_articles_path, class: "nav-link p-0 text-muted" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h4>
+          <strong>रचनाकार</strong>
+        </h4>
+        <ul class="nav flex-column">
+          <% @authors.limit(5).each do | author | %>
+            <li class="nav-item mb-2">
+              <%= link_to author.name, public_author_path(author), class: "nav-link p-0 text-muted" %>
+            </li>
+          <% end %>
+          <% if @authors.length > 5 %>
+            <li class="nav-item mb-2">
+              <%= link_to "View more ...", public_authors_path, class: "nav-link p-0 text-muted" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <div class="col">
+        <h4>
+          <strong>रचना प्रकार</strong>
+        </h4>
+        <ul class="nav flex-column">
+          <% @article_types.limit(5).each do | article_type | %>
+            <li class="nav-item mb-2">
+              <%= link_to article_type.name, articles_by_type_public_articles_path(article_type.name), class: "nav-link p-0 text-muted" %>
+            </li>
+          <% end %>
+          <% if @article_types.length > 5 %>
+            <li class="nav-item mb-2">
+              <%= link_to "View more ...", article_types_public_articles_path, class: "nav-link p-0 text-muted" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex justify-content-between pt-4 mt-4 border-top">
+      <p>
+        <center>
+          <strong>© 2021 Company, Inc. All rights reserved.</strong>
+        </center>
+      </p>
+      <!-- <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+      </ul> -->
+    </div>
+  </div>
+</footer>

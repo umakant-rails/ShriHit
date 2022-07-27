@@ -77,7 +77,7 @@
           <a class="nav-link" href="#">भक्ति ग्रन्थ/वाणी</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%= public_suggestions_path %>">नए सुझाव</a>
+          <a class="nav-link" href="<%= public_suggestions_path %>">सुझाव</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<%= public_about_path %>">About</a>
@@ -98,6 +98,12 @@
             </a>
           </li>
         <% else %>
+          <li class="nav-item ms-1 me-2">
+            <a class="btn btn-outline-info" href="<%= new_user_registration_path %>">
+              <i class="fa-solid fa-user-plus"></i>
+              Contributer/Admin Panel
+            </a>
+          </li>
           <li class="nav-item">
             <%= form_for(current_user, url: destroy_user_session_path, html: { method: :delete }) do |f| %>
               <button type="submit" class="btn btn-outline-info">

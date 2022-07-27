@@ -1,4 +1,5 @@
 class ContextsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_context, only: %i[ show edit update destroy ]
 
   # GET /contexts or /contexts.json

@@ -26,6 +26,14 @@ class Public::ArticlesController < ApplicationController
       .page(params[:page]).per(10)
   end
 
+  def article_types
+    @article_types = ArticleType.order("created_at ASC").page(params[:page]).per(10)
+  end
+  
+  def article_contexts
+    @article_contexts = Context.order("name ASC") #.page(params[:page]).per(10)
+  end
+
   def article_pdf
     @article = Article.find(params[:id])
 
@@ -93,8 +101,8 @@ class Public::ArticlesController < ApplicationController
     def set_layout
       if params[:action] == "article_pdf"
         return "pdf_layout"
-      else
-        return "application";
+      # else
+      #   return ;
       end
     end
 end
