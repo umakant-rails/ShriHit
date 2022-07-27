@@ -9,24 +9,24 @@ export default class extends Controller {
   }
 
   toggleAuthor(){
-    let authorValue = this.authorSelectTarget.value;
-    if(authorValue == 'NA' && !this.authorSelectTarget.hidden){
-      this.authorSelectTarget.hidden = true;
-      this.authorInputTarget.hidden = false;
-    } else {
-      this.authorSelectTarget.hidden = false;
-      this.authorInputTarget.hidden = true;
-    }
+    // let authorValue = this.authorSelectTarget.value;
+    // if(authorValue == 'NA' && !this.authorSelectTarget.hidden){
+    //   this.authorSelectTarget.hidden = true;
+    //   this.authorInputTarget.hidden = false;
+    // } else {
+    //   this.authorSelectTarget.hidden = false;
+    //   this.authorInputTarget.hidden = true;
+    // }
   }
   toggleContext(){
-    let contextValue = this.contextSelectTarget.value;
-    if(contextValue == 'NA' && !this.contextSelectTarget.hidden) {
-      this.contextSelectTarget.hidden = true;
-      this.contextInputTarget.hidden = false;
-    } else {
-      this.contextSelectTarget.hidden = false;
-      this.contextInputTarget.hidden = true;
-    }
+    // let contextValue = this.contextSelectTarget.value;
+    // if(contextValue == 'NA' && !this.contextSelectTarget.hidden) {
+    //   this.contextSelectTarget.hidden = true;
+    //   this.contextInputTarget.hidden = false;
+    // } else {
+    //   this.contextSelectTarget.hidden = false;
+    //   this.contextInputTarget.hidden = true;
+    // }
   }
 
   setBhajanContext(event){

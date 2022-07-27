@@ -1,7 +1,7 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: article, html: {
   'data-article-target': 'form', 'data-action': 'article#submitForm'}) do |form| %>
-  <% article_types, authors, contexts = get_data_for_article_creation %>  
+  <% article_types, authors, contexts = get_data_for_article_creation(current_user) %>  
   <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display: <%= article.errors.present? ? 'block' : 'none' %>;" role="alert">
     <% article.errors.each do |error| %>
       <li><%= error.full_message %></li>
@@ -21,32 +21,32 @@
       <div class='mb-3'>
         <label class='form-label'>प्रसंग</label>
         <%= form.select :context_id, options_for_select(contexts, selected: article.context_id), {:prompt => 'प्रसंग चुने'}, class: 'form-control', 'data-action': 'change->article#toggleContext', 'data-article-target': 'contextSelect'%>
-        <div data-article-target='contextInput' hidden=true>
+        <!-- <div data-article-target='contextInput' hidden=true>
           <div class="row">
             <div class="col-md-8">
-              <%= text_field_tag 'context', nil, class: 'form-control', placeholder: 'प्रसंग का नाम टाइप करे.' %>
+              <%#= text_field_tag 'context', nil, class: 'form-control', placeholder: 'प्रसंग का नाम टाइप करे.' %>
             </div>
-              <div class="col-md-4">
-                <a href="javascript:void(0);" data-action="article#toggleContext" class="btn btn-primary">सूची  प्रदर्शित करे </a>
-              </div>
+            <div class="col-md-4">
+              <a href="javascript:void(0);" data-action="article#toggleContext" class="btn btn-primary">सूची  प्रदर्शित करे </a>
             </div>
-        </div>
+          </div>
+        </div> -->
       </div>
     </div>
     <div class="col-md-6">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>लेखक</label>
-          <%= form.select :author_id, options_for_select(authors, selected: article.author_id), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-article-target': 'authorSelect' %>
-          <div data-article-target='authorInput' hidden=true>
-            <div class="row">
-              <div class="col-md-8">
-                <%= text_field_tag 'author', nil, class: 'form-control', placeholder: 'लेखक का नाम टाइप करे.'  %>
-              </div>
-              <div class="col-md-4">
-                <a href="javascript:void(0);" data-action="article#toggleAuthor" class="btn btn-primary">सूची  प्रदर्शित करे </a>
-              </div>
+        <%= form.select :author_id, options_for_select(authors, selected: article.author_id), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-article-target': 'authorSelect' %>
+        <!-- <div data-article-target='authorInput' hidden=true>
+          <div class="row">
+            <div class="col-md-8">
+              <%#= text_field_tag 'author', nil, class: 'form-control', placeholder: 'लेखक का नाम टाइप करे.'  %>
+            </div>
+            <div class="col-md-4">
+              <a href="javascript:void(0);" data-action="article#toggleAuthor" class="btn btn-primary">सूची  प्रदर्शित करे </a>
             </div>
           </div>
+        </div> -->
       </div>
     </div>
   </div>

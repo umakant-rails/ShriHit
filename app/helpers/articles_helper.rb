@@ -8,12 +8,14 @@ module ArticlesHelper
     end
     return arr
   end
-  def get_data_for_article_creation
+  def get_data_for_article_creation(current_user)
     article_types = ArticleType.order("name ASC").collect{|e| [e.name, e.id]}
-    authors = Author.order("name ASC").collect{|e| [e.name, e.id]}
-    contexts = Context.order("name ASC").collect{|e| [e.name, e.id]}
-    contexts.push(['प्रसंग का नाम टाइप करे', 'NA'])
-    authors.push(['लेखक का नाम टाइप करे', 'NA'])
+    authors = Author.where("is_approved = ? or user_id = ?", true, current_user.id)
+      .order("name ASC").collect{|e| [e.name, e.id]}
+    contexts = Context.where("is_approved = ? or user_id = ?", true, current_user.id)
+      .order("name ASC").collect{|e| [e.name, e.id]}
+    # contexts.push(['प्रसंग का नाम टाइप करे', 'NA'])
+    # authors.push(['लेखक का नाम टाइप करे', 'NA'])
     return article_types, authors, contexts
   end
 end

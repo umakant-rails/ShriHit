@@ -95,8 +95,12 @@ class Admin::ContextsController < ApplicationController
   private
 
     def set_pending_records
-      @contexts_pending = Context.pending.order("created_at DESC").page(params[:page])
-      #@contexts_approved = Context.approved.order("created_at DESC")
+      if( params[:id].present? )
+        @contexts_pending = Context.where(id: params[:id]).page(params[:page])
+      else
+        @contexts_pending = Context.pending.order("created_at DESC").page(params[:page])
+      end
+      @contexts_approved = Context.approved.order("created_at DESC")
     end
 
     def verify_admin

@@ -93,7 +93,11 @@ class Admin::AuthorsController < ApplicationController
   private
 
     def set_pending_records
-      @authors_pending = Author.pending.order("created_at DESC").page(params[:page])
+      if( params[:id].present? )
+        @authors_pending = Author.where(id: params[:id]).page(params[:page])
+      else
+        @authors_pending = Author.pending.order("created_at DESC").page(params[:page])
+      end
       @authors_approved = Author.approved.order("created_at DESC")
     end
 

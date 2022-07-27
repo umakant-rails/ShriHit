@@ -18,6 +18,9 @@
     %>
     <% if articles.present? %>
       <% articles.each_with_index do |article, index| %>
+        <% 
+          author, context = article.author, article.context
+        %>
         <tr>
         	<td><%= (page * page_size) + (index + 1) %></td>
         	<td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
@@ -27,7 +30,7 @@
           </td>
           <td>
             <a href="<%= author_path(article.author.id) %>">
-              <%= article.author.name %>
+              <%= author.name %>
             </a>
           </td>
         	<td>
@@ -38,7 +41,38 @@
           </td>
           <%# if action_name == "pending" %>
             <td>
-          		<input type="button" value="स्वीकृत" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action-name="approve" data-action="click->admin-article#approveOrApproveArticle"  class="btn btn-primary"/>
+              <% if true %>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%= article.id%>">
+                  स्वीकृत
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal<%= article.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+                        <% if !author.is_approved %>
+                          इस रचना के लिए एक नया रचनाकार <%= link_to author.name, pending_authors_admin_authors_path(id: author.id)%> दर्ज किया गया है, इसे स्वीकृत करने के लिये <%= link_to "यहाँ", pending_authors_admin_authors_path(id: author.id) %> क्लिक करें<br/>
+                        <% end %>
+                        <% if !context.is_approved %>
+                          इस रचना के लिए एक नया प्रसंग <%= link_to context.name, pending_authors_admin_authors_path(id: context.id) %> दर्ज किया गया है, इसे स्वीकृत करने के लिये <%= link_to "यहाँ", pending_authors_admin_authors_path(id: context.id) %> क्लिक करें<br/>
+                        <% end %>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% else %>
+          		  <input type="button" value="स्वीकृत" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action-name="approve" 
+                  data-action="click->admin-article#approveOrApproveArticle" 
+                  class="btn btn-primary"/>
+              <% end %>
             	<input type="button" value="अस्वीकृत" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action-name="reject" data-action="click->admin-article#approveOrApproveArticle" class="btn btn-danger"/>
             </td>
           <%# end %>

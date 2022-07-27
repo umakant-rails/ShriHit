@@ -47,7 +47,7 @@ class Admin::ArticlesController < ApplicationController
   private
 
     def set_pending_records
-      @articles_pending = Article.pending.order("created_at DESC").page(params[:page])
+      @articles_pending = Article.joins([:author, :context]).pending.order("created_at DESC").page(params[:page])
     end
 
     def verify_admin
