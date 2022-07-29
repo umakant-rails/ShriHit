@@ -7,6 +7,7 @@ class Article < ApplicationRecord
   has_many :theme_articles
   has_many :theme_chapters
   has_many :comments, as: :commentable
+  has_many :comment_reportings
   
   paginates_per 10
 

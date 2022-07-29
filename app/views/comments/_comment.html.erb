@@ -10,10 +10,27 @@
             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <a href="javascript:void(0);" class="dropdown-item text-secondary">
-              <i class="fa-solid fa-flag"></i>
-              Report
-            </a>
+            <%#= render partial: "comments/comment_report_modal", locals: {article: article, comment: comment} %>
+            <% if current_user.present? %>
+              <a href="javascript:void(0);" 
+                class="dropdown-item text-secondary" 
+                data-bs-toggle="modal" 
+                data-bs-target="#comment-reporting"
+                data-comment_id="<%= comment.id %>"
+                data-article_id="<%= article.id %>"
+                data-action="click->comment-reporting#setParameters"
+              >
+                <i class="fa-solid fa-flag"></i>
+                Report
+              </a>
+            <% else %>
+              <a href="<%= new_user_session_path%>" 
+                class="dropdown-item text-secondary" 
+              >
+                <i class="fa-solid fa-flag"></i>
+                Report
+              </a>
+            <% end %>
           </div>
         </div>
       </div>
@@ -111,7 +128,7 @@
         <%#= render partial: "comments/comment", locals: {comment: cmt, 
           parent: cmt, parent_name: cmt.class.name, level: 2 } %>
         <%= render partial: "comments/comment", locals: {comment: cmt, 
-        parent: comment, parent_name: comment.class.name, level: 2 } %>
+        parent: comment, parent_name: comment.class.name, article: article, level: 2 } %>
       <% end %>
     <% end %>
   </div>

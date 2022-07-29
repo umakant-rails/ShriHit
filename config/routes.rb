@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :article_types
   resources :contexts
   resources :theme_chapters
+  resources :comment_reportings
 
   namespace :admin do
     resources :dashboards, only: [:index] do

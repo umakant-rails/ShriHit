@@ -1,0 +1,78 @@
+<div class="modal fade" id="comment-reporting" tabindex="-1" 
+  aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h3 class="modal-title">Report about Comment</h3> -->
+        <div class="modal-title">
+          <div class="form-control page-subject-header">Report about Comment</div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body modal-txt">
+        <div class="form-check">
+          <input class="form-check-input comment-report-cmt" type="radio" 
+            name="flexRadioDefault" id="comment_report_1"
+            data-action="click->comment-reporting#toggleTextBox"
+          />
+          <label class="form-check-label" for="comment_report_1">
+            Hateful or abusive comment.
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input comment-report-cmt" type="radio" 
+            name="flexRadioDefault" id="comment_report_2"
+            data-action="click->comment-reporting#toggleTextBox"
+          />
+          <label class="form-check-label" for="comment_report_2">
+            Spam or misleading comment.
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input comment-report-cmt" type="radio" 
+           name="flexRadioDefault" id="comment_report_3"
+           data-action="click->comment-reporting#toggleTextBox"
+          />
+          <label class="form-check-label" for="comment_report_3">
+            Irrelevent comment.
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input comment-report-cmt" type="radio" 
+            name="flexRadioDefault" id="comment_report_4"
+            data-action="click->comment-reporting#toggleTextBox"
+          />
+          <label class="form-check-label" for="comment_report_4">
+            Others.
+          </label>
+        </div>
+        <div class="form-check mt-3">
+          <div class="row">
+            <div class="col-md-8">
+              <input type="hidden" data-comment-reporting-target="reportType" value="" />
+              <textarea class="form-control article-comment-input  comment-report-input"
+                placeholder="Type here..." disabled 
+                data-comment-reporting-target="reportTxt"
+                style="border-radius: 5px;"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" 
+          data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary"
+          data-comment_id = ""
+          data-article_id = ""
+          data-comment-reporting-target="submitBtn"
+          data-bs-dismiss="modal"
+          data-action="click->comment-reporting#submitCommentReport">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

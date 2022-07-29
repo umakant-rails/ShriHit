@@ -15,7 +15,7 @@ class User < ApplicationRecord
   has_many :suggestions
   has_many :comments
   belongs_to :role
-
+  has_many :comment_reportings
 
   def is_admin
     self.role.name == "Admin"

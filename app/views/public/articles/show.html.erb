@@ -1,7 +1,7 @@
-<div class="row">
+<div class="row" data-controller="comment comment-reporting">
   <div class="col-md-1"></div>
   <div class="col-md-10">
-    <div class="card mb-2" data-controller="comment">
+    <div class="card mb-2">
       <div class="card-body h-100 pb-2" id="article-list">
         <div class="row">
           <div class="col-md-8">
@@ -24,10 +24,17 @@
               )
             </div>
           </div>
-          <div class="col-md-4 text-end text-primary author-mark-txt"> 
-            <%= link_to(export_pdf_public_article_path(@article.id, format: :pdf), class: "export-pdf", target: "_blank") do %>
-              <!-- <i class="fa-solid fa-file-export"></i> -->
-               <i class="fas fa-file-download"></i>
+          <div class="col-md-4 text-end text-primary author-mark-txt">
+            <% if current_user.present? %> 
+              <%= link_to(export_pdf_public_article_path(@article.id, format: :pdf), class: "export-pdf", target: "_blank") do %>
+                <!-- <i class="fa-solid fa-file-export"></i> -->
+                 <i class="fas fa-file-download"></i>
+              <% end %>
+            <% else %>
+              <%= link_to(new_user_session_path, class: "export-pdf", onclick: "alert('Pdf डाउनलोड करने के लिए पहले लॉगिन करे')" ) do %>
+                  <!-- <i class="fa-solid fa-file-export"></i> -->
+                 <i class="fas fa-file-download"></i>
+              <% end %> 
             <% end %>
           </div>
         </div>
@@ -88,7 +95,8 @@
               <% @comments.each do | comment | %>
               <div class="parent-comment-body">
                 <%= render partial: "comments/comment", locals: {comment: comment, 
-                  parent: @article, parent_name: @article.class.name, level: 1} %>
+                  article: @article, parent: @article, parent_name: @article.class.name, 
+                  level: 1} %>
               </div>
               <% end %>
             <% else %>
@@ -104,6 +112,7 @@
     </div>
   </div>
   <div class="col-md-1"></div>
+  <%= render partial: "comments/comment_report_modal" %>
 </div>
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/comment-custom" %>

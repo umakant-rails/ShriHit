@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" data-controller="comment comment-reporting">
   <div class="col-md-1"></div>
-  <div class="col-md-10" data-controller="comment">
+  <div class="col-md-10">
     <div class="card">
       <div class="card-body">
         <div class="row">
@@ -26,9 +26,7 @@
           </div>
           <div class="col-md-4 text-end text-primary author-mark-txt"> 
             <%= link_to(export_pdf_public_article_path(@article.id, format: :pdf), class: "export-pdf", target: "_blank") do %>
-              <!-- <i class="fa-solid fa-file-export"></i>
-              <i class="fa-solid fa-file-pdf"></i> -->
-              <!-- <i class="fas fa-file-pdf"></i> -->
+              <!-- <i class="fa-solid fa-file-export"></i> -->
               <i class="fas fa-file-download"></i>
             <% end %>
           </div>
@@ -58,7 +56,7 @@
             </div> -->
             <div class="row ms-0">
               <div class="col-md-9 ps-0 mb-2">
-                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" data-comment-target="csrfToken">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" data-comment-target="csrfToken" data-comment-reporting-target="csrfToken">
                 <textarea class="form-control article-comment-input" rows="2" id="article_new_comment" data-article_id="<%= @article.id %>" data-comment-target="newComment" placeholder="Type here..."></textarea>
               </div>
             </div>
@@ -91,7 +89,8 @@
               <% @comments.each do | comment | %>
                 <div class="parent-comment-body">
                   <%= render partial: "comments/comment", locals: {comment: comment, 
-                    parent: @article, parent_name: @article.class.name, level: 1} %>
+                    article: @article, parent: @article, parent_name: @article.class.name, 
+                    level: 1} %>
                 </div>
               <% end %>
             <% else %>
@@ -107,6 +106,7 @@
     </div>
   </div>
   <div class="col-md-1"></div>
+  <%= render partial: "comments/comment_report_modal" %>
 </div>
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/comment-custom" %>
