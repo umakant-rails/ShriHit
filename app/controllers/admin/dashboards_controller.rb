@@ -9,5 +9,11 @@ class Admin::DashboardsController < ApplicationController
     @contexts_pending = Context.pending
     @authors_pending = Author.pending
     @authors_approved = Author.approved
+
+    @articles_group_by_approval = Article.group(:is_approved).count
+    @authors_group_by_approval = Author.group(:is_approved).count
+    @contexts_group_by_approval = Context.group(:is_approved).count
+    @spam_comment_reports = CommentReporting.not_read
+    @registered_users = User.where("role_id > ?", 2)
   end
 end

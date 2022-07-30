@@ -1,0 +1,30 @@
+.pending-status {
+  font-weight: bold;
+  padding: 4px;
+  background: #f8d7da;
+  border: 1px solid #f8d7da;
+}
+.pending-status a{
+  color: #842029;
+}
+.approved-status {
+  font-weight: bold;
+  padding: 4px;
+  background: #cfe2ff;
+  border: 1px solid #cfe2ff;
+}
+.approved-status a{
+  color:#084298;
+}
+
+.stat-new{
+  align-items: center;
+  background: #d3e2f7;
+  border-radius: 50%;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  width: 25px;
+  font-size: 14px;
+  margin-top: -4px;
+}

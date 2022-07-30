@@ -5,7 +5,7 @@ class CreateCommentReportings < ActiveRecord::Migration[7.0]
       t.integer :article_id
       t.integer :comment_id
       t.integer :user_id
-
+      t.boolean :is_read, default: false
       t.timestamps
     end
   end

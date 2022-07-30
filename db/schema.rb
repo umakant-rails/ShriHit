@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_28_063104) do
     t.integer "article_id"
     t.integer "comment_id"
     t.integer "user_id"
+    t.boolean "is_read", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_28_063104) do
     t.string "commentable_type", null: false
     t.bigint "commentable_id", null: false
     t.integer "depth", default: 0
+    t.boolean "is_blocked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"

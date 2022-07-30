@@ -10,6 +10,7 @@
 @import 'about';
 @import 'suggestion';
 @import 'comment';
+@import 'dashboard';
 
 .main{
   background: #F0F0F0 !important;
@@ -51,6 +52,16 @@ a:hover{
 .h-500{min-height: 500px;}
 .fRight{float: right;}
 .fLeft{float: left;}
+
+.fnt-sz-14{font-size: 14px;}
+.fnt-sz-15{font-size: 15px;}
+.fnt-sz-16{font-size: 16px;}
+.fnt-sz-17{font-size: 17px;}
+.fnt-sz-18{font-size: 18px;}
+.fnt-sz-19{font-size: 19px;}
+.fnt-sz-20{font-size: 20px;}
+.fnt-sz-25{font-size: 25px;}
+.fnt-sz-30{font-size: 30px;}
 
 .page-subject-header {
   font-size: 22px;

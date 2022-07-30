@@ -20,8 +20,6 @@ export default class extends Controller {
   }
 
   setParameters(){
-    console.log(event.target.dataset.article_id)
-    console.log(event.target.dataset.comment_id)
     this.submitBtnTarget.dataset.article_id = event.target.dataset.article_id;
     this.submitBtnTarget.dataset.comment_id = event.target.dataset.comment_id;
   }
@@ -44,6 +42,20 @@ export default class extends Controller {
     let requestType = "POST";
 
     this.reportAboutComment(url, requestType, params);
+  }
+
+  markAsRead(){
+    let commentId = event.target.parentElement.dataset.comment_id;
+    let csrfToken = this.csrfTokenTarget.value;
+
+    $.ajax({
+      type: 'POST',
+      url: '/comment_reportings/'+commentId+'/mark_as_read',
+      data: {authenticity_token: csrfToken},
+      dataType: 'script',
+      success: function(data){
+      }
+    });
   }
 
   /* start ajax block to make js request */

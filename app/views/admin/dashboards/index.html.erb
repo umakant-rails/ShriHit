@@ -1,4 +1,145 @@
 <div class="row">
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body h-150 py-2 px-2">
+						<div class="row">
+							<div class="col mt-0 ">
+								<h5 class="card-title">Articles</h5>
+							</div>
+							<div class="col-auto">
+								<div class="stat-new text-primary">
+									<i class="fa-solid fa-file"></i>
+								</div>
+							</div>
+						</div>
+						<div class="fnt-sz-15 mt-4">
+							<div class="mb-1 approved-status">
+								<a href="<%= approved_articles_admin_articles_path %>">
+									Approved:&nbsp;<%= @articles_group_by_approval[true] %>
+								</a>
+							</div>
+							<div class="mb-0 pending-status" >
+								<a href="<%= pending_articles_admin_articles_path %>">
+									Pending:&nbsp;&nbsp;&nbsp;<%= @articles_group_by_approval[nil] %>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body h-150 py-2 px-2">
+						<div class="row">
+							<div class="col mt-0 ">
+								<h5 class="card-title">Authors</h5>
+							</div>
+							<div class="col-auto">
+								<div class="stat-new text-primary">
+									<i class="fa-solid fa-user"></i>
+								</div>
+							</div>
+						</div>
+						<div class="fnt-sz-15 mt-4">
+							<div class="mb-1 approved-status">
+								<a href="<%= approved_authors_admin_authors_path %>">
+									Approved:&nbsp;<%= @authors_group_by_approval[true] %>
+								</a>
+							</div>
+							<div class="mb-0 pending-status" >
+								<a href="<%= pending_authors_admin_authors_path %>">
+									Pending:&nbsp;&nbsp;&nbsp;<%= @authors_group_by_approval[false] %>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body h-150 py-2 px-2">
+						<div class="row">
+							<div class="col mt-0">
+								<h5 class="card-title">Contexts</h5>
+							</div>
+							<div class="col-auto">
+								<div class="stat-new text-primary">
+									<i class="fa-solid fa-tree"></i>
+								</div>
+							</div>
+						</div>
+						<div class="fnt-sz-15 mt-4">
+							<div class="mb-1 approved-status">
+								<a href="<%= approved_contexts_admin_contexts_path %>">
+									Approved:&nbsp;<%= @contexts_group_by_approval[true] %>
+								</a>
+							</div>
+							<div class="mb-0 pending-status" >
+								<a href="<%= pending_contexts_admin_contexts_path %>">
+									Pending:&nbsp;&nbsp;&nbsp;<%= @contexts_group_by_approval[false] %>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body h-150 py-2 px-2">
+						<div class="row">
+							<div class="col mt-0">
+								<h5 class="card-title">Comments Spam Report</h5>
+							</div>
+							<div class="col-auto">
+								<div class="stat-new text-primary">
+									<i class="fa-solid fa-comment-slash"></i>
+								</div>
+							</div>
+						</div>
+						<div class="fnt-sz-15 mt-4">
+							<div class="mb-0 pending-status" >
+								<a href="<%= comment_reportings_path %>">
+									Reported Spam Comment:&nbsp;<%= @spam_comment_reports.count %>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body h-150 py-2 px-2">
+						<div class="row">
+							<div class="col mt-0">
+								<h5 class="card-title">User Mgmt Report</h5>
+							</div>
+							<div class="col-auto">
+								<div class="stat-new text-primary">
+									<i class="fa-solid fa-user"></i>
+								</div>
+							</div>
+						</div>
+						<div class="fnt-sz-15 mt-4">
+							<div class="mb-0 pending-status" >
+								<a href="<%= pending_contexts_admin_contexts_path %>">
+									Registered User:&nbsp;<%= @registered_users.count %>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+<div class="row">
 	<div class="col-md-4">
 		<div class="card">
 			<div class="card-body h-400">

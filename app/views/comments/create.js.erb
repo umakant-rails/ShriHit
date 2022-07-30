@@ -6,12 +6,12 @@
   if(comment_elements == 1){
     $("#comment-section").html(
      `<%= escape_javascript(render 'comments/comment', comment: @comment,
-      parent: @comment.commentable,
+      article: @article, parent: @comment.commentable,
       parent_name: @comment.commentable.class.name, level: 1) %>`);
   } else {
     $("#comment-section").before(
      `<%= escape_javascript(render 'comments/comment', comment: @comment,
-      parent: @comment.commentable,
+      article: @article, parent: @comment.commentable,
       parent_name: @comment.commentable.class.name, level: 1) %>`);
   }
 <% else %>
@@ -21,12 +21,12 @@
     if($(element).siblings().length == 0){
       $(element).after(
         `<%= escape_javascript(render 'comments/comment', comment: @comment,
-        parent: @comment,
+        article: @article, parent: @comment,
         parent_name: @comment.class.name, level: 2) %>`);
     } else {
       $(element).siblings().last().after(
         `<%= escape_javascript(render 'comments/comment', comment: @comment,
-        parent: @comment,
+        article: @article, parent: @comment,
         parent_name: @comment.class.name, level: 2) %>`);
     }
   <% else %>
@@ -34,12 +34,12 @@
     if($(reply_comment).siblings().length == 0){
       $(reply_comment).after(
         `<%= escape_javascript(render 'comments/comment', comment: @comment,
-        parent: @comment,
+        article: @article, parent: @comment,
         parent_name: @comment.class.name, level: 2) %>`);
     } else {
       $(reply_comment).siblings().last().after(
         `<%= escape_javascript(render 'comments/comment', comment: @comment,
-        parent: @comment,
+        article: @article, parent: @comment,
         parent_name: @comment.class.name, level: 2) %>`);
     }
   <% end %>

@@ -31,7 +31,9 @@ Rails.application.routes.draw do
   resources :article_types
   resources :contexts
   resources :theme_chapters
-  resources :comment_reportings
+  resources :comment_reportings, only: [:index, :destroy, :create]
+  post "comment_reportings/:comment_id/mark_as_read" => "comment_reportings#mark_as_read", as: :mark_as_read
+
 
   namespace :admin do
     resources :dashboards, only: [:index] do
