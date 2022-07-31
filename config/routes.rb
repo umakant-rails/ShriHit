@@ -38,6 +38,12 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :dashboards, only: [:index] do
     end
+    resources :user_mgmts, only: [:index, :show, :destroy] do
+      post "/block_to_user" => "user_mgmts#block_to_user", as: :block_to_user, on: :member
+      post "/unblock_to_user" => "user_mgmts#unblock_to_user", as: :unblock_to_user, on: :member
+      get "/blocked_users" => "user_mgmts#blocked_users", as: :blocked_users, on: :collection
+    end
+
     resources :articles, only: [:index, :update] do
       get "/approved" => "articles#approved", as: :approved_articles, on: :collection
       get "/pending" => "articles#pending", as: :pending_articles, on: :collection

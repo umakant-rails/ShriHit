@@ -1,0 +1,35 @@
+<% users_list.each_with_index do |user, index| %>
+  <tr>
+    <td><%= index +1 %></td>
+    <td>
+      <%= user.username %>
+    </td>
+    <td>
+      <%= user.articles.length %>
+    </td>
+    <td>
+      <%= user.authors.length %>
+    </td>
+    <td>
+      <%= user.contexts.length %>
+    </td>
+    <td>
+      <%= user.comments.length %>
+    </td>
+    <td>
+      <% if action_type == "unblocked" %>
+        <%= form_for(user, url: block_to_user_admin_user_mgmt_path(user), html: { method: :post, onSubmit: "return confirm('Are you sure you wish to BLOCK?');" }) do |f| %>
+          <button type="submit" class="btn btn-danger">
+            <i class="fa-solid fa-ban"></i> Block
+          </button>
+        <% end %>
+      <% else %>
+        <%= form_for(user, url: unblock_to_user_admin_user_mgmt_path(user), html: { method: :post, onSubmit: "return confirm('Are you sure you wish to UNBLOCK?');" }) do |f| %>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-lock-open"></i> Unblock
+          </button>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

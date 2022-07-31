@@ -1,0 +1,52 @@
+<div class="row" data-controller="admin-author">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body h-400">
+        <span class="col-md-6 text-start article-title text-primary">
+          उपयोगकर्ता सूची 
+        </span>
+        <div class="btn-group fRight">
+          <a href="javascript:void(0);" class="text-white btn btn-secondary">
+            Unblocked Users
+          </a>
+          <a href="<%= blocked_users_admin_user_mgmts_path %>" class="text-white btn btn-primary">
+            Blocked Users
+            </a>
+        </div>
+        <div class="dropdown-divider"></div>
+        <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-author-target="acsrfToken">
+        <div id="author_list">
+          <table class="table table-bordered">
+            <thead class="table-primary">
+              <tr class="usr-tbl-border border-dark">
+                <th scope="col" class="border-dark" rowspan="2">S. No.</th>
+                <th scope="col" class="border-dark" rowspan="2">उपयोगकर्ता का नाम</th>
+                <th scope="col" class="border-dark" colspan="4">
+                  <center>योगदान</center>
+                </th>                
+                <th scope="col" class="border-dark" rowspan="2">Actions</th>
+              </tr>
+              <tr>
+                <th scope="col" class="border-dark">रचनायें</th>
+                <th scope="col" class="border-dark">रचनाकार</th>
+                <th scope="col" class="border-dark">प्रसंग</th>
+                <th scope="col" class="border-dark">टिप्पणी/कमेन्ट्स</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @users_list.present? %>
+                <%= render partial: "users_list", locals: {users_list: @users_list, action_type: "unblocked"}%>
+              <% else %>
+                <td colspan="7">
+                  <center>अभी रिकॉर्ड उपलब्ध नहीं है.</center>
+                </td>
+              <% end %>
+            </tbody>
+          </table>
+          <%= paginate @users_list, remote: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

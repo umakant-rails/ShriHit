@@ -17,6 +17,9 @@ class User < ApplicationRecord
   belongs_to :role
   has_many :comment_reportings
 
+  scope :unblocked_users, ->(){ where(is_blocked: false, role_id: 3) }
+  scope :blocked_users, ->(){ where(is_blocked: true) }
+
   def is_admin
     self.role.name == "Admin"
   end
