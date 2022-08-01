@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 	before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_public_data
   before_action :set_admin_data, if: :is_user_admin_or_super_admin?
+
   private
 
   def set_public_data
@@ -63,8 +64,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    if resource.present? && (resource.role_id == 1)
-      homes_path
+    if resource.is_blocked
+      sign_out resource
+      flash[:notice] = ""
+      flash[:error] = "Your account has been Blocked - Please Contact Admin"
+      root_path
     else
       homes_path
     end

@@ -1,9 +1,15 @@
-<% if alert.present? || notice.present? %>
-  <div class="alert alert-<%= notice.present? ? 'info' : 'danger'%> alert-dismissible fade show" role="alert">
-    <%= alert.present? ? alert : notice %>
+<% if notice.present? %>
+  <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <%= notice %>
+    <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
+  </div>
+<% elsif error.present? %>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= error %>
     <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>
   </div>
 <% end %>
+
 <div class="alert alert-danger alert-dismissible fade show" style="display:none;" role="alert" data-controller="application" >
   <div id="errorsAlert" data-application-target="errorsAlert"></div>
   <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close"></button>

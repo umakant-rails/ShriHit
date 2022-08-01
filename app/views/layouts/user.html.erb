@@ -16,7 +16,7 @@
       <%= render partial: "layouts/sidebar" %>
       <div class="main">
         <%= render partial: "layouts/user_navbar" %>
-        <%= render partial: "layouts/alert_message" %>
+        <%= render partial: "layouts/alert_message", locals: {notice: flash[:notice], error: flash[:error]}%>
         <main class="content">
           <div class="container-fluid p-0" style="font-size: 18px;">
             <%= yield %>
