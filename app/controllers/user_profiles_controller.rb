@@ -1,6 +1,6 @@
 class UserProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user_profile, only: %i[ show edit update ]
+  before_action :set_user_profile, only: %i[ show edit update comments contexts authors articles ]
 
   def new
     @user_profile = UserProfile.new
@@ -22,9 +22,9 @@ class UserProfilesController < ApplicationController
   end
 
   def show
-    if @user_profile.blank?
-      redirect_to new_user_profile_path
-    end
+    # if (current_user.id == params[:id]) && @user_profile.blank?
+    #   redirect_to new_user_profile_path
+    # end
   end
 
   def edit
@@ -42,10 +42,31 @@ class UserProfilesController < ApplicationController
     end
   end
 
+  def comments
+    @comments = @_user.comments
+  end
+
+  def contexts
+    @contexts = @_user.contexts
+  end
+
+  def articles
+    @articles = @_user.articles
+  end
+
+  def authors    
+    @authors = @_user.articles
+  end
+
   private
 
     def set_user_profile
-      @user_profile = current_user.user_profile
+      if current_user.id == params[:id]
+        @_user = @user_profile
+      else 
+        @_user = User.find(params[:id])   
+      end
+      @user_profile = @_user.user_profile
     end
 
     def update_user

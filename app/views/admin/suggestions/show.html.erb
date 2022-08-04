@@ -33,6 +33,12 @@
         <div class="suggestion-description" data-controller= ''>
           <%= raw @suggestion.description %>
         </div>
+        <div class="dropdown-divider"></div>
+          <!-- <span class="sgstion-user">
+            Username: <span class="username"><strong><%#= @suggestion.username %></strong></span>
+          </span> -->
+          <%= link_to "स्वीकृत", accept_admin_suggestion_path(@suggestion), class: "btn btn-primary" %>
+          <%= link_to "अस्वीकृत", reject_admin_suggestion_path(@suggestion), class: "btn btn-danger" %>
       </div>
     </div>
   </div>

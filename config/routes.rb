@@ -15,7 +15,13 @@ Rails.application.routes.draw do
     confirmations: "users/confirmations"
   }
 
-  resources :user_profiles
+  resources :user_profiles do
+    get "/comments" => "user_profiles#comments", as: :user_comments, on: :member
+    get "/contexts" => "user_profiles#contexts", as: :user_contexts, on: :member
+    get "/authors" => "user_profiles#authors", as: :user_authors, on: :member
+    get "/articles" => "user_profiles#articles", as: :user_articles, on: :member
+  end
+
   resources :homes, only: [:index]
   resources :articles
   resources :comments
@@ -68,6 +74,14 @@ Rails.application.routes.draw do
       get "/reject" => "contexts#reject", as: :reject, on: :member
       post "/merge" => "contexts#merge", as: :merge, on: :member
     end
+
+    resources :suggestions, only: [:index, :show] do
+      get "/approve" => "suggestions#approve", as: :approve, on: :member
+      get "/reject" => "suggestions#reject", as: :reject, on: :member
+      get "/approved" => "suggestions#approved", as: :approved, on: :collection
+      get "/rejected" => "suggestions#rejected", as: :rejected, on: :collection
+    end
+
   end
   
   namespace :public, path: :pb do

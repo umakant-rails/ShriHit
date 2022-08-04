@@ -6,7 +6,7 @@ class CreateSuggestions < ActiveRecord::Migration[7.0]
       t.integer :user_id
       t.string :email
       t.string :username
-      t.boolean :is_approved, default: false
+      t.boolean :is_approved, default: nil
       t.timestamps
     end
   end

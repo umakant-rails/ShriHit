@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div>
+        <%= link_to(admin_suggestions_path, class: "btn btn-outline-primary fRight ms-1") do %>
+          <i class="fas fa-list"></i>
+        <% end %>
+        <%= link_to("javascript:void(0);", class: "btn btn-outline-danger fRight ms-1") do %>
+          <i class="fa-regular fa-circle-xmark fnt-sz-20"></i>
+        <% end %>
+        <%= link_to(approved_admin_suggestions_path, class: "btn btn btn-outline-success fRight ms-1") do %>
+          <i class="fa-regular fa-circle-check fnt-sz-20"></i>
+        <% end %>
+      </div>
+      <div class="card-body pt-0"> `
+        <div class="card article-type-title page-subject-header">
+          अस्वीकृत सुझाव सूची
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="suggestion-container" data-controller= ''>
+          <table class="table">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">सुझाव</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% 
+                page = params[:page].blank? ?  0 : (params[:page].to_i - 1)
+                page_size = @suggestions.limit_value
+              %>
+              <% if @suggestions.present? %>
+                <% @suggestions.each_with_index do | suggestion, index | %>
+                  <tr class="suggestion-item">
+                    <th scope="row"><%= (page * page_size) + (index + 1) %></th>
+                    <td>
+                      <a href="<%= admin_suggestion_path(suggestion)%>">
+                        <%= suggestion.title %>
+                      </a>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr>
+                  <td colspan="2">
+                    कोई सुझाव उपलब्ध नहीं है
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <%= paginate @suggestions, remote: true %>
+</div>

@@ -12,6 +12,8 @@ class Public::SuggestionsController < ApplicationController
   def create
     if current_user.present?
       @suggestion = current_user.suggestions.new(suggestion_params)
+      @suggestion.email = current_user.email
+      @suggestion.username = current_user.username
     else 
       @suggestion = Suggestion.new(suggestion_params)
     end
