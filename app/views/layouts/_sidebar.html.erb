@@ -7,7 +7,7 @@
       <% if current_user.is_admin || current_user.is_super_admin%>
         <%= render partial: "layouts/admin_side_bar" %>
       <% end %>
-      <div class="dropdown-divider"></div>
+      <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
         <a class="sidebar-link" data-bs-toggle="collapse" href="#aricleList" role="button"  
           aria-expanded="false" aria-controls="aricleList" data-id="aricleList"
@@ -34,7 +34,7 @@
           </a>
         </li>
       </div>
-      <div class="dropdown-divider"></div>
+      <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
         <a class="sidebar-link" data-bs-toggle="collapse" href="#authorList"   role="button" aria-expanded="false" aria-controls="authorList" data-id="authorList"
           data-action="click->sidebar#toggleTab">
@@ -60,7 +60,7 @@
           </a>
         </li>
       </div>
-      <div class="dropdown-divider"></div>
+      <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
         <a class="sidebar-link" data-bs-toggle="collapse" href="#themeList"   role="button" aria-expanded="false" aria-controls="themeList" data-id="themeList"
           data-action="click->sidebar#toggleTab">
@@ -100,7 +100,7 @@
           </a>
         </li>
       </div>
-      <div class="dropdown-divider"></div>
+      <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
         <a class="sidebar-link" data-bs-toggle="collapse" href="#contextList"   role="button" aria-expanded="false" aria-controls="contextList" data-id="contextList"
           data-action="click->sidebar#toggleTab">

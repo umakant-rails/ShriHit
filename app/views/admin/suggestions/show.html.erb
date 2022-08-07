@@ -1,7 +1,17 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
+      <div>
+        <%= link_to(admin_suggestions_path, class: "btn btn-outline-primary fRight ms-1") do %>
+          <i class="fas fa-list"></i> Pending
+        <% end %>
+        <%= link_to(rejected_admin_suggestions_path, class: "btn btn-outline-danger fRight ms-1") do %>
+          <i class="fa-regular fa-circle-xmark fnt-sz-20"></i> Rejected
+        <% end %>
+        <%= link_to(approved_admin_suggestions_path, class: "btn btn btn-outline-success fRight ms-1") do %>
+          <i class="fa-regular fa-circle-check fnt-sz-20"></i> Approved
+        <% end %>
+      </div>
       <div class="card-body">
         <div class="card row">
           <div class="col-md-12">
@@ -37,10 +47,9 @@
           <!-- <span class="sgstion-user">
             Username: <span class="username"><strong><%#= @suggestion.username %></strong></span>
           </span> -->
-          <%= link_to "स्वीकृत", accept_admin_suggestion_path(@suggestion), class: "btn btn-primary" %>
+          <%= link_to "स्वीकृत", approve_admin_suggestion_path(@suggestion), class: "btn btn-primary" %>
           <%= link_to "अस्वीकृत", reject_admin_suggestion_path(@suggestion), class: "btn btn-danger" %>
       </div>
     </div>
   </div>
-  <div class="col-md-1"></div>
 </div>
