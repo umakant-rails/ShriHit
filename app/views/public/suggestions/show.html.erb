@@ -8,6 +8,15 @@
             <a href="<%= public_articles_path%>" class="article-title text-primary">
               सुझाव : <%= @suggestion.title %>
             </a>
+            <% if @suggestion.is_approved.nil? %>
+              <button class="btn btn-warning fRight">Pending</button>
+            <% elsif @suggestion.is_approved %>
+              <button class="btn btn-success fRight">Approved</button> 
+            <% else %>
+               <button class="btn btn-danger fRight">Rejected</button>
+            <% end %>
+          </div>
+          <div class="col-md-12">
             <div class="contributer-text">
               (योगदानकर्ता : 
                 <strong>
@@ -33,6 +42,8 @@
         <div class="suggestion-description" data-controller= ''>
           <%= raw @suggestion.description %>
         </div>
+        <div class="dropdown-divider"></div>
+        <%= link_to "Back to suggestions", public_suggestions_path, class:"btn btn-primary"%>
       </div>
     </div>
   </div>

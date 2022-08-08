@@ -1,8 +1,7 @@
 class Public::SuggestionsController < ApplicationController
 
   def index
-    @page_size = 10
-    @suggestions = Suggestion.where(is_approved: false).page(params[:page]).per(10)
+    @suggestions = Suggestion.order("created_at DESC").page(params[:page]).per(10)
   end
 
   def new

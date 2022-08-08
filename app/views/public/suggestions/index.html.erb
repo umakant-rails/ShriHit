@@ -21,15 +21,25 @@
               </tr>
             </thead>
             <tbody>
-              <% page = params[:page].blank? ?  0 : (params[:page].to_i - 1)%>
+              <% 
+                page = params[:page].blank? ?  0 : (params[:page].to_i - 1)
+                page_size = @suggestions.limit_value
+              %>
               <% if @suggestions.present? %>
                 <% @suggestions.each_with_index do | suggestion, index | %>
                   <tr class="suggestion-item">
-                    <th scope="row"><%= (page * @page_size) + (index + 1) %></th>
+                    <th scope="row"><%= (page * page_size) + (index + 1) %></th>
                     <td>
                       <a href="<%= public_suggestion_path(suggestion)%>">
                         <%= suggestion.title %>
                       </a>
+                      <% if suggestion.is_approved.nil? %>
+                        <div class="sgstion-status pending text-warning">Pending</div>
+                      <% elsif suggestion.is_approved %>
+                        <div class="sgstion-status approved text-success">Approved</div> 
+                      <% else %>
+                         <div class="sgstion-status rejected text-danger">Rejected</div>
+                      <% end %>
                     </td>
                   </tr>
                 <% end %>
