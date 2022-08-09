@@ -7,6 +7,12 @@
       <% if current_user.is_admin || current_user.is_super_admin%>
         <%= render partial: "layouts/admin_side_bar" %>
       <% end %>
+      <%
+       is_articles_active = show_collapse_items("articles")
+       is_authors_active = show_collapse_items("authors")
+       is_themes_active = show_collapse_items("themes")
+       is_contexts_active = show_collapse_items("contexts")
+      %>
       <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
         <a class="sidebar-link" data-bs-toggle="collapse" href="#aricleList" role="button"  
@@ -15,10 +21,10 @@
           <span class="align-middle">
             रचना
           </span>
-          <i class="fa-solid fa-angle-right"></i>
+          <i class="fa-solid fa-angle-<%= (is_articles_active == "show") ? "down" : "right" %>"></i>
         </a>
       </li>
-      <div class="collapse <%= show_collapse_items("articles") %>" data-sidebar-target="anchorListBlock" id="aricleList">
+      <div class="collapse <%= is_articles_active %>" data-sidebar-target="anchorListBlock" id="aricleList">
         <li class="sidebar-item <%= set_active("articles", "new") %>">
           <a class="sidebar-link" href="<%= new_article_path %>">
             <span class="align-middle">
@@ -41,10 +47,10 @@
           <span class="align-middle">
             रचनाकार
           </span>
-          <i class="fa-solid fa-angle-right"></i>
+          <i class="fa-solid fa-angle-<%= (is_authors_active == "show") ? "down" : "right" %>"></i>
         </a>
       </li>
-      <div class="collapse <%= show_collapse_items("authors") %>" data-sidebar-target="anchorListBlock" id="authorList">
+      <div class="collapse <%= is_authors_active %>" data-sidebar-target="anchorListBlock" id="authorList">
         <li class="sidebar-item <%= set_active("authors", "new") %>">
           <a class="sidebar-link" href="<%= new_author_path %>">
             <span class="align-middle">
@@ -67,10 +73,10 @@
           <span class="align-middle">
             उत्सव
           </span>
-          <i class="fa-solid fa-angle-right"></i>
+          <i class="fa-solid fa-angle-<%= (is_themes_active == "show") ? "down" : "right" %>"></i>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_items("themes") %>" data-sidebar-target="anchorListBlock" id="themeList">
+      <div class="collapse  <%= is_themes_active %>" data-sidebar-target="anchorListBlock" id="themeList">
         <li class="sidebar-item <%= set_active("themes", "new") %>">
           <a class="sidebar-link" href="<%= new_theme_path %>">
             <span class="align-middle">
@@ -107,10 +113,10 @@
           <span class="align-middle">
             प्रसंग
           </span>
-          <i class="fa-solid fa-angle-right"></i>
+          <i class="fa-solid fa-angle-<%= (is_contexts_active == "show") ? "down" : "right" %>"></i>
         </a>
       </li>
-      <div class="collapse  <%= show_collapse_items("contexts") %>" data-sidebar-target="anchorListBlock" id="contextList">
+      <div class="collapse  <%= is_contexts_active %>" data-sidebar-target="anchorListBlock" id="contextList">
         <li class="sidebar-item <%= set_active("contexts", "new") %>">
           <a class="sidebar-link" href="<%= new_context_path %>">
             <span class="align-middle">
