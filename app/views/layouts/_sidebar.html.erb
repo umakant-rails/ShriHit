@@ -12,6 +12,7 @@
        is_authors_active = show_collapse_items("authors")
        is_themes_active = show_collapse_items("themes")
        is_contexts_active = show_collapse_items("contexts")
+       is_tags_active = show_collapse_items("tags")
       %>
       <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
@@ -128,6 +129,31 @@
           <a class="sidebar-link" href="<%= contexts_path %>">
             <span class="align-middle">
               प्रसंग सूची
+            </span>
+          </a>
+        </li>
+      </div>
+      <li class="sidebar-item">
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#tagList"   role="button" aria-expanded="false" aria-controls="tagList" data-id="tagList"
+          data-action="click->sidebar#toggleTab">
+          <span class="align-middle">
+            टैग्स
+          </span>
+          <i class="fa-solid fa-angle-<%= (is_tags_active == "show") ? "down" : "right" %>"></i>
+        </a>
+      </li>
+      <div class="collapse  <%= is_tags_active %>" data-sidebar-target="anchorListBlock" id="tagList">
+        <li class="sidebar-item <%= set_active("tags", "new") %>">
+          <a class="sidebar-link" href="<%= new_tag_path %>">
+            <span class="align-middle">
+              टैग्स जोड़े
+            </span>
+          </a>
+        </li>
+        <li class="sidebar-item <%= set_active("tags", "others") %>">
+          <a class="sidebar-link" href="<%= tags_path %>">
+            <span class="align-middle">
+              टैग्स सूची
             </span>
           </a>
         </li>

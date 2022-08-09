@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <span class="col-md-6 text-start article-title text-primary">
+          नया टैग्स प्रपत्र
+        </span>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4">
+          <%= render "form", tag: @tag %>
+        </div>
+      </div>
+    </div>
+    <%= link_to "Back to tags", tags_path %>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/tag-custom" %>
+<% end %>

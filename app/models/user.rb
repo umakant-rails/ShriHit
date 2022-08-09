@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :theme_articles
   has_many :suggestions
   has_many :comments
+  has_many :tags
   belongs_to :role
   has_many :comment_reportings
 

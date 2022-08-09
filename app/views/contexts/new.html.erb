@@ -1,6 +1,5 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-body">
         <h3>नया प्रसंग</h3>
@@ -12,7 +11,6 @@
     </div>
     <%= link_to "Back to contexts", contexts_path %>
   </div>
-  <div class="col-md-1"></div>
 </div>
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/context-custom" %>
