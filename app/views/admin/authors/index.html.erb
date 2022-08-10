@@ -5,6 +5,17 @@
 		    <span class="col-md-6 text-start article-title text-primary">
 		      रचनाकार / कवि / भक्त सूची 
 		    </span>
+		    <div class="btn-group fRight">
+		    	<a href="javascript:void(0);" class="text-white btn btn-primary">
+				  	<i class="fas fa-list"></i> Index
+				  </a>
+			  	<a href="<%= approved_authors_admin_authors_path %>" class="text-white btn btn-success">
+				  	<i class="far fa-check-circle"></i> Approved
+				  </a>
+			  	<a href="<%= pending_authors_admin_authors_path %>" class="text-white btn btn-warning">
+				  	<i class="far fa-hourglass-half"></i> Pending
+				  </a>
+				</div>
 		    <div class="dropdown-divider"></div>
       	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-author-target="acsrfToken">
       	<div id="author_list">

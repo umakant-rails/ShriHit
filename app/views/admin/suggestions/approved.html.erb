@@ -1,20 +1,20 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-      <div>
-        <%= link_to(admin_suggestions_path, class: "btn btn-outline-primary fRight ms-1") do %>
-          <i class="fas fa-list"></i> Pending
-        <% end %>
-        <%= link_to(rejected_admin_suggestions_path, class: "btn btn-outline-danger fRight ms-1") do %>
-          <i class="fa-regular fa-circle-xmark fnt-sz-20"></i> Rejected
-        <% end %>
-        <%= link_to(approved_admin_suggestions_path, class: "btn btn btn-outline-success fRight ms-1") do %>
-          <i class="fa-regular fa-circle-check fnt-sz-20"></i> Approved
-        <% end %>
-      </div>
-      <div class="card-body pt-0"> `
-        <div class="card article-type-title page-subject-header">
+      <div class="card-body">
+        <span class="col-md-6 text-start article-title text-primary">
           स्वीकृत सुझाव सूची
+        </span>
+        <div class="fRight">
+          <%= link_to(rejected_admin_suggestions_path, class: "btn btn-danger fRight ms-1") do %>
+            <i class="fa-regular fa-circle-xmark fnt-sz-20"></i> Rejected
+          <% end %>
+          <%= link_to("javascript:void(0);", class: "btn btn btn-success fRight ms-1") do %>
+            <i class="fa-regular fa-circle-check fnt-sz-20"></i> Approved
+          <% end %>
+          <%= link_to(admin_suggestions_path, class: "btn btn-primary fRight ms-1") do %>
+            <i class="fas fa-list"></i> Index
+          <% end %>
         </div>
         <div class="dropdown-divider"></div>
         <div class="suggestion-container" data-controller= ''>

@@ -1,14 +1,11 @@
 class ContextsController < ApplicationController
   before_action :authenticate_user!
+  before_action :verify_admin
   before_action :set_context, only: %i[ show edit update destroy ]
 
   # GET /contexts or /contexts.json
   def index
-    if current_user.is_admin || current_user.is_super_admin
-      @contexts = Context.order("created_at DESC").page(params[:page])
-    else
-      @contexts = current_user.contexts.order("created_at DESC").page(params[:page])
-    end
+    @contexts = Context.order("created_at DESC").page(params[:page])
   end
 
   # GET /contexts/1 or /contexts/1.json
@@ -71,5 +68,11 @@ class ContextsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def context_params
       params.fetch(:context, {}).permit(:name, :user_id)
+    end
+
+    def verify_admin
+      if !current_user.is_admin && !current_user.is_super_admin
+        redirect_back_or_to homes_path
+      end
     end
 end

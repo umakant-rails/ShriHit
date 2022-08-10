@@ -51,7 +51,10 @@ class ThemeChaptersController < ApplicationController
 
   private
     def set_theme_chapter
-      @theme_chapter = ThemeChapter.find(params[:id])
+      @theme_chapter = current_user.theme_chapters.find(params[:id]) rescue nil
+      if @theme_chapter.blank?
+        redirect_back_or_to homes_path
+      end
     end
 
     # Only allow a list of trusted parameters through.

@@ -19,8 +19,13 @@
           </thead>
           <tbody>
             <% if @articles.present? %>
+              <% 
+                page = (@articles.current_page - 1)
+                per_page = @articles.limit_value 
+              %>
               <% @articles.each_with_index do |article, index| %>
-                <%= render partial: 'article', locals: {article: article, index: (index + 1) } %>
+                <% ind = (page * per_page) + (index + 1) %>
+                <%= render partial: 'article', locals: {article: article, index: ind } %>
               <% end %>
             <% else %>
               <tr>

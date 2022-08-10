@@ -4,11 +4,11 @@ class TagsController < ApplicationController
 
   # GET /tags or /tags.json
   def index
-    if current_user.is_admin || current_user.is_super_admin
-      @tags = Tag.order("created_at DESC").page(params[:page])
-    else
+    # if current_user.is_admin || current_user.is_super_admin
+    #   @tags = Tag.order("created_at DESC").page(params[:page])
+    # else
       @tags = current_user.tags.order("created_at DESC").page(params[:page])
-    end
+    # end
   end
 
   # GET /tags/1 or /tags/1.json
@@ -65,7 +65,10 @@ class TagsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
-      @tag = current_user.tags.find(params[:id])
+      @tag = current_user.tags.find(params[:id]) rescue nil
+      if @tag.blank?
+        redirect_back_or_to homes_path
+      end
     end
 
     # Only allow a list of trusted parameters through.

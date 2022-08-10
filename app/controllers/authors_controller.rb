@@ -58,7 +58,10 @@ class AuthorsController < ApplicationController
   private
 
     def set_author
-      @author = Author.find(params[:id])
+      @author = current_user.authors.find(params[:id]) rescue nil
+      if @author.blank?
+        redirect_back_or_to homes_path
+      end
     end
 
     def author_params

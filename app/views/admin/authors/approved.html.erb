@@ -6,11 +6,14 @@
 		      स्वीकृत रचनाकार सूची 
 		    </span>
 		    <div class="btn-group fRight">
-			  	<a href="javascript:void(0);" class="text-white btn btn-primary">
-				  	Approved
+		    	<a href="<%= admin_authors_path %>" class="text-white btn btn-primary">
+				  	<i class="fas fa-list"></i> Index
 				  </a>
-			  	<a href="<%= pending_authors_admin_authors_path %>" class="text-white btn btn-secondary">
-				  	Pending
+			  	<a href="javascript:void(0);" class="text-white btn btn-success">
+				  	<i class="far fa-check-circle"></i> Approved
+				  </a>
+			  	<a href="<%= pending_authors_admin_authors_path %>" class="text-white btn btn-warning">
+				  	<i class="far fa-hourglass-half"></i> Pending
 				  </a>
 				</div>
 		    <div class="dropdown-divider"></div>

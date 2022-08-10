@@ -5,7 +5,7 @@ class ArticleTypesController < ApplicationController
 
   # GET /article_types or /article_types.json
   def index
-    @article_types = current_user.article_types.page(params[:page])
+    @article_types = ArticleType.order("created_at DESC").page(params[:page])
   end
 
   # GET /article_types/1 or /article_types/1.json
@@ -72,7 +72,7 @@ class ArticleTypesController < ApplicationController
 
     def verify_admin
       if !current_user.is_admin && !current_user.is_super_admin
-        redirect_to homes_path
+        redirect_back_or_to homes_path
       end
     end
 end

@@ -8,11 +8,16 @@
 </li>
 <div class="dropdown-divider1"></div>
 <%
-  is_index_active = show_admin_collapse_items("index")
-  is_pending_active = show_admin_collapse_items("pending")
-  is_approved_active = show_admin_collapse_items("approved")
-  is_report_active = show_admin_collapse_items("report")
-  is_article_type_active = show_collapse_items("article_types") 
+  app_subject_actions = ["index", "pending", "approved"]
+  report_actions = ["report"]
+  is_app_subject_display = show_admin_collapse_items(app_subject_actions)
+  is_report_display = show_admin_collapse_items(report_actions)
+
+  # is_pending_active = show_admin_collapse_items("pending")
+  # is_approved_active = show_admin_collapse_items("approved")
+  # is_report_active = show_admin_collapse_items(["report"])
+  is_article_type_active = show_collapse_items("article_types")
+  is_contexts_active = show_collapse_items("contexts")
 %>
 <li class="sidebar-item">
   <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#appContent" role="button"  
@@ -21,96 +26,27 @@
     <span class="align-middle">
       App विषय-सूची
     </span>
-    <i class="fa-solid fa-angle-<%= (is_index_active == "show") ? "down" : "right" %>"></i>
+    <i class="fa-solid fa-angle-<%= (is_app_subject_display == "show") ? "down" : "right" %>"></i>
   </a>
 </li>
-<div class="collapse <%= is_index_active %>" 
+<div class="collapse <%= is_app_subject_display %>" 
   data-sidebar-target="anchorListBlock" id="appContent">
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles", "index") %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles", app_subject_actions) %>">
     <a class="sidebar-link" href="<%= admin_articles_path %>">
       <span class="align-middle">
         रचना
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors", "index") %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors", app_subject_actions) %>">
     <a class="sidebar-link" href="<%= admin_authors_path %>">
       <span class="align-middle">
         रचनाकार
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/contexts", "index") %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/contexts", app_subject_actions) %>">
     <a class="sidebar-link" href="<%= admin_contexts_path %>">
-      <span class="align-middle">
-        प्रसंग
-      </span>
-    </a>
-  </li>
-</div>
-<div class="dropdown-divider1"></div>
-<li class="sidebar-item">
-  <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#pendingContent" role="button" aria-expanded="false" aria-controls="pendingContent" data-id="pendingContent" 
-    data-action="click->sidebar#toggleTab">
-    <span class="align-middle">
-      लंबित विषय-सूची
-    </span>
-    <i class="fa-solid fa-angle-<%= (is_pending_active == "show") ? "down" : "right" %>"></i>
-  </a>
-</li>
-<div class="collapse <%= is_pending_active %>" 
-  data-sidebar-target="anchorListBlock" id="pendingContent">
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles", "pending") %>">
-    <a class="sidebar-link" href="<%= pending_articles_admin_articles_path %>">
-      <span class="align-middle">
-        रचना
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors", "pending") %>">
-    <a class="sidebar-link" href="<%= pending_authors_admin_authors_path %>">
-      <span class="align-middle">
-        रचनाकार
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/contexts", "pending") %>">
-    <a class="sidebar-link" href="<%= pending_contexts_admin_contexts_path %>">
-      <span class="align-middle">
-        प्रसंग
-      </span>
-    </a>
-  </li>
-</div>
-<div class="dropdown-divider1"></div>
-<li class="sidebar-item">
-  <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#approvedContent" role="button"  
-    aria-expanded="false" aria-controls="approvedContent" data-id="approvedContent" 
-    data-action="click->sidebar#toggleTab">
-    <span class="align-middle">
-      स्वीकृत विषय-सूची
-    </span>
-    <i class="fa-solid fa-angle-<%= (is_approved_active == "show") ? "down" : "right" %>"></i>
-  </a>
-</li>
-<div class="collapse <%= is_approved_active %>" 
-  data-sidebar-target="anchorListBlock" id="approvedContent">
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles", "approved") %>">
-    <a class="sidebar-link" href="<%= approved_articles_admin_articles_path %>">
-      <span class="align-middle">
-        रचना
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors", "approved") %>">
-    <a class="sidebar-link" href="<%= approved_authors_admin_authors_path %>">
-      <span class="align-middle">
-        रचनाकार
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/contexts", "approved") %>">
-    <a class="sidebar-link" href="<%= approved_contexts_admin_contexts_path %>">
       <span class="align-middle">
         प्रसंग
       </span>
@@ -124,26 +60,26 @@
     <span class="align-middle">
       रिपोर्ट्स
     </span>
-    <i class="fa-solid fa-angle-<%= (is_report_active == "show") ? "down" : "right" %>"></i>
+    <i class="fa-solid fa-angle-<%= (is_report_display == "show") ? "down" : "right" %>"></i>
   </a>
 </li>
-<div class="collapse <%= is_report_active %>" 
+<div class="collapse <%= is_report_display %>" 
   data-sidebar-target="anchorListBlock" id="adminReports">
-  <li class="sidebar-item <%= set_active("admin/articles", "report") %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles", report_actions) %>">
     <a class="sidebar-link" href="<%= report_articles_admin_articles_path %>">
       <span class="align-middle">
         रचना
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("admin/authors", "report") %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors", report_actions) %>">
     <a class="sidebar-link" href="<%= report_authors_admin_authors_path %>">
       <span class="align-middle">
         रचनाकार
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("admin/contexts", "report") %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/contexts", report_actions) %>">
     <a class="sidebar-link" href="<%= report_contexts_admin_contexts_path %>">
       <span class="align-middle">
         प्रसंग
@@ -173,6 +109,32 @@
     <a class="sidebar-link" href="<%= article_types_path %>">
       <span class="align-middle">
         रचना प्रकार सूची
+      </span>
+    </a>
+  </li>
+</div>
+<div class="dropdown-divider1"></div>
+<li class="sidebar-item">
+  <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#contextList"   role="button" aria-expanded="false" aria-controls="contextList" data-id="contextList"
+    data-action="click->sidebar#toggleTab">
+    <span class="align-middle">
+      प्रसंग
+    </span>
+    <i class="fa-solid fa-angle-<%= (is_contexts_active == "show") ? "down" : "right" %>"></i>
+  </a>
+</li>
+<div class="collapse  <%= is_contexts_active %>" data-sidebar-target="anchorListBlock" id="contextList">
+  <li class="sidebar-item <%= set_active("contexts", "new") %>">
+    <a class="sidebar-link" href="<%= new_context_path %>">
+      <span class="align-middle">
+        प्रसंग जोड़े
+      </span>
+    </a>
+  </li>
+  <li class="sidebar-item <%= set_active("contexts", "others") %>">
+    <a class="sidebar-link" href="<%= contexts_path %>">
+      <span class="align-middle">
+        प्रसंग सूची
       </span>
     </a>
   </li>

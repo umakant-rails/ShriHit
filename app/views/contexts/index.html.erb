@@ -17,8 +17,13 @@
           </thead>
           <tbody>
             <% if @contexts.present? %>
+              <% 
+                page = (@contexts.current_page - 1)
+                per_page = @contexts.limit_value 
+              %>
               <% @contexts.each_with_index do |context, index| %>
-                <%= render partial: 'context', locals: {context: context, index: (index + 1) } %>
+                <% ind = (page * per_page) + (index + 1) %>
+                <%= render partial: 'context', locals: {context: context, index: ind } %>
               <% end %>
             <% else %>
               <tr>
@@ -29,6 +34,7 @@
             <% end %> 
           </tbody>
         </table>
+        <%= paginate @contexts, remote: true %>
         <% if paginate(@contexts).present? %>
           <div class="dropdown-divider"></div>
         <% end %>

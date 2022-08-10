@@ -6,11 +6,14 @@
 		      लंबित रचना सूची 
 		    </span>
 		    <div class="btn-group fRight">
-			  	<a href="<%= approved_articles_admin_articles_path %>" class="text-white btn btn-secondary">
-				  	Approved
+		    	<a href="<%= admin_articles_path %>" class="text-white btn btn-primary">
+				  	<i class="fas fa-list"></i> Index
 				  </a>
-			  	<a href="javascript:void(0);" class="text-white btn btn-primary">
-				  	Pending
+			  	<a href="<%= approved_articles_admin_articles_path %>" class="text-white btn btn-success">
+				  	<i class="far fa-check-circle"></i> Approved
+				  </a>
+			  	<a href="javascript:void(0);>" class="text-white btn btn-warning">
+				  	<i class="far fa-hourglass-half"></i> Pending
 				  </a>
 				</div>
 		    <div class="dropdown-divider"></div>

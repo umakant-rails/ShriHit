@@ -114,7 +114,10 @@ class ThemesController < ApplicationController
   private
     
     def set_theme
-      @theme = Theme.find(params[:id])
+      @theme = current_user.themes.find(params[:id]) rescue nil
+      if @theme.blank?
+        redirect_back_or_to homes_path
+      end
     end
 
     def theme_params
