@@ -5,7 +5,7 @@ class ArticleTypesController < ApplicationController
 
   # GET /article_types or /article_types.json
   def index
-    @article_types = current_user.article_types.all
+    @article_types = current_user.article_types.page(params[:page])
   end
 
   # GET /article_types/1 or /article_types/1.json
