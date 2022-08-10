@@ -29,8 +29,11 @@
             <% end %> 
           </tbody>
         </table>
+        <% if paginate(@contexts).present? %>
+          <div class="dropdown-divider"></div>
+        <% end %>
+        <%= link_to "New context", new_context_path %>
       </div>
     </div>
-    <%= link_to "New context", new_context_path %>
   </div>
 </div>

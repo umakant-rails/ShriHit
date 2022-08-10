@@ -1,7 +1,6 @@
 <%= form_with(model: tag) do |form| %>
   <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">  
+    <div class="col-md-8">
       <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= tag.errors.present? ? 'block' : 'none' %>;" role="alert">
         <% tag.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -15,13 +14,16 @@
       </div>
 
       <div class='text-center mt-3 actions'>
-        <% if tag.id.present? %>
-          <%= form.submit "अद्यतन करें", class: 'btn btn-primary form-control' %>
-        <% else %>
-          <%= form.submit "सम्पादित करें", class: 'btn btn-primary form-control' %>
-        <% end %>
+        <div class="row">
+          <div class="col-md-4">
+            <% if tag.id.present? %>
+              <%= form.submit "अद्यतन करें", class: 'btn btn-primary form-control' %>
+            <% else %>
+              <%= form.submit "सम्पादित करें", class: 'btn btn-primary form-control' %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-3"></div>
   </div>
 <% end %>

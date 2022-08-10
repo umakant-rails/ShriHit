@@ -1,20 +1,22 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <h3>प्रसंग</h3>
+        <span class="col-md-6 text-start article-title text-primary">
+          अद्यतन प्रसंग फॉर्म
+        </span>
         <div class="dropdown-divider"></div>
         <div class="m-sm-4" data-controller= 'author'>
           <!-- <h3 class="card-title">New article</h3>
           <div class="dropdown-divider"></div> -->
           <%= render "form", context: @context %>
         </div>
+        <div class="dropdown-divider"></div>
+        <%= link_to "Show this context", @context %> |
+        <%= link_to "Back to contexts", contexts_path %>
       </div>
     </div>
-    <%= link_to "Back to contexts", contexts_path %>
   </div>
-  <div class="col-md-1"></div>
 </div>
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/context-custom" %>

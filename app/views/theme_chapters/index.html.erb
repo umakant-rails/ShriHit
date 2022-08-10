@@ -1,6 +1,5 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-body h-100">
         <span class="col-md-6 text-start article-title text-primary">
@@ -29,9 +28,12 @@
             <% end %>
           </tbody>
         </table>
+        <%= paginate @theme_chapters, remote: true %>
+        <% if paginate(@theme_chapters).present? %>
+          <div class="dropdown-divider"></div>
+        <% end %>
+        <%= link_to "New Theme Chapter", new_theme_chapter_path %>
       </div>
     </div>
-    <%= link_to "New Theme Chapter", new_theme_chapter_path %>
   </div>
-  <div class="col-md-1"></div>
 </div>

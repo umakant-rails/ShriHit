@@ -1,9 +1,14 @@
 class TagsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_tag, only: %i[ show edit update destroy ]
 
   # GET /tags or /tags.json
   def index
-    @tags = current_user.tags.order("created_at DESC").page(params[:page])
+    if current_user.is_admin || current_user.is_super_admin
+      @tags = Tag.order("created_at DESC").page(params[:page])
+    else
+      @tags = current_user.tags.order("created_at DESC").page(params[:page])
+    end
   end
 
   # GET /tags/1 or /tags/1.json

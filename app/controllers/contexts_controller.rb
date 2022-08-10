@@ -4,7 +4,11 @@ class ContextsController < ApplicationController
 
   # GET /contexts or /contexts.json
   def index
-    @contexts = current_user.contexts.all
+    if current_user.is_admin || current_user.is_super_admin
+      @contexts = Context.order("created_at DESC").page(params[:page])
+    else
+      @contexts = current_user.contexts.order("created_at DESC").page(params[:page])
+    end
   end
 
   # GET /contexts/1 or /contexts/1.json

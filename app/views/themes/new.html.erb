@@ -1,18 +1,19 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <h3>नया उत्सव</h3>
+        <span class="col-md-6 text-start article-title text-primary">
+          नया उत्सव 
+        </span>
         <div class="dropdown-divider"></div>
         <div class="m-sm-4" data-controller= 'article'>
           <%= render "form", theme: @theme %>
         </div>
+        <div class="dropdown-divider"></div>
+        <%= link_to "Back to theme", themes_path %>
       </div>
     </div>
-    <%= link_to "Back to theme", themes_path %>
   </div>
-  <div class="col-md-1"></div>
 </div>
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/theme-custom" %>

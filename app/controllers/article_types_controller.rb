@@ -1,5 +1,6 @@
 class ArticleTypesController < ApplicationController
   before_action :authenticate_user!
+  before_action :verify_admin
   before_action :set_article_type, only: %i[ show edit update destroy ]
 
   # GET /article_types or /article_types.json
@@ -67,5 +68,11 @@ class ArticleTypesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def article_type_params
       params.fetch(:article_type, {}).permit(:name)
+    end
+
+    def verify_admin
+      if !current_user.is_admin && !current_user.is_super_admin
+        redirect_to homes_path
+      end
     end
 end

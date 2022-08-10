@@ -1,6 +1,5 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-body h-100">
         <span class="col-md-6 text-start article-title text-primary">
@@ -18,14 +17,25 @@
             </tr>
           </thead>
           <tbody>
-            <% @themes.each_with_index do |theme, index| %>
-              <%= render partial: 'theme', locals: {theme: theme, index: (index + 1) } %>
+            <% if @themes.present? %>
+              <% @themes.each_with_index do |theme, index| %>
+                <%= render partial: 'theme', locals: {theme: theme, index: (index + 1) } %>
+              <% end %>
+            <% else %>
+              <tr>
+                <td colspan="5">
+                  <center>There is no data available now.</center>
+                </td>
+              </tr>
             <% end %>
           </tbody>
         </table>
+        <%= paginate @themes, remote: true %>
+        <% if paginate(@themes).present? %>
+          <div class="dropdown-divider"></div>
+        <% end %>
+        <%= link_to "New themes", new_theme_path %>
       </div>
     </div>
-    <%= link_to "New themes", new_theme_path %>
   </div>
-  <div class="col-md-1"></div>
 </div>

@@ -1,20 +1,23 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-body">
-        <h3>नया रचनाकार</h3>
+        <span class="col-md-6 text-start article-title text-primary">
+          नया रचनाकार फॉर्म 
+        </span>
         <div class="dropdown-divider"></div>
-        <div class="m-sm-4" data-controller= 'author'>
+        <div class="m-sm-4 row" data-controller= 'author'>
           <!-- <h3 class="card-title">New article</h3>
           <div class="dropdown-divider"></div> -->
-          <%= render "form", author: @author %>
+          <div class="col-md-12 offset-0">
+            <%= render "form", author: @author %>
+          </div>
         </div>
+        <div class="divider-bdr"></div>
+        <%= link_to "Back to Authors", authors_path %>
       </div>
     </div>
-    <%= link_to "Back to Authors", authors_path %>
   </div>
-  <div class="col-md-1"></div>
 </div>
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/author-custom" %>

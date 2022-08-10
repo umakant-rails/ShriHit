@@ -3,7 +3,7 @@ class ThemeChaptersController < ApplicationController
   before_action :set_theme_chapter, only: %i[ show edit update destroy ]
 
   def index
-    @theme_chapters = current_user.theme_chapters 
+    @theme_chapters = current_user.theme_chapters.page(params[:page]) 
   end
 
   def new

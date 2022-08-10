@@ -1,8 +1,7 @@
 <%= form_with(model: context, html: {
   'data-context-target': 'form', 'data-action': 'context#submitForm'}) do |form| %>
   <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">  
+    <div class="col-md-8">
       <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= context.errors.present? ? 'block' : 'none' %>;" role="alert">
         <% context.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -16,9 +15,12 @@
       </div>
 
       <div class='text-center mt-3 actions'>
-        <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-md-2"></div>
   </div>
 <% end %>

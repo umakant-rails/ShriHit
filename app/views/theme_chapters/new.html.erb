@@ -1,6 +1,5 @@
 <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-body">
         <h3>नया खंड/प्रकरण</h3>
@@ -10,11 +9,11 @@
           <div class="dropdown-divider"></div> -->
           <%= render "form", theme_chapter: @theme_chapter %>
         </div>
+        <div class="dropdown-divider"></div>
+        <%= link_to "Back to Theme Chapter", theme_chapters_path(params[:theme_id]) %>
       </div>
     </div>
-    <%= link_to "Back to Theme Chapter", theme_chapters_path(params[:theme_id]) %>
   </div>
-  <div class="col-md-1"></div>
 </div>
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/theme-chapter-custom" %>
