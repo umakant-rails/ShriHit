@@ -75,6 +75,13 @@ Rails.application.routes.draw do
       post "/merge" => "contexts#merge", as: :merge, on: :member
     end
 
+    resources :tags, only: [:index] do
+      post "/reject" => "tags#reject", as: :reject, on: :member
+      post "/approve" => "tags#approve", as: :approve, on: :member
+      get "/approved" => "tags#approved", as: :approved_tags, on: :collection
+      get "/rejected" => "tags#rejected", as: :rejected_tags, on: :collection
+    end
+
     resources :suggestions, only: [:index, :show] do
       get "/approve" => "suggestions#approve", as: :approve, on: :member
       get "/reject" => "suggestions#reject", as: :reject, on: :member

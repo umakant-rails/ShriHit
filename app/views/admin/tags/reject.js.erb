@@ -1,0 +1,12 @@
+$(".alert").hide();
+<% if @tags.present? && flash[:success].present? %>
+  $("#tag_list").html("<%= escape_javascript(render 'approved_tags', tags: @tags)%>");
+  $("#successAlert").html("<%= flash[:success] %>");
+  $("#successAlert").parent().css("display", "block");
+<% elsif @tags.present? && flash[:error].present? %>
+  $("#errorsAlert").html("<%= flash[:error] %>");
+  $("#errorsAlert").parent().css("display", "block");
+<% elsif @tags.blank? %>
+  let url = window.location.href;
+  window.location.href = url.substr(0, url.indexOf('?'));
+<% end %>

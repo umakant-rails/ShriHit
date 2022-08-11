@@ -1,0 +1,39 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">S. No.</th>
+      <th scope="col">नाम</th>
+      <th scope="col">योगदानकर्ता</th>
+      <th scope="col">स्वीकृत/अस्वीकृत</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody id="tag_rows">
+    <% if tags.present? %>
+      <%
+        page = (tags.current_page - 1)
+        page_size = tags.limit_value
+      %>
+      <% tags.each_with_index  do | tag, index | %>
+        <% ind = (page * page_size) + (index+1) %>
+        <tr class="<%= tag.is_approved ? "text-primary" : "" %>">
+          <th><%= ind %></th>
+          <td><%= tag.name %></td>
+          <td><%= tag.user.username %></td>
+          <td>अस्वीकृत</td>
+          <td>
+            <%= link_to "javascript:void(0);", class: "btn btn-primary", 'data-action': 'admin-tag#approveTag', 'data-id': tag.id do %>
+              Approved
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="4">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

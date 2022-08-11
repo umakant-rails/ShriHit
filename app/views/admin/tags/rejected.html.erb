@@ -1,0 +1,27 @@
+<div class="row" data-controller="admin-tag">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body h-400">
+        <span class="col-md-6 text-start article-title text-primary">
+          टैग्स सूची 
+        </span>
+        <div class="btn-group fRight">
+          <a href="<%= approved_tags_admin_tags_path %>" class="text-white btn btn-success">
+            <i class="far fa-check-circle"></i> Approved
+          </a>
+          <a href="<%= rejected_tags_admin_tags_path %>" class="text-white btn btn-danger">
+            <i class="fa-regular fa-circle-xmark"></i> Rejected
+          </a>
+        </div>
+        <div class="dropdown-divider"></div>  
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-tag-target="csrfToken">
+        <div id="tag_list">
+          <%= render "rejected_tags", tags: @tags %>
+        </div>
+        <div id="paginate-block">
+          <%= paginate @tags, remote: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
