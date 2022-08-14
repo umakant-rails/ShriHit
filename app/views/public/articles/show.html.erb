@@ -4,6 +4,7 @@
     <div class="card mb-2">
       <div class="card-body h-100 pb-2" id="article-list">
         <div class="row">
+          <% article_tags = @article.tags %>
           <div class="col-md-8">
             <a href="<%= public_article_path (@article) %>" class="article-title text-primary">
               रचना : <%= @article.hindi_title %>
@@ -40,7 +41,7 @@
         </div>
         <div class="dropdown-divider"></div>
         <div class="row">
-          <div class="m-sm-1" data-controller= 'article'>
+          <div class="m-sm-1 article-body" data-controller= 'article'>
             <div class="article-content">
               <%= raw @article.content %>
             </div>
@@ -49,6 +50,16 @@
                 ( रचनाकार - श्री <%= @article.author.name %> जी )
               </a>
             </div>
+            <% if article_tags.present?%>
+              <div class="article-tag-txt text-primary mt-3">
+                <strong>सम्बंधित बिषय :-</strong>&nbsp;&nbsp;
+                <% article_tags.each do | tag | %>
+                  <a href="#" class='tag-txt'>
+                    <%= tag.name %>
+                  </a>
+                <% end %>
+              </div>
+            <% end %>
           </div>
         </div>
         <br/>

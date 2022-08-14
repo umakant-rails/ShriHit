@@ -8,7 +8,9 @@ class Article < ApplicationRecord
   has_many :theme_chapters
   has_many :comments, as: :commentable
   has_many :comment_reportings
-  
+  has_many :article_tags
+  has_many :tags, through: :article_tags
+
   paginates_per 10
 
   validates :content, :article_type_id, :author_id, :context_id,

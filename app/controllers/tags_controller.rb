@@ -26,6 +26,7 @@ class TagsController < ApplicationController
 
   # POST /tags or /tags.json
   def create
+    params[:tag][:name] = params[:tag][:name].strip
     @tag = current_user.tags.new(tag_params)
 
     respond_to do |format|

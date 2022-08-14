@@ -28,8 +28,7 @@ $(document).ready(function(){
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["article_hindi_title", "context", 
-        "author", "article_content_ifr"]);
+    control.makeTransliteratable(["article_hindi_title", "article_content_ifr", "tag-input-field"]);
   }
   google.setOnLoadCallback(onLoad);
 

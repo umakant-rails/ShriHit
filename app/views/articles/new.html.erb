@@ -6,7 +6,7 @@
           नई रचना फॉर्म 
         </span>
         <div class="dropdown-divider"></div>
-        <div class="m-sm-4" data-controller= 'article'>
+        <div class="m-sm-4" data-controller= 'article tagging'>
           <!-- <h3 class="card-title">New article</h3>
           <div class="dropdown-divider"></div> -->
           <%= render "form", article: @article %>
@@ -19,5 +19,5 @@
 </div>
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/article-custom" %>
-  <%#= javascript_import_module_tag "google-custom" %>
+  <%#= javascript_import_module_tag "custom/tagify-custom" %>
 <% end %>

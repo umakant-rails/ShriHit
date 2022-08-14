@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :tags
   belongs_to :role
   has_many :comment_reportings
+  has_many :article_tags
 
   scope :unblocked_users, ->(){ where(is_blocked: false, role_id: 3) }
   scope :blocked_users, ->(){ where(is_blocked: true) }

@@ -16,19 +16,24 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
+    @tags = Tag.approved.order("name ASC")
     @article = Article.new
   end
 
   # GET /articles/1/edit
   def edit
+    @tags = Tag.approved.order("name ASC")
   end
 
   # POST /articles or /articles.json
   def create
     @article = current_user.articles.new(article_params)
-    
+
     respond_to do |format|
       if @article.save
+        if params[:article][:tags].present?
+          create_tags_for_articles
+        end
         format.html { redirect_to article_url(@article), notice: "Article was successfully created." }
         format.json { render :show, status: :created, location: @article }
       else
@@ -42,6 +47,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
+        update_tags_for_articles
         format.html { redirect_to article_url(@article), notice: "Article was successfully updated." }
         format.json { render :show, status: :ok, location: @article }
       else
@@ -63,6 +69,29 @@ class ArticlesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def update_tags_for_articles
+      param_tags = params[:article][:tags].split(",")
+      new_tags = Tag.create_tags(current_user, param_tags)
+
+      new_tags_id = new_tags.map(&:id)
+
+      commen_ids = new_tags_id & @article.tags.pluck(:id)
+
+      @article.article_tags.where.not(tag_id: commen_ids).destroy_all
+
+      (new_tags_id-commen_ids).each do | tag_id |
+        current_user.article_tags.create(article_id: @article.id, tag_id: tag_id)
+      end
+    end
+
+    def create_tags_for_articles
+      tags = Tag.create_tags(current_user, param_tags)
+      tags.each do | tag |
+        current_user.article_tags.create(article_id: @article.id, tag_id: tag.id) 
+      end
+    end
+
     def set_article
       @article = current_user.articles.find(params[:id]) rescue nil
       if @article.blank?

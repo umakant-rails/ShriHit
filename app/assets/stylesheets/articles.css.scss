@@ -6,11 +6,26 @@
 	font-size: 18px;
 }
 .author-mark-txt{
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: bold;
 }
-
-.article-content{
+.article-tag-txt{
+  font-size: 18px;
+}
+.tag-txt{
+  font-size: 16px;
+  background-color: #a366ff;
+  color: #fff;
+  display: inline-block;
+  margin-top: 5px;
+  margin-right: 6px;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+.tag-txt:hover{
+  color: #FFF;
+}
+.article-body{
 	background: url("./assets/shrihit1.png") 10px 0px repeat;
 }
 .article-item{

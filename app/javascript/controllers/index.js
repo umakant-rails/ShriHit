@@ -21,6 +21,7 @@ import AdminTagController from "./admin/tag_controller";
 import SidebarController from "./sidebar_controller";
 import CommentController from "./comment_controller";
 import CommentReportingController from "./comment_reporting_controller";
+import TaggingController from "./tagging_controller";
 
 application.register('application', ApplicationController);
 application.register('autocomplete', Autocomplete);
@@ -39,3 +40,4 @@ application.register("comment", CommentController);
 application.register("comment-reporting", CommentReportingController);
 application.register("admin-tag", AdminTagController);
 //application.register("dashboard", DashboardController);
+application.register("tagging", TaggingController);
