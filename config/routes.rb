@@ -119,6 +119,10 @@ Rails.application.routes.draw do
     resources :contexts, only: [:index] do 
       get '/:context_name' => "contexts#show", as: :context_articles, on: :member
     end
+
+    resources :article_types, only: [:index] do 
+      get '/:article_type_name' => "article_types#show", as: :article_by_types, on: :member
+    end
   end
 
 end

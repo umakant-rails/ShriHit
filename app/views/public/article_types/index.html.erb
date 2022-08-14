@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="card">
+    <div class="card-body h-100" style="min-height: 545px;">
+      <div class="row page-subject-header">
+        <%= params[:article_type] %> ( रचना प्रकार ) : रचना सूची
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="row-fluid">
+        <% if @article_types.present? %>
+          <% @article_types.each do | article_type | %>
+            <%= link_to article_type.name, article_by_types_public_article_type_path(article_type.id, article_type.name), class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -98,12 +98,12 @@
         <ul class="nav flex-column">
           <% @article_types.limit(5).each do | article_type | %>
             <li class="nav-item mb-2">
-              <%= link_to article_type.name, articles_by_type_public_articles_path(article_type.name), class: "nav-link p-0 text-muted" %>
+              <%= link_to article_type.name, article_by_types_public_article_type_path(article_type.id, article_type.name), class: "nav-link p-0 text-muted" %>
             </li>
           <% end %>
           <% if @article_types.length > 5 %>
             <li class="nav-item mb-2">
-              <%= link_to "View more ...", article_types_public_articles_path, class: "nav-link p-0 text-muted" %>
+              <%= link_to "View more ...", public_article_types_path, class: "nav-link p-0 text-muted" %>
             </li>
           <% end %>
         </ul>
