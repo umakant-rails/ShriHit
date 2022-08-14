@@ -41,7 +41,7 @@
           <%= form_tag(tags_update_article_path(@article) ) do %>
             <div class="mb-3">
               <% article_tags = @article.tags %>
-              <label for='tags' class='form-label'>टैग्स</label>
+              <label for='tags' class='form-label'>रचना के टैग अद्यतन करे </label>
               <%= hidden_field_tag "article[tags]", article_tags.pluck(:name).join(","), 
                 'data-tagging-target': 'articleTags', 'data-tag-array': article_tags.pluck(:name).each{|nm| nm.strip!}.join(",") %>
 

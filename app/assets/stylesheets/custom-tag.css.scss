@@ -9,13 +9,27 @@
   padding: 4px 10px;
 }
 
-.tag-txt:hover{
+.tags:hover{
+  color: #FFF;
+  background: #F08376;
+}
+
+.tags-txt{
+  font-size: 16px;
+  background-color:#a366ff;
+  color:#fff;
+  display: inline-block;
+  margin-top: 5px;
+  margin-right: 6px;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+.tags-txt:hover{
   color: #FFF;
 }
 
-.tags:hover{
-  background: #F08376;
-}
+
 .tags-cross{
   margin-left: 8px;
   font-size: 12px;

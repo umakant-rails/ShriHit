@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     @article_types = ArticleType.order("name ASC")
     @contexts = Context.order("name ASC")
     @authors = Author.order("name ASC")
+    @tags = Tag.approved.order("name ASC")
     @contributors = User.order("username ASC")
   end
 

@@ -27,7 +27,7 @@
 </footer> -->
 <footer class="footer border-top pt-5 my5">
   <div class="container">
-    <div class="row row-cols-5 mx-1">
+    <div class="row row-cols-6 mx-1">
       <div class="col">
         <a href="<%= root_path %>" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
            <img src="/assets/lalji_icon.jpg" alt="ShriHit" class="footer-icon">
@@ -35,6 +35,24 @@
       </div>
 
       <div class="col">
+      </div>
+
+      <div class="col">
+        <h4>
+          <strong>टैग्स</strong>
+        </h4>
+        <ul class="nav flex-column">
+          <% @tags.limit(5).each do | tag | %>
+            <li class="nav-item mb-2">
+              <%= link_to tag.name, tag_articles_public_tag_path(tag.id, tag.name), class: "nav-link p-0 text-muted" %>
+            </li>
+          <% end %>
+          <% if @tags.length > 5 %>
+            <li class="nav-item mb-2">
+              <%= link_to "View more ...", public_tags_path, class: "nav-link p-0 text-muted" %>
+            </li>
+          <% end %>
+        </ul>
       </div>
 
       <div class="col">

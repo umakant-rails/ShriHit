@@ -111,11 +111,9 @@ Rails.application.routes.draw do
     end
     get "/about" => "abouts#about", as: :about
     resources :suggestions, only: [:index, :new, :create, :show]
-  end
 
-  namespace :public_page do
-    resources :export, only: [:index] do
-      get "/export_pdf" => "export#article_pdf", as: :export_pdf, on: :member
+    resources :tags, only: [:index] do
+      get '/:tag_name' => "tags#show", as: :tag_articles, on: :member
     end
   end
 
