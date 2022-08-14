@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="card">
+    <div class="card-body h-100" style="min-height: 545px;">
+      <div class="row page-subject-header">
+        प्रसंग सूची
+      </div>
+      <div class="dropdown-divider"></div>
+      <div class="row-fluid">
+        <% if @contexts.present? %>
+          <% @contexts.each do | context | %>
+            <%= link_to context.name, context_articles_public_context_path(context.id, context.name), class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

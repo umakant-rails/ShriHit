@@ -115,6 +115,10 @@ Rails.application.routes.draw do
     resources :tags, only: [:index] do
       get '/:tag_name' => "tags#show", as: :tag_articles, on: :member
     end
+
+    resources :contexts, only: [:index] do 
+      get '/:context_name' => "contexts#show", as: :context_articles, on: :member
+    end
   end
 
 end

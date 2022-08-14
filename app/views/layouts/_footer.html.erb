@@ -62,12 +62,12 @@
         <ul class="nav flex-column">
           <% @contexts.limit(5).each do | context | %>
             <li class="nav-item mb-2">
-              <%= link_to context.name, articles_by_context_public_articles_path(context.name), class: "nav-link p-0 text-muted" %>
+              <%= link_to context.name, context_articles_public_context_path(context.id, context.name), class: "nav-link p-0 text-muted" %>
             </li>
           <% end %>
           <% if @contexts.length > 5 %>
             <li class="nav-item mb-2">
-              <%= link_to "View more ...", article_contexts_public_articles_path, class: "nav-link p-0 text-muted" %>
+              <%= link_to "View more ...", public_contexts_path, class: "nav-link p-0 text-muted" %>
             </li>
           <% end %>
         </ul>

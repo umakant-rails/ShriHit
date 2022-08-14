@@ -5,7 +5,6 @@ class Public::TagsController < ApplicationController
   end
 
   def show
-    #binding.break
     @tag = Tag.find(params[:id])
     @tag_articles = @tag.articles.page(params[:page])
   end
