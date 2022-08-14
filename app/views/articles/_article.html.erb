@@ -28,6 +28,11 @@
 				  <i class="fa fa-edit"></i>
 				<% end %>
 			</div>
+			<div class="col-md-2 text-primary">
+				<%= link_to tags_article_path(article) do %>
+		  		<i class="fa-solid fa-tags"></i>
+		  	<% end %>
+		  </div>
 			<div class="col-md-2">
 				<%= form_for(article, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
 		      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">

@@ -1,0 +1,87 @@
+<div class="row" data-controller="tagging">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <% article_tags = @article.tags %>
+          <div class="col-md-8">
+            <a href="<%= public_article_path (@article) %>" class="article-title text-primary">
+              रचना : <%= @article.hindi_title %>
+            </a>
+            <div class="contributer-text">
+              (योगदानकर्ता : 
+                <strong>
+                  <%= link_to @article.user.username.capitalize, public_user_profile_path(@article.user.id) %>
+                </strong>, 
+                Created at : 
+                <strong class="text-primary">
+                  <%= @article.created_at.strftime("%B %d, %Y")%>
+                </strong>,
+                रचना प्रकार - 
+                <strong class="text-primary">
+                  <%= @article.article_type.name %>
+                </strong>
+              )
+            </div>
+          </div>
+          <div class="col-md-4 text-end text-primary author-mark-txt"> 
+            <%= link_to(export_pdf_public_article_path(@article.id, format: :pdf), class: "export-pdf", target: "_blank") do %>
+              <!-- <i class="fa-solid fa-file-export"></i> -->
+              <i class="fas fa-file-download"></i>
+            <% end %>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="ms-4 article-body" data-controller= 'article'>
+          <div class="article-content">
+            <%= raw @article.content %>
+          </div>
+        </div>
+        <div class="m-sm-5 article-tags-block">
+          <%= form_tag(tags_update_article_path(@article) ) do %>
+            <div class="mb-3">
+              <% article_tags = @article.tags %>
+              <label for='tags' class='form-label'>टैग्स</label>
+              <%= hidden_field_tag "article[tags]", article_tags.pluck(:name).join(","), 
+                'data-tagging-target': 'articleTags', 'data-tag-array': article_tags.pluck(:name).each{|nm| nm.strip!}.join(",") %>
+
+              <select class="form-control" 
+                data-tags="<%=@tags.pluck(:name).each{|nm| nm.strip!}.join(',')%>"
+                data-action= "focus->tagging#showTagsDataList click->tagging#selectTag"
+                data-tagging-target= "tagSelectInput">
+              </select>
+              <div data-tagging-target="newTagBlock" style="display:none;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <%= text_field_tag "new_tag", nil, id: "tag-input-field", 
+                    'data-tagging-target': 'newTag', class: 'form-control', 
+                    placeholder: "New Tage Type here...", "data-action": "keyup->tagging#createTagFromInput"%>
+                  </div>
+                  <div class="col-md-6">
+                    <a href="javascript:void(0);" data-action="tagging#createTag" class="btn btn-primary">टैग बनाये</a>
+                    <a href="javascript:void(0);" data-action="tagging#showtagList" class="btn btn-primary">सूची प्रदर्शित करे </a>
+                  </div>
+                </div>
+              </div>
+              <div id="tag-list" data-tagging-target="tagList" class="">
+                <% article_tags && article_tags.each do | tag | %>
+                  <span class='tags'>
+                    <%= tag.name %>
+                    <i class='fa-solid fa-xmark tags-cross' data-tags-target='crossTag' 
+                      data-action='click->tagging#removeTag'></i>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+            <div class="mt-5">
+              <%= submit_tag("टैग अद्यतन करे", class: "btn btn-primary btn-lg") %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/article-tags-update" %>
+<% end %>

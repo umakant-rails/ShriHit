@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :set_article, only: %i[ show edit update destroy tags tags_update ]
   before_action :create_author, only: [:create]
   before_action :create_context, only: [:create]
 
@@ -64,6 +64,17 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def tags
+    @tags = Tag.approved.order("name ASC")
+  end
+
+  def tags_update
+    update_tags_for_articles
+    respond_to do |format|
+      format.html { redirect_to articles_url, notice: "Tags was successfully updated." }
     end
   end
 

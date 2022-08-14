@@ -1,12 +1,16 @@
 .tags{
   font-size: 16px;
-  background-color:#3b7ddd;
+  background-color:#a366ff;
   color:#fff;
   display: inline-block;
   margin-top: 5px;
   margin-right: 6px;
   border-radius: 4px;
-  padding: 3px 8px;
+  padding: 4px 10px;
+}
+
+.tag-txt:hover{
+  color: #FFF;
 }
 
 .tags:hover{

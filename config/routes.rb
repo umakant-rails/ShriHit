@@ -23,7 +23,10 @@ Rails.application.routes.draw do
   end
 
   resources :homes, only: [:index]
-  resources :articles
+  resources :articles do 
+    get   "/tags" => "articles#tags", as: :tags, on: :member
+    post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member
+  end
   resources :comments
 
   resources :themes do

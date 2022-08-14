@@ -53,7 +53,9 @@ export default class extends ApplicationController {
       valueTxt = valueTxt.substring(0, valueTxt.indexOf(",")-1).trim();
       if(this.selectedTagList.indexOf(valueTxt) > -1){
         super.showErrorsByLayout("यह टैग लिस्ट में पहले से उपलब्ध है");
-      } else {
+      } else if(this.tagsArray.indexOf(valueTxt) > -1){
+        super.showErrorsByLayout("ययह टैग सूची में पूर्व से उपलब्ध है कृपया इसको सूची से चुने !"); 
+      } else if (valueTxt,length > 2){
         this.selectedTagList.push(valueTxt);
         this.addTagInHtml();
       }
@@ -65,15 +67,17 @@ export default class extends ApplicationController {
 
     if(this.selectedTagList.indexOf(valueTxt) > -1){
       super.showErrorsByLayout("यह टैग लिस्ट में पहले से उपलब्ध है");
+    } else if(this.tagsArray.indexOf(valueTxt) > -1){
+      super.showErrorsByLayout("ययह टैग सूची में पूर्व से उपलब्ध है कृपया इसको सूची से चुने !"); 
     } else if(valueTxt.indexOf(",") > 0){
       valueTxt = valueTxt.substring(0, valueTxt.indexOf(",")-1).trim();
       this.selectedTagList.push(valueTxt);
       this.addTagInHtml();
-    } else {
+    } else if(valueTxt.length > 2) {
       this.selectedTagList.push(valueTxt);
       this.addTagInHtml();
     }
-    event.target.value = "";
+    this.newTagTarget.value = "";
   }
 
   removeTag(){
