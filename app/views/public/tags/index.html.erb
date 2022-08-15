@@ -8,7 +8,7 @@
       <div class="row-fluid">
         <% if @tags.present? %>
           <% @tags.each do | tag | %>
-            <%= link_to tag.name, tag_articles_public_tag_path(tag.id, tag.name), class: "tags-txt" %>
+            <%= link_to tag.name, articles_by_tag_public_tags_path(tag.name), class: "tags-txt" %>
           <% end %>
         <% end %>
       </div>

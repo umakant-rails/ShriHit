@@ -54,7 +54,7 @@
               <div class="article-tag-txt text-primary mt-3">
                 <strong>सम्बंधित बिषय :-</strong>&nbsp;&nbsp;
                 <% article_tags.each do | tag | %>
-                  <a href="<%= tag_articles_public_tag_path(tag.id, tag.name) %>" class='tags-txt'>
+                  <a href="<%= articles_by_tag_public_tags_path(tag.name) %>" class='tags-txt'>
                     <i class="fa-solid fa-tags"></i> <%= tag.name %>
                   </a>
                 <% end %>

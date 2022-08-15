@@ -97,15 +97,15 @@ Rails.application.routes.draw do
   namespace :public, path: :pb do
     resources :authors, only: [:index, :show]
     resources :articles, only: [:index, :show] do
-      get "/type/:article_type" => "articles#articles_by_type", as: :articles_by_type, on: :collection
-      get "/contexts/:context_name" => "articles#articles_by_context", as: :articles_by_context, on: :collection
+      # get "/type/:article_type" => "articles#articles_by_type", as: :articles_by_type, on: :collection
+      # get "/contexts/:context_name" => "articles#articles_by_context", as: :articles_by_context, on: :collection
       get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
       get "/search_term" => "articles#search_term", as: :search_term, on: :collection
       #get "/search_article/:id" => "articles#search_article", as: :search_article, on: :collection
       get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
 
-      get "/article_contexts" => "articles#article_contexts", as: :article_contexts, on: :collection
-      get "/article_types" => "articles#article_types", as: :article_types, on: :collection
+      # get "/article_contexts" => "articles#article_contexts", as: :article_contexts, on: :collection
+      # get "/article_types" => "articles#article_types", as: :article_types, on: :collection
     end
     resources :user_profiles, only: [:index, :show] do
     end
@@ -113,15 +113,15 @@ Rails.application.routes.draw do
     resources :suggestions, only: [:index, :new, :create, :show]
 
     resources :tags, only: [:index] do
-      get '/:tag_name' => "tags#show", as: :tag_articles, on: :member
+      get '/:tag_name' => "tags#show", as: :articles_by_tag, on: :collection
     end
 
     resources :contexts, only: [:index] do 
-      get '/:context_name' => "contexts#show", as: :context_articles, on: :member
+      get '/:context_name' => "contexts#show", as: :articles_by_context, on: :collection
     end
 
     resources :article_types, only: [:index] do 
-      get '/:article_type_name' => "article_types#show", as: :article_by_types, on: :member
+      get '/:article_type_name' => "article_types#show", as: :articles_by_type, on: :collection
     end
   end
 

@@ -5,8 +5,12 @@ class Public::ContextsController < ApplicationController
   end
 
   def show
-    @context = Context.find(params[:id])
-    @context_articles = @context.articles.page(params[:page])
+    if(params[:id].blank? && params[:context_name].present?)
+      @context = Context.where(name: params[:context_name].strip)[0]
+    elsif params[:id].present?
+      @context = Context.find(params[:id])
+    end
+    @context_articles = @context.articles.page(params[:page]) rescue []
   end
 
 end

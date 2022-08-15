@@ -14,25 +14,25 @@ class Public::ArticlesController < ApplicationController
     @comments = @article.comments.order("created_at DESC")
   end
 
-  def articles_by_type
-    @page_size = 10
-    @articles = Article.joins(:article_type).where(article_types: {name: params[:article_type]})
-      .page(params[:page]).per(10)
-  end
+  # def articles_by_type
+  #   @page_size = 10
+  #   @articles = Article.joins(:article_type).where(article_types: {name: params[:article_type]})
+  #     .page(params[:page]).per(10)
+  # end
 
-  def articles_by_context
-    @page_size = 10
-    @articles = Article.joins(:context).where("contexts.name = ?",params[:context_name])
-      .page(params[:page]).per(10)
-  end
+  # def articles_by_context
+  #   @page_size = 10
+  #   @articles = Article.joins(:context).where("contexts.name = ?",params[:context_name])
+  #     .page(params[:page]).per(10)
+  # end
 
-  def article_types
-    @article_types = ArticleType.order("created_at ASC").page(params[:page]).per(10)
-  end
+  # def article_types
+  #   @article_types = ArticleType.order("created_at ASC").page(params[:page]).per(10)
+  # end
   
-  def article_contexts
-    @article_contexts = Context.order("name ASC") #.page(params[:page]).per(10)
-  end
+  # def article_contexts
+  #   @article_contexts = Context.order("name ASC") #.page(params[:page]).per(10)
+  # end
 
   def article_pdf
     @article = Article.find(params[:id])

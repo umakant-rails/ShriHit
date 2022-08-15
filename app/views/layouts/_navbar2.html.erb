@@ -21,7 +21,7 @@
           <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
             <% @article_types && @article_types.each do |article_type| %>
               <li>
-                <a class="dropdown-item" href="<%= articles_by_type_public_articles_path(article_type.name) %>">
+                <a class="dropdown-item" href="<%= articles_by_type_public_article_types_path(article_type.name) %>">
                   <%= article_type.name %>
                 </a>
               </li>
@@ -35,7 +35,7 @@
           <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
             <% @contexts && @contexts.each do |context| %>
               <li>
-                <a class="dropdown-item" href="<%= articles_by_context_public_articles_path(context.name) %>">
+                <a class="dropdown-item" href="<%= articles_by_context_public_contexts_path(context.name) %>">
                   <%= context.name %>
                 </a>
               </li>
