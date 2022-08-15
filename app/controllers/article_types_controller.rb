@@ -23,6 +23,7 @@ class ArticleTypesController < ApplicationController
 
   # POST /article_types or /article_types.json
   def create
+    params[:article_type][:name] = params[:article_type][:name].strip
     @article_type = current_user.article_types.new(article_type_params)
 
     respond_to do |format|

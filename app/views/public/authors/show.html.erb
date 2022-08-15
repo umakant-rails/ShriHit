@@ -6,15 +6,15 @@
           रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.present? ? @author.sampradaya.name : 'सम्प्रदाय - NA' %> )
         </span>
         <span class="col-md-6 text-end author-mark-txt">
-          <a href="<%= public_user_profile_path(@author.user.id) %>" class="text-white">
-            ( योगदानकर्ता : <%= @author.user.username %> )
+          <a href="<%= @author.present? ? public_user_profile_path(@author.user.id) : '' %>" class="text-white">
+            ( योगदानकर्ता : <%= @author.present? ? @author.user.username : 'Not Available' %> )
           </a>
         </span>
       </div>
       <div class="dropdown-divider"></div>
       <div class="m-sm-4" data-controller= 'article'>
         <div class="article-content">
-          <% if @author.biography.present? %>
+          <% if @author && @author.biography.present? %>
             <%= raw @author.biography %>
           <% else %>
             There is no biography.

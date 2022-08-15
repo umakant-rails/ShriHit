@@ -14,6 +14,7 @@ class AuthorsController < ApplicationController
   end
 
   def create
+    params[:author][:name] = params[:author][:name].strip
     @author = current_user.authors.new(author_params)
 
     respond_to do |format|

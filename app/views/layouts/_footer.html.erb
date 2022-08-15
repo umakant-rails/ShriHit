@@ -80,7 +80,7 @@
         <ul class="nav flex-column">
           <% @authors.limit(5).each do | author | %>
             <li class="nav-item mb-2">
-              <%= link_to author.name, public_author_path(author), class: "nav-link p-0 text-muted" %>
+              <%= link_to author.name, articles_by_author_public_authors_path(author.name), class: "nav-link p-0 text-muted" %>
             </li>
           <% end %>
           <% if @authors.length > 5 %>

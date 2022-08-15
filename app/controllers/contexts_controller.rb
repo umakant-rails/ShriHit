@@ -23,6 +23,7 @@ class ContextsController < ApplicationController
 
   # POST /contexts or /contexts.json
   def create
+    params[:context][:name] = params[:context][:name].strip
     @context = current_user.contexts.new(context_params)
 
     respond_to do |format|

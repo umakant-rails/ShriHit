@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="card">
+    <div class="card-body">
+      <div class="page-subject-header">
+        <span class="col-md-6 text-start article-title">
+            <%= @author.blank? ? params[:author_name] : @author.name %> ( रचनाकार/कवि/भक्त ) : रचना सूची 
+        </span>
+      </div>
+      <div class="dropdown-divider"></div>
+      <%= render partial: "public/shared/article", locals: {articles: @articles, page: 0, page_size: 0} %>
+    </div>
+  </div>
+</div>

@@ -95,7 +95,7 @@ Rails.application.routes.draw do
   end
   
   namespace :public, path: :pb do
-    resources :authors, only: [:index, :show]
+    
     resources :articles, only: [:index, :show] do
       # get "/type/:article_type" => "articles#articles_by_type", as: :articles_by_type, on: :collection
       # get "/contexts/:context_name" => "articles#articles_by_context", as: :articles_by_context, on: :collection
@@ -112,14 +112,15 @@ Rails.application.routes.draw do
     get "/about" => "abouts#about", as: :about
     resources :suggestions, only: [:index, :new, :create, :show]
 
+    resources :authors, only: [:index, :show] do
+      get '/articles_by_author/:author_name' => "authors#articles_by_author", as: :articles_by_author, on: :collection
+    end
     resources :tags, only: [:index] do
       get '/:tag_name' => "tags#show", as: :articles_by_tag, on: :collection
     end
-
     resources :contexts, only: [:index] do 
       get '/:context_name' => "contexts#show", as: :articles_by_context, on: :collection
     end
-
     resources :article_types, only: [:index] do 
       get '/:article_type_name' => "article_types#show", as: :articles_by_type, on: :collection
     end
