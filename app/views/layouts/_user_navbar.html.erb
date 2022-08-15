@@ -13,7 +13,7 @@
         <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
           <% @article_types && @article_types.each do |article_type| %>
             <li>
-              <a class="dropdown-item" href="<%= articles_by_type_public_article_types_path(article_type.id, article_type.name) %>">
+              <a class="dropdown-item" href="<%= articles_by_type_public_article_types_path( article_type.name) %>">
                 <%= article_type.name %>
               </a>
             </li>
@@ -70,6 +70,11 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<%= public_suggestions_path %>">नए सुझाव</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<%= search_articles_public_articles_path %>">
+          <i class="fa-solid fa-magnifying-glass"></i> Search Article
+        </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="<%= public_about_path %>">About</a>

@@ -80,14 +80,13 @@
           <a class="nav-link" href="<%= public_suggestions_path %>">सुझाव</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%= public_about_path %>">About</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="<%= search_articles_public_articles_path %>">
             <i class="fa-solid fa-magnifying-glass"></i> Search Article
           </a>
         </li>
-        
+        <li class="nav-item">
+          <a class="nav-link" href="<%= public_about_path %>">About</a>
+        </li>
       </ul>
       <ul class="navbar-nav">
         <% if current_user.blank? %>
