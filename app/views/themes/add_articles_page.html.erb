@@ -36,15 +36,7 @@
 		    	<div class="row">
 		    		<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-themechapter-target="csrfToken">
 			    	<ul class="list-group" id="theme-article-list">
-				      <%@articles && @articles.each_with_index do |article, index|%>
-				      	<%= render "article", article: article %>
-							  <!-- <li class="list-group-item">
-							  	<%#= article.hindi_title %>
-							  	<span class="fRight add-article-in-theme" data-action="click->themechapter#addArticleInTheme" data-id="<%#= article.id %>">
-								  	<i class="fa-solid fa-angle-right pull-right"></i>
-								  </span>
-							  </li> -->
-			        <% end %>
+			      	<%= render partial: "article", locals: {articles: @articles} %>
 						</ul>
 					</div>
 		    </div>
@@ -55,7 +47,7 @@
 		    <div class="card-body h-100">
 		    	<div class="row">
 		    		<span class="text-primary chapter-article-header">
-		          <%= @theme_chapters.blank? ? "उत्सव में जोड़ी गयी रचनाये" : "उत्सव के खंड/प्रकरण में जोड़ी गयी रचनाये"%> 
+		          <%= @theme_chapters.blank? ? "उत्सव में जोड़ी गयी रचनाये" : "उत्सव के खंड/प्रकरण में जोड़ी गयी रचनाये"%>
 		        </span>
 		        <div class="dropdown-divider"></div>
 			    	<ul class="list-group" id="theme-added-article-list">

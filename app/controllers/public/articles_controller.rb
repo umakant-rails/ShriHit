@@ -5,7 +5,7 @@ class Public::ArticlesController < ApplicationController
     @article_types = ArticleType.order("name ASC")
     @contexts = Context.order("name ASC")
     @authors = Author.order("name ASC").limit(10)
-    @articles = Article.order("created_at DESC")
+    @articles = Article.order("created_at DESC").page(params[:page])
     @contributors = User.all
   end
 
@@ -75,11 +75,11 @@ class Public::ArticlesController < ApplicationController
     search_term = params[:q].strip
 
     if params[:search_in] == "english"
-      @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
-        "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+      @articles = Article.by_search_english_term(search_term)
     else
-      @articles = Article.where("content like ?", "%#{search_term}%")
+      @articles = Article.by_search_hindi_term(search_term)
     end
+
     respond_to do |format|
       format.html {}
       format.json { head :no_content }
@@ -87,13 +87,31 @@ class Public::ArticlesController < ApplicationController
     render layout: false
   end
 
-  def search_term
-    @added_articles, @articles = Article.get_articles_by_params(params)
+  def search_articles
+    # @added_articles, @articles = Article.get_articles_by_params(params)
+
+    if params[:search_type] == 'by_attribute'
+      queryy = Article.by_attributes_query(params[:author_id], params[:context_id], 
+        params[:article_type_id], params[:theme_chapter_id], params[:contributor_id]
+      )
+      @articles = Article.where(queryy).page(params[:page])
+    elsif params[:search_type] == 'by_id'
+      @articles = Article.where(id: params[:article_id]).page(params[:page])
+    elsif params[:search_type] == 'by_term'
+      search_term = params[:term]
+      if params[:search_in] == "english"
+        @articles = Article.by_search_english_term(search_term).page(params[:page])
+      else
+        @articles = Article.by_search_hindi_term(search_term).page(params[:page])
+      end
+    else
+      @articles = Article.order("created_at desc").page(params[:page])
+    end
+
     respond_to do |format|
       format.html {}
       format.js {}
     end
-    render layout: false
   end
 
   private

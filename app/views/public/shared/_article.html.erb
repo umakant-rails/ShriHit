@@ -6,6 +6,10 @@
     </tr>
   </thead>
   <tbody>
+    <%
+      page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
+      page_size = articles.present? ? articles.limit_value : 0
+    %>
     <% if articles.present? %>
       <% articles.each_with_index do | article, index | %>
         <tr class="article-item">
@@ -26,3 +30,6 @@
     <% end %>
   </tbody>
 </table>
+<div id="paginate-block">
+  <%= paginate articles, remote: true %>
+</div>

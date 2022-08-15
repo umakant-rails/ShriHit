@@ -138,7 +138,7 @@ export default class extends ApplicationController {
     $.ajax({
       type: "get",
       //url: '/themes/search_articles',
-      url: '/pb/articles/search_term',
+      url: '/pb/articles/search_articles',
       data: searchParams,
       dataType: 'script',
       success: function(data){

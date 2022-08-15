@@ -58,13 +58,12 @@ class ThemesController < ApplicationController
     @article_types = ArticleType.all
     @contexts = Context.all
     @authors = Author.all
-    @articles = Article.all
+    @articles = Article.order("hindi_title ASC").page(params[:page])
     @theme_chapters = @theme.theme_chapters
   end
 
   def search_articles
-    @added_articles, @articles = Article.get_articles_by_params(params)
-    #get_articles_by_params
+    get_articles_by_params
     respond_to do |format|
       format.html {}
       format.js {}
@@ -76,8 +75,7 @@ class ThemesController < ApplicationController
     if current_user.theme_articles.where(theme_article_params).blank?
       @theme_article = current_user.theme_articles.new(theme_article_params)
       if @theme_article.save
-        #get_articles_by_params
-        @added_articles, @articles = Article.get_articles_by_params(params)
+        get_articles_by_params
         flash[:success] = "उत्सव में रचना सफलतापूर्वक जोड़ दी गई है."
       else
         flash[:error] = "उत्सव में रचना जोड़ने की प्रकिया असफल हो गई है."
@@ -97,8 +95,8 @@ class ThemesController < ApplicationController
     @theme_article = current_user.theme_articles.find(params[:theme_article_id])
 
     if @theme_article.destroy
-      # get_articles_by_params
-      @added_articles, @articles = Article.get_articles_by_params(params)
+      get_articles_by_params
+      # @added_articles, @articles = Article.get_articles_by_params(params)
       flash[:success] = "उत्सव से रचना सफलतापूर्वक हटा दी गई है."
     else
       flash[:error] = "उत्सव में रचना हटाने की प्रकिया असफल हो गई है."
@@ -113,6 +111,32 @@ class ThemesController < ApplicationController
 
   private
     
+    def get_articles_by_params
+      queryy = ''
+      if params[:theme_chapter_id].present?
+        @added_articles = ThemeArticle.joins(:article).where(theme_chapter_id: params[:theme_chapter_id])
+      end
+
+      if params[:search_type] == 'by_attribute'
+        queryy = Article.by_attributes_query(params[:author_id], params[:context_id], 
+          params[:article_type_id], params[:theme_chapter_id], params[:contributor_id]
+        )
+       elsif params[:search_type] == 'by_id'
+        queryy = "articles.id = #{params[:article_id]}"
+      elsif params[:search_type] == 'by_term'
+        search_term = params[:term].strip
+        if params[:search_in] == "english"
+          queryy = "LOWER(english_title) like '%#{search_term.downcase}%'"
+        else
+           queryy = "content like '%#{search_term}%'  or hindi_title like '%#{search_term}%'"
+        end
+      end
+
+      @articles = Article.where(queryy)
+        .where.not(id: @added_articles.pluck(:article_id))
+        .order("hindi_title ASC").page(params[:page])
+    end
+
     def set_theme
       @theme = current_user.themes.find(params[:id]) rescue nil
       if @theme.blank?

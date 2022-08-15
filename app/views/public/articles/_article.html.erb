@@ -6,9 +6,13 @@
     </tr>
   </thead>
   <tbody>
+    <%
+      page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
+      page_size = articles.present? ? articles.limit_value : 0
+    %>
     <% if articles.present? %>
       <% articles.each_with_index do | article, index | %>
-        <tr>
+        <tr class="article-item">
           <th scope="row"><%= (page * page_size) + (index + 1) %></th>
           <td>
             <a href="<%= public_article_path(article)%>">
@@ -26,3 +30,6 @@
     <% end %>
   </tbody>
 </table>
+<div id="paginate-block">
+  <%= paginate articles, remote: true %>
+</div>

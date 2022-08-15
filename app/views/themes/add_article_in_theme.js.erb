@@ -1,6 +1,6 @@
 $(".alert").hide();
 <% if flash[:success].present? %>
-	$("#theme-article-list").html("<%= escape_javascript(render partial: 'article', :collection => @articles, :as => :article)%>");
+	$("#theme-article-list").html("<%= escape_javascript(render partial: 'article', locals: { articles: @articles })%>");
 	$("#theme-added-article-list").html("<%= escape_javascript(render partial: 'added_article', :collection => @added_articles, :as => :theme_article)%>");
 	$("#successAlert").html("<%= flash[:success] %>");
 	$("#successAlert").parent().css("display", "block");

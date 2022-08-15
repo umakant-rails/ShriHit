@@ -100,7 +100,7 @@ Rails.application.routes.draw do
       # get "/type/:article_type" => "articles#articles_by_type", as: :articles_by_type, on: :collection
       # get "/contexts/:context_name" => "articles#articles_by_context", as: :articles_by_context, on: :collection
       get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
-      get "/search_term" => "articles#search_term", as: :search_term, on: :collection
+      get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
       #get "/search_article/:id" => "articles#search_article", as: :search_article, on: :collection
       get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
 
