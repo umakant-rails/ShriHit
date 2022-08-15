@@ -21,7 +21,7 @@
     		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-themechapter-target': 'authorName', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
     	</div>
     	<div class="col-md-3">
-    		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name"), :prompt => "लेखक चुने", class:"form-control", 'data-themechapter-target': 'authorName', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
+				<%= select_tag 'contributor_name', options_from_collection_for_select(@contributors, "id", "username"), :prompt => "योगदानकर्ता चुने", class:"form-control", 'data-themechapter-target': 'contributorName', 'data-action': 'change->themechapter#searchArticlesByAttrs' %>
     	</div>
     	<div class="col-md-2">
   			<input type="button" id="search_article_btn" value="Clear Filter" class="form-control btn btn-primary" data-themechapter-target='clearFiltersBtn' data-action="click->themechapter#clearFiltersAndGetArticles"/>
