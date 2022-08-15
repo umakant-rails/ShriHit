@@ -19,7 +19,7 @@
         <tbody class="table-group-divider">
           <% 
             page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
-            page_size = @authors.limit_value
+            page_size = @authors.present? ? @authors.limit_value : 0
           %>
           <% if @authors.present? %>
             <% @authors.each_with_index do | author, index | %>
@@ -48,7 +48,7 @@
           <% end %>
         </tbody>
       </table>
-      <%= paginate @authors, remote: true%>
+      <%= paginate @authors, remote: true if @authors.present? %>
     </div>
   </div>
 </div>

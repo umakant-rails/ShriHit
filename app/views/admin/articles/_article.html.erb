@@ -1,23 +1,54 @@
-<% approved_cls = article.is_approved ? "text-success" : "" %>
-<tr class="<%= approved_cls %>">
-  <td><%= index %></td>
-  <td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
-    <a href="<%= article_path(article.id) %>" class="<%= approved_cls %>">
-      <%= article.hindi_title %> 
-    </a>
-  </td>
-  <td>
-    <a href="<%= author_path(article.author.id) %>" class="<%= approved_cls %>">
-      <%= article.author.name %>
-    </a>
-  </td>
-  <td>
-    <%= article.article_type.name %> 
-  </td>
-  <td>
-    <%= article.user.username %> 
-  </td>
-  <td>
-    <%= article.is_approved? ? "स्वीकृत" : "अस्वीकृत" %>
-  </td>
-</tr>
+<% 
+  page = (articles.current_page - 1)
+  per_page = articles.present? ? articles.limit_value : 0 
+%>
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">S. No.</th>
+      <th scope="col">नई रचना</th>
+      <th scope="col">रचनाकार</th>
+      <th scope="col">रचना प्रकार</th>
+      <th scope="col">योगदानकर्ता</th>
+      <th scope="col">स्वीकृत/अस्वीकृत</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if articles.present? %>
+      <% articles.each_with_index do |article, index| %>
+        <% 
+          ind = (page * per_page) + (index + 1) 
+          approved_cls = article.is_approved ? "text-success" : ""
+        %>
+        <tr class="<%= approved_cls %>">
+          <td><%= ind %></td>
+          <td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
+            <a href="<%= article_path(article.id) %>" class="<%= approved_cls %>">
+              <%= article.hindi_title %> 
+            </a>
+          </td>
+          <td>
+            <a href="<%= author_path(article.author.id) %>" class="<%= approved_cls %>">
+              <%= article.author.name %>
+            </a>
+          </td>
+          <td>
+            <%= article.article_type.name %> 
+          </td>
+          <td>
+            <%= article.user.username %> 
+          </td>
+          <td>
+            <%= article.is_approved? ? "स्वीकृत" : "अस्वीकृत" %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3">
+          अभी रिकॉर्ड उपलब्ध नहीं है.
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

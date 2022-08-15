@@ -1,7 +1,6 @@
 class Public::AuthorsController < ApplicationController
 
   def index
-    @page_size = 10
     @authors = Author.order("name ASC").page(params[:page]).page(params[:page]).per(10)
   end
 

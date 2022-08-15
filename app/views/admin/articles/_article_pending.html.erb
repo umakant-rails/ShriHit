@@ -14,7 +14,7 @@
   <tbody>
     <% 
       page = articles.current_page - 1
-      page_size = articles.limit_value
+      page_size = articles.present? ? articles.limit_value : 0
     %>
     <% if articles.present? %>
       <% articles.each_with_index do |article, index| %>

@@ -18,7 +18,7 @@
           <tbody>
             <% 
               page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
-              page_size = @tags.limit_value
+              page_size = @tags.present? ? @tags.limit_value : 0
             %>
             <% if @tags.present? %>
               <% @tags.each_with_index do |tag, index| %>
@@ -34,8 +34,8 @@
             <% end %> 
           </tbody>
         </table>
-        <%= paginate @tags, remote: true%>
         <% if paginate(@tags).present? %>
+          <%= paginate @tags, remote: true%>
           <div class="dropdown-divider"></div>
         <% end %>
         <%= link_to "New tag", new_tag_path %>

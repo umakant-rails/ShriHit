@@ -8,12 +8,12 @@
       <div class="dropdown-divider"></div>
       <% 
         page = params[:page].blank? ?  0 : (params[:page].to_i - 1)
-        page_size = @tag_articles.limit_value
+        page_size = @tag_articles.present? ? @tag_articles.limit_value : 0
       %>
       <%= render partial: "public/shared/article", locals: {articles: @tag_articles, page: page, page_size: page_size} %>
     </div>
   </div>
 </div>
 <div class="row">
-  <%= paginate @tag_articles, remote: true %>
+  <%= paginate @tag_articles, remote: true if @tag_articles.present? %>
 </div>

@@ -21,7 +21,7 @@
 	      	<%= render "article_approved", articles: @articles_approved %>
 	      </div>
 	      <div id="paginate-block">
-      		<%= paginate @articles_approved, remote: true %>
+      		<%= paginate @articles_approved, remote: true if @articles_approved.present? %>
       	</div>
 			</div>
 		</div>

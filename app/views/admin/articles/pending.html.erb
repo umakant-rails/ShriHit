@@ -22,7 +22,7 @@
 	      	<%= render "article_pending", articles: @articles_pending %>
 	      </div>
 	      <div id="paginate-block">
-      		<%= paginate @articles_pending, remote: true %>
+      		<%= paginate @articles_pending, remote: true if @articles_pending.present? %>
       	</div>
 			</div>
 		</div>

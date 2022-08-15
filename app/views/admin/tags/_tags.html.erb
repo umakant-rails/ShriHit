@@ -11,7 +11,7 @@
     <% if tags.present? %>
       <%
         page = (tags.current_page - 1)
-        page_size = tags.limit_value
+        page_size = tags.present? ? tags.limit_value : 0
       %>
       <% tags.each_with_index  do | tag, index | %>
         <% ind = (page * page_size) + (index+1) %>

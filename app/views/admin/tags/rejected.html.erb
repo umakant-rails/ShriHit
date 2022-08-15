@@ -19,7 +19,7 @@
           <%= render "rejected_tags", tags: @tags %>
         </div>
         <div id="paginate-block">
-          <%= paginate @tags, remote: true %>
+          <%= paginate @tags, remote: true if @tags.present? %>
         </div>
       </div>
     </div>

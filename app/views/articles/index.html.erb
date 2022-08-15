@@ -21,7 +21,7 @@
             <% if @articles.present? %>
               <% 
                 page = (@articles.current_page - 1)
-                per_page = @articles.limit_value 
+                per_page = @articles.present? ? @articles.limit_value : 0
               %>
               <% @articles.each_with_index do |article, index| %>
                 <% ind = (page * per_page) + (index + 1) %>
@@ -36,8 +36,8 @@
             <% end %>
           </tbody>
         </table>
-        <%= paginate @articles, remote: true %>
         <% if paginate(@articles).present? %>
+          <%= paginate @articles, remote: true %>
           <div class="dropdown-divider"></div>
         <% end %>
         <%= link_to "New article", new_article_path %>
