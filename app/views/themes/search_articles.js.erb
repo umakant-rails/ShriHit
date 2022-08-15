@@ -1,3 +1,3 @@
-$("#theme-article-list").html("<%= escape_javascript(render partial: 'article', locals: {:articles => @articles} )%>");
-$("#theme-added-article-list").html("<%= escape_javascript(render partial: 'added_article', :collection => @added_articles, :as => :theme_article)%>");
+$("#theme-article-list").html("<%= escape_javascript(render partial: 'article', locals: {articles: @articles} )%>");
+$("#theme-added-article-list").html("<%= escape_javascript(render partial: 'added_article', locals: { articles: @added_articles})%>");
 //$("#paginate-block").html("<%#= escape_javascript(paginate @articles, remote: true) %>");

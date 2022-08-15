@@ -75,7 +75,6 @@ class ThemesController < ApplicationController
     if current_user.theme_articles.where(theme_article_params).blank?
       @theme_article = current_user.theme_articles.new(theme_article_params)
       if @theme_article.save
-        get_articles_by_params
         flash[:success] = "उत्सव में रचना सफलतापूर्वक जोड़ दी गई है."
       else
         flash[:error] = "उत्सव में रचना जोड़ने की प्रकिया असफल हो गई है."
@@ -83,6 +82,7 @@ class ThemesController < ApplicationController
     else
       flash[:error] = "उत्सव में रचना पहले से जुडी हुई है."
     end
+    get_articles_by_params
 
     respond_to do |format|
       format.html {}
@@ -92,16 +92,14 @@ class ThemesController < ApplicationController
   end
 
   def remove_article_from_theme
-    @theme_article = current_user.theme_articles.find(params[:theme_article_id])
+    @theme_article = current_user.theme_articles.find(params[:theme_article_id]) rescue nil
 
-    if @theme_article.destroy
-      get_articles_by_params
-      # @added_articles, @articles = Article.get_articles_by_params(params)
+    if @theme_article && @theme_article.destroy
       flash[:success] = "उत्सव से रचना सफलतापूर्वक हटा दी गई है."
     else
       flash[:error] = "उत्सव में रचना हटाने की प्रकिया असफल हो गई है."
     end
-
+    get_articles_by_params
     respond_to do |format|
       format.html {}
       format.js {}
@@ -113,8 +111,10 @@ class ThemesController < ApplicationController
     
     def get_articles_by_params
       queryy = ''
+      added_articles_tmp, articles_tmp = []
       if params[:theme_chapter_id].present?
-        @added_articles = ThemeArticle.joins(:article).where(theme_chapter_id: params[:theme_chapter_id])
+        added_articles_tmp = ThemeArticle.joins(:article).where(theme_chapter_id: params[:theme_chapter_id]).order("articles.hindi_title ASC")
+        @added_articles = Kaminari.paginate_array(added_articles_tmp).page(params[:page])
       end
 
       if params[:search_type] == 'by_attribute'
@@ -132,9 +132,11 @@ class ThemesController < ApplicationController
         end
       end
 
-      @articles = Article.where(queryy)
-        .where.not(id: @added_articles.pluck(:article_id))
-        .order("hindi_title ASC").page(params[:page])
+      articles_tmp = Article.where(queryy)
+        .where.not(id: added_articles_tmp.pluck(:article_id))
+        .order("hindi_title ASC")
+
+      @articles = Kaminari.paginate_array(articles_tmp).page(params[:page])
     end
 
     def set_theme

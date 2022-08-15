@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     get "/add_articles_page" => "themes#add_articles_page", as: :add_articles_page , on: :member
     post "/add_article_in_theme" => "themes#add_article_in_theme", as: :add_article_in_theme, on: :member
     post "/remove_article_from_theme" => "themes#remove_article_from_theme", as: :remove_article_from_theme, on: :member
-    get "/search_articles" => "themes#search_articles", as: :search_article, on: :collection
+    get "/search_articles" => "themes#search_articles", as: :search_articles, on: :collection
   end
   resources :authors
   resources :article_types

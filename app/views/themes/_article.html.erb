@@ -14,9 +14,9 @@
 <% end %>
 <br>
 <div id="paginate-block">
-  <%if params[:action] == "add_articles_page" %> 
+  <% if params[:action] == "add_articles_page" %> 
     <%= paginate articles %>
   <% else %>
-    <%= paginate articles, remote: true %>
+    <%= paginate articles, remote: true, :params => { controller: :themes, action: :search_articles } %>
   <% end %>
 </div>

@@ -1,8 +1,22 @@
-<li class="list-group-item">
-  <span class="fLeft" id="aritcle-title-<%= theme_article.article_id %>">
-    <%= theme_article.article.hindi_title %>    
-  </span>
-  <span class="fRight added-article-icon" data-action="click->themechapter#removeArticlesFromTheme" data-id="<%= theme_article.id %>">
-    <i class="fa-solid fa-trash-can pull-right"></i>
-  </span>
-</li>
+<%
+  page = (articles.current_page - 1)
+  page_size = articles.present? ? articles.limit_value : 0
+%>
+<% articles && articles.each_with_index do |theme_article, index|%>
+  <li class="list-group-item">
+    <span class="fLeft" id="aritcle-title-<%= theme_article.article_id %>">
+      <strong><%= (page*page_size) + (index+1)%>.</strong> <%= theme_article.article.hindi_title %>
+    </span>
+    <span class="fRight added-article-icon" data-action="click->themechapter#removeArticlesFromTheme" data-id="<%= theme_article.id %>">
+      <i class="fa-solid fa-trash-can pull-right"></i>
+    </span>
+  </li>
+<% end %>
+<br>
+<div id="paginate-block">
+  <% if params[:action] == "add_articles_page" %> 
+    <%= paginate articles %>
+  <% else %>
+    <%= paginate articles, remote: true, :params => { controller: :themes, action: :search_articles } %>
+  <% end %>
+</div>
