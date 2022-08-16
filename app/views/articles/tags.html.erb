@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="col-md-4 text-end text-primary author-mark-txt"> 
-            <%= link_to(export_pdf_public_article_path(@article.id, format: :pdf), class: "export-pdf", target: "_blank") do %>
+            <%= link_to(export_pdf_article_path(@article.id, format: :pdf), class: "export-pdf", target: "_blank") do %>
               <!-- <i class="fa-solid fa-file-export"></i> -->
               <i class="fas fa-file-download"></i>
             <% end %>

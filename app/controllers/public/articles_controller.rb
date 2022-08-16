@@ -38,43 +38,6 @@ class Public::ArticlesController < ApplicationController
   #   @article_contexts = Context.order("name ASC") #.page(params[:page]).per(10)
   # end
 
-  def article_pdf
-    @article = Article.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: @article.hindi_title,
-          save_to_file: @article.hindi_title,
-          template: "public/articles/article_pdf",
-          layout: "pdf_layout",
-          margin: {top: 14, bottom: 14, left: 10, right: 10},
-          title:  @article.english_title,
-          header: {
-            html: {
-              template: 'public/articles/pdf_content/header',
-              layout:   'pdf_plain'
-            },
-            line: true,
-            spacing: 4
-          },
-          footer: {
-            html: {
-              template: 'public/articles/pdf_content/footer',
-              layout:   'pdf_plain'
-            },
-            line: true,
-            spacing: 4
-          },
-          background: true,
-          show_as_html: false,
-          page_size: "A4",
-          encoding:"UTF-8",
-          print_media_type: true
-      end
-    end
-  end
-
   def autocomplete_term
     search_term = params[:q].strip
 

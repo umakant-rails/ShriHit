@@ -78,6 +78,44 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def article_pdf
+    @article = Article.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: @article.hindi_title,
+          save_to_file: @article.hindi_title,
+          template: "articles/article_pdf",
+          layout: "pdf_layout",
+          margin: {top: 14, bottom: 14, left: 10, right: 10},
+          title:  @article.english_title,
+          header: {
+            html: {
+              template: 'articles/pdf_content/header',
+              layout:   'pdf_plain'
+            },
+            line: true,
+            spacing: 4
+          },
+          footer: {
+            html: {
+              template: 'articles/pdf_content/footer',
+              layout:   'pdf_plain'
+            },
+            line: true,
+            spacing: 4
+          },
+          background: true,
+          show_as_html: false,
+          page_size: "A4",
+          encoding:"UTF-8",
+          print_media_type: true
+      end
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
 

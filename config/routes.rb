@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :articles do 
     get   "/tags" => "articles#tags", as: :tags, on: :member
     post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member
+    get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
   end
   resources :comments
 
@@ -69,14 +70,14 @@ Rails.application.routes.draw do
       get "/reject" => "authors#reject", as: :reject, on: :member
       post "/merge" => "authors#merge", as: :merge, on: :member
     end
-    # resources :contexts, only: [:index, :update] do
-    #   get "/approved" => "contexts#approved", as: :approved_contexts, on: :collection
-    #   get "/pending" => "contexts#pending", as: :pending_contexts, on: :collection
-    #   get "/report" => "contexts#report", as: :report_contexts, on: :collection
-    #   get "/approve" => "contexts#approve", as: :approve, on: :member
-    #   get "/reject" => "contexts#reject", as: :reject, on: :member
-    #   post "/merge" => "contexts#merge", as: :merge, on: :member
-    # end
+    resources :contexts, only: [:index, :update] do
+      # get "/approved" => "contexts#approved", as: :approved_contexts, on: :collection
+      # get "/pending" => "contexts#pending", as: :pending_contexts, on: :collection
+      get "/report" => "contexts#report", as: :report_contexts, on: :collection
+      # get "/approve" => "contexts#approve", as: :approve, on: :member
+      # get "/reject" => "contexts#reject", as: :reject, on: :member
+      # post "/merge" => "contexts#merge", as: :merge, on: :member
+    end
 
     resources :tags, only: [:index] do
       post "/reject" => "tags#reject", as: :reject, on: :member
@@ -102,7 +103,7 @@ Rails.application.routes.draw do
       get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
       get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
       #get "/search_article/:id" => "articles#search_article", as: :search_article, on: :collection
-      get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
+      #get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
       get "/article_by_title/:hindi_title" => "articles#article_by_title", as: :article_by_title, on: :collection
       # get "/article_contexts" => "articles#article_contexts", as: :article_contexts, on: :collection
       # get "/article_types" => "articles#article_types", as: :article_types, on: :collection

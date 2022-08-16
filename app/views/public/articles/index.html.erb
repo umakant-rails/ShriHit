@@ -11,7 +11,7 @@
 		              रचना : <%= article.hindi_title %>
 		            </a>
 		            <% if current_user.present? %> 
-		              <%= link_to(export_pdf_public_article_path(article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
+		              <%= link_to(export_pdf_article_path(article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
 		                <!-- <i class="fa-solid fa-file-export"></i> -->
 		                 <i class="fas fa-file-download"></i>
 		              <% end %>
