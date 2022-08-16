@@ -15,7 +15,7 @@
         <tr class="article-item">
           <th scope="row"><%= (page * page_size) + (index + 1) %></th>
           <td>
-            <a href="<%= public_article_path(article)%>">
+            <a href="<%= article_by_title_public_articles_path(article.hindi_title)%>">
               <%= article.hindi_title %>
             </a>
           </td>

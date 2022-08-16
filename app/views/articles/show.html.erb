@@ -16,13 +16,17 @@
           <strong>
             <%= link_to @article.user.username.capitalize, public_user_profile_path(@article.user.id) %>
           </strong>, 
-          Created at : 
+          सृजन तिथि : 
           <strong class="text-primary">
-            <%= @article.created_at.strftime("%B %d, %Y")%>
+            <%= link_to @article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
           </strong>,
           रचना प्रकार - 
-          <strong class="text-primary">
-            <%= @article.article_type.name %>
+          <strong class="text-primary fnt-sz-14">
+            <%= link_to @article.article_type.name, articles_by_type_public_article_types_path(@article.article_type.name) %>
+          </strong>,
+          रचनाकार - 
+          <strong class="text-primary fnt-sz-14">
+            <%= link_to @article.author.name, public_author_path(@article.author.id) %>
           </strong>
         )
       </div>
@@ -40,7 +44,7 @@
           <strong>सम्बंधित बिषय :-</strong>&nbsp;&nbsp;
           <% article_tags.each do | tag | %>
             <a href="<%= articles_by_tag_public_tags_path(tag.name) %>" class='tags-txt'>
-              <i class="fa-solid fa-tags"></i> <%= tag.name %>
+              <i class="fa-solid fa-tag"></i> <%= tag.name %>
             </a>
           <% end %>
         </div>

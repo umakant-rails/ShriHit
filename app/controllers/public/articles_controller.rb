@@ -14,6 +14,10 @@ class Public::ArticlesController < ApplicationController
     @comments = @article.comments.order("created_at DESC")
   end
 
+  def article_by_title
+    @article = Article.where(hindi_title: params[:hindi_title])[0]
+    @comments = @article.comments.order("created_at DESC")
+  end
   # def articles_by_type
   #   @page_size = 10
   #   @articles = Article.joins(:article_type).where(article_types: {name: params[:article_type]})

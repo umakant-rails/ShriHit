@@ -67,13 +67,6 @@ a:hover{
 .fnt-sz-30{font-size: 30px;}
 
 .page-subject-header {
-  /*font-size: 22px;
-  font-weight: bold;
-  color:  #3b7ddd;
-  padding:  4px 10px;
-  border: 1px solid #3b7ddd;
-  border-radius: 4px;*/
-
   background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(255,255,255,1)),color-stop(100%,rgba(255,248,243,1)));
   background: -webkit-linear-gradient(90deg,rgba(255,255,255,1) 0%,#b3ffff 100%);
   background: -o-linear-gradient(90deg,rgba(255,255,255,1) 0%, #b3ffff 100%);
@@ -87,6 +80,7 @@ a:hover{
   font-weight: bold;
   color: #3b7ddd;
 }
+
 .req-field{
   color: red;
   font-size: 10px;

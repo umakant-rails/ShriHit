@@ -1,4 +1,3 @@
-<%#= render partial: 'search_bar'%>
 <div class="row">
 	<div class="col-md-9 ps-0">
 		<div class="card">
@@ -7,12 +6,12 @@
 					<div class="row">
 	          <% article_tags = article.tags %>
 	          <div class="col-md-12 page-subject-header mb-3">
-	          	<div>
-		            <a href="<%= public_article_path (article) %>" class="article-title text-primary">
+	          	<div class="article-title">
+		            <a href="<%= article_by_title_public_articles_path (article.hindi_title) %>" class="article-title text-primary">
 		              रचना : <%= article.hindi_title %>
 		            </a>
 		            <% if current_user.present? %> 
-		              <%= link_to(export_pdf_public_article_path(@article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
+		              <%= link_to(export_pdf_public_article_path(article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
 		                <!-- <i class="fa-solid fa-file-export"></i> -->
 		                 <i class="fas fa-file-download"></i>
 		              <% end %>
@@ -28,66 +27,65 @@
 	                <strong>
 	                  <%= link_to article.user.username.capitalize, public_user_profile_path(article.user.id) %>
 	                </strong>, 
-	                Created at : 
+	                सृजन तिथि : 
 	                <strong class="text-primary">
-	                  <%= article.created_at.strftime("%B %d, %Y")%>
+	                  <%= link_to article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
 	                </strong>,
 	                रचना प्रकार - 
-	                <strong class="text-primary">
-	                  <%= article.article_type.name %>
+	                <strong class="text-primary fnt-sz-14">
+	                  <%= link_to article.article_type.name, articles_by_type_public_article_types_path(article.article_type.name) %>
+	                </strong>,
+	                रचनाकार - 
+	                <strong class="text-primary fnt-sz-14">
+	                  <%= link_to article.author.name, public_author_path(article.author.id) %>
 	                </strong>
 	              )
 	            </div>
 	          </div>
 	        </div>
-	        <div class="row mb-3">
-	          <div class="m-sm-1 article-body" data-controller= 'article'>
+	        <div class="page-subject-header1">
+	          <div class="m-sm-1 article-body mb-3 pb-2" data-controller= 'article'>
 	            <div class="article-content">
 	              <%= raw article.content %>
-	            </div>
-	            <div class="author-mark-txt text-info">
-	              <a href="<%= public_author_path(article.author.id) %>">
-	                ( रचनाकार - श्री <%= article.author.name %> जी )
-	              </a>
 	            </div>
 	            <% if article_tags.present?%>
 	              <div class="article-tag-txt text-primary mt-3">
 	                <strong>सम्बंधित बिषय :-</strong>&nbsp;&nbsp;
 	                <% article_tags.each do | tag | %>
 	                  <a href="<%= articles_by_tag_public_tags_path(tag.name) %>" class='tags-txt'>
-	                    <i class="fa-solid fa-tags"></i> <%= tag.name %>
+	                    <i class="fa-solid fa-tag"></i> <%= tag.name %>
 	                  </a>
 	                <% end %>
 	              </div>
 	            <% end %>
 	          </div>
-	        </div>
-	        <div class="m-sm-2">
-	          <div class="row mb-2 ms-0">
-	            <div class="ps-0" style="color:#6c757d;">
-	              <strong>Comments</strong>
-	            </div>
-	          </div>
-	        </div>
-	        <div class="m-sm-2">
-	          <div class="row mb-2 ms-0" id="comment-section">
-	            <% if article.comments.present? %>
-	              <% article.comments.limit(5).each do | comment | %>
-	              <div class="parent-comment-body">
-	                <%= render partial: "comments/comment", locals: {comment: comment, 
-	                  article: article, parent: article, parent_name: article.class.name, 
-	                  level: 1} %>
-	              </div>
-	              <% end %>
-	            <% else %>
-	              <div class="d-flex">
-	                <div class="no-comment-msg">
-	                  There is not comment available now.
-	                </div>
-	              </div>
-	            <% end %>
-	          </div>
-	        </div>
+		        <div class="m-sm-2">
+		          <div class="row mb-2 ms-0">
+		            <div class="ps-0" style="color:#6c757d;">
+		              <strong>Comments</strong>
+		            </div>
+		          </div>
+		        </div>
+		        <div class="m-sm-2">
+		          <div class="row mb-2 ms-0" id="comment-section">
+		            <% if article.comments.present? %>
+		              <% article.comments.limit(5).each do | comment | %>
+		              <div class="parent-comment-body">
+		                <%= render partial: "comments/comment", locals: {comment: comment, 
+		                  article: article, parent: article, parent_name: article.class.name, 
+		                  level: 1} %>
+		              </div>
+		              <% end %>
+		            <% else %>
+		              <div class="d-flex">
+		                <div class="no-comment-msg">
+		                  There is not comment available now.
+		                </div>
+		              </div>
+		            <% end %>
+		          </div>
+		        </div>
+		      </div>
 		      <br/>
 				<% end %>
 				<div class="dropdown-divider"></div>
@@ -100,9 +98,10 @@
   <div class="col-md-3 ps-0 pe-0">
     <div class="card">
       <div class="card-body h-100" style="min-height: 545px;">
-        <span class="col-md-6 text-start article-title text-primary">
-          रचनाकार / कवि / भक्त सूची 
-        </span>
+        <div class="col-md-12 page-subject-header mb-3">
+          <div>रचनाकार / कवि / भक्त सूची</div>
+          <div class="contributer-text">&nbsp;</div>
+        </div>
         <div class="dropdown-divider"></div>
           <ul class="list-group">
 					  <% if @authors.present? %>

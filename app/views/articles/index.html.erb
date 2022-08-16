@@ -35,7 +35,7 @@
       </tbody>
     </table>
     <% if paginate(@articles).present? %>
-      <%= paginate @articles, remote: true %>
+      <%= paginate @articles %>
       <div class="dropdown-divider"></div>
     <% end %>
     <%= link_to "New article", new_article_path %>

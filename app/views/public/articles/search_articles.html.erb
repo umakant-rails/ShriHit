@@ -10,6 +10,10 @@
 	<div class="col-md-9 ps-0">
 		<div class="card">
 			<div class="card-body h-100" id="article-list">
+				<div class="col-md-12 page-subject-header">
+          रचना सूची 
+        </div>
+        <div class="dropdown-divider"></div>
 				<%= render partial: "article", locals: {articles: @articles} %>
 		  </div>	
 		</div>
@@ -17,9 +21,9 @@
   <div class="col-md-3 ps-0 pe-0">
     <div class="card">
       <div class="card-body h-100" style="min-height: 545px;">
-        <span class="col-md-6 text-start article-title text-primary">
+        <div class="col-md-12 page-subject-header">
           रचनाकार / कवि / भक्त सूची 
-        </span>
+        </div>
         <div class="dropdown-divider"></div>
           <ul class="list-group">
 					  <% if @authors.present? %>

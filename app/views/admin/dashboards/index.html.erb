@@ -62,24 +62,24 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col mt-0">
-								<h5 class="card-title">Contexts</h5>
+								<h5 class="card-title">Tags</h5>
 							</div>
 							<div class="col-auto">
 								<div class="stat-new text-primary">
-									<i class="fa-solid fa-tree"></i>
+									<i class="fa-solid fa-tags"></i>
 								</div>
 							</div>
 						</div>
 						<br/>
 						<div class="mb-3">
 							<a href="<%= admin_contexts_path %>" class="btn btn-primary mb-2 m-w-120"> 
-								Total:&nbsp;<%= @contexts_group_by_approval[true] +  @contexts_group_by_approval[false] %>
+								Total:&nbsp;<%= get_total_grouped_record(@tags_group_by_approval) %>
 							</a> 
 							<a href="<%= approved_contexts_admin_contexts_path %>" class="btn btn-success mb-2 m-w-120"> 
-								Approved:&nbsp;<%= @contexts_group_by_approval[true] %>
+								Approved:&nbsp;<%= @tags_group_by_approval[true] %>
 							</a> 
 							<a href="<%= pending_contexts_admin_contexts_path %>" class="btn btn-warning m-w-120">
-								Pending:&nbsp;&nbsp;&nbsp;<%= @contexts_group_by_approval[false] %>
+								Pending:&nbsp;&nbsp;&nbsp;<%= @tags_group_by_approval[false] %>
 							</a> 
 						</div>
 					</div>
@@ -179,23 +179,23 @@
 		<div class="card">
 			<div class="card-body h-450">
 		    <div class="col-md-12 page-subject-header">
-          <span>लंबित प्रसंग सूची</span>
+          <span>लंबित रचना सूची</span>
         </div>
 		    <div class="dropdown-divider"></div>
 		    <table class="table">
 		      <thead class="table-primary ps-0 pe-0">
 		        <tr>
 		          <th scope="col">S. No.</th>
-		          <th scope="col">नए प्रसंग</th>
+		          <th scope="col">नई रचनायें</th>
 		        </tr>
 		      </thead>
 		      <tbody>
-		      	<% if @contexts_pending.present? %>
-		          <% @contexts_pending.limit(5).each_with_index do |context, index| %>
+		      	<% if @articles_pending.present? %>
+		          <% @articles_pending.limit(5).each_with_index do |article, index| %>
 		            <tr>
-		              <td><%= index+1 %></td>
+		              <th><%= index+1 %></th>
 		              <td>
-		              	<%= context.name %>
+		              	<%= article.hindi_title %>
 		              </td>
 		          	</tr>
 		          <% end %>
@@ -206,7 +206,7 @@
 		        <% end %>
 						<tr>
 							<td colspan="5">
-								<a href="<%= pending_contexts_admin_contexts_path %>" class="fRight">
+								<a href="<%= pending_articles_admin_articles_path %>" class="fRight">
 									स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे 
 								</a>
 							</td>
@@ -236,7 +236,7 @@
 	      	<% if @authors_pending.present? %>
 	          <% @authors_pending.limit(5).each_with_index do |author, index| %>
 	            <tr>
-	            	<td><%= index +1 %></td>
+	            	<th><%= index +1 %></th>
 	            	<td>
 	            		<%= author.name %> </td>
 	            </tr>
