@@ -9,7 +9,7 @@
         <br/>
         <div class="sign-up-container">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-            <div class="content">
+            <div class="m-sm-3">
               <h5 class="title text-center">
                 <strong>Login To Your Account</strong>
               </h5>
@@ -22,7 +22,6 @@
                       <%= get_errors(resource.errors.messages) %>
                     </div>
                   <% end %>
-                  <%#= render "users/shared/error_messages", resource: resource %>
                 </div>
               </div>        
               <div class="mb-3">
@@ -34,20 +33,15 @@
                   Password
                 </label>
                 <%= f.password_field :password, autocomplete: 'off', class: 'form-control', id: 'password', placeholder: 'Password' %>
-                </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <%= f.submit "Log in", class: "btn btn-info form-control"%>
-                </div>
+              <div class="mb-3">
+                <%= f.submit "Log in", class: "form-control"%>
               </div>
               <hr>
-              <div class="row">
-                <div class="col-md-12">
-                  If you not registered, please click <a href="<%= new_user_registration_path %>">here</a>.
-                  <div>
-                    <a href="<%= new_user_password_path %>">Forget your password?</a>
-                  </div>
+              <div class="mb-3">
+                If you not registered, please click <a href="<%= new_user_registration_path %>">here</a>.
+                <div>
+                  <a href="<%= new_user_password_path %>">Forget your password?</a>
                 </div>
               </div>
             </div>

@@ -75,10 +75,10 @@
 							<a href="<%= admin_contexts_path %>" class="btn btn-primary mb-2 m-w-120"> 
 								Total:&nbsp;<%= get_total_grouped_record(@tags_group_by_approval) %>
 							</a> 
-							<a href="<%= approved_contexts_admin_contexts_path %>" class="btn btn-success mb-2 m-w-120"> 
+							<a href="<%= approved_tags_admin_tags_path %>" class="btn btn-success mb-2 m-w-120"> 
 								Approved:&nbsp;<%= @tags_group_by_approval[true] %>
 							</a> 
-							<a href="<%= pending_contexts_admin_contexts_path %>" class="btn btn-warning m-w-120">
+							<a href="<%= rejected_tags_admin_tags_path %>" class="btn btn-warning m-w-120">
 								Pending:&nbsp;&nbsp;&nbsp;<%= @tags_group_by_approval[false] %>
 							</a> 
 						</div>
