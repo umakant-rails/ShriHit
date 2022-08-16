@@ -1,15 +1,11 @@
 <div class="row">
   <div class="card">
-    <div class="card-body">
-      <div class="row page-subject-header">
-        <span class="col-md-6 text-start article-title">
-          रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.present? ? @author.sampradaya.name : 'सम्प्रदाय - NA' %> )
-        </span>
-        <span class="col-md-6 text-end author-mark-txt">
-          <a href="<%= @author.present? ? public_user_profile_path(@author.user.id) : '' %>" class="text-white">
-            ( योगदानकर्ता : <%= @author.present? ? @author.user.username : 'Not Available' %> )
-          </a>
-        </span>
+    <div class="card-body h-450">
+      <div class="page-subject-header">
+        रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.present? ? @author.sampradaya.name : 'सम्प्रदाय - NA' %> )
+        <a href="<%= @author.present? ? public_user_profile_path(@author.user.id) : '' %>" class="text-white">
+          ( योगदानकर्ता : <%= @author.present? ? @author.user.username : 'Not Available' %> )
+        </a>
       </div>
       <div class="dropdown-divider"></div>
       <div class="m-sm-4" data-controller= 'article'>
