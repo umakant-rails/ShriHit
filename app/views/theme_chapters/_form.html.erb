@@ -11,13 +11,17 @@
   <div class="row">
     <div class="col-md-12"> 
       <div class='mb-3'>
-        <label class='form-label'>उत्सव</label>
+        <label class='form-label'>
+          उत्सव <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
         <%= form.select :theme_id, options_for_select(themes, selected: params[:theme_id]), {:prompt => 'उत्सव चुने'}, class: 'form-control' %>
       </div>
     </div>
     <div class="col-md-12">
       <div class='mb-3'>
-        <label for='article_type' class='form-label'>नाम</label>
+        <label for='article_type' class='form-label'>
+          नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
         <%= form.text_field :name, class: 'form-control' %>
         <%= form.hidden_field :is_default, class: 'form-control' %>
       </div>

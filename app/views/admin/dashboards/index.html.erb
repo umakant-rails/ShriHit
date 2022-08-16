@@ -1,11 +1,11 @@
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-7">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="card">
-					<div class="card-body h-150 py-2 px-2">
+					<div class="card-body h-225">
 						<div class="row">
-							<div class="col mt-0 ">
+							<div class="col mt-0">
 								<h5 class="card-title">Articles</h5>
 							</div>
 							<div class="col-auto">
@@ -14,26 +14,26 @@
 								</div>
 							</div>
 						</div>
-						<div class="fnt-sz-15 mt-4">
-							<div class="mb-1 approved-status">
-								<a href="<%= approved_articles_admin_articles_path %>">
-									Approved:&nbsp;<%= @articles_group_by_approval[true] %>
-								</a>
-							</div>
-							<div class="mb-0 pending-status" >
-								<a href="<%= pending_articles_admin_articles_path %>">
-									Pending:&nbsp;&nbsp;&nbsp;<%= @articles_group_by_approval[nil] %>
-								</a>
-							</div>
+						<br/>
+						<div class="mb-3">
+							<a href="<%= admin_articles_path %>" class="btn btn-primary mb-2 m-w-120"> 
+								Total:&nbsp;<%= @articles_group_by_approval[true] +  @articles_group_by_approval[nil] %>
+							</a> 
+							<a href="<%= approved_articles_admin_articles_path %>" class="btn btn-success mb-2 m-w-120"> 
+								Approved:&nbsp;<%= @articles_group_by_approval[true] %>
+							</a> 
+							<a href="<%= pending_articles_admin_articles_path %>" class="btn btn-warning m-w-120">
+								Pending:&nbsp;<%= @articles_group_by_approval[nil] %>
+							</a> 
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="card">
-					<div class="card-body h-150 py-2 px-2">
+					<div class="card-body h-225">
 						<div class="row">
-							<div class="col mt-0 ">
+							<div class="col mt-0">
 								<h5 class="card-title">Authors</h5>
 							</div>
 							<div class="col-auto">
@@ -42,24 +42,24 @@
 								</div>
 							</div>
 						</div>
-						<div class="fnt-sz-15 mt-4">
-							<div class="mb-1 approved-status">
-								<a href="<%= approved_authors_admin_authors_path %>">
-									Approved:&nbsp;<%= @authors_group_by_approval[true] %>
-								</a>
-							</div>
-							<div class="mb-0 pending-status" >
-								<a href="<%= pending_authors_admin_authors_path %>">
-									Pending:&nbsp;&nbsp;&nbsp;<%= @authors_group_by_approval[false] %>
-								</a>
-							</div>
+						<br/>
+						<div class="mb-3">
+							<a href="<%= admin_authors_path %>" class="btn btn-primary mb-2 m-w-120"> 
+								Total:&nbsp;<%= @authors_group_by_approval[true] +  @authors_group_by_approval[false] %>
+							</a> 
+							<a href="<%= approved_authors_admin_authors_path %>" class="btn btn-success mb-2 m-w-120"> 
+								Approved:&nbsp;<%= @authors_group_by_approval[true] %>
+							</a> 
+							<a href="<%= pending_authors_admin_authors_path %>" class="btn btn-warning m-w-120">
+								Pending:&nbsp;&nbsp;&nbsp;<%= @authors_group_by_approval[false] %>
+							</a> 
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="card">
-					<div class="card-body h-150 py-2 px-2">
+					<div class="card-body">
 						<div class="row">
 							<div class="col mt-0">
 								<h5 class="card-title">Contexts</h5>
@@ -70,28 +70,28 @@
 								</div>
 							</div>
 						</div>
-						<div class="fnt-sz-15 mt-4">
-							<div class="mb-1 approved-status">
-								<a href="<%= approved_contexts_admin_contexts_path %>">
-									Approved:&nbsp;<%= @contexts_group_by_approval[true] %>
-								</a>
-							</div>
-							<div class="mb-0 pending-status" >
-								<a href="<%= pending_contexts_admin_contexts_path %>">
-									Pending:&nbsp;&nbsp;&nbsp;<%= @contexts_group_by_approval[false] %>
-								</a>
-							</div>
+						<br/>
+						<div class="mb-3">
+							<a href="<%= admin_contexts_path %>" class="btn btn-primary mb-2 m-w-120"> 
+								Total:&nbsp;<%= @contexts_group_by_approval[true] +  @contexts_group_by_approval[false] %>
+							</a> 
+							<a href="<%= approved_contexts_admin_contexts_path %>" class="btn btn-success mb-2 m-w-120"> 
+								Approved:&nbsp;<%= @contexts_group_by_approval[true] %>
+							</a> 
+							<a href="<%= pending_contexts_admin_contexts_path %>" class="btn btn-warning m-w-120">
+								Pending:&nbsp;&nbsp;&nbsp;<%= @contexts_group_by_approval[false] %>
+							</a> 
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-5">
 		<div class="row">
 			<div class="col-md-6">
 				<div class="card">
-					<div class="card-body h-150 py-2 px-2">
+					<div class="card-body h-225">
 						<div class="row">
 							<div class="col mt-0">
 								<h5 class="card-title">Comments Spam Report</h5>
@@ -102,19 +102,18 @@
 								</div>
 							</div>
 						</div>
-						<div class="fnt-sz-15 mt-4">
-							<div class="mb-0 pending-status" >
-								<a href="<%= comment_reportings_path %>">
-									Reported Spam Comments:&nbsp;<%= @spam_comment_reports.count %>
-								</a>
-							</div>
+						<br/>
+						<div class="mb-3">
+							<a href="<%= comment_reportings_path %>" class="btn btn-danger m-w-120">
+								Reported Spam Comments:&nbsp;<%= @spam_comment_reports.count %>
+							</a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="card">
-					<div class="card-body h-150 py-2 px-2">
+					<div class="card-body h-225">
 						<div class="row">
 							<div class="col mt-0">
 								<h5 class="card-title">User Mgmt Report</h5>
@@ -125,12 +124,11 @@
 								</div>
 							</div>
 						</div>
-						<div class="fnt-sz-15 mt-4">
-							<div class="mb-0 pending-status" >
-								<a href="<%= admin_user_mgmts_path %>">
-									Registered User:&nbsp;<%= @registered_users.count %>
-								</a>
-							</div>
+						<br/>
+						<div class="mb-3">
+							<a href="<%= admin_user_mgmts_path %>" class="btn btn-danger m-w-120">
+								Registered User:&nbsp;<%= @registered_users.count %>
+							</a>
 						</div>
 					</div>
 				</div>

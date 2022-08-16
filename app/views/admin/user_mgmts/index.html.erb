@@ -2,16 +2,18 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body h-400">
-        <span class="col-md-6 text-start article-title text-primary">
-          उपयोगकर्ता सूची 
-        </span>
-        <div class="btn-group fRight">
-          <a href="javascript:void(0);" class="text-white btn btn-secondary">
-            Unblocked Users
-          </a>
-          <a href="<%= blocked_users_admin_user_mgmts_path %>" class="text-white btn btn-primary">
-            Blocked Users
+        <div class="page-subject-header">
+          <span >
+            उपयोगकर्ता सूची 
+          </span>
+          <div class="btn-group fRight">
+            <a href="javascript:void(0);" class="btn btn-success">
+              Unblocked Users
             </a>
+            <a href="<%= blocked_users_admin_user_mgmts_path %>" class="btn btn-danger">
+              Blocked Users
+              </a>
+          </div>
         </div>
         <div class="dropdown-divider"></div>
         <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-author-target="acsrfToken">

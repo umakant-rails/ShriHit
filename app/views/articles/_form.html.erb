@@ -11,7 +11,9 @@
   <div class="row">
     <div class="col-md-12">
       <div class='mb-3'>
-        <label for='article_type' class='form-label'>रचना का प्रकार</label>
+        <label for='article_type' class='form-label'>
+          रचना का प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
         <%= form.select :article_type_id, options_for_select(article_types, selected: article.article_type_id), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-article-target': 'articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
       </div>
     </div>
@@ -19,7 +21,9 @@
   <div class="row">
     <div class="col-md-6">
       <div class='mb-3'>
-        <label class='form-label'>प्रसंग</label>
+        <label class='form-label'>
+          प्रसंग <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
         <%= form.select :context_id, options_for_select(contexts, selected: article.context_id), {:prompt => 'प्रसंग चुने'}, class: 'form-control', 'data-action': 'change->article#toggleContext', 'data-article-target': 'contextSelect'%>
         <!-- <div data-article-target='contextInput' hidden=true>
           <div class="row">
@@ -35,7 +39,9 @@
     </div>
     <div class="col-md-6">
       <div class='mb-3'>
-        <label for='article_type' class='form-label'>लेखक</label>
+        <label for='article_type' class='form-label'>
+          लेखक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
         <%= form.select :author_id, options_for_select(authors, selected: article.author_id), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-article-target': 'authorSelect' %>
         <!-- <div data-article-target='authorInput' hidden=true>
           <div class="row">
@@ -53,13 +59,17 @@
    <div class="row">
     <div class="col-md-6">
       <div class='mb-3'>
-        <label for='hindi_title' class='form-label'>हिंदी शीर्षक</label>
+        <label for='hindi_title' class='form-label'>
+          हिंदी शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
         <%= form.text_field :hindi_title, class: 'form-control' %>
       </div>
     </div>
     <div class="col-md-6">
       <div class='mb-3'>
-        <label for='article_type' class='form-label'>इंग्लिश शीर्षक</label>
+        <label for='article_type' class='form-label'>
+          इंग्लिश शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
         <%= form.text_field :english_title, class: 'form-control' %>
       </div>
     </div>
@@ -99,7 +109,9 @@
     </div>
   </div>
   <div class='mb-3'>
-    <label for='article_type' class='form-label'>रचना</label>
+    <label for='article_type' class='form-label'>
+      रचना <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+    </label>
     <%#= text_area(:article, :content, cols: 30, rows: 12, class: 'form-control', 'data-article-target': 'content') %>
     <%= form.text_area :content, class: 'tinymce' %>
   </div>

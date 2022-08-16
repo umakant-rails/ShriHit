@@ -45,12 +45,14 @@ a:hover{
 .h-100{min-height: 100px;}
 .h-150{min-height: 150px;}
 .h-200{min-height: 200px;}
+.h-225{min-height: 225px;}
 .h-250{min-height: 250px;}
 .h-300{min-height: 300px;}
 .h-350{min-height: 350px;}
 .h-400{min-height: 400px;}
 .h-450{min-height: 450px;}
 .h-500{min-height: 500px;}
+.m-w-120{min-width: 120px;}
 .fRight{float: right;}
 .fLeft{float: left;}
 
@@ -84,6 +86,11 @@ a:hover{
   font-size: 22px;
   font-weight: bold;
   color: #3b7ddd;
+}
+.req-field{
+  color: red;
+  font-size: 10px;
+  margin-left: -3px;
 }
 .divider-bdr{
   border-top: 1px solid rgba(0, 0, 0, 0.15);

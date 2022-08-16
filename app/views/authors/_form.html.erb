@@ -10,11 +10,15 @@
   </div>
 
   <div class='mb-3'>
-    <label class='form-label'>नाम</label>
+    <label class='form-label'>
+      नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+    </label>
     <%= form.text_field :name, class: 'form-control' %>
   </div>
   <div class='mb-3'>
-    <label class='form-label'>सम्प्रदाय</label>
+    <label class='form-label'>
+      सम्प्रदाय <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+    </label>
     <%= form.select :sampradaya_id, options_for_select(sampradaya_list, selected: author.sampradaya_id), {:prompt => 'सम्प्रदाय चुने'}, class: 'form-control', 'data-action': 'change->author#toggleSampradaya', 'data-author-target': 'sampradayaSelect'%>
     <div data-author-target='sampradayaInput' hidden=true>
       <div class="row">

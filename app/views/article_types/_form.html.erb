@@ -9,8 +9,10 @@
         <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
       </div>
       <div class='mb-3'>
-        <label class='form-label'>नाम</label>
-        <%= form.text_field :name, class: 'form-control' %>
+        <label class='form-label'>
+          नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_field :name, class: 'form-control', required: '' %>
       </div>
 
       <div class='text-center mt-3 actions'>

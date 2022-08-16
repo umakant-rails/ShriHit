@@ -1,34 +1,26 @@
-<div class="row" data-controller="comment comment-reporting">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-body">
-        <div class="row page-subject-header">
-          <span class="col-md-6 text-start article-title">
-            Spam Comment Reporting Page
-          </span>
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="mt-4 fnt-sz-15">
-          <table class="table table-bordered">
-            <thead class="table-primary">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">रचना शीर्षक</th>
-                <th scope="col">कमेंट/टिप्पणी</th>
-                <th scope="col">Spam कमेंट/टिप्पणी</th>
-                <th scope="col">सूचना देनेवाला</th>
-                <th scope="col">Action/Detele</th>
-              </tr>
-            </thead>
-            <tbody class="table-group-divider" id="comment_reporting_block">
-              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"  data-comment-reporting-target="csrfToken">
-              <%= render partial: "comment_reporting", locals: {comments: @comments} %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+<div class="card" data-controller="comment comment-reporting">
+  <div class="card-body">
+    <div class="row-fluid page-subject-header">
+        Spam Comment Reporting Page
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="mt-4 fnt-sz-15">
+      <table class="table table-bordered">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">रचना शीर्षक</th>
+            <th scope="col">कमेंट/टिप्पणी</th>
+            <th scope="col">Spam कमेंट/टिप्पणी</th>
+            <th scope="col">सूचना देनेवाला</th>
+            <th scope="col">Action/Detele</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" id="comment_reporting_block">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"  data-comment-reporting-target="csrfToken">
+          <%= render partial: "comment_reporting", locals: {comments: @comments} %>
+        </tbody>
+      </table>
     </div>
   </div>
-  <div class="col-md-1"></div>
 </div>

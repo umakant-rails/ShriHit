@@ -6,7 +6,7 @@
 				<% @articles && @articles.limit(5).each do | article | %>
 					<div class="row">
 	          <% article_tags = article.tags %>
-	          <div class="col-md-12 article-title-body mb-3">
+	          <div class="col-md-12 page-subject-header mb-3">
 	          	<div>
 		            <a href="<%= public_article_path (article) %>" class="article-title text-primary">
 		              रचना : <%= article.hindi_title %>

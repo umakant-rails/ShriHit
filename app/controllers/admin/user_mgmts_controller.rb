@@ -3,11 +3,11 @@ class Admin::UserMgmtsController < ApplicationController
   before_action :set_user, only: %i[ block_to_user unblock_to_user]
 
   def index
-    @users_list = User.left_outer_joins([:articles, :authors, :contexts, :comments]).unblocked_users.page(params[:page])
+    @users_list = User.includes([:articles, :authors, :contexts, :comments]).unblocked_users.page(params[:page])
   end
 
   def blocked_users
-    @users_list = User.left_outer_joins([:articles, :authors, :contexts, :comments]).blocked_users.page(params[:page])
+    @users_list = User.includes([:articles, :authors, :contexts, :comments]).blocked_users.page(params[:page])
   end
 
   def block_to_user

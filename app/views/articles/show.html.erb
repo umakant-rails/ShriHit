@@ -1,7 +1,7 @@
 <div class="card" data-controller="comment comment-reporting">
   <div class="card-body">
     <% article_tags = @article.tags %>
-    <div class="article-title-body mb-3">
+    <div class="page-subject-header mb-3">
       <div>
         <a href="<%= public_article_path (@article) %>" class="article-title text-primary">
           रचना : <%= @article.hindi_title %>
@@ -109,8 +109,9 @@
       </div>
     </div>
   </div>
+  <%= render partial: "comments/comment_report_modal" %>
 </div>
-<%= render partial: "comments/comment_report_modal" %>
+
 
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/comment-custom" %>

@@ -49,3 +49,12 @@ reply-block.btn-block{
 .show{display: block;}
 .modal-txt{font-size: 14px;}
 .comment-report-box{border-radius: 5px;}
+
+.comment-popup-close-btn{
+  font-size: 16px;
+  border: 1px solid red;
+  padding: 3px 8px 1px 8px;
+  border-radius: 50%;
+  background: red;
+  color: #FFF;
+}
