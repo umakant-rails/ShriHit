@@ -5,6 +5,23 @@
   <div class="navbar-collapse collapse">
     <ul class="navbar-nav navbar-align">
       <li class="nav-item dropdown">
+        <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+          <i class="fa-solid fa-table-list"></i>
+        </a>
+        <a class="nav-link dropdown-toggle d-none d-sm-inline-block text-primary" 
+          href="#" data-bs-toggle="dropdown">
+          <span class="text-dark">Layouts</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="layoutsDropdown">
+          <!-- <a class="dropdown-item" href="<%= set_layout_homes_path('user_layout') %>">
+            <i class="fa-solid fa-user"></i> User Layout
+          </a> -->
+          <a class="dropdown-item" href="<%= set_layout_homes_path('public_layout') %>">
+           <i class="fa-solid fa-users"></i> Public Layout
+          </a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
         <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
           <div class="position-relative">
             <i class="fa-regular fa-bell"></i>
@@ -111,9 +128,10 @@
           </div>
         </div>
       </li>
+
       <li class="nav-item dropdown">
         <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-          <i class="align-middle" data-feather="settings"></i>
+          <i class="fa-solid fa-gear"></i>
         </a>
 
         <a class="nav-link dropdown-toggle d-none d-sm-inline-block text-primary" 

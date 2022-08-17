@@ -22,7 +22,10 @@ Rails.application.routes.draw do
     get "/articles" => "user_profiles#articles", as: :user_articles, on: :member
   end
 
-  resources :homes, only: [:index]
+  resources :homes, only: [:index] do
+    get '/set_layout/:layout_name' => "homes#set_layout", as: :set_layout, on: :collection
+  end
+
   resources :articles do 
     get   "/tags" => "articles#tags", as: :tags, on: :member
     post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member

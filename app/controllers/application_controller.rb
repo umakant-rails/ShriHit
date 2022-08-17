@@ -85,9 +85,11 @@ class ApplicationController < ActionController::Base
 
 	def set_layouts
     if current_user.present?
-      return 'user'
-    elsif current_user.present?
-      return 'user'
+      if session[:layout_name] == "public_layout"
+        return 'application'
+      else
+        return 'user'
+      end
     else
       return 'application'
     end
