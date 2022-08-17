@@ -9,3 +9,11 @@ import "chartkick"
 import "Chart.bundle"
 
 Rails.start();
+
+$(".js-sidebar-toggle").on('click', function(){
+  if($("#sidebar").hasClass("collapsed")){
+    $("#sidebar").removeClass("collapsed");
+  } else {
+    $("#sidebar").addClass("collapsed");
+  }
+})

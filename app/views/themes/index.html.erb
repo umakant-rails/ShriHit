@@ -6,35 +6,7 @@
           उत्सव सूची 
         </div>
         <div class="dropdown-divider"></div>
-        <table class="table table-bordered">
-          <thead class="table-dark">
-            <tr>
-              <th scope="col" class="col-sm-1">S. No.</th>
-              <th scope="col" class="col-sm-5">उत्सव नाम</th>
-              <th scope="col" class="col-sm-2">खंड/प्रकरण जोड़े</th>
-              <th scope="col" class="col-sm-2">पद/रचना जोड़े</th>
-              <th scope="col" class="col-sm-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if @themes.present? %>
-              <% @themes.each_with_index do |theme, index| %>
-                <%= render partial: 'theme', locals: {theme: theme, index: (index + 1) } %>
-              <% end %>
-            <% else %>
-              <tr>
-                <td colspan="5">
-                  <center>There is no data available now.</center>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <%= paginate @themes, remote: true %>
-        <% if paginate(@themes).present? %>
-          <div class="dropdown-divider"></div>
-        <% end %>
-        <%= link_to "New themes", new_theme_path %>
+        <%= render partial: 'theme', locals: {themes: @themes} %>
       </div>
     </div>
   </div>

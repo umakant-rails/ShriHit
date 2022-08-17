@@ -1,11 +1,11 @@
 <table class="table">
   <thead class="table-dark">
     <tr>
-      <th scope="col">S. No.</th>
-      <th scope="col">नए रचनाकार</th>
-      <th scope="col">स्वीकृत/अस्वीकृत</th>
-      <th scope="col">विलय करे</th>
-      <th scope="col">अपडेट करें</th>
+      <th>S. No.</th>
+      <th>नए रचनाकार</th>
+      <th>स्वीकृत/अस्वीकृत</th>
+      <th class="d-none d-xl-table-cell">विलय करे</th>
+      <th class="d-none d-xl-table-cell">अपडेट करें</th>
     </tr>
   </thead>
   <tbody>
@@ -18,7 +18,7 @@
         		<input type="button" value="स्वीकृत"  data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="click->admin-author#approveAuthor"  class="btn btn-primary"/>
           	<input type="button" value="अस्वीकृत"  data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="click->admin-author#rejectAuthor" class="btn btn-danger"/>
           </td>
-          <td>
+          <td  class="d-none d-xl-table-cell">
           	<% if authors_approved.present? %>
           		<div class="row">
             		<div class="col-md-8">
@@ -32,7 +32,7 @@
           		विलय करने के लिए अभी कोई डाटा उपलब्ध नहीं है.
           	<% end %>
           </td>
-          <td>
+          <td  class="d-none d-xl-table-cell">
             <button type="button" class="btn btn-primary" data-index="<%= index %>" data-page="<%= params[:page]%>" data-action="admin-author#setAuthorIndexInPopup" data-bs-toggle="modal" data-bs-target="#updateAuthorPopup">
               अपडेट करें
             </button>

@@ -9,7 +9,7 @@
     <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
   </div>
   <div class="row">
-    <div class="col-md-12"> 
+    <div class="col-md-8"> 
       <div class='mb-3'>
         <label class='form-label'>
           उत्सव <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
@@ -17,7 +17,7 @@
         <%= form.select :theme_id, options_for_select(themes, selected: params[:theme_id]), {:prompt => 'उत्सव चुने'}, class: 'form-control' %>
       </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-8">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>
           नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-  <div class='text-center mt-3 actions'>
+  <div class='text-center mt-3 actions col-md-4'>
     <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
   </div>
 <% end %>

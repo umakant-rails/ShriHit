@@ -1,36 +1,61 @@
-<div id="<%= dom_id tag %>">
-</div>
-<tr>
-  <th scope="row">
-    <%= local_assigns[:index] %>
-  </th>
-  <td>
-    <%= link_to "" do %>
-      <%= tag.name %>
-    <% end %>
-  </td>
-  <td>
-    <%= tag.is_approved ? 'स्वीकृत' : 'लंबित' %>
-  </td>
-  <td>
-    <div class="row">
-      <!-- <div class="col-md-2">
-        <%#= link_to article_type do %>
-          <i class="fa fa-eye"></i>
-        <%# end %>
-      </div> -->
-      <div class="col-md-2">
-        <%= link_to edit_tag_path(tag) do %>
-          <i class="fa fa-edit"></i>
-        <% end %>
-      </div>
-      <div class="col-md-2">
-        <%= form_for(tag, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
-          <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
-            <i class="fa fa-trash" style="color:red;"></i>
-          </button>
-        <% end %>
-      </div>
-    </div>
-  </td>
-</tr>
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th>टैग्स नाम</th>
+      <th class="d-none d-xl-table-cell">स्वीकृत/अस्वीकृत</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% 
+      page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
+      page_size = tags.present? ? tags.limit_value : 0
+    %>
+    <% if tags.present? %>
+      <% tags.each_with_index do |tag, index| %>
+        <% ind = (page * page_size) + (index + 1) %>
+        <tr>
+          <th scope="row">
+            <%= ind %>
+          </th>
+          <td>
+            <%= link_to "" do %>
+              <%= tag.name %>
+            <% end %>
+          </td>
+          <td class="d-none d-xl-table-cell">
+            <%= tag.is_approved ? 'स्वीकृत' : 'लंबित' %>
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-md-2">
+                <%= link_to edit_tag_path(tag) do %>
+                  <i class="fa fa-edit"></i>
+                <% end %>
+              </div>
+              <div class="col-md-2">
+                <%= form_for(tag, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+                  <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+                    <i class="fa fa-trash" style="color:red;"></i>
+                  </button>
+                <% end %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table>
+<% if paginate(tags).present? %>
+  <%= paginate tags, remote: true%>
+  <div class="dropdown-divider"></div>
+<% end %>
+<%= link_to "New tag", new_tag_path %>

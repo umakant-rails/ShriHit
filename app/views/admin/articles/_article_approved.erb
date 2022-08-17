@@ -1,11 +1,11 @@
 <table class="table">
   <thead class="table-dark">
     <tr>
-      <th scope="col">S. No.</th>
-      <th scope="col">नई रचना</th>
-      <th scope="col">रचनाकार</th>
-      <th scope="col">रचना प्रकार</th>
-      <th scope="col">योगदानकर्ता</th>
+      <th>S. No.</th>
+      <th>नई रचना</th>
+      <th>रचनाकार</th>
+      <th class="d-none d-xl-table-cell">रचना प्रकार</th>
+      <th class="d-none d-xl-table-cell">योगदानकर्ता</th>
     </tr>
   </thead>
   <tbody>
@@ -27,10 +27,10 @@
               <%= article.author.name %>
             </a>
           </td>
-        	<td>
+        	<td class="d-none d-xl-table-cell">
             <%= article.article_type.name %> 
           </td>
-          <td>
+          <td class="d-none d-xl-table-cell">
             <%= article.user.username %> 
           </td>
         </tr>

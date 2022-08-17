@@ -2,18 +2,22 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body h-400">
-		    <div class="col-md-12 page-subject-header">
-          <span>स्वीकृत रचना सूची </span>
-			    <div class="btn-group fRight">
-			    	<a href="<%= admin_articles_path %>" class="text-white btn btn-primary">
-					  	<i class="fas fa-list"></i> Index
-					  </a>
-				  	<a href="javascript:void(0);" class="text-white btn btn-success">
-					  	<i class="far fa-check-circle"></i> Approved
-					  </a>
-				  	<a href="<%= pending_articles_admin_articles_path %>" class="text-white btn btn-warning">
-					  	<i class="far fa-hourglass-half"></i> Pending
-					  </a>
+		    <div class="page-subject-header">
+		    	<div class="row">
+	          <div class="col-md-6">स्वीकृत रचना सूची </div>
+	          <div class="col-md-6">
+					    <div class="btn-group fRight">
+					    	<a href="<%= admin_articles_path %>" class="text-white btn btn-primary">
+							  	<i class="fas fa-list"></i> Index
+							  </a>
+						  	<a href="javascript:void(0);" class="text-white btn btn-success">
+							  	<i class="far fa-check-circle"></i> Approved
+							  </a>
+						  	<a href="<%= pending_articles_admin_articles_path %>" class="text-white btn btn-warning">
+							  	<i class="far fa-hourglass-half"></i> Pending
+							  </a>
+							</div>
+						</div>
 					</div>
 				</div>
 		    <div class="dropdown-divider"></div>

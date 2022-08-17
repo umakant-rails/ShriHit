@@ -1,45 +1,79 @@
-<tr>
-	<th scope="row">
-		<%= local_assigns[:index] %>
-	</th>
-	<td>
-		<%= link_to article do %>
-			<%= article.hindi_title %>
-		<% end %>
-	</td>
-	<td>
-		<%= article.author.name %>
-	</td>
-	<td>
-		<%= article.user.username.capitalize %>
-	</td>
-	<td>
-		<%= article.is_approved ? 'स्वीकृत' : 'लंबित' %>
-	</td>
-	<td style="display:inline-block">
-		<div class="row">
-			<div class="col-md-2">
-				<%= link_to article do %>
-				  <i class="fa fa-eye"></i>
-				<% end %>
-			</div>
-			<div class="col-md-2">
-				<%= link_to edit_article_path(article) do %>
-				  <i class="fa fa-edit"></i>
-				<% end %>
-			</div>
-			<div class="col-md-2 text-primary">
-				<%= link_to tags_article_path(article) do %>
-		  		<i class="fa-solid fa-tag"></i>
-		  	<% end %>
-		  </div>
-			<div class="col-md-2">
-				<%= form_for(article, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
-		      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
-		        <i class="fa fa-trash" style="color:red;"></i>
-		      </button>
-		    <% end %>  
-		  </div>
-    </div> 
-	</td>
-</tr>
+<table class="table">
+  <thead>
+    <tr>
+      <th>S. No.</th>
+      <th>रचना</th>
+      <th class="d-none d-xl-table-cell">लेखक</th>
+      <th class="d-none d-xl-table-cell">योगदानकर्ता</th>
+      <th class="d-none d-xl-table-cell">स्वीकृत/अस्वीकृत</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if articles.present? %>
+      <% 
+        page = (articles.current_page - 1)
+        per_page = articles.present? ? articles.limit_value : 0
+      %>
+      <% articles.each_with_index do |article, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr>
+					<th scope="row">
+						<%= local_assigns[:index] %>
+					</th>
+					<td>
+						<%= link_to article do %>
+							<%= article.hindi_title %>
+						<% end %>
+					</td>
+					<td class="d-none d-xl-table-cell">
+						<%= article.author.name %>
+					</td>
+					<td class="d-none d-xl-table-cell">
+						<%= article.user.username.capitalize %>
+					</td>
+					<td class="d-none d-xl-table-cell">
+						<%= article.is_approved ? 'स्वीकृत' : 'लंबित' %>
+					</td>
+					<td style="display:inline-block">
+						<div class="row">
+							<div class="col-md-2">
+								<%= link_to article do %>
+								  <i class="fa fa-eye"></i>
+								<% end %>
+							</div>
+							<div class="col-md-2">
+								<%= link_to edit_article_path(article) do %>
+								  <i class="fa fa-edit"></i>
+								<% end %>
+							</div>
+							<div class="col-md-2 text-primary">
+								<%= link_to tags_article_path(article) do %>
+						  		<i class="fa-solid fa-tag"></i>
+						  	<% end %>
+						  </div>
+							<div class="col-md-2">
+								<%= form_for(article, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+						      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+						        <i class="fa fa-trash" style="color:red;"></i>
+						      </button>
+						    <% end %>  
+						  </div>
+				    </div> 
+					</td>
+				</tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="5">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if paginate(articles).present? %>
+  <%= paginate articles %>
+  <div class="dropdown-divider"></div>
+<% end %>
+<%= link_to "New article", new_article_path %>

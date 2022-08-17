@@ -2,15 +2,15 @@
   page = (articles.current_page - 1)
   per_page = articles.present? ? articles.limit_value : 0 
 %>
-<table class="table">
+<table class="table table-hover my-0">
   <thead class="table-dark">
     <tr>
-      <th scope="col">S. No.</th>
-      <th scope="col">नई रचना</th>
-      <th scope="col">रचनाकार</th>
-      <th scope="col">रचना प्रकार</th>
-      <th scope="col">योगदानकर्ता</th>
-      <th scope="col">स्वीकृत/अस्वीकृत</th>
+      <th>S. No.</th>
+      <th >नई रचना</th>
+      <th class="d-none d-xl-table-cell">रचनाकार</th>
+      <th class="d-none d-xl-table-cell">रचना प्रकार</th>
+      <th class="d-none d-xl-table-cell">योगदानकर्ता</th>
+      <th>स्वीकृत/अस्वीकृत</th>
     </tr>
   </thead>
   <tbody>
@@ -27,15 +27,15 @@
               <%= article.hindi_title %> 
             </a>
           </td>
-          <td>
+          <td class="d-none d-xl-table-cell">
             <a href="<%= author_path(article.author.id) %>" class="<%= approved_cls %>">
               <%= article.author.name %>
             </a>
           </td>
-          <td>
+          <td class="d-none d-xl-table-cell">
             <%= article.article_type.name %> 
           </td>
-          <td>
+          <td class="d-none d-xl-table-cell">
             <%= article.user.username %> 
           </td>
           <td>

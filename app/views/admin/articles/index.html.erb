@@ -1,10 +1,10 @@
-<div class="row" data-controller="dashboard">
-	<div class="col-md-12">
-		<div class="card">
-			<div class="card-body h-400">
-		    <div class="col-md-12 page-subject-header">
-          <span>रचना सूची</span>
-			    <div class="btn-group fRight">
+<div class="card" data-controller="dashboard">
+	<div class="card-body h-400">
+    <div class="page-subject-header">
+    	<div class="row">
+	      <div class="col-md-6">रचना सूची</div>
+		    <div class="col-md-6">
+		    	<div class="btn-group fRight">
 			    	<a href="javascript:void(0);" class="text-white btn btn-primary">
 					  	<i class="fas fa-list"></i> Index
 					  </a>
@@ -16,15 +16,15 @@
 					  </a>
 					</div>
 				</div>
-		    <div class="dropdown-divider"></div>
-      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-dashboard-target="csrfToken">
-      	<div id="article_list">
-      	  <%= render "article", articles: @articles %>
-	      </div>
-	      <div id="paginate-block">
-      		<%= paginate @articles, remote: true if @articles.present?%>
-      	</div>
 			</div>
 		</div>
+    <div class="dropdown-divider"></div>
+  	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-dashboard-target="csrfToken">
+  	<div id="article_list">
+  	  <%= render "article", articles: @articles %>
+    </div>
+    <div id="paginate-block">
+  		<%= paginate @articles, remote: true if @articles.present?%>
+  	</div>
 	</div>
 </div>

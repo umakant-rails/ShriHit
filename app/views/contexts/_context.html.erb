@@ -1,34 +1,66 @@
-<tr>
-	<th scope="row">
-		<%= local_assigns[:index] %>
-	</th>
-	<td>
-		<%= link_to "" do %>
-			<%= context.name %>
-		<% end %>
-	</td>
-	<td>
-		<%= context.is_approved ? 'स्वीकृत' : 'लंबित' %>
-	</td>
-	<td>
-		<div class="row">
-			<!-- <div class="col-md-2">
-				<%#= link_to article_type do %>
-				  <i class="fa fa-eye"></i>
-				<%# end %>
-			</div> -->
-			<div class="col-md-2">
-				<%= link_to edit_context_path(context) do %>
-				  <i class="fa fa-edit"></i>
-				<% end %>
-			</div>
-			<div class="col-md-2">
-				<%= form_for(context, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
-		      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
-		        <i class="fa fa-trash" style="color:red;"></i>
-		      </button>
-		    <% end %>
-		  </div>
-    </div>
-	</td>
-</tr>
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th scope="col">प्रसंग नाम</th>
+      <th class="d-none d-xl-table-cell">स्वीकृत/अस्वीकृत </th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if contexts.present? %>
+      <% 
+        page = (contexts.current_page - 1)
+        per_page = contexts.present? ? contexts.limit_value : 0
+      %>
+      <% contexts.each_with_index do |context, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr>
+					<th scope="row">
+						<%= ind %>
+					</th>
+					<td>
+						<%= link_to "" do %>
+							<%= context.name %>
+						<% end %>
+					</td>
+					<td class="d-none d-xl-table-cell">
+						<%= context.is_approved ? 'स्वीकृत' : 'लंबित' %>
+					</td>
+					<td>
+						<div class="row">
+							<!-- <div class="col-md-2">
+								<%#= link_to article_type do %>
+								  <i class="fa fa-eye"></i>
+								<%# end %>
+							</div> -->
+							<div class="col-md-2">
+								<%= link_to edit_context_path(context) do %>
+								  <i class="fa fa-edit"></i>
+								<% end %>
+							</div>
+							<div class="col-md-2">
+								<%= form_for(context, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+						      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+						        <i class="fa fa-trash" style="color:red;"></i>
+						      </button>
+						    <% end %>
+						  </div>
+				    </div>
+					</td>
+				</tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table>
+<% if paginate(contexts).present? %>
+  <%= paginate contexts, remote: true %>
+  <div class="dropdown-divider"></div>
+<% end %>
+<%= link_to "New context", new_context_path %>

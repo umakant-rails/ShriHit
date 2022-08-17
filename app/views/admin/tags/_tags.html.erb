@@ -1,10 +1,10 @@
 <table class="table">
   <thead class="table-dark">
     <tr>
-      <th scope="col">S. No.</th>
-      <th scope="col">नाम</th>
-      <th scope="col">योगदानकर्ता</th>
-      <th scope="col">स्वीकृत/अस्वीकृत</th>
+      <th>S. No.</th>
+      <th>नाम</th>
+      <th class="d-none d-xl-table-cell">योगदानकर्ता</th>
+      <th>स्वीकृत/अस्वीकृत</th>
     </tr>
   </thead>
   <tbody id="tag_rows">
@@ -18,7 +18,7 @@
         <tr class="<%= tag.is_approved ? "text-primary" : "" %>">
           <th><%= ind %></th>
           <td><%= tag.name %></td>
-          <td><%= tag.user.username %></td>
+          <td class="d-none d-xl-table-cell"><%= tag.user.username %></td>
           <td><%= tag.is_approved ? "स्वीकृत" : "अस्वीकृत" %>
         </tr>
       <% end %>

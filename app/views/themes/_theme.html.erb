@@ -1,41 +1,73 @@
-<tr>
-	<th scope="row">
-		<%= local_assigns[:index] %>
-	</th>
-	<td>
-		<%= link_to theme do %>
-			<%= theme.name %>
-		<% end %>
-	</td>
-	<td>
-		<a href="<%= theme_new_theme_chapter_path(theme) %>">
-			<i class="fa-solid fa-circle-plus text-primary"></i>
-		</a>
-	</td>
-	<td>
-		<a href="<%= add_articles_page_theme_path(theme) %>">
-			<i class="fa-solid fa-file-circle-plus text-primary"></i>
-		</a>
-	</td>
-	<td>
-		<div class="row">
-			<div class="col-md-1">
-				<%= link_to theme do %>
-				  <i class="fa fa-eye"></i>
-				<% end %>
-			</div>
-			<div class="col-md-1">
-				<%= link_to edit_theme_path(theme) do %>
-				  <i class="fa fa-edit"></i>
-				<% end %>
-			</div>
-			<div class="col-md-1">
-				<%= form_for(theme, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
-		      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
-		        <i class="fa fa-trash" style="color:red;"></i>
-		      </button>
-		    <% end %>
-	    </div>
-    </div>
-	</td>
-</tr>
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>S. No.</th>
+      <th>उत्सव नाम</th>
+      <th class="d-none d-xl-table-cell">खंड/प्रकरण जोड़े</th>
+      <th>पद/रचना जोड़े</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if themes.present? %>
+    	<% 
+		    page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
+		    page_size = themes.present? ? themes.limit_value : 0
+		  %>
+      <% themes.each_with_index do |theme, index| %>
+        <tr>
+					<th scope="row">
+						<%= (page * page_size) + (index + 1) %>
+					</th>
+					<td>
+						<%= link_to theme do %>
+							<%= theme.name %>
+						<% end %>
+					</td>
+					<td class="d-none d-xl-table-cell">
+						<a href="<%= theme_new_theme_chapter_path(theme) %>">
+							<i class="fa-solid fa-circle-plus text-primary"></i>
+						</a>
+					</td>
+					<td>
+						<a href="<%= add_articles_page_theme_path(theme) %>">
+							<i class="fa-solid fa-file-circle-plus text-primary"></i>
+						</a>
+					</td>
+					<td>
+						<div class="row">
+							<div class="col-md-1">
+								<%= link_to theme do %>
+								  <i class="fa fa-eye"></i>
+								<% end %>
+							</div>
+							<div class="col-md-1">
+								<%= link_to edit_theme_path(theme) do %>
+								  <i class="fa fa-edit"></i>
+								<% end %>
+							</div>
+							<div class="col-md-1">
+								<%= form_for(theme, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+						      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+						        <i class="fa fa-trash" style="color:red;"></i>
+						      </button>
+						    <% end %>
+					    </div>
+				    </div>
+					</td>
+				</tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="5">
+          <center>There is no data available now.</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate themes, remote: true %>
+<% if paginate(themes).present? %>
+  <div class="dropdown-divider"></div>
+<% end %>
+<%= link_to "New themes", new_theme_path %>
