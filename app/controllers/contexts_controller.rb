@@ -14,7 +14,7 @@ class ContextsController < ApplicationController
 
   # GET /contexts/new
   def new
-    @context = Context.new
+    @context = Context.new(is_approved: true)
   end
 
   # GET /contexts/1/edit
@@ -68,7 +68,7 @@ class ContextsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def context_params
-      params.fetch(:context, {}).permit(:name, :user_id)
+      params.fetch(:context, {}).permit(:name, :is_approved, :user_id)
     end
 
     def verify_admin

@@ -90,10 +90,10 @@
         <div class="col-md-6">
           <%= text_field_tag "new_tag", nil, id: "tag-input-field", 
           'data-tagging-target': 'newTag', class: 'form-control', 
-          placeholder: "New Tage Type here...", "data-action": "keyup->tagging#createTagFromInput"%>
+          placeholder: "New Tage Type here...", "data-action": "keyup->tagging#createTagByInput"%>
         </div>
         <div class="col-md-6">
-          <a href="javascript:void(0);" data-action="tagging#createTag" class="btn btn-primary">टैग बनाये</a>
+          <a href="javascript:void(0);" data-action="tagging#createTagByButton" class="btn btn-primary">टैग बनाये</a>
           <a href="javascript:void(0);" data-action="tagging#showtagList" class="btn btn-primary">सूची प्रदर्शित करे </a>
         </div>
       </div>

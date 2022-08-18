@@ -62,22 +62,28 @@ export default class extends ApplicationController {
       event.target.value = "";
     }
   }
-  createTag(){
+  createTagByInput(){
     var valueTxt = this.newTagTarget.value.trim();
-
+    if(valueTxt.indexOf(",") > 0){
+      valueTxt = valueTxt.substring(0, valueTxt.indexOf(",")).trim();
+      this.createTag(valueTxt);
+    } 
+  }
+  createTagByButton(){
+    var valueTxt = this.newTagTarget.value.trim();
+    this.createTag(valueTxt);
+  }
+  createTag(valueTxt){
+    //var valueTxt = this.newTagTarget.value.trim();
     if(this.selectedTagList.indexOf(valueTxt) > -1){
       super.showErrorsByLayout("यह टैग लिस्ट में पहले से उपलब्ध है");
     } else if(this.tagsArray.indexOf(valueTxt) > -1){
       super.showErrorsByLayout("ययह टैग सूची में पूर्व से उपलब्ध है कृपया इसको सूची से चुने !"); 
-    } else if(valueTxt.indexOf(",") > 0){
-      valueTxt = valueTxt.substring(0, valueTxt.indexOf(",")-1).trim();
-      this.selectedTagList.push(valueTxt);
-      this.addTagInHtml();
     } else if(valueTxt.length > 2) {
       this.selectedTagList.push(valueTxt);
       this.addTagInHtml();
+      this.newTagTarget.value = "";
     }
-    this.newTagTarget.value = "";
   }
 
   removeTag(){

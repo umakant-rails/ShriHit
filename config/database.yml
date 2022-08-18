@@ -1,36 +1,24 @@
-# default: &default
-#   adapter: mysql2
-#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#   username: rails
-#   password: Rails@123
-#   timeout: 5000
-
-# development:
-#   <<: *default
-#   database: shri_hit_dev
-# test:
-#   <<: *default
-#   database: shri_hit_tst
-
-# production:
-#   <<: *default
-#   database: shri_hit_prd
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  database: sample_postgres_development
+  pool: 5
+  username: postgres
+  password: Rails@123
 
 default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
+  username: 
+  password: 
 development:
   <<: *default
   database: shri_hit_dev
-  username: postgres
-  password: Rails@123
 test:
   <<: *default
   database: shri_hit_test
-  username: postgres
-  password: Rails@123
 production:
   <<: *default
   database: shti_hit_prd

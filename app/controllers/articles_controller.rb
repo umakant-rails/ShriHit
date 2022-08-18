@@ -135,6 +135,8 @@ class ArticlesController < ApplicationController
     end
 
     def create_tags_for_articles
+      param_tags = params[:article][:tags]
+      param_tags = param_tags.index(",").blank? ? [param_tags] : param_tags.split(",")
       tags = Tag.create_tags(current_user, param_tags)
       tags.each do | tag |
         current_user.article_tags.create(article_id: @article.id, tag_id: tag.id) 

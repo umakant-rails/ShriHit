@@ -55,7 +55,7 @@
   </tbody>
 </table>
 <% if paginate(tags).present? %>
-  <%= paginate tags, remote: true%>
+  <%= paginate tags %>
   <div class="dropdown-divider"></div>
 <% end %>
 <%= link_to "New tag", new_tag_path %>
