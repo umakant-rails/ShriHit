@@ -22,7 +22,7 @@ default: &default
   database: sample_postgres_development
   pool: 5
   username: postgres
-  password: Rails@123
+  password: 
 
 default: &default
   adapter: postgresql
