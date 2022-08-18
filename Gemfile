@@ -55,7 +55,7 @@ gem "chartkick"
 gem "groupdate"
 gem 'kaminari'
 gem 'wicked_pdf'
-gem "wkhtmltopdf-binary", group: :development
+gem "wkhtmltopdf-binary", group: :production
 gem "wkhtmltopdf-heroku", group: :production
 
 group :development, :test do
