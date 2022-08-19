@@ -9,9 +9,10 @@ div.nobreak{ page-break-inside: avoid; }
 }
 
 @font-face {
-  font-family: 'Aparajita';
+  font-family: 'Helvetica';
   font-style: normal;
-  src: asset('Aparajita.ttf', font)  format('truetype');
+  src: asset('Helvetica Neue.otf') format('otf'),
+    asset('Helvetica Neue.ttf', font) format('truetype');
 }
 
 /* start pdf header/footer css */
