@@ -8,6 +8,12 @@ div.nobreak{ page-break-inside: avoid; }
   margin-bottom: 25px;
 }
 
+@font-face {
+  font-family: 'Aparajita';
+  font-style: normal;
+  src: asset('Aparajita.ttf', font)  format('truetype');
+}
+
 /* start pdf header/footer css */
   .header{
     padding: 6px 0px;
