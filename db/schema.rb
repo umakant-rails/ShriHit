@@ -14,11 +14,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_13_174835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "airticles_tags", id: false, force: :cascade do |t|
-    t.bigint "airticle_id", null: false
-    t.bigint "tag_id", null: false
-  end
-
   create_table "article_tags", force: :cascade do |t|
     t.integer "article_id", null: false
     t.integer "tag_id", null: false
