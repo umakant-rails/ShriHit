@@ -28,9 +28,9 @@ class Admin::ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     if @article.update(is_approved: false)
       set_pending_records
-      flash[:success] = "रचना को सफलतापूर्वक स्वीकृत कर दिया है"
+      flash[:success] = "रचना को सफलतापूर्वक अस्वीकृत कर दिया है"
     else
-      flash[:error] = "रचना को स्वीकृत करने प्रकिया असफल हो गई है"
+      flash[:error] = "रचना को अस्वीकृत करने प्रकिया असफल हो गई है"
     end
   end
 

@@ -18,6 +18,7 @@ class ArticlesController < ApplicationController
   def new
     @tags = Tag.approved.order("name ASC")
     @article = Article.new
+    @article.build_image
   end
 
   # GET /articles/1/edit
@@ -28,7 +29,6 @@ class ArticlesController < ApplicationController
   # POST /articles or /articles.json
   def create
     @article = current_user.articles.new(article_params)
-
     respond_to do |format|
       if @article.save
         if params[:article][:tags].present?
@@ -139,7 +139,7 @@ class ArticlesController < ApplicationController
       param_tags = param_tags.index(",").blank? ? [param_tags] : param_tags.split(",")
       tags = Tag.create_tags(current_user, param_tags)
       tags.each do | tag |
-        current_user.article_tags.create(article_id: @article.id, tag_id: tag.id) 
+        current_user.article_tags.create(article_id: @article.id, tag_id: tag.id)
       end
     end
 
@@ -152,14 +152,14 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.fetch(:article, {}).permit(:content, :author_id, :article_type_id, 
-        :theme_id, :context_id, :hindi_title, :english_title)
+      params.fetch(:article, {}).permit(:content, :author_id, :article_type_id,
+        :theme_id, :context_id, :hindi_title, :english_title, image_attributes:[:image])
     end
 
     def create_author
       if params[:author_id].blank? && params[:author].present?
         @author = Author.create_author(params[:author], current_user.id)
-        params[:article][:author_id] = @author.id 
+        params[:article][:author_id] = @author.id
       end
     end
 

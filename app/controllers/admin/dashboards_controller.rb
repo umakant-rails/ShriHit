@@ -10,10 +10,24 @@ class Admin::DashboardsController < ApplicationController
     @authors_pending = Author.pending
     @authors_approved = Author.approved
 
-    @articles_group_by_approval = Article.group(:is_approved).count
-    @authors_group_by_approval = Author.group(:is_approved).count
-    @tags_group_by_approval = Tag.group(:is_approved).count
+    articles_grouped = Article.group(:is_approved).count
+    authors_grouped = Author.group(:is_approved).count
+    tags_grouped = Tag.group(:is_approved).count
     @spam_comment_reports = CommentReporting.not_read
+
+    @articles_group_by_approval = {
+      approved: articles_grouped[true] ? articles_grouped[true] : 0,
+      pending: articles_grouped[nil] ? articles_grouped[nil] : 0
+    }
+    @authors_group_by_approval = {
+      approved: authors_grouped[true] ? authors_grouped[true] : 0,
+      pending: authors_grouped[nil] ? authors_grouped[nil] : 0
+    }
+    @tags_group_by_approval = {
+      approved: tags_grouped[true] ? tags_grouped[true] : 0,
+      pending: tags_grouped[nil] ? tags_grouped[nil] : 0
+    }
+
     @registered_users = User.where("role_id > ?", 2)
   end
 end

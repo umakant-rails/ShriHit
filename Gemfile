@@ -55,13 +55,17 @@ gem "chartkick"
 gem "groupdate"
 gem 'kaminari'
 gem 'wicked_pdf'
+gem 'carrierwave', '>= 3.0.0.beta', '< 4.0'
+gem "mini_magick"
+gem "rmagick"
+
 gem "wkhtmltopdf-binary", group: :production
 gem "wkhtmltopdf-heroku", group: :production
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  gem "web-console"  
+  gem "web-console"
 end
 
 group :production do

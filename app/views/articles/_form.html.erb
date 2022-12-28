@@ -1,7 +1,7 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: article, html: {
   'data-article-target': 'form', 'data-action': 'article#submitForm'}) do |form| %>
-  <% article_types, authors, contexts = get_data_for_article_creation(current_user) %>  
+  <% article_types, authors, contexts = get_data_for_article_creation(current_user) %>
   <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display: <%= article.errors.present? ? 'block' : 'none' %>;" role="alert">
     <% article.errors.each do |error| %>
       <li><%= error.full_message %></li>
@@ -77,22 +77,29 @@
   <div class="mb-3">
     <% article_tags = @article.tags %>
     <label for='tags' class='form-label'>टैग्स</label>
-    <%= hidden_field_tag "article[tags]", article_tags.pluck(:name).join(","), 
-      'data-tagging-target': 'articleTags', 'data-tag-array': article_tags.pluck(:name).each{|nm| nm.strip!}.join(",") %>
-
-    <select class="form-control" 
-      data-tags="<%=@tags.pluck(:name).each{|nm| nm.strip!}.join(',')%>"
-      data-action= "focus->tagging#showTagsDataList click->tagging#selectTag"
-      data-tagging-target= "tagSelectInput">
-    </select>
+    <div class="row">
+      <div class="col-md-10">
+        <%= hidden_field_tag "article[tags]", article_tags.pluck(:name).join(","),
+          'data-tagging-target': 'articleTags', 'data-tag-array': article_tags.pluck(:name).each{|nm| nm.strip!}.join(",") %>
+        <select class="form-control"
+          data-tags="<%=@tags.pluck(:name).each{|nm| nm.strip!}.join(',')%>"
+          data-action= "focus->tagging#showTagsDataList click->tagging#selectTag"
+          data-tagging-target= "tagSelectInput">
+        </select>
+      </div>
+      <div class="col-md-2">
+        <a href="javascript:void(0);" data-action="tagging#showTagInput" data-tagging-target="showTagInputBtn"
+          class="btn btn-primary">नया टैग टाइप करे</a>
+      </div>
+    </div>
     <div data-tagging-target="newTagBlock" style="display:none;">
       <div class="row">
-        <div class="col-md-6">
-          <%= text_field_tag "new_tag", nil, id: "tag-input-field", 
-          'data-tagging-target': 'newTag', class: 'form-control', 
+        <div class="col-md-9">
+          <%= text_field_tag "new_tag", nil, id: "tag-input-field",
+          'data-tagging-target': 'newTag', class: 'form-control',
           placeholder: "New Tage Type here...", "data-action": "keyup->tagging#createTagByInput"%>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
           <a href="javascript:void(0);" data-action="tagging#createTagByButton" class="btn btn-primary">टैग बनाये</a>
           <a href="javascript:void(0);" data-action="tagging#showtagList" class="btn btn-primary">सूची प्रदर्शित करे </a>
         </div>
@@ -102,7 +109,7 @@
       <% article_tags && article_tags.each do | tag | %>
         <span class='tags'>
           <%= tag.name %>
-          <i class='fa-solid fa-xmark tags-cross' data-tags-target='crossTag' 
+          <i class='fa-solid fa-xmark tags-cross' data-tags-target='crossTag'
             data-action='click->tagging#removeTag'></i>
         </span>
       <% end %>
@@ -114,6 +121,14 @@
     </label>
     <%#= text_area(:article, :content, cols: 30, rows: 12, class: 'form-control', 'data-article-target': 'content') %>
     <%= form.text_area :content, class: 'tinymce' %>
+  </div>
+  <div class='mb-3'>
+    <label for='article_type' class='form-label'>
+      तस्वीर/फोटो <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+    </label>
+    <%= form.fields_for :image do | image |  %>
+      <%= image.file_field :image, class: "form-control" %>
+    <% end %>
   </div>
   <div class='text-center mt-3 actions'>
     <div class="row">

@@ -8,7 +8,7 @@
             <a href="javascript:void(0);" class="article-title text-primary">
               रचना : <%= @article.hindi_title %>
             </a>
-            <% if current_user.present? %> 
+            <% if current_user.present? %>
               <%= link_to(export_pdf_article_path(@article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
                 <!-- <i class="fa-solid fa-file-export"></i> -->
                  <i class="fas fa-file-download"></i>
@@ -17,23 +17,23 @@
               <%= link_to(new_user_session_path, class: "export-pdf fRight", onclick: "alert('Pdf डाउनलोड करने के लिए पहले लॉगिन करे')" ) do %>
                   <!-- <i class="fa-solid fa-file-export"></i> -->
                  <i class="fas fa-file-download"></i>
-              <% end %> 
+              <% end %>
             <% end %>
           </div>
           <div class="contributer-text">
-            (योगदानकर्ता : 
+            (योगदानकर्ता :
               <strong>
                 <%= link_to @article.user.username.capitalize, public_user_profile_path(@article.user.id) %>
-              </strong>, 
-              सृजन तिथि : 
+              </strong>,
+              सृजन तिथि :
               <strong class="text-primary">
                 <%= link_to @article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
               </strong>,
-              रचना प्रकार - 
+              रचना प्रकार -
               <strong class="text-primary fnt-sz-14">
                 <%= link_to @article.article_type.name, articles_by_type_public_article_types_path(@article.article_type.name) %>
               </strong>,
-              रचनाकार - 
+              रचनाकार -
               <strong class="text-primary fnt-sz-14">
                 <%= link_to @article.author.name, public_author_path(@article.author.id) %>
               </strong>
@@ -43,6 +43,11 @@
       </div>
       <div class="row">
         <div class="m-sm-1 article-body" data-controller= 'article'>
+          <% if @article.image.present? %>
+            <div class="mb-3">
+              <img src="<%= @article.image.image %>" alt="no image" style="width: 100%"/>
+            </div>
+          <% end %>
           <div class="article-content mb-5">
             <%= raw @article.content %>
           </div>
@@ -76,15 +81,15 @@
             <button class="btn btn-sm btn-outline-secondary fRight" <%= current_user.present? ? '' : 'disabled' %> data-action="click->comment#cancelNewComment">
               Cancel
             </button>
-            <button class="btn btn-sm btn-primary fRight me-2" 
-              <%= current_user.present? ? '' : 'disabled' %> 
+            <button class="btn btn-sm btn-primary fRight me-2"
+              <%= current_user.present? ? '' : 'disabled' %>
               data-parent_id="<%= @article.id %>"
               data-depth="0"
               data-parent_name="<%= @article.class.name %>"
               data-action="click->comment#submitNewComment"
             >
               Comment
-            </button>  
+            </button>
           </div>
         </div>
       </div>
@@ -101,8 +106,8 @@
           <% if @comments.present? %>
             <% @comments.each do | comment | %>
             <div class="parent-comment-body">
-              <%= render partial: "comments/comment", locals: {comment: comment, 
-                article: @article, parent: @article, parent_name: @article.class.name, 
+              <%= render partial: "comments/comment", locals: {comment: comment,
+                article: @article, parent: @article, parent_name: @article.class.name,
                 level: 1} %>
             </div>
             <% end %>

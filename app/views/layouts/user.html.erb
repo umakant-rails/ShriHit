@@ -19,7 +19,13 @@
         <%= render partial: "layouts/alert_message", locals: {notice: flash[:notice], error: flash[:error]}%>
         <main class="content">
           <div class="container-fluid p-0" style="font-size: 18px;">
-            <%= yield %>
+            <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-10">
+                <%= yield %>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
           </div>
         </main>
         <%#= render partial: "layouts/footbar" %>
