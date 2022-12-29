@@ -1,6 +1,6 @@
-<% 
+<%
   page = (articles.current_page - 1)
-  per_page = articles.present? ? articles.limit_value : 0 
+  per_page = articles.present? ? articles.limit_value : 0
 %>
 <table class="table table-hover my-0">
   <thead class="table-dark">
@@ -10,21 +10,24 @@
       <th class="d-none d-xl-table-cell">रचनाकार</th>
       <th class="d-none d-xl-table-cell">रचना प्रकार</th>
       <th class="d-none d-xl-table-cell">योगदानकर्ता</th>
-      <th>स्वीकृत/अस्वीकृत</th>
+      <th>गतिविधि</th>
     </tr>
   </thead>
   <tbody>
+    <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>"
+      data-admin-article-target="csrfToken">
     <% if articles.present? %>
       <% articles.each_with_index do |article, index| %>
-        <% 
-          ind = (page * per_page) + (index + 1) 
-          approved_cls = article.is_approved ? "text-success" : ""
+        <%
+          ind = (page * per_page) + (index + 1)
+          approved_cls = ""
+          # approved_cls = article.is_approved.nil? ? "text-warning" : (article.is_approved ? "text-success" : "text-danger")
         %>
         <tr class="<%= approved_cls %>">
           <td><%= ind %></td>
           <td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
             <a href="<%= article_path(article.id) %>" class="<%= approved_cls %>">
-              <%= article.hindi_title %> 
+              <%= article.hindi_title %>
             </a>
           </td>
           <td class="d-none d-xl-table-cell">
@@ -33,13 +36,34 @@
             </a>
           </td>
           <td class="d-none d-xl-table-cell">
-            <%= article.article_type.name %> 
+            <%= article.article_type.name %>
           </td>
           <td class="d-none d-xl-table-cell">
-            <%= article.user.username %> 
+            <%= article.user.username %>
           </td>
           <td>
-            <%= article.is_approved? ? "स्वीकृत" : "अस्वीकृत" %>
+            <% if parent_type == "approved" %>
+              <input type="button" value="अस्वीकृत" data-index="<%= index %>"
+                data-page="<%= params[:page]%>" data-action-name="reject"
+                data-parent-type="<%= parent_type %>"
+                data-action="click->admin-article#articleActions"
+                class="btn btn-danger"/>
+            <% elsif parent_type == "pending" %>
+              <%= render "article_action", article: article, index: index, parent_type: parent_type %>
+              <input type="button" value="अस्वीकृत" data-index="<%= index %>"
+                data-page="<%= params[:page]%>" data-action-name="reject"
+                data-parent-type="<%= parent_type %>"
+                data-action="click->admin-article#articleActions" class="btn btn-danger"/>
+            <% elsif parent_type == "rejected"%>
+              <%= render "article_action", article: article, index: index, parent_type: parent_type %>
+              <input type="button" value="पोर्टल से हटाए" data-index="<%= index %>"
+                data-page="<%= params[:page]%>" data-action-name="delete"
+                data-parent-type="<%= parent_type %>"
+                data-action="click->admin-article#articleActions" class="btn btn-danger"/>
+            <% else %>
+              <%= article.is_approved.nil? ? "लंबित":(article.is_approved ? "स्वीकृत" : "अस्वीकृत") %>
+            <% end %>
+            <%#= article.is_approved.nil? ? "लंबित":(article.is_approved ? "स्वीकृत" : "अस्वीकृत") %>
           </td>
         </tr>
       <% end %>
@@ -52,3 +76,6 @@
     <% end %>
   </tbody>
 </table>
+<div id="paginate-block">
+  <%= paginate articles, remote: true if articles.present? %>
+</div>

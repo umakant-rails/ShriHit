@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <% if articles.present? %>
-      <% 
+      <%
         page = (articles.current_page - 1)
         per_page = articles.present? ? articles.limit_value : 0
       %>
@@ -57,9 +57,9 @@
 						      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
 						        <i class="fa fa-trash" style="color:red;"></i>
 						      </button>
-						    <% end %>  
+						    <% end %>
 						  </div>
-				    </div> 
+				    </div>
 					</td>
 				</tr>
       <% end %>
@@ -73,7 +73,7 @@
   </tbody>
 </table>
 <% if paginate(articles).present? %>
-  <%= paginate articles %>
+  <%= paginate articles, remote: true %>
   <div class="dropdown-divider"></div>
 <% end %>
 <%= link_to "New article", new_article_path %>

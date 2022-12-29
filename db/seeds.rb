@@ -8,7 +8,7 @@
 Role.create!(name: 'Super Admin') if Role.where(name: 'Super Admin').blank?
 Role.create!(name: 'Admin') if Role.where(name: 'Admin').blank?
 Role.create!(name: 'Contributor') if Role.where(name: 'Contributor').blank?
-User.create!(username: 'umakant005', email: 'umakantrajpoot@gmail.com', 
+User.create!(username: 'umakant005', email: 'umakantrajpoot@gmail.com',
   password: '12345678', password_confirmation: '12345678', role_id:1,
   confirmed_at: Date.today) if User.where(email: 'umakantrajpoot@gmail.com').blank?
 
@@ -54,13 +54,13 @@ Theme.create!(name: 'होली', user_id: 1) if Theme.where(name: 'होल�
 Theme.all.each{ | theme |
   ThemeChapter.create(user_id:1, theme_id: theme.id, name: "#{theme.name}_विविध _प्रकरण") if ThemeChapter.where(name: "#{theme.name}_विविध _प्रकरण").blank?
 }
- 
-Context.create!(name: 'विविध', user_id: 1) if Context.where(name: 'विविध').blank?
-Context.create!(name: 'वन विहार', user_id: 1) if Context.where(name: 'वन विहार').blank?
-Context.create!(name: 'श्रृंगार', user_id: 1) if Context.where(name: 'श्रृंगार').blank?
-Context.create!(name: 'शरद ऋतु', user_id: 1) if Context.where(name: 'शरद ऋतु').blank?
-Context.create!(name: 'वर्षा ऋतु', user_id: 1) if Context.where(name: 'वर्षा ऋतु').blank?
-Context.create!(name: 'नौका विहार', user_id: 1) if Context.where(name: 'नौका विहार').blank?
+
+Context.create!(name: 'विविध', is_approved: true, user_id: 1) if Context.where(name: 'विविध').blank?
+Context.create!(name: 'वन विहार', is_approved: true, user_id: 1) if Context.where(name: 'वन विहार').blank?
+Context.create!(name: 'श्रृंगार', is_approved: true, user_id: 1) if Context.where(name: 'श्रृंगार').blank?
+Context.create!(name: 'शरद ऋतु', is_approved: true, user_id: 1) if Context.where(name: 'शरद ऋतु').blank?
+Context.create!(name: 'वर्षा ऋतु', is_approved: true, user_id: 1) if Context.where(name: 'वर्षा ऋतु').blank?
+Context.create!(name: 'नौका विहार', is_approved: true, user_id: 1) if Context.where(name: 'नौका विहार').blank?
 
 Sampradaya.create!(name: 'अज्ञात') if Sampradaya.where(name: 'अज्ञात').blank?
 Sampradaya.create!(name: 'माध्व सम्प्रदाय') if Sampradaya.where(name: 'माध्व सम्प्रदाय').blank?

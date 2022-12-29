@@ -5,7 +5,9 @@ export default class extends ApplicationController {
   static targets = ['tagSelectInput', 'tagList', 'articleTags', 'newTag', 'newTagBlock', 'showTagInputBtn']
 
   connect(){
-    this.tagsArray = this.tagSelectInputTarget.dataset.tags.split(",");
+
+    let tagsText = this.tagSelectInputTarget.dataset.tags.split(",");
+    this.tagsArray = (tagsText.length > 1) ? tagsText.split(",") : [];
     this.selectedTagList = (this.articleTagsTarget.value.length > 0) ? this.articleTagsTarget.value.split(",") : [];
   }
 
@@ -39,9 +41,10 @@ export default class extends ApplicationController {
     // if(valueTxt == "new"){
     //   this.tagSelectInputTarget.style.display = "none";
     //   this.newTagBlockTarget.style.display = "block";
-    // } else if( valueTxt.length > 0 ){
+    // } else
+    if( valueTxt.length > 0 ){
       this.selectedTagList.push(valueTxt);
-    // }
+    }
     setTimeout(()=> {this.tagSelectInputTarget.value = ""}, 300);
     this.addTagInHtml()
     this.showTagsDataList();

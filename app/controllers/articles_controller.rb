@@ -144,7 +144,12 @@ class ArticlesController < ApplicationController
     end
 
     def set_article
-      @article = current_user.articles.find(params[:id]) rescue nil
+      if current_user.is_super_admin or current_user.is_admin
+        @article = Article.find(params[:id]) rescue nil
+      else
+        @article = current_user.articles.find(params[:id]) rescue nil
+      end
+
       if @article.blank?
         redirect_back_or_to homes_path
       end

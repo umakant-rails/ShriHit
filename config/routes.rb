@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     get '/set_layout/:layout_name' => "homes#set_layout", as: :set_layout, on: :collection
   end
 
-  resources :articles do 
+  resources :articles do
     get   "/tags" => "articles#tags", as: :tags, on: :member
     post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member
     get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
@@ -61,9 +61,11 @@ Rails.application.routes.draw do
       get "/approved" => "articles#approved", as: :approved_articles, on: :collection
       get "/pending" => "articles#pending", as: :pending_articles, on: :collection
       get "/report" => "articles#report", as: :report_articles, on: :collection
-      get "/approve" => "articles#approve", as: :approve, on: :member
-      get "/reject" => "articles#reject", as: :reject, on: :member
-      post "/merge" => "articles#merge", as: :merge, on: :member
+      get "/rejected" => "articles#rejected", as: :rejected_articles, on: :collection
+
+      post "/approve" => "articles#approve", as: :approve, on: :member
+      post "/reject" => "articles#reject", as: :reject, on: :member
+      post "/delete" => "articles#delete", as: :merge, on: :member
     end
     resources :authors, only: [:index, :update] do
       get "/approved" => "authors#approved", as: :approved_authors, on: :collection
@@ -97,9 +99,9 @@ Rails.application.routes.draw do
     end
 
   end
-  
+
   namespace :public, path: :pb do
-    
+
     resources :articles, only: [:index, :show] do
       # get "/type/:article_type" => "articles#articles_by_type", as: :articles_by_type, on: :collection
       # get "/contexts/:context_name" => "articles#articles_by_context", as: :articles_by_context, on: :collection
@@ -122,10 +124,10 @@ Rails.application.routes.draw do
     resources :tags, only: [:index] do
       get '/:tag_name' => "tags#show", as: :articles_by_tag, on: :collection
     end
-    resources :contexts, only: [:index] do 
+    resources :contexts, only: [:index] do
       get '/:context_name' => "contexts#show", as: :articles_by_context, on: :collection
     end
-    resources :article_types, only: [:index] do 
+    resources :article_types, only: [:index] do
       get '/:article_type_name' => "article_types#show", as: :articles_by_type, on: :collection
     end
   end

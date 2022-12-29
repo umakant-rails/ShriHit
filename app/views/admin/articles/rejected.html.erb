@@ -4,7 +4,7 @@
 			<div class="card-body h-400">
 		    <div class="page-subject-header">
 		    	<div class="row">
-	          <div class="col-md-6">लंबित रचना सूची</div>
+	          <div class="col-md-6">अस्वीकृत रचना सूची</div>
 			    	<div class="col-md-6">
 			    		<div class="btn-group fRight">
 					    	<a href="<%= admin_articles_path %>" class="text-white btn btn-primary">
@@ -13,7 +13,7 @@
 						  	<a href="<%= approved_articles_admin_articles_path %>" class="text-white btn btn-success">
 							  	<i class="far fa-check-circle"></i> स्वीकृत
 							  </a>
-						  	<a href="javascript:void(0);>" class="text-white btn btn-warning">
+						  	<a href="<%= pending_articles_admin_articles_path %>" class="text-white btn btn-warning">
 							  	<i class="far fa-hourglass-half"></i> लंबित
 							  </a>
 								<a href="<%= rejected_articles_admin_articles_path %>" class="text-white btn btn-danger">
@@ -25,7 +25,7 @@
 				</div>
 		    <div class="dropdown-divider"></div>
       	<div id="article_list">
-	      	<%= render "article", articles: @articles_pending, parent_type: params[:action] %>
+	      	<%= render "article", articles: @articles_rejected, parent_type: params[:action] %>
 	      </div>
 			</div>
 		</div>
