@@ -28,7 +28,7 @@ class Admin::TagsController < ApplicationController
     if Context.where(name: @tag.name).blank?
       context = Context.new(name: @tag.name, is_approved: true, user_id: @tag.user_id)
       if context.save
-        @tag.update(is_approved: true, is_imported_as_tag: true)
+        @tag.update(is_approved: true)
         flash[:success] = "टैग को सफलतापूर्वक प्रसंग बना दिया गया हैै"
       else
         flash[:error] = "टैग को प्रसंग बनाने की प्रकिया असफल हो गई हैै"
