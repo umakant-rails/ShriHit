@@ -19,7 +19,28 @@
           <th><%= ind %></th>
           <td><%= tag.name %></td>
           <td class="d-none d-xl-table-cell"><%= tag.user.username %></td>
-          <td><%= tag.is_approved ? "स्वीकृत" : "अस्वीकृत" %>
+          <td>
+            <% if parent_type == "approved" %>
+              <%= link_to "javascript:void(0);", class: "btn btn-danger",
+                'data-action': 'admin-tag#rejectTag', 'data-id': tag.id,
+                'data-parent-type': parent_type do %>
+                <i class="fa-solid fa-ban"></i> अस्वीकृत
+              <% end %>
+              <%= link_to "javascript:void(0);", class: "btn btn-primary",
+                'data-action': 'admin-tag#convertTagToContext', 'data-id': tag.id,
+                'data-parent-type': parent_type do %>
+                <i class="fa-solid fa-share-from-square"></i> टैग को प्रसंग बनाये
+              <% end %>
+            <% elsif parent_type == "rejected"%>
+              <%= link_to "javascript:void(0);", class: "btn btn-primary",
+                'data-action': 'admin-tag#approveTag', 'data-id': tag.id,
+                'data-parent-type': parent_type do %>
+                Approved
+              <% end %>
+            <% else %>
+              <%= tag.is_approved ? "स्वीकृत" : "अस्वीकृत" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     <% else %>
@@ -31,3 +52,6 @@
     <% end %>
   </tbody>
 </table>
+<div id="paginate-block">
+  <%= paginate tags, remote: true if tags.present? %>
+</div>

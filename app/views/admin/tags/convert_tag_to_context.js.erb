@@ -6,7 +6,4 @@ $(".alert").hide();
 <% elsif flash[:error].present? %>
   $("#errorsAlert").html("<%= flash[:error] %>");
   $("#errorsAlert").parent().css("display", "block");
-<%# elsif @tags.blank? %>
-  // let url = window.location.href;
-  // window.location.href = url.substr(0, url.indexOf('?'));
 <% end %>

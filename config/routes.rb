@@ -89,6 +89,7 @@ Rails.application.routes.draw do
       post "/approve" => "tags#approve", as: :approve, on: :member
       get "/approved" => "tags#approved", as: :approved_tags, on: :collection
       get "/rejected" => "tags#rejected", as: :rejected_tags, on: :collection
+      post '/convert_tag_to_context' => "tags#convert_tag_to_context", as: :tag_to_context, on: :member
     end
 
     resources :suggestions, only: [:index, :show] do
