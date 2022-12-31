@@ -25,8 +25,24 @@ div.nobreak{ page-break-inside: avoid; }
     color:  #306EFF;
   }
 /* end pdf header/footer css */
-.title-image{
-  color: #306EFF;
+.col-left {
+  width: 24%; display: inline-block; margin-top: 5px;
+}
+.col-middle {
+  width: 50%; display: inline-block; margin-top: -10%;
+}
+.col-right {
+  width: 24%; display: inline-block; margin-top: 5px;
+}
+.left-image-logo, .right-image-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.middle-image-logo {
+  width: 300px;
+  height: 125px;
+  margin-top: -10%;
 }
 body{
   /*background: #f5f7fb;*/
@@ -46,19 +62,33 @@ body{
 }
 
 .article-title{
-  background: #3b7ddd;
-  color: #FFF;
-  padding: 6px 4px;
-  /*border-radius: 4px;*/
-  border: 1px solid #3b7ddd;
-  font-size: 22px;
+  background: #F5F5F5;
+  padding: 15px 8px;;
+  color: #0d6efd;
+  border-radius: 4px;
+  border-top: 3px solid #3b7ddd;
+  border-bottom: 3px solid #3b7ddd;
+  font-size: 34px;
   font-weight: bold;
+  margin-bottom: 25px;
+}
+.title-text{
+  margin-bottom: 5px;
+}
+.contributer-text {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: -2px;
+}
+.contributer-text a {
+  color: #0d6efd;
 }
 .article-content{
-  font-size: 18px;
+  font-size: 30px;
   padding: 10px 20px;
-/*  background-image: url(/assets/shrihit1.png) 10px 0px repeat; */
-  background-image: url('/assets/lalji_icon.jpg'); 
+  /*  background-image: url(/assets/shrihit1.png) 10px 0px repeat; */
+  // background-image: url('/assets/lalji_icon.jpg');
+  background: linear-gradient(0deg, white 0%, #b3ffff 100%);
 }
 .article-author{
   font-size: 18px;

@@ -88,7 +88,7 @@ class ArticlesController < ApplicationController
           save_to_file: @article.hindi_title,
           template: "articles/article_pdf",
           layout: "pdf_layout",
-          margin: {top: 14, bottom: 14, left: 10, right: 10},
+          margin: {top: 14, bottom: 14, left: 8, right: 8},
           title:  @article.english_title,
           header: {
             html: {
