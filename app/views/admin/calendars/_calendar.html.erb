@@ -1,0 +1,35 @@
+<% month, year = @cur_date.month, @cur_date.year %>
+<% dates_array = (Date.new(year, month, 1).at_beginning_of_week..Date.new(year, month, -1).at_end_of_week) %>
+<div id="custom-calendar">
+  <div class="row-fluid mb-2">
+    <a href="<%= @last_month_link%>"><<</a>
+      <strong><%= @cur_date.strftime("%B, %Y") %></strong>
+    <a href="<%= @next_month_link%>">>></a>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <% @week_days.each do |day| %>
+          <th><%= day %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% indx = 0 %>
+      <% dates_array.each do | dt | %>
+        <% if indx%7 == 0 %>
+          <tr>
+        <% end %>
+          <td class="<%= dt.month == @cur_date.month ? "cur-month" : "not-cur-month"%>"
+            data-date="<%= dt.strftime("%d/%m/%Y")%>"
+            >
+            <%= dt.strftime("%b %d") %>
+          </td>
+        <% if indx%7 == 66 %>
+          </tr>
+        <% end %>
+        <% indx = indx + 1%>
+      <% end %>
+    </tbody>
+  </table>
+</div>

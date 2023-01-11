@@ -1,0 +1,25 @@
+<div class="row" data-controller="admin-contextt">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+        <div class="row">
+          <div class="col-md-6 text-start article-title text-primary">पंचांग में तिथि जोड़े</div>
+        </div>
+		    <div class="dropdown-divider"></div>
+      	<input type=hidden name="authenticity_token"
+          value="<%= form_authenticity_token %>"
+          data-admin-context-target="csrfToken">
+        <div class="row">
+					<div class="col-md-6">
+						<%= render "calendar" %>
+          </div>
+          <div class="col-md-6">
+          </div>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/calender" %>
+<% end %>
