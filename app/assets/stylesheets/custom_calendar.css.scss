@@ -2,10 +2,11 @@
   thead th{
     border: 1px solid lightgray;
   }
-  td.cur-month{
+  td.current-month{
     border: 1px solid #00BFFF;
     color: #1E90FF;
     padding: 16px 12px;
+    cursor: pointer;
   }
   td.not-cur-month{
     // background: #DDD;

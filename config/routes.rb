@@ -99,7 +99,7 @@ Rails.application.routes.draw do
       get "/rejected" => "suggestions#rejected", as: :rejected, on: :collection
     end
 
-    resources :calendars
+    resources :panchangs
 
   end
 

@@ -1,0 +1,68 @@
+<% month, year = @cur_date.month, @cur_date.year %>
+<% dates_array = (Date.new(year, month, 1).at_beginning_of_week..Date.new(year, month, -1).at_end_of_week) %>
+<div id="custom-calendar">
+  <div class="row-fluid mb-2">
+    <div class="col-md-12 page-subject-header">
+      <a href="<%= @last_month_link%>"><<</a>
+      <strong><%= Panchang::HIN_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %></strong>
+      <a href="<%= @next_month_link%>">>></a>
+    </div>
+  </div>
+  <div class="dropdown-divider"></div>
+  <div class="mt-4">
+    <table class="table">
+      <thead>
+        <tr class="text-white bg-primary">
+          <% @week_days.each do |day| %>
+            <th><%= day %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% indx = 0 %>
+        <% dates_array.each do | dt | %>
+          <% if indx%7 == 0 %>
+            <tr>
+          <% end %>
+            <% if dt.month == @cur_date.month %>
+              <% selected  = (tithi && dt == tithi.date) ? 'selected' : '' %>
+              <% utsav = tithiya.present? ? tithiya.where("date=?", dt) : nil%>
+              <% utsv = get_utsav(tithiya, dt) %>
+              <%# debugger %>
+              <td class="current-month <%= selected %> <%= "utsav" if utsav.present? && utsav[0].description.present? %>"
+                data-date="<%= dt.strftime("%d/%m/%Y")%>"
+                data-admin-panchang-target="calendarDate"
+                data-action="click->admin-panchang#selectDate"
+                >
+                <% if utsav.present? && utsav[0].description.present? %>
+                  <div>
+                    <img src="/assets/lalji_icon.jpg" alt="ShriHit" class="fRight" style="width:20px;height:20px;border-radius:50%;">
+                  </div>
+                <% end %>
+                <center>
+                  <span style="font-size:18px;color:red;">
+                    <%= utsav[0].panchang_month if utsav.present? %>
+                  </span><br/>
+                  <%= dt.strftime("%b %d") %><br/>
+                  <span style="font-size:14px;color:red;">
+                    <%= utsv %>
+                  </span>
+                </center>
+              </td>
+            <% else %>
+              <td class="not-cur-month">
+                <br/>
+                <%= dt.strftime("%b %d") %>
+                <br/>
+                <br/>
+              </td>
+            <% end %>
+          <% if indx%7 == 66 %>
+            </tr>
+          <% end %>
+          <% indx = indx + 1%>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
