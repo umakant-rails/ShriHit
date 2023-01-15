@@ -7,23 +7,23 @@
             <div class="col-md-6">स्वीकृत टैग्स सूची</div>
             <div class="col-md-6">
               <div class="btn-group fRight">
+                <a href="<%= admin_tags_path %>" class="text-white btn btn-primary">
+                  <i class="far fa-check-circle"></i> टैग्स सूची
+                </a>
                 <a href="javascript:void(0);" class="text-white btn btn-success">
-                  <i class="far fa-check-circle"></i> Approved
+                  <i class="far fa-check-circle"></i> स्वीकृत
                 </a>
                 <a href="<%= rejected_tags_admin_tags_path %>" class="text-white btn btn-danger">
-                  <i class="fa-regular fa-circle-xmark"></i> Rejected
+                  <i class="fa-regular fa-circle-xmark"></i> अस्वीकृत
                 </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="dropdown-divider"></div>  
+        <div class="dropdown-divider"></div>
         <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-tag-target="csrfToken">
         <div id="tag_list">
-          <%= render "approved_tags", tags: @tags %>
-        </div>
-        <div id="paginate-block">
-          <%= paginate @tags, remote: true if @tags.present? %>
+          <%= render "tags", tags: @tags, parent_type: params[:action] %>
         </div>
       </div>
     </div>

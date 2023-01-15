@@ -1,0 +1,73 @@
+<div class="row" data-controller="admin-panchang">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+        <div class="row">
+          <div class="col-md-6 text-start article-title text-primary">पंचांग</div>
+        </div>
+		    <div class="dropdown-divider"></div>
+      	<input type=hidden name="authenticity_token"
+          value="<%= form_authenticity_token %>"
+          data-admin-context-target="csrfToken">
+        <div class="row">
+					<div class="col-md-8">
+						<div class="card1">
+					    <div class="card-body1">
+					    	<%= render "tithi_calendar", tithi: @tithi, tithiya: @panchange_tithiya %>
+							</div>
+						</div>
+          </div>
+          <div class="col-md-4">
+          		<div class="card1">
+					      <div class="card-body1">
+					        <div class="col-md-12 page-subject-header">
+					          पंचांग तिथि सूची
+					        </div>
+					        <div class="dropdown-divider"></div>
+					        <div class="mt-4" id="tithi_form">
+					          <table class="table">
+										  <thead class="table bg-primary text-white ps-0 pe-0">
+										    <tr>
+										      <th scope="col">दिनांक </th>
+										      <th scope="col">तिथि</th>
+										    </tr>
+										  </thead>
+										  <tbody>
+										    <% if @panchange_tithiya.present? %>
+										      <% @panchange_tithiya.each_with_index do |tithi, index| %>
+										      	<% if tithi.paksh == "शुक्ळ पक्ष" %>
+									          	<tr class="ttithi-<%= tithi.panchang_tithi%>">
+									          	<% is_purmina = true if tithi.panchang_tithi == 15 %>
+									          <% elsif tithi.paksh == "कृष्ण पक्ष"%>
+									          	<tr class="ttithi-<%= (15 - tithi.panchang_tithi.to_i) %>">
+									          	<% is_amavas = true if tithi.panchang_tithi == 15 %>
+									        	<% end %>
+									        		<td class="text-danger">
+																<strong><%= tithi.date.strftime("%d/%b/%y") %></strong>
+										          	<br/>
+										          	<%= Panchang::WEEKDAYS[tithi.date.wday] %>
+										          <td class="text-primary">
+										          	<strong>
+										          		<%= tithi.panchang_month + " "+ tithi.paksh + "-"+ tithi.panchang_tithi%>
+										          	</strong><br/>
+										          	<%= tithi.description %>
+										          </td>
+										      	</tr>
+										      <% end %>
+										    <% else %>
+										      <td colspan="4">
+										      	अभी रिकॉर्ड उपलब्ध नहीं है.
+										      </td>
+										    <% end %>
+										  </tbody>
+										</table>
+					        </div>
+					        <div class="dropdown-divider"></div>
+					      </div>
+					    </div>
+          </div>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>

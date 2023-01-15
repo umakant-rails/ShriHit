@@ -1,0 +1,33 @@
+<div class="row" data-controller="admin-article">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+		    <div class="page-subject-header">
+		    	<div class="row">
+	          <div class="col-md-6">अस्वीकृत रचना सूची</div>
+			    	<div class="col-md-6">
+			    		<div class="btn-group fRight">
+					    	<a href="<%= admin_articles_path %>" class="text-white btn btn-primary">
+							  	<i class="fas fa-list"></i> रचना सूची
+							  </a>
+						  	<a href="<%= approved_articles_admin_articles_path %>" class="text-white btn btn-success">
+							  	<i class="far fa-check-circle"></i> स्वीकृत
+							  </a>
+						  	<a href="<%= pending_articles_admin_articles_path %>" class="text-white btn btn-warning">
+							  	<i class="far fa-hourglass-half"></i> लंबित
+							  </a>
+								<a href="<%= rejected_articles_admin_articles_path %>" class="text-white btn btn-danger">
+							  	<i class="fa fa-ban"></i> अस्वीकृत
+							  </a>
+							</div>
+						</div>
+					</div>
+				</div>
+		    <div class="dropdown-divider"></div>
+      	<div id="article_list">
+	      	<%= render "article", articles: @articles_rejected, parent_type: params[:action] %>
+	      </div>
+			</div>
+		</div>
+	</div>
+</div>

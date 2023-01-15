@@ -16,15 +16,15 @@
 						</div>
 						<br/>
 						<div class="mb-3">
-							<a href="<%= admin_articles_path %>" class="btn btn-primary mb-2 m-w-120"> 
-								Total:&nbsp;<%= @articles_group_by_approval[true] +  @articles_group_by_approval[nil] %>
-							</a> 
-							<a href="<%= approved_articles_admin_articles_path %>" class="btn btn-success mb-2 m-w-120"> 
-								Approved:&nbsp;<%= @articles_group_by_approval[true] %>
-							</a> 
+							<a href="<%= admin_articles_path %>" class="btn btn-primary mb-2 m-w-120">
+								Total:&nbsp;<%= @articles_group_by_approval[:approved] +  @articles_group_by_approval[:pending] %>
+							</a>
+							<a href="<%= approved_articles_admin_articles_path %>" class="btn btn-success mb-2 m-w-120">
+								Approved:&nbsp;<%= @articles_group_by_approval[:approved] %>
+							</a>
 							<a href="<%= pending_articles_admin_articles_path %>" class="btn btn-warning m-w-120">
-								Pending:&nbsp;<%= @articles_group_by_approval[nil] %>
-							</a> 
+								Pending:&nbsp;<%= @articles_group_by_approval[:pending] %>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -44,15 +44,15 @@
 						</div>
 						<br/>
 						<div class="mb-3">
-							<a href="<%= admin_authors_path %>" class="btn btn-primary mb-2 m-w-120"> 
-								Total:&nbsp;<%= @authors_group_by_approval[true] +  @authors_group_by_approval[false] %>
-							</a> 
-							<a href="<%= approved_authors_admin_authors_path %>" class="btn btn-success mb-2 m-w-120"> 
-								Approved:&nbsp;<%= @authors_group_by_approval[true] %>
-							</a> 
+							<a href="<%= admin_authors_path %>" class="btn btn-primary mb-2 m-w-120">
+								Total:&nbsp;<%= @authors_group_by_approval[:approved] +  @authors_group_by_approval[:pending] %>
+							</a>
+							<a href="<%= approved_authors_admin_authors_path %>" class="btn btn-success mb-2 m-w-120">
+								Approved:&nbsp;<%= @authors_group_by_approval[:approved] %>
+							</a>
 							<a href="<%= pending_authors_admin_authors_path %>" class="btn btn-warning m-w-120">
-								Pending:&nbsp;&nbsp;&nbsp;<%= @authors_group_by_approval[false] %>
-							</a> 
+								Pending:&nbsp;&nbsp;&nbsp;<%= @authors_group_by_approval[:pending] %>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -72,15 +72,15 @@
 						</div>
 						<br/>
 						<div class="mb-3">
-							<a href="<%= admin_contexts_path %>" class="btn btn-primary mb-2 m-w-120"> 
-								Total:&nbsp;<%= get_total_grouped_record(@tags_group_by_approval) %>
-							</a> 
-							<a href="<%= approved_tags_admin_tags_path %>" class="btn btn-success mb-2 m-w-120"> 
-								Approved:&nbsp;<%= @tags_group_by_approval[true] %>
-							</a> 
+							<a href="<%= admin_contexts_path %>" class="btn btn-primary mb-2 m-w-120">
+								Total:&nbsp;<%= @tags_group_by_approval[:approved] +  @tags_group_by_approval[:pending] %>
+							</a>
+							<a href="<%= approved_tags_admin_tags_path %>" class="btn btn-success mb-2 m-w-120">
+								Approved:&nbsp;<%= @tags_group_by_approval[:approved] %>
+							</a>
 							<a href="<%= rejected_tags_admin_tags_path %>" class="btn btn-warning m-w-120">
-								Pending:&nbsp;&nbsp;&nbsp;<%= @tags_group_by_approval[false] %>
-							</a> 
+								Pending:&nbsp;&nbsp;&nbsp;<%= @tags_group_by_approval[:pending] %>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -207,7 +207,7 @@
 						<tr>
 							<td colspan="5">
 								<a href="<%= pending_articles_admin_articles_path %>" class="fRight">
-									स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे 
+									स्वीकृत करने/और पढ़ने के लिए यहाँ क्लिक करे
 								</a>
 							</td>
 						</tr>

@@ -2,22 +2,25 @@ import { Controller } from "@hotwired/stimulus"
 import ApplicationController from "../application_controller";
 
 export default class extends ApplicationController {
-  static targets = ['articleForApproval'];
-  
+  static targets = ['articleForApproval', 'csrfToken'];
+
   connect(){
     this.params = {};
   }
 
-  approveOrApproveArticle(){
-    console.log(event.target.dataset.actionName);
+  articleActions(){
     let index = event.target.dataset.index;
     let page = event.target.dataset.page;
+    let csrfToken = this.csrfTokenTarget.value;
     let actionName = event.target.dataset.actionName;
+    let parentType = event.target.dataset.parentType;
     let articleId = this.articleForApprovalTargets[index].dataset.vl;
     let url = "/admin/articles/"+articleId+"/" + actionName;
-    this.update_data("get", url);
+    this.params.parent_type = parentType;
+    this.params.authenticity_token = csrfToken;
+    this.update_data("post", url);
   }
-  
+
   // rejectArticle(){
   //   console.log('reject');
   //   let index = event.target.dataset.index;
@@ -33,7 +36,7 @@ export default class extends ApplicationController {
     $.ajax({
       type: requestType,
       url: url,
-      data: {},
+      data: this.params,
       dataType: 'script',
       success: function(data){
       }

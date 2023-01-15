@@ -12,19 +12,19 @@
         <% end %>
       </div>
       <div class="contributer-text">
-        (योगदानकर्ता : 
+        (योगदानकर्ता :
           <strong>
             <%= link_to @article.user.username.capitalize, public_user_profile_path(@article.user.id) %>
-          </strong>, 
-          सृजन तिथि : 
+          </strong>,
+          सृजन तिथि :
           <strong class="text-primary">
             <%= link_to @article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
           </strong>,
-          रचना प्रकार - 
+          रचना प्रकार -
           <strong class="text-primary fnt-sz-14">
             <%= link_to @article.article_type.name, articles_by_type_public_article_types_path(@article.article_type.name) %>
           </strong>,
-          रचनाकार - 
+          रचनाकार -
           <strong class="text-primary fnt-sz-14">
             <%= link_to @article.author.name, public_author_path(@article.author.id) %>
           </strong>
@@ -33,6 +33,11 @@
     </div>
     <div class="dropdown-divider"></div>
     <div class="ms-4 article-body" data-controller= 'article'>
+      <% if @article.image.present? %>
+        <div class="mb-3">
+          <img src="<%= @article.image.image %>" alt="no image" style="width: 100%;"/>
+        </div>
+      <% end %>
       <div class="article-content">
         <%= raw @article.content %>
       </div>
@@ -51,13 +56,13 @@
       <% end %>
     </div>
     <% if current_user.present? %>
-      <div class="ms-4 mt-3">
-        <%= link_to "Edit this article", edit_article_path(@article) %> | 
-        <%= link_to "Back to articles", articles_path %> | 
+      <div class="ms-4 mt-3 edit-delete-block">
+        <%= link_to "Edit this article", edit_article_path(@article) %> |
+        <%= link_to "Back to articles", articles_path %> |
         <%= button_to("Destroy this article", article_path(@article), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
       </div>
     <% end %>
-  
+
     <div class="ms-4 ms-2">
         <!-- <div class="row mb-2">
           <div class="ps-0" style="color:#6c757d;">
@@ -72,17 +77,17 @@
         </div>
         <div class="row">
           <div class="col-md-9 ps-0">
-            <button class="btn btn-sm btn-outline-secondary fRight" <%= current_user.present? ? '' : 'disabled' %> data-action="click->comment#cancelNewComment">
+            <button class="btn btn-outline-secondary fRight" <%= current_user.present? ? '' : 'disabled' %> data-action="click->comment#cancelNewComment">
               Cancel
             </button>
-            <button class="btn btn-sm btn-primary fRight me-2" 
-              <%= current_user.present? ? '' : 'disabled' %> 
+            <button class="btn btn-primary fRight me-2"
+              <%= current_user.present? ? '' : 'disabled' %>
               data-parent_id="<%= @article.id %>"
               data-parent_name="<%= @article.class.name %>"
               data-action="click->comment#submitNewComment"
             >
               Comment
-            </button>  
+            </button>
           </div>
         </div>
       </div>
@@ -98,8 +103,8 @@
         <% if @comments.present? %>
           <% @comments.each do | comment | %>
             <div class="parent-comment-body">
-              <%= render partial: "comments/comment", locals: {comment: comment, 
-                article: @article, parent: @article, parent_name: @article.class.name, 
+              <%= render partial: "comments/comment", locals: {comment: comment,
+                article: @article, parent: @article, parent_name: @article.class.name,
                 level: 1} %>
             </div>
           <% end %>

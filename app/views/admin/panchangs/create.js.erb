@@ -1,0 +1,8 @@
+<% if flash[:success].present? %>
+	$("#successAlert").html("<%= flash[:success] %>");
+	$("#successAlert").parent().css("display", "block");
+<% elsif flash[:error].present? %>
+	$("#errorsAlert").html("<%= flash[:error] %>");
+	$("#errorsAlert").parent().css("display", "block");
+<% end %>
+$("#tithi_form").html("<%= escape_javascript(render partial: 'form', locals: {tithi: @tithi}) %>");

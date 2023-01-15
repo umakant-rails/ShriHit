@@ -1,0 +1,8 @@
+<% if flash[:success].present? %>
+	window.location.href = "/admin/panchangs"
+	$("#successAlert").html("<%= flash[:success] %>");
+	$("#successAlert").parent().css("display", "block");
+<% elsif flash[:error].present? %>
+	$("#errorsAlert").html("<%= flash[:error] %>");
+	$("#errorsAlert").parent().css("display", "block");
+<% end %>

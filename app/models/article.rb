@@ -10,6 +10,8 @@ class Article < ApplicationRecord
   has_many :comment_reportings
   has_many :article_tags
   has_many :tags, through: :article_tags
+  has_one :image, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :image
 
   paginates_per 10
 
@@ -25,6 +27,7 @@ class Article < ApplicationRecord
   scope :by_search_hindi_term, ->(term) {where("content like ? or LOWER(hindi_title) like ?", "%#{term.strip}%", "%#{term.strip}%")}
   scope :approved, ->(){ where(is_approved: true) }
   scope :pending, ->(){ where(is_approved: nil) }
+  scope :rejected, ->(){ where(is_approved: false) }
 
   def self.by_attributes_query(author_id, context_id, article_type_id, selected_chapter_id, contributor_id)
     query = ""

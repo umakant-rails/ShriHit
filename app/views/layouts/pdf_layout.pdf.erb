@@ -7,10 +7,22 @@
   </head>
   <body onload='number_pages'>
     <div id="containter" class="page">
-      <div class="title-image">
-        <center>
-          <%= image_tag wicked_pdf_asset_base64('shrihit_new.png') %>
-        </center>
+      <div>
+        <div class="col-left">
+          <center>
+            <%= image_tag wicked_pdf_asset_base64('hitharivansh.png'), class: 'left-image-logo' %>
+          </center>
+        </div>
+        <div class="col-middle">
+          <center>
+            <%= image_tag wicked_pdf_asset_base64('shrihit_new.png'), class: 'middle-image-logo' %>
+          </center>
+        </div>
+        <div class="col-right">
+          <center>
+            <%= image_tag wicked_pdf_asset_base64('hitlalju.png'), class: 'right-image-logo' %>
+          </center>
+        </div>
       </div>
       <%= yield %>
     </div>

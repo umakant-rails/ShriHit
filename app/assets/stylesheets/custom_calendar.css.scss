@@ -1,0 +1,19 @@
+#custom-calendar{
+  thead th{
+    border: 1px solid lightgray;
+  }
+  td.current-month{
+    border: 1px solid #00BFFF;
+    color: #1E90FF;
+    padding: 16px 12px;
+    cursor: pointer;
+  }
+  td.not-cur-month{
+    // background: #DDD;
+    border: 1px solid lightgray;
+    padding: 16px 12px;
+  }
+  .selected{
+    border: 3px solid #4169E1 !important;
+  }
+}

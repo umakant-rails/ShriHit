@@ -8,26 +8,25 @@
 			    	<div class="col-md-6">
 			    		<div class="btn-group fRight">
 					    	<a href="<%= admin_articles_path %>" class="text-white btn btn-primary">
-							  	<i class="fas fa-list"></i> Index
+							  	<i class="fas fa-list"></i> रचना सूची
 							  </a>
 						  	<a href="<%= approved_articles_admin_articles_path %>" class="text-white btn btn-success">
-							  	<i class="far fa-check-circle"></i> Approved
+							  	<i class="far fa-check-circle"></i> स्वीकृत
 							  </a>
 						  	<a href="javascript:void(0);>" class="text-white btn btn-warning">
-							  	<i class="far fa-hourglass-half"></i> Pending
+							  	<i class="far fa-hourglass-half"></i> लंबित
+							  </a>
+								<a href="<%= rejected_articles_admin_articles_path %>" class="text-white btn btn-danger">
+							  	<i class="fa fa-ban"></i> अस्वीकृत
 							  </a>
 							</div>
 						</div>
 					</div>
 				</div>
 		    <div class="dropdown-divider"></div>
-      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-article-target="csrfToken">
-      	<div id="pending_article_list">
-	      	<%= render "article_pending", articles: @articles_pending %>
+      	<div id="article_list">
+	      	<%= render "article", articles: @articles_pending, parent_type: params[:action] %>
 	      </div>
-	      <div id="paginate-block">
-      		<%= paginate @articles_pending, remote: true if @articles_pending.present? %>
-      	</div>
 			</div>
 		</div>
 	</div>

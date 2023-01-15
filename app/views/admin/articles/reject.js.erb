@@ -1,12 +1,12 @@
 $(".alert").hide();
-<% if @authors_pending.present? && flash[:success].present? %>
-	$("#pending_article_list").html("<%= escape_javascript(render 'article_pending', articles: @articles_pending)%>");
+<% if flash[:success].present? %>
+	$("#article_list").html("<%= escape_javascript(render 'article', articles: @articles, parent_type: params[:parent_type])%>");
 	$("#successAlert").html("<%= flash[:success] %>");
 	$("#successAlert").parent().css("display", "block");
-<% elsif @authors_pending.present? && flash[:error].present? %>
+<% elsif flash[:error].present? %>
 	$("#errorsAlert").html("<%= flash[:error] %>");
 	$("#errorsAlert").parent().css("display", "block");
-<% elsif @authors_pending.blank? %>
-	let url = window.location.href;
-  window.location.href = url.substr(0, url.indexOf('?'));
+<%# elsif @articles.blank? %>
+	// let url = window.location.href;
+  // window.location.href = url.substr(0, url.indexOf('?'));
 <% end %>

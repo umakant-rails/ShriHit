@@ -1,0 +1,37 @@
+<div class="row" data-controller="admin-panchang">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+        <div class="row">
+          <div class="col-md-6 text-start article-title text-primary">पंचांग में तिथि जोड़े</div>
+        </div>
+		    <div class="dropdown-divider"></div>
+      	<input type=hidden name="authenticity_token"
+          value="<%= form_authenticity_token %>"
+          data-admin-context-target="csrfToken">
+        <div class="row">
+					<div class="col-md-6">
+						<%= render "calendar",  tithi: @tithi %>
+          </div>
+          <div class="col-md-6">
+          		<div class="card">
+					      <div class="card-body">
+					        <div class="col-md-12 page-subject-header">
+					          अद्यतन तिथि फॉर्म
+					        </div>
+					        <div class="dropdown-divider"></div>
+					        <div class="m-sm-4" id="tithi_form">
+					          <%= render "form", tithi: @tithi %>
+					        </div>
+					        <div class="dropdown-divider"></div>
+					      </div>
+					    </div>
+          </div>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/panchang-custom" %>
+<% end %>

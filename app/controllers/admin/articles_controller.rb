@@ -7,17 +7,21 @@ class Admin::ArticlesController < ApplicationController
   end
 
   def approved
-    @articles_approved = Article.approved.order("created_at DESC").page(params[:page])
+    @articles_approved = Article.joins([:author, :context]).approved.order("created_at DESC").page(params[:page])
   end
 
   def pending
-    set_pending_records
+    @articles_pending = Article.joins([:author, :context]).pending.order("created_at DESC").page(params[:page])
+  end
+
+  def rejected
+    @articles_rejected = Article.rejected.order("created_at DESC").page(params[:page])
   end
 
   def approve
     @article = Article.find(params[:id])
     if @article.update(is_approved: true)
-      set_pending_records
+      set_records
       flash[:success] = "रचना को सफलतापूर्वक स्वीकृत कर दिया है"
     else
       flash[:error] = "रचना को स्वीकृत करने प्रकिया असफल हो गई है"
@@ -27,10 +31,20 @@ class Admin::ArticlesController < ApplicationController
   def reject
     @article = Article.find(params[:id])
     if @article.update(is_approved: false)
-      set_pending_records
-      flash[:success] = "रचना को सफलतापूर्वक स्वीकृत कर दिया है"
+      set_records
+      flash[:success] = "रचना को सफलतापूर्वक अस्वीकृत कर दिया है"
     else
-      flash[:error] = "रचना को स्वीकृत करने प्रकिया असफल हो गई है"
+      flash[:error] = "रचना को अस्वीकृत करने प्रकिया असफल हो गई है"
+    end
+  end
+
+  def delete
+    @article = Article.find(params[:id])
+    if @article.destroy
+      set_records
+      flash[:success] = "रचना को सफलतापूर्वक डिलीट कर दिया गया हैै"
+    else
+      flash[:error] = "रचना को डिलीट करने प्रकिया असफल हो गई है"
     end
   end
 
@@ -46,8 +60,14 @@ class Admin::ArticlesController < ApplicationController
 
   private
 
-    def set_pending_records
-      @articles_pending = Article.joins([:author, :context]).pending.order("created_at DESC").page(params[:page])
+    def set_records
+      if params[:parent_type ] == "approved"
+        @articles = Article.joins([:author, :context]).approved.order("created_at DESC").page(params[:page])
+      elsif params[:parent_type ] == "pending"
+        @articles = Article.joins([:author, :context]).pending.order("created_at DESC").page(params[:page])
+      elsif params[:parent_type ] == "rejected"
+        @articles = Article.joins([:author, :context]).rejected.order("created_at DESC").page(params[:page])
+      end
     end
 
     def verify_admin

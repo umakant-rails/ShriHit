@@ -2,10 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 import ApplicationController from "./application_controller";
 
 export default class extends ApplicationController {
-  static targets = ['tagSelectInput', 'tagList', 'articleTags', 'newTag', 'newTagBlock']
+  static targets = ['tagSelectInput', 'tagList', 'articleTags', 'newTag', 'newTagBlock', 'showTagInputBtn']
 
   connect(){
-    this.tagsArray = this.tagSelectInputTarget.dataset.tags.split(",");
+
+    let tagsText = this.tagSelectInputTarget.dataset.tags.split(",");
+    this.tagsArray = (tagsText.length > 1) ? tagsText.split(",") : [];
     this.selectedTagList = (this.articleTagsTarget.value.length > 0) ? this.articleTagsTarget.value.split(",") : [];
   }
 
@@ -17,7 +19,7 @@ export default class extends ApplicationController {
         datalist += "<option data-action='click->tagging#selectTag'>" + tagArray[i] + "</option>";
       }
     }
-    datalist = datalist + "<option value='new'>नया टैग टाइप करे </option>";
+    // datalist = datalist + "<option value='new'>नया टैग टाइप करे </option>";
     this.tagSelectInputTarget.innerHTML = datalist;
   }
 
@@ -25,7 +27,7 @@ export default class extends ApplicationController {
     var tagsHtmlContent = '';
     for(const tag of this.selectedTagList){
       let html_content = `<span class='tags'>  ${tag}
-        <i class='fa-solid fa-xmark tags-cross' data-tags-target='crossTag' 
+        <i class='fa-solid fa-xmark tags-cross' data-tags-target='crossTag'
           data-action='click->tagging#removeTag'></i>
         </span>`;
       tagsHtmlContent = tagsHtmlContent + html_content;
@@ -36,10 +38,11 @@ export default class extends ApplicationController {
 
   selectTag(){
     var valueTxt = this.tagSelectInputTarget.value.trim();
-    if(valueTxt == "new"){
-      this.tagSelectInputTarget.style.display = "none";
-      this.newTagBlockTarget.style.display = "block";
-    } else if( valueTxt.length > 0 ){
+    // if(valueTxt == "new"){
+    //   this.tagSelectInputTarget.style.display = "none";
+    //   this.newTagBlockTarget.style.display = "block";
+    // } else
+    if( valueTxt.length > 0 ){
       this.selectedTagList.push(valueTxt);
     }
     setTimeout(()=> {this.tagSelectInputTarget.value = ""}, 300);
@@ -47,27 +50,27 @@ export default class extends ApplicationController {
     this.showTagsDataList();
   }
 
-  createTagFromInput(){
-    if(event.keyCode == 188){
-      var valueTxt = this.newTagTarget.value;
-      valueTxt = valueTxt.substring(0, valueTxt.indexOf(",")-1).trim();
-      if(this.selectedTagList.indexOf(valueTxt) > -1){
-        super.showErrorsByLayout("यह टैग लिस्ट में पहले से उपलब्ध है");
-      } else if(this.tagsArray.indexOf(valueTxt) > -1){
-        super.showErrorsByLayout("ययह टैग सूची में पूर्व से उपलब्ध है कृपया इसको सूची से चुने !"); 
-      } else if (valueTxt,length > 2){
-        this.selectedTagList.push(valueTxt);
-        this.addTagInHtml();
-      }
-      event.target.value = "";
-    }
-  }
+  // createTagFromInput(){
+  //   if(event.keyCode == 188){
+  //     var valueTxt = this.newTagTarget.value;
+  //     valueTxt = valueTxt.substring(0, valueTxt.indexOf(",")-1).trim();
+  //     if(this.selectedTagList.indexOf(valueTxt) > -1){
+  //       super.showErrorsByLayout("यह टैग लिस्ट में पहले से उपलब्ध है");
+  //     } else if(this.tagsArray.indexOf(valueTxt) > -1){
+  //       super.showErrorsByLayout("यह टैग सूची में पूर्व से उपलब्ध है कृपया इसको सूची से चुने !");
+  //     } else if (valueTxt,length > 2){
+  //       this.selectedTagList.push(valueTxt);
+  //       this.addTagInHtml();
+  //     }
+  //     event.target.value = "";
+  //   }
+  // }
   createTagByInput(){
     var valueTxt = this.newTagTarget.value.trim();
     if(valueTxt.indexOf(",") > 0){
       valueTxt = valueTxt.substring(0, valueTxt.indexOf(",")).trim();
       this.createTag(valueTxt);
-    } 
+    }
   }
   createTagByButton(){
     var valueTxt = this.newTagTarget.value.trim();
@@ -78,7 +81,7 @@ export default class extends ApplicationController {
     if(this.selectedTagList.indexOf(valueTxt) > -1){
       super.showErrorsByLayout("यह टैग लिस्ट में पहले से उपलब्ध है");
     } else if(this.tagsArray.indexOf(valueTxt) > -1){
-      super.showErrorsByLayout("ययह टैग सूची में पूर्व से उपलब्ध है कृपया इसको सूची से चुने !"); 
+      super.showErrorsByLayout("यह टैग सूची में पूर्व से उपलब्ध है कृपया इसको सूची से चुने !");
     } else if(valueTxt.length > 2) {
       this.selectedTagList.push(valueTxt);
       this.addTagInHtml();
@@ -96,5 +99,11 @@ export default class extends ApplicationController {
   showtagList(){
     this.tagSelectInputTarget.style.display = "block";
     this.newTagBlockTarget.style.display = "none";
+    this.showTagInputBtnTarget.style.display = "block";
+  }
+  showTagInput(){
+    this.tagSelectInputTarget.style.display = "none";
+    this.newTagBlockTarget.style.display = "block";
+    this.showTagInputBtnTarget.style.display = "none";
   }
 }

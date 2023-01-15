@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_13_174835) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_11_102841) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_13_174835) do
     t.boolean "is_approved", default: false
     t.integer "user_id"
     t.integer "theme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "image"
+    t.string "imageable_type"
+    t.bigint "imageable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable"
+  end
+
+  create_table "panchangs", force: :cascade do |t|
+    t.date "date"
+    t.string "panchang_tithi"
+    t.string "panchang_month"
+    t.string "paksh"
+    t.text "description"
+    t.string "title"
+    t.string "panchang_type"
+    t.integer "vikram_samvat"
+    t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
