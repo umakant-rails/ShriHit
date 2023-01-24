@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_102841) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_18_125458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_102841) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "hindi_months", force: :cascade do |t|
+    t.string "name"
+    t.integer "order"
+    t.boolean "is_purshottam_month"
+    t.integer "panchang_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "images", force: :cascade do |t|
     t.string "image"
     t.string "imageable_type"
@@ -97,16 +106,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_102841) do
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable"
   end
 
-  create_table "panchangs", force: :cascade do |t|
+  create_table "panchang_tithis", force: :cascade do |t|
     t.date "date"
-    t.string "panchang_tithi"
-    t.string "panchang_month"
+    t.string "tithi"
     t.string "paksh"
     t.text "description"
     t.string "title"
+    t.integer "year"
+    t.integer "panchang_id"
+    t.integer "hindi_month_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "panchangs", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
     t.string "panchang_type"
     t.integer "vikram_samvat"
-    t.integer "year"
+    t.boolean "is_tithi_populated"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

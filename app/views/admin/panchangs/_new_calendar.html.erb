@@ -1,11 +1,15 @@
-<% month, year = @cur_date.month, @cur_date.year %>
-<% dates_array = (Date.new(year, month, 1).at_beginning_of_week..Date.new(year, month, -1).at_end_of_week) %>
+<% dates_array = (@cur_date.beginning_of_month.at_beginning_of_week..@cur_date.end_of_month.at_end_of_week) %>
 <div id="custom-calendar">
-  <div class="row-fluid mb-2">
-    <div class="col-md-12 page-subject-header">
+  <div class="row mb-2 page-subject-header">
+    <div class="col-md-6">
       <a href="<%= @last_month_link%>"><<</a>
-        <strong><%= Panchang::HIN_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %></strong>
+        <strong><%= HindiMonth::ENG_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %></strong>
       <a href="<%= @next_month_link%>">>></a>
+    </div>
+    <div class="col-md-4" style="font-size: 16px;text-align: right;padding-top: 5px;">कार्यवाही प्रारूप</div>
+    <div class="col-md-2">
+      <%= select_tag "mode", options_for_select([ "Add", "Edit" ], "Add"),
+        class: 'form-control', 'data-admin-panchang-target': 'mode' %>
     </div>
   </div>
   <div class="dropdown-divider"></div>
@@ -26,16 +30,22 @@
           <% end %>
             <% if dt.month == @cur_date.month %>
               <% selected  = (tithi && dt == tithi.date) ? 'selected' : '' %>
-              <td class="current-month <%= selected %> py-4"
+              <% pan_tithi = tithiya ? tithiya.where("date=?", dt)[0] : nil %>
+              <td class="current-month <%= selected %> py-4 <%= pan_tithi ? "utsav" : "" %>"
                 data-date="<%= dt.strftime("%d/%m/%Y")%>"
                 data-admin-panchang-target="calendarDate"
                 data-action="click->admin-panchang#selectDate"
-                >
-                  <%= Panchang::HIN_MONTH[dt.month-1]%> <%= dt.strftime("%d") %>
+                data-tithiid="<%= pan_tithi ? pan_tithi.id  : ''%>"
+                id="<%= "td-#{dt.day}-#{dt.month}-#{dt.year}" %>"
+              >
+                <span class="date-active"
+                  data-action="click->admin-panchang#selectDate" id="<%= "date-#{dt.day}-#{dt.month}-#{dt.year}" %>" >
+                  <%= dt.strftime("%d") %>
+                </span>
               </td>
             <% else %>
               <td class="not-cur-month">
-                <%= Panchang::HIN_MONTH[dt.month-1]%> <%= dt.strftime("%d") %>
+                <span class="date-inactive"><%= dt.strftime("%d") %></span>
               </td>
             <% end %>
           <% if indx%7 == 66 %>

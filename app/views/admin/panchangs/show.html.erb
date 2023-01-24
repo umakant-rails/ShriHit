@@ -1,0 +1,99 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+        <div class="row page-subject-header">
+          <div class="col-md-6 text-start article-title text-primary">पंचांग (<%= @panchang.title %>) विवरण</div>
+          <div class="col-md-6">
+						<% pur_month = @panchang.hindi_months.purshottam_month %>
+						<% if pur_month.present? %>
+							<%= form_tag(remove_purshottam_mas_admin_panchang_path(@panchang), method: :post) do %>
+								<%= hidden_field_tag :hindi_month_id, pur_month[0].id,  class: 'form-cnotrol'%>
+								<%= submit_tag "पुरुषोत्तम माह डिलीट करे", class: "fRight btn btn-danger" %>
+							<% end %>
+						<% end %>
+          	<%= link_to "माह क्रम सुधारे", new_admin_panchang_path, class: "fRight btn btn-primary me-1" %>
+						<%= link_to "पंचांग सूची", admin_panchangs_path, class: "fRight btn btn-primary me-1" %>
+          </div>
+        </div>
+		    <div class="dropdown-divider"></div>
+      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>"
+          data-admin-context-target="csrfToken">
+        <% if params[:populate].present? %>
+	        <div class="row" id="panchang_desc">
+						<div class="col-md-12">
+							<div class="card1">
+						    <div class="card-body1">
+						    	<table class="table">
+									  <thead class="table bg-primary text-white ps-0 pe-0">
+									    <tr>
+									    	<th>#</th>
+									      <th>माह का नाम</th>
+									      <th>माह की तिथियां</th>
+									      <th>माह का क्रम</th>
+												<th>पुरषोत्तम माह</th>
+									      <th>गतिविधि</th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									    <% if @hindi_months.present? %>
+									      <% @hindi_months.each_with_index do |hindi_month, index| %>
+									      	<tr>
+									      		<td><%=index+1%></td>
+								        		<td class="text-primary1">
+															<%= hindi_month.name %>
+									          </td>
+									          <td class="text-primary1">
+									          	<%= hindi_month.panchang_tithis.length %>
+									          </td>
+									          <td class="text-primary1">
+									          	<%= hindi_month.order %>
+									          </td>
+														<td class="text-primary1">
+									          	<%= hindi_month.is_purshottam_month ? "हाँ" : "नहीं"%>
+									          </td>
+									          <td class="">
+													  	<% if hindi_month.panchang_tithis.length == 30 %>
+										          	<button type="button" class="btn btn-secondary">
+																  Populate तिथियां
+																</button>
+															<% else %>
+																<div style="display:inline-block;">
+																	<%= form_tag(populate_panchang_admin_panchang_path(@panchang), method: :post) do %>
+																		<%= hidden_field_tag "hindi_month_id", hindi_month.id,  class: 'form-control' %>
+																		<%= submit_tag "Populate तिथियां", class: "btn #{params[:populate] ? 'btn-lg btn-success' : 'btn-primary'}" %>
+																	<% end %>
+																</div>
+															<% end %>
+															<%= link_to "माह में तिथि जोड़े", edit_tithis_admin_panchang_path(@panchang), class: "btn btn-primary" %>
+															<div style="display:inline-block;">
+																<%= form_tag(add_purshottam_mas_admin_panchang_path(@panchang), method: :post) do %>
+																	<%= hidden_field_tag "hindi_month_id", hindi_month.id,  class: 'form-control' %>
+																	<%= submit_tag "पुरुषोत्तम माह", class: "btn btn-primary" %>
+																<% end %>
+															</div>
+
+									          </td>
+									      	</tr>
+									      	<% index = index + 1%>
+									      <% end %>
+									    <% else %>
+									      <td colspan="4">
+									      	अभी रिकॉर्ड उपलब्ध नहीं है.
+									      </td>
+									    <% end %>
+									  </tbody>
+									</table>
+								</div>
+							</div>
+	          </div>
+	        </div>
+	      <% else %>
+	        <div class="row" id="panchang_tithi_layout">
+	        	<%= render "tithi_calendar", tithiya: @panchang_tithiya %>
+	        </div>
+	      <% end %>
+			</div>
+		</div>
+	</div>
+</div>

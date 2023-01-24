@@ -4,7 +4,7 @@
   <div class="row-fluid mb-2">
     <div class="col-md-12 page-subject-header">
       <a href="<%= @last_month_link%>"><<</a>
-      <strong><%= Panchang::HIN_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %></strong>
+      <strong><%= HindiMonth::ENG_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %></strong>
       <a href="<%= @next_month_link%>">>></a>
     </div>
   </div>
@@ -14,7 +14,7 @@
       <thead>
         <tr class="text-white bg-primary">
           <% @week_days.each do |day| %>
-            <th><%= day %></th>
+            <th style="width: 14%;"><%= day %></th>
           <% end %>
         </tr>
       </thead>
@@ -25,39 +25,34 @@
             <tr>
           <% end %>
             <% if dt.month == @cur_date.month %>
-              <% selected  = (tithi && dt == tithi.date) ? 'selected' : '' %>
-              <% utsav = tithiya.present? ? tithiya.where("date=?", dt) : nil%>
-              <% utsv = get_utsav(tithiya, dt) %>
-              <%# debugger %>
-              <td class="current-month <%= selected %> <%= "utsav" if utsav.present? && utsav[0].description.present? %>"
-                data-date="<%= dt.strftime("%d/%m/%Y")%>"
+              <% month, is_utsav_present, tithi = get_utsav(tithiya, dt) %>
+              <td class="current-month <%="utsav" if is_utsav_present %>"
+                data-date="<%= %>"
                 data-admin-panchang-target="calendarDate"
                 data-action="click->admin-panchang#selectDate"
                 >
-                <% if utsav.present? && utsav[0].description.present? %>
-                  <div>
-                    <img src="/assets/lalji_icon.jpg" alt="ShriHit" class="fRight" style="width:20px;height:20px;border-radius:50%;">
-                  </div>
-                <% end %>
-                <center>
-                  <span style="font-size:18px;color:red;">
-                    <%= utsav[0].panchang_month if utsav.present? %>
-                  </span><br/>
-                  <%= dt.strftime("%b %d") %><br/>
-                  <span style="font-size:14px;color:red;">
-                    <%= utsv %>
+                <div class="month-txt">
+                  <%=raw (month.present? ? month : '<br/>') %>
+                </div>
+                <div class="date-txt">
+                  <span class="date-active">
+                    <%= dt.strftime("%d") %>
                   </span>
-                </center>
+                </div>
+                <div class="tithi-txt">
+                  <%=raw (tithi.present? ? tithi : '<br/>') %>
+                </div>
               </td>
             <% else %>
               <td class="not-cur-month">
                 <br/>
-                <%= dt.strftime("%b %d") %>
-                <br/>
+                <div class="date-txt">
+                  <span class="date-inactive"><%= dt.strftime("%d") %></span>
+                </div>
                 <br/>
               </td>
             <% end %>
-          <% if indx%7 == 66 %>
+          <% if indx%7 == 6 %>
             </tr>
           <% end %>
           <% indx = indx + 1%>

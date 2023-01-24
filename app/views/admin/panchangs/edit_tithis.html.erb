@@ -1,0 +1,83 @@
+<div class="row" data-controller="admin-panchang">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+        <div class="row">
+          <div class="col-md-6 text-start article-title text-primary">पंचांग में तिथि जोड़े</div>
+        </div>
+		    <div class="dropdown-divider"></div>
+        <div class="row">
+					<div class="col-md-8">
+						<div class="body my-4">
+							<%= render "new_calendar", tithi: @tithi, tithiya: @panchang_tithiya %>
+						</div>
+          </div>
+          <div class="col-md-4">
+						<div class="body my-4">
+			        <div class="col-md-12 page-subject-header">
+			          नया तिथि फॉर्म
+			        </div>
+			        <div class="dropdown-divider"></div>
+			        <div class="m-sm-4" id="tithi_form">
+                <div class="row">
+                  <div class="col-md-12">
+										<input type=hidden name="authenticity_token"
+											value="<%= form_authenticity_token %>"
+											data-admin-panchang-target="csrfToken">
+										<div class="mb-3">
+										  <label class="form-label">
+												दिनांक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+											</label>
+											<%= text_field_tag "date", nil, class: "form-control", 'data-admin-panchang-target': 'date' %>
+										</div>
+										<div class="mb-3">
+										  <label class="form-label">
+												पंचांग मास <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+											</label>
+											<%= select_tag "month", options_for_select(get_months_array(@months)),
+												prompt: "मास चयन करे", class: "form-control", 'data-panchang_id': @panchang.id,
+												'data-admin-panchang-target': 'month',
+												'data-action': 'change->admin-panchang#getTithi' %>
+										</div>
+										<div class="mb-3">
+										  <label class="form-label">
+												पंचांग तिथियां <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+											</label>
+											<%= select_tag "tithi", options_for_select([]),
+												prompt: "तिथि का चयन करे", class: "form-control",
+												'data-admin-panchang-target': 'tithi',
+												'data-action': 'change->admin-panchang#displayTitle' %>
+											<div data-admin-panchang-target="tagLabel"></div>
+										</div>
+										<div class="mb-3">
+										  <label class="form-label">
+												तिथि शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+											</label>
+											<%= text_field_tag "title", nil, class: "form-control", 'data-admin-panchang-target': 'title' %>
+										</div>
+										<div class="mb-3">
+										  <label class="form-label">विवरण</label>
+											<%= text_area_tag "description", '', class: "form-control", 'data-admin-panchang-target': 'desc' %>
+										</div>
+										<div class="mb-3">
+											<div class="row">
+												<div class='col-md-12'>
+                          <%= button_tag "तिथि जोड़े", class: "form-control btn btn-primary",
+													'data-action': 'click->admin-panchang#submitForm'%>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+			        </div>
+						</div>
+		      </div>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/panchang-custom" %>
+<% end %>

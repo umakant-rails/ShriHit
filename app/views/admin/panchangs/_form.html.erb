@@ -1,11 +1,8 @@
-<%= form_with(model: [:admin, tithi], html: {
-  multipart: true,remote: true,
-  'data-admin-panchang-target': 'form',
-  'data-action': 'ajax:beforeSend->admin-panchang#submitForm'}) do |form| %>
+<%= form_with(model: [:admin, panchang]) do |form| %>
   <div class="row">
     <div class="col-md-12">
-      <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= tithi.errors.present? ? 'block' : 'none' %>;" role="alert">
-        <% tithi.errors.each do |error| %>
+      <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= panchang.errors.present? ? 'block' : 'none' %>;" role="alert">
+        <% panchang.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
         <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
@@ -13,68 +10,50 @@
       <div class='mb-3'>
         <div class="row">
           <div class='form-label col-md-2'>
-            दिनांक:
+            शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
           </div>
           <div class="col-md-10">
-            <%= form.text_field :date, class: 'form-control', 'data-admin-panchang-target': 'date', disabled: 'disabled' %>
+            <%= form.text_field :title, class: 'form-control'%>
           </div>
         </div>
       </div>
       <div class='mb-3'>
-        <label class='form-label'>
-          पंचांग <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-        </label>
-        <%= form.select :panchang_type, Panchang::TYPE, {prompt: 'पंचांग चयन करे'},
-          class: 'form-control', 'data-admin-panchang-target': 'tithi'
-          %>
+        <div class="row">
+          <div class='form-label col-md-2'>
+            पंचांग का प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </div>
+          <div class="col-md-10">
+            <%= form.select :panchang_type, Panchang::TYPE, {prompt: 'पंचांग चयन करे'},
+              class: 'form-control' %>
+          </div>
+        </div>
       </div>
       <div class='mb-3'>
-        <label class='form-label'>
-          तिथि <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-        </label>
-        <%= form.select :panchang_tithi, Panchang::TITHIYA, {prompt: 'तिथि चयन करे'},
-          class: 'form-control', 'data-admin-panchang-target': 'tithi'
-          %>
+        <div class="row">
+          <div class='form-label col-md-2'>
+            विक्रम सम्वत <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </div>
+          <div class="col-md-10">
+            <%= form.text_field :vikram_samvat, class: 'form-control'%>
+          </div>
+        </div>
       </div>
       <div class='mb-3'>
-        <label class='form-label'>
-          माह <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-        </label>
-        <%= form.select :panchang_month, Panchang::MONTH, {:prompt => 'माह चयन करे'},
-          class: 'form-control', 'data-admin-panchang-target': 'month' %>
+        <div class="row">
+          <div class='form-label col-md-2'>
+            विवरण
+          </div>
+          <div class="col-md-10">
+            <%= form.text_area :description, class: 'form-control',
+              'data-admin-panchang-target': 'desc' %>
+          </div>
+        </div>
       </div>
-      <div class='mb-3'>
-        <label class='form-label'>
-          पक्ष <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-        </label>
-        <%= form.select :paksh, Panchang::PAKSH, {:prompt => 'पक्ष चयन करे'},
-          class: 'form-control', 'data-admin-panchang-target': 'paksh' %>
-      </div>
-      <div class='mb-3'>
-        <label class='form-label'>
-          शीर्षक
-        </label>
-        <%= form.text_field :title, class: 'form-control' %>
-      </div>
-      <div class='mb-3'>
-        <label class='form-label'>
-          विक्रम संवत <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-        </label>
-        <%= form.text_field :vikram_samvat, class: 'form-control',
-          'data-admin-panchang-target': 'samvat' %>
-      </div>
-      <div class='mb-3'>
-        <label class='form-label'>
-          विवरण <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-        </label>
-        <%= form.text_area :description, class: 'form-control',
-          'data-admin-panchang-target': 'desc' %>
-      </div>
-
       <div class='text-center mt-3 actions'>
         <div class="row">
+          <div class="col-md-2"></div>
           <div class="col-md-4">
-            <%= form.button "तिथि दर्ज करे", type: "submit",
+            <%= form.submit "पंचांग जोड़े",
               class: 'btn btn-lg btn-primary form-control'
               # data: {action: 'click->admin-panchang#formSubmit'}
             %>

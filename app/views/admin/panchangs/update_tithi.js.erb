@@ -1,0 +1,21 @@
+$("#successAlert").parent().css("display", "none");
+$("#errorsAlert").parent().css("display", "none");
+<% if flash[:success].present? %>
+  <% dt = @panchang_tithi.date %>
+  var tithis_txt = "<option value=''>तिथि चयन करे</option>";
+  <% @panchang_tithis.each do | tithi | %>
+  	tithis_txt += "<option value='<%= tithi.id %>' data-title='<%= tithi.title %>'><%= tithi.paksh + " " + tithi.tithi.to_s %></option>";
+  <% end %>
+  $("#tithi").html(tithis_txt);
+  $("#date").val("");
+  $("#title").val("");
+  $("#description").val("");
+  $("#td-<%= "#{dt.day}-#{dt.month}-#{dt.year}"%>").addClass("utsav").removeClass('selected');
+  $("#successAlert").html("<%= flash[:success] %>");
+	$("#successAlert").parent().css("display", "block");
+  window.scrollTo(0, 0);
+<% elsif flash[:error].present? %>
+	$("#errorsAlert").html("<%= flash[:error] %>");
+	$("#errorsAlert").parent().css("display", "block");
+  window.scrollTo(0, 0);
+<% end %>

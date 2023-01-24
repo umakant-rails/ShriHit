@@ -1,70 +1,104 @@
-<div class="row" data-controller="admin-panchang">
+<div class="row">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body h-400">
-        <div class="row">
-          <div class="col-md-6 text-start article-title text-primary">पंचांग</div>
+        <div class="row page-subject-header">
+          <div class="col-md-6 text-start article-title text-primary">पंचांग सूची</div>
+          <div class="col-md-6">
+          	<%= link_to "नया पंचांग जोड़े", new_admin_panchang_path, class: "fRight btn btn-primary" %>
+          </div>
         </div>
 		    <div class="dropdown-divider"></div>
-      	<input type=hidden name="authenticity_token"
-          value="<%= form_authenticity_token %>"
+      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>"
           data-admin-context-target="csrfToken">
         <div class="row">
-					<div class="col-md-8">
+					<div class="col-md-12">
 						<div class="card1">
 					    <div class="card-body1">
-					    	<%= render "tithi_calendar", tithi: @tithi, tithiya: @panchange_tithiya %>
+					    	<table class="table">
+								  <thead class="table bg-primary text-white ps-0 pe-0">
+								    <tr>
+								    	<th>#</th>
+								      <th>शीर्षक</th>
+								      <th>पंचांग का प्रकार</th>
+								      <th>विक्रम सम्वत</th>
+								      <th>गतिविधि</th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								    <% if @panchangs.present? %>
+								      <% @panchangs.each_with_index do |panchang, index| %>
+								      	<tr>
+								      		<td><%=index+1%></td>
+							        		<td class="text-primary1">
+														<%= link_to panchang.title, admin_panchang_path(panchang) %>
+								          </td>
+								          <td class="text-primary1">
+								          	<%= panchang.panchang_type %>
+								          </td>
+								          <td class="text-primary1">
+								          	<%= panchang.vikram_samvat %>
+								          </td>
+								          <td class="">
+								          	<%= link_to "Populate पंचांग", admin_panchang_path(panchang, populate: true), class: "btn btn-primary" %>
+														<%= link_to edit_admin_panchang_path(panchang), class: "btn btn-primary" do %>
+														  <i class="fa fa-edit"></i>
+														<% end %>
+														<div style="display:inline-block;">
+															<%= form_for([:admin, panchang], html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+													      <button type="submit" class="btn btn-primary">
+													        <i class="fa fa-trash" style="color:red;"></i>
+													      </button>
+													    <% end %>
+													  </div>
+														<%= link_to "पंचांग में तिथि जोड़े", edit_tithis_admin_panchang_path(panchang), class: "btn btn-primary" %>
+														<div style="display:inline-block;">
+															<%= link_to "पुरुषोत्तम माह", 'javascript:void(0);', 
+																class: "btn btn-primary", "data-bs-toggle":"modal",
+																"data-bs-target": "#panchang-modal#{panchang.id}" %>
+															
+															<!-- Modal -->
+															<div class="modal fade" id="panchang-modal<%= panchang.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+															  <div class="modal-dialog">
+															    <div class="modal-content">
+																		<%= form_tag(add_purshottam_mas_admin_panchang_path(panchang), method: :post) do %>
+																		  <div class="modal-header">
+																        <h3 class="modal-title" id="exampleModalLabel">पुरषोत्तम माह जोड़े/अद्यतन करे</h3>
+																        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																      </div>
+																      <div class="modal-body">
+																				<% pur_month = panchang.hindi_months.purshottam_month[0] %>
+																				<%= select_tag 'hindi_month_id',
+																					options_from_collection_for_select(
+																						panchang.hindi_months, "id", "name", pur_month.present? ? pur_month.id : nil
+																					), :prompt => "पुरषोत्तम माह का चयन करे", class:"form-control" %>
+																		  </div>
+																      <div class="modal-footer">
+																        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+																				<% if panchang.hindi_months.purshottam_month.blank? %>
+																					<%= submit_tag "पुरुषोत्तम माह जोड़े", class: "btn btn-primary" %>
+																				<% else %>
+																					<%= submit_tag "पुरुषोत्तम माह अद्यतन करे", class: "btn btn-primary" %>
+																				<% end %>
+																      </div>
+																		<% end %>
+															    </div>
+															  </div>
+															</div>
+														</div>
+								          </td>
+								      	</tr>
+								      	<% index = index + 1%>
+								      <% end %>
+								    <% else %>
+								      <td colspan="4">
+								      	अभी रिकॉर्ड उपलब्ध नहीं है.
+								      </td>
+								    <% end %>
+								  </tbody>
+								</table>
 							</div>
 						</div>
-          </div>
-          <div class="col-md-4">
-          		<div class="card1">
-					      <div class="card-body1">
-					        <div class="col-md-12 page-subject-header">
-					          पंचांग तिथि सूची
-					        </div>
-					        <div class="dropdown-divider"></div>
-					        <div class="mt-4" id="tithi_form">
-					          <table class="table">
-										  <thead class="table bg-primary text-white ps-0 pe-0">
-										    <tr>
-										      <th scope="col">दिनांक </th>
-										      <th scope="col">तिथि</th>
-										    </tr>
-										  </thead>
-										  <tbody>
-										    <% if @panchange_tithiya.present? %>
-										      <% @panchange_tithiya.each_with_index do |tithi, index| %>
-										      	<% if tithi.paksh == "शुक्ळ पक्ष" %>
-									          	<tr class="ttithi-<%= tithi.panchang_tithi%>">
-									          	<% is_purmina = true if tithi.panchang_tithi == 15 %>
-									          <% elsif tithi.paksh == "कृष्ण पक्ष"%>
-									          	<tr class="ttithi-<%= (15 - tithi.panchang_tithi.to_i) %>">
-									          	<% is_amavas = true if tithi.panchang_tithi == 15 %>
-									        	<% end %>
-									        		<td class="text-danger">
-																<strong><%= tithi.date.strftime("%d/%b/%y") %></strong>
-										          	<br/>
-										          	<%= Panchang::WEEKDAYS[tithi.date.wday] %>
-										          <td class="text-primary">
-										          	<strong>
-										          		<%= tithi.panchang_month + " "+ tithi.paksh + "-"+ tithi.panchang_tithi%>
-										          	</strong><br/>
-										          	<%= tithi.description %>
-										          </td>
-										      	</tr>
-										      <% end %>
-										    <% else %>
-										      <td colspan="4">
-										      	अभी रिकॉर्ड उपलब्ध नहीं है.
-										      </td>
-										    <% end %>
-										  </tbody>
-										</table>
-					        </div>
-					        <div class="dropdown-divider"></div>
-					      </div>
-					    </div>
           </div>
         </div>
 			</div>

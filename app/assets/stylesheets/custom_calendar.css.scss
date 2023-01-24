@@ -5,15 +5,49 @@
   td.current-month{
     border: 1px solid #00BFFF;
     color: #1E90FF;
-    padding: 16px 12px;
+    // padding: 16px 12px;
     cursor: pointer;
+    text-align:center;
   }
   td.not-cur-month{
     // background: #DDD;
     border: 1px solid lightgray;
-    padding: 16px 12px;
+    text-align:center;
+    // padding: 16px 12px;
   }
   .selected{
     border: 3px solid #4169E1 !important;
+  }
+  .date-active{
+    border: 1px solid gray;
+    border-radius: 50%;
+    padding: 8px;
+    background: #3b7ddd;
+    color: white;
+  }
+  .date-inactive{
+    border: 1px solid #3b7ddd;
+    border-radius: 50%;
+    padding: 8px;
+    background: gray;
+    color: white;
+  }
+  .utsav span{
+    background: #dc3545 !important;
+  }
+  .month-txt{
+    font-size:18px;
+    color:red;
+    text-align:center;
+    word-wrap: break-word;
+  }
+  .date-txt{
+    text-align:center;
+    margin:3px;
+  }
+  .tithi-txt {
+    font-size:14px;
+    color:red;
+    text-align:center;
   }
 }

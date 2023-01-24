@@ -13,7 +13,7 @@ $(document).ready(function(){
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["panchang_title", "panchang_description"]);
+    control.makeTransliteratable(["description"]);
   }
   google.setOnLoadCallback(onLoad);
 

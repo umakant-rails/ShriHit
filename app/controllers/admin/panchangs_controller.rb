@@ -1,33 +1,43 @@
 class Admin::PanchangsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :verify_admin
-	before_action :set_tithi, only: %i[ show edit update destroy]
+	before_action :set_panchang, only: %i[ show edit update destroy edit_tithis get_tithis update_tithi populate_panchang add_purshottam_mas remove_purshottam_mas]
 
 	def index
-		# date = Date.today
-		# start_date = date.beginning_of_month
-		# end_date = Date.new(date.year, date.month, -1)
-		# @panchange_tithiya = Panchang.where("date between ? and ?", date.beginning_of_month, date.end_of_month).order("date asc")
-		# respond_to do |format|
-  	# 	format.html {}
-    #   format.js {}
-    # end
-
-    @cur_date = params[:start_date].blank? ? Date.today : Date.parse(params[:start_date])
-
-    next_month_wday = @cur_date.next_month.beginning_of_month
-    next_month_wday += 1.days until next_month_wday.wday == 1
-    last_month_wday = @cur_date.last_month.beginning_of_month
-    last_month_wday += 1.days until last_month_wday.wday == 1
-
-    @week_days = Date::DAYNAMES.rotate(1).map{ | d | d[0,3] }
-    @next_month_link = '/admin/panchangs?start_date='+next_month_wday.strftime("%d/%m/%Y")
-    @last_month_link = '/admin/panchangs?start_date='+last_month_wday.strftime("%d/%m/%Y")
-    @panchange_tithiya = Panchang.where("date between ? and ? and description is not null",
-			@cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc")
+    @panchangs = Panchang.all
 	end
 
   def new
+    @panchang = Panchang.new
+  end
+
+  def create
+		month_order = 0
+  	@panchang = Panchang.new(panchang_params)
+  	if @panchang.save
+    	HindiMonth::MONTH.each do | month |
+				month_order = month_order + 1
+				@panchang.hindi_months.create({name: month, order: month_order, is_purshottam_month: false})
+				if month == params[:purshottam_month]
+					month_order = month_order + 1
+					@panchang.hindi_months.create({name: "#{month}", order: month_order, is_purshottam_month: true})
+				end
+			end
+    	flash[:success] = "पंचांग की एंट्री सफलतापूर्वक की गई."
+    else
+    	flash[:error] = "पंचांग जोड़ने की प्रकिया असफल हो गई है."
+    end
+
+  	respond_to do |format|
+  		format.html {redirect_to admin_panchangs_path}
+      format.js {}
+    end
+
+  end
+
+	def show
+		@hindi_months = @panchang.hindi_months.includes(:panchang_tithis).order("hindi_months.order ASC")
+
     @cur_date = params[:start_date].blank? ? Date.today : Date.parse(params[:start_date])
     @cur_date += 1.days until @cur_date.wday == 1
 
@@ -37,59 +47,127 @@ class Admin::PanchangsController < ApplicationController
     last_month_wday += 1.days until last_month_wday.wday == 1
 
     @week_days = Date::DAYNAMES.rotate(1).map{ | d | d[0,3] }
-    @next_month_link = '/admin/panchangs/new?start_date='+next_month_wday.strftime("%d/%m/%Y")
-    @last_month_link = '/admin/panchangs/new?start_date='+last_month_wday.strftime("%d/%m/%Y")
-    @tithi = Panchang.new
-  end
+    @next_month_link = "/admin/panchangs/#{@panchang.id}?start_date="+next_month_wday.strftime("%d/%m/%Y")
+    @last_month_link = "/admin/panchangs/#{@panchang.id}?start_date="+last_month_wday.strftime("%d/%m/%Y")
+    @panchang_tithiya = PanchangTithi.where("panchang_id=? and date between ? and ?",@panchang.id,
+      @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc")
 
-  def create
-  	params[:panchang][:year] = Date.parse(params[:panchang][:date]).year
-  	params[:panchang][:title] = params[:panchang][:panchang_month] + ", " + params[:panchang][:paksh] + " - " + params[:panchang][:panchang_tithi]
-
-  	@panchang = Panchang.new(panchang_params)
-
-  	if @panchang.save!
-    	@tithi = Panchang.new
-    	flash[:success] = "तिथि की एंट्री सफलतापूर्वक की गई."
-    else
-    	flash[:error] = "तिथि जोड़ने की प्रकिया असफल हो गई है."
-    end
-
-  	respond_to do |format|
-  		format.html {}
-      format.js {}
-    end
-
-  end
+	end
 
   def edit
-  	@cur_date = params[:start_date].blank? ? Date.today : Date.parse(params[:start_date])
-    @cur_date += 1.days until @cur_date.wday == 1
-
-    next_month_wday = (@cur_date + 1.month).beginning_of_month
-    next_month_wday += 1.days until next_month_wday.wday == 1
-    last_month_wday = (@cur_date - 1.month).beginning_of_month
-    last_month_wday += 1.days until last_month_wday.wday == 1
-
-    @week_days = Date::DAYNAMES.rotate(Date.today.wday).map{ | d | d[0,3] }
-    @next_month_link = '/admin/panchangs/new?start_date='+next_month_wday.strftime("%d/%m/%Y")
-    @last_month_link = '/admin/panchangs/new?start_date='+last_month_wday.strftime("%d/%m/%Y")
   end
 
-   def update
-
-   	if @tithi.update(panchang_params)
-    	flash[:success] = "तिथि अद्यतन की एंट्री सफलतापूर्वक की गई."
+  def update
+    new_purshottam_month = params[:purshottam_month]
+    if @panchang.update(panchang_params)
+    	flash[:success] = "पंचांग अद्यतन की एंट्री सफलतापूर्वक की गई."
     else
-    	flash[:error] = "तिथि अद्यतन की प्रकिया असफल हो गई है."
+    	flash[:error] = "पंचांग अद्यतन की प्रकिया असफल हो गई है."
     end
 
     respond_to do |format|
-  		format.html {}
+  		format.html {redirect_to admin_panchangs_path}
       format.js {}
     end
   end
 
+	def destroy
+    @panchang.destroy
+    respond_to do |format|
+      format.html { redirect_to admin_panchangs_path, notice: "पंचांग को सफलतापूर्वक डिलीट कर दिया गया है." }
+      format.json { head :no_content }
+    end
+  end
+
+	def edit_tithis
+		@cur_date = params[:start_date].blank? ? Date.today : Date.parse(params[:start_date])
+    @cur_date += 1.days until @cur_date.wday == 1
+
+    next_month_wday =  @cur_date.next_month.beginning_of_month
+    next_month_wday += 1.days until next_month_wday.wday == 1
+    last_month_wday =  @cur_date.last_month.beginning_of_month
+    last_month_wday += 1.days until last_month_wday.wday == 1
+
+    @week_days = Date::DAYNAMES.rotate(1).map{ | d | d[0,3] }
+    @next_month_link = "/admin/panchangs/#{@panchang.id}/edit_tithis?start_date="+next_month_wday.strftime("%d/%m/%Y")
+    @last_month_link = "/admin/panchangs/#{@panchang.id}/edit_tithis?start_date="+last_month_wday.strftime("%d/%m/%Y")
+    @panchang_tithiya = PanchangTithi.where("panchang_id=? and date between ? and ?",@panchang.id,
+      @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc")
+
+		@months = HindiMonth.joins(:panchang_tithis).where("date is null").order("hindi_months.order ASC").select("hindi_months.*, count(panchang_tithis.hindi_month_id) as total_records").group(:id)
+	end
+
+	def get_tithis
+		@month = @panchang.hindi_months.where("hindi_months.id=?", params[:month_id])
+		@panchang_tithis = @month[0].panchang_tithis.where("date is null")
+		respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+	end
+
+	def update_tithi
+		year = Date.parse(params[:date]).year
+		@panchang_tithi = @panchang.panchang_tithis.where("panchang_tithis.id=?", params[:tithi_id])[0]
+		if @panchang_tithi.present?
+			update_params = {date: params[:date], title: params[:title], description: params[:desc], year: year}
+			if @panchang_tithi.update(update_params)
+				@month = @panchang.hindi_months.where("hindi_months.id=?", params[:month_id])
+				@panchang_tithis = @month[0].panchang_tithis.where("date is null")
+				flash[:success] = "तिथि अद्यतन की एंट्री सफलतापूर्वक की गई."
+	    else
+	    	flash[:error] = "तिथि अद्यतन की प्रकिया असफल हो गई है."
+			end
+		end
+		respond_to do |format|
+      format.html {}
+      format.js {}
+    end
+	end
+
+  def populate_panchang
+		@panchang_month = @panchang.hindi_months.where("id=?", params[:hindi_month_id])
+		if @panchang_month.present?
+	    begin
+				ActiveRecord::Base.transaction do
+	        tithiya = PanchangTithi.get_tithis_of_month(@panchang, @panchang_month[0])
+					tithiya.each do | tithi |
+						new_tithi = @panchang_month[0].panchang_tithis.new(tithi)
+						new_tithi.save!(validate: false)
+					end
+					flash[:success] = "पंचांग में तिथि की एंट्री सफलतापूर्वक कर दी गई है."
+				end
+	    rescue => error
+	      flash[:error] = "पंचांग में तिथि की एंट्री  करने की प्रकिया असफल हो गई है"
+	    end
+		else
+			flash[:error] = "पंचांग में तिथि की एंट्री  करने की प्रकिया असफल हो गई है"
+		end
+		respond_to do |format|
+      format.html { redirect_to admin_panchang_path(@panchang, populate: true) }
+      format.js {}
+    end
+  end
+
+	def add_purshottam_mas
+		@panchang_month = @panchang.hindi_months.where("id=?", params[:hindi_month_id])[0]
+		if @panchang_month.present?
+			@panchang.update_purshottam_month(@panchang_month.name)
+		end
+
+		respond_to do |format|
+      format.html { redirect_to admin_panchang_path(@panchang, populate: true) }
+      format.js {}
+    end
+	end
+
+	def remove_purshottam_mas
+		@panchang.update_purshottam_month('');
+		respond_to do |format|
+      format.html { redirect_to admin_panchang_path(@panchang, populate: true) }
+      format.js {}
+    end
+	end
 
   private
 
@@ -100,12 +178,11 @@ class Admin::PanchangsController < ApplicationController
   end
 
   def panchang_params
-  	params.fetch(:panchang, {}).permit(:date, :panchang_tithi, :panchang_month,
-        :paksh, :title, :vikram_samvat, :description, :year, :panchang_type)
+    params.fetch(:panchang, {}).permit(:title, :vikram_samvat, :panchang_type, :has_purshottam_month, :purshottam_month, :description)
   end
 
-  def set_tithi
-    @tithi = Panchang.find(params[:id])
+  def set_panchang
+    @panchang = Panchang.find(params[:id])
   end
 
 end

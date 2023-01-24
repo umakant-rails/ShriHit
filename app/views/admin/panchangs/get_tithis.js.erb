@@ -1,0 +1,8 @@
+var tithis_txt = "<option value=''>तिथि चयन करे</option>";
+<% @panchang_tithis.each do | tithi | %>
+	tithis_txt += `<option value='<%= tithi.id %>' data-title='<%= tithi.title %>'
+		data-tithi='<%= tithi.tithi%>' data-paksh='<%= tithi.paksh %>'>
+			<%= tithi.paksh + " " + tithi.tithi.to_s %>
+		</option>`;
+<% end %>
+$("#tithi").html(tithis_txt);
