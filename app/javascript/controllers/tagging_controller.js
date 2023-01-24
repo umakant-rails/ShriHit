@@ -6,7 +6,7 @@ export default class extends ApplicationController {
 
   connect(){
 
-    let tagsText = this.tagSelectInputTarget.dataset.tags.split(",");
+    let tagsText = this.tagSelectInputTarget.dataset.tags;
     this.tagsArray = (tagsText.length > 1) ? tagsText.split(",") : [];
     this.selectedTagList = (this.articleTagsTarget.value.length > 0) ? this.articleTagsTarget.value.split(",") : [];
   }
