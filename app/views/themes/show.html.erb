@@ -7,7 +7,7 @@
         </div>
         <div class="dropdown-divider"></div>
         <div class="row mb-3">
-          <div class="col-md-12"> 
+          <div class="col-md-12">
             <div class='profile-title'>उत्सव का नाम</div>
             <div class='profile-content'>
               <%= @theme.name %>
@@ -15,7 +15,7 @@
           </div>
         </div>
         <div class="row mb-3">
-          <div class="col-md-12"> 
+          <div class="col-md-12">
             <div class='profile-title'>योगदानकर्ता का नाम</div>
             <div class='profile-content'>
               <%= @theme.user.username %>
@@ -24,9 +24,9 @@
         </div>
         <div class="dropdown-divider"></div>
         <div class="">
-          <%= link_to "Edit this Theme", edit_theme_path(@theme) %> | 
-          <%= link_to "Back to Themes", themes_path %> |
-          <%= button_to("Destroy this Theme", theme_path(@theme), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
+          <%= link_to "उत्सव अद्यतन करे", edit_theme_path(@theme) %> |
+          <%= link_to "उत्सव सूची जोड़े", themes_path %> |
+          <%= button_to("उत्सव डिलीट करे", theme_path(@theme), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
         </div>
       </div>
     </div>

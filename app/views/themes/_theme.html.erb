@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <% if themes.present? %>
-    	<% 
+    	<%
 		    page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
 		    page_size = themes.present? ? themes.limit_value : 0
 		  %>
@@ -70,4 +70,4 @@
 <% if paginate(themes).present? %>
   <div class="dropdown-divider"></div>
 <% end %>
-<%= link_to "New themes", new_theme_path %>
+<%= link_to "नया उत्सव जोड़े", new_theme_path %>
