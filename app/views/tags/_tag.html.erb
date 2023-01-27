@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <% 
+    <%
       page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
       page_size = tags.present? ? tags.limit_value : 0
     %>
@@ -51,11 +51,11 @@
           <center>अभी कोई डाटा उपलब्ध नहीं है</center>
         </td>
       </tr>
-    <% end %> 
+    <% end %>
   </tbody>
 </table>
 <% if paginate(tags).present? %>
   <%= paginate tags %>
   <div class="dropdown-divider"></div>
 <% end %>
-<%= link_to "New tag", new_tag_path %>
+<%= link_to "टैग्स सूची देखें", new_tag_path %>
