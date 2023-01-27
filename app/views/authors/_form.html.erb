@@ -1,7 +1,7 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: author, html: {
   'data-author-target': 'form', 'data-action': 'author#submitForm'}) do |form| %>
-  <% sampradaya_list = get_sampradaya_list %>   
+  <% sampradaya_list = get_sampradaya_list %>
   <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= author.errors.present? ? 'block' : 'none' %>;" role="alert">
     <% author.errors.each do |error| %>
       <li><%= error.full_message %></li>
@@ -37,6 +37,10 @@
   </div>
 
   <div class='text-center mt-3 actions'>
-    <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+    <% if form.id.blank? %>
+      <%= form.submit "रचनाकार जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+    <% else %>
+      <%= form.submit "रचनाकार अद्यतन करेे", class: 'btn btn-lg btn-primary form-control' %>
+    <% end %>
   </div>
 <% end %>

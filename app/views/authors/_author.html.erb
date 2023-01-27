@@ -14,7 +14,7 @@
       <% authors.each_with_index do |author, index| %>
         <tr>
 					<th scope="row">
-						<%= local_assigns[:index] %>
+						<%= index + 1  %>
 					</th>
 					<td>
 						<%= link_to author do %>
@@ -66,4 +66,4 @@
 <% if paginate(authors).present? %>
   <div class="dropdown-divider"></div>
 <% end %>
-<%= link_to "New Author", new_author_path %>
+<%= link_to "नया रचनाकार जोड़े", new_author_path %>
