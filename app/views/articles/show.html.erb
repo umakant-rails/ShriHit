@@ -57,9 +57,9 @@
     </div>
     <% if current_user.present? %>
       <div class="ms-4 mt-3 edit-delete-block">
-        <%= link_to "Edit this article", edit_article_path(@article) %> |
-        <%= link_to "Back to articles", articles_path %> |
-        <%= button_to("Destroy this article", article_path(@article), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
+        <%= link_to "रचना अद्यतन करे", edit_article_path(@article) %> |
+        <%= link_to "रचना सूची देखे", articles_path %> |
+        <%= button_to("रचना डिलीट करे", article_path(@article), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
       </div>
     <% end %>
 
