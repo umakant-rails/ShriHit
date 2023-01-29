@@ -1,0 +1,17 @@
+$("#successAlert").parent().css("display", "none");
+$("#errorsAlert").parent().css("display", "none");
+<% if flash[:success].present? %>
+	$("#new_calendar").html(`<%= escape_javascript(render partial: 'new_calendar',
+		locals: {tithi: @panchang_tithi, tithiya: @panchang_tithiya })%>`);
+	$("#new_tithi_form").html(`<%= escape_javascript(render partial: 'form',
+	  locals: {panchang_tithi: @panchang_tithi, panchang: @panchang, all_tithis: @all_tithis,
+		month_tithis: @month_tithis, hindi_months: @hindi_months})%>`);
+
+  $("#successAlert").html("<%= flash[:success] %>");
+	$("#successAlert").parent().css("display", "block");
+  window.scrollTo(0, 0);
+<% elsif flash[:error].present? %>
+	$("#errorsAlert").html("<%= flash[:error] %>");
+	$("#errorsAlert").parent().css("display", "block");
+  window.scrollTo(0, 0);
+<% end %>

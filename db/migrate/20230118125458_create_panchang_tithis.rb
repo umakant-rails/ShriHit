@@ -2,7 +2,7 @@ class CreatePanchangTithis < ActiveRecord::Migration[7.0]
   def change
     create_table :panchang_tithis do |t|
       t.date    :date
-      t.string  :tithi
+      t.integer  :tithi
       t.string  :paksh
       t.text    :description
       t.string  :title

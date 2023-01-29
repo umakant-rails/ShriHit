@@ -100,15 +100,16 @@ Rails.application.routes.draw do
     end
 
     resources :panchangs do
-      # get '/get_tithis' => "panchangs#get_tithis", on: :collection
-
-      post '/populate_panchang' => "panchangs#populate_panchang", on: :member, as: :populate_panchang
       post '/add_purshottam_mas' => "panchangs#add_purshottam_mas", on: :member, as: :add_purshottam_mas
       post '/remove_purshottam_mas' => "panchangs#remove_purshottam_mas", on: :member, as: :remove_purshottam_mas
       get  '/month/:month_id/get_tithis' => "panchangs#get_tithis", on: :member, as: :get_tithis
-      get  '/edit_tithis' => "panchangs#edit_tithis", as: :edit_tithis, on: :member, as: :edit_tithis
-      post '/tithi/:tithi_id/update' => "panchangs#update_tithi", as: :update_tithi, on: :member
+
+      resources :panchang_tithis do
+          get '/:month_id/get_tithis' => "panchang_tithis#get_tithis", as: :get_tithis, on: :collection
+      end
+
     end
+
 
   end
 

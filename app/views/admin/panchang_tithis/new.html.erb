@@ -1,0 +1,26 @@
+<div class="row" data-controller="admin-panchangtithi">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+        <div class="row">
+          <div class="col-md-6 text-start article-title text-primary">पंचांग में तिथि जोड़े</div>
+        </div>
+		    <div class="dropdown-divider"></div>
+        <div class="row">
+					<div class="col-md-8">
+						<div class="body my-4" id="new_calendar">
+							<%= render "new_calendar", tithi: @panchang_tithi, panchang: @panchang, tithiya: @panchang_tithiya %>
+						</div>
+          </div>
+          <div class="col-md-4" id="new_tithi_form">
+						<%= render "form", panchang_tithi: @panchang_tithi, panchang: @panchang,
+							all_tithis: @all_tithis, month_tithis:@month_tithis, hindi_months: @hindi_months %>
+		      </div>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/panchang-custom" %>
+<% end %>

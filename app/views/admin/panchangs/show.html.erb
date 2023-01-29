@@ -12,7 +12,6 @@
 								<%= submit_tag "पुरुषोत्तम माह डिलीट करे", class: "fRight btn btn-danger" %>
 							<% end %>
 						<% end %>
-          	<%= link_to "माह क्रम सुधारे", new_admin_panchang_path, class: "fRight btn btn-primary me-1" %>
 						<%= link_to "पंचांग सूची", admin_panchangs_path, class: "fRight btn btn-primary me-1" %>
           </div>
         </div>
@@ -38,13 +37,14 @@
 									  <tbody>
 									    <% if @hindi_months.present? %>
 									      <% @hindi_months.each_with_index do |hindi_month, index| %>
+													<% tithi_inserted =  hindi_month.panchang_tithis.pluck(:paksh, :tithi).uniq.length %>
 									      	<tr>
 									      		<td><%=index+1%></td>
 								        		<td class="text-primary1">
 															<%= hindi_month.name %>
 									          </td>
 									          <td class="text-primary1">
-									          	<%= hindi_month.panchang_tithis.length %>
+									          	<%= tithi_inserted %>
 									          </td>
 									          <td class="text-primary1">
 									          	<%= hindi_month.order %>
@@ -53,19 +53,13 @@
 									          	<%= hindi_month.is_purshottam_month ? "हाँ" : "नहीं"%>
 									          </td>
 									          <td class="">
-													  	<% if hindi_month.panchang_tithis.length == 30 %>
-										          	<button type="button" class="btn btn-secondary">
-																  Populate तिथियां
-																</button>
+															<% if tithi_inserted == 30 %>
+																<%= link_to "माह में तिथि जोड़े", "javascript:void(0);",
+																class: "btn btn-secondary" %>
 															<% else %>
-																<div style="display:inline-block;">
-																	<%= form_tag(populate_panchang_admin_panchang_path(@panchang), method: :post) do %>
-																		<%= hidden_field_tag "hindi_month_id", hindi_month.id,  class: 'form-control' %>
-																		<%= submit_tag "Populate तिथियां", class: "btn #{params[:populate] ? 'btn-lg btn-success' : 'btn-primary'}" %>
-																	<% end %>
-																</div>
+														  	<%= link_to "माह में तिथि जोड़े", new_admin_panchang_panchang_tithi_path(@panchang),
+																class: "btn #{params[:populate] ? 'btn-lg btn-success' : 'btn-primary'}" %>
 															<% end %>
-															<%= link_to "माह में तिथि जोड़े", edit_tithis_admin_panchang_path(@panchang), class: "btn btn-primary" %>
 															<div style="display:inline-block;">
 																<%= form_tag(add_purshottam_mas_admin_panchang_path(@panchang), method: :post) do %>
 																	<%= hidden_field_tag "hindi_month_id", hindi_month.id,  class: 'form-control' %>

@@ -1,0 +1,102 @@
+<div class="body my-4">
+  <div class="col-md-12 page-subject-header">
+    <%= panchang_tithi.id.blank? ? 'तिथि फॉर्म' : 'तिथि अद्यतन फॉर्म' %>
+  </div>
+  <div class="dropdown-divider"></div>
+  <div class="m-sm-4" id="tithi_form">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+          <% if panchang_tithi.id.blank? %>
+            <%#url_txt = create_tithi_admin_panchang_path(panchang)%>
+          <% else %>
+            <%#url_txt = update_tithi_admin_panchang_path(panchang, panchang_tithi)%>
+          <% end %>
+          <%#= form_for(panchang_tithi, url: url_txt, remote: true) do |form| %>
+          <%= form_with(model: [:admin, panchang, panchang_tithi]) do |form| %>
+            <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= panchang_tithi.errors.present? ? 'block' : 'none' %>;" role="alert">
+              <% panchang_tithi.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+              <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+            </div>
+            <div class='mb-3'>
+              <div class='form-label'>
+                दिनांक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+              </div>
+              <%= form.text_field :date, class: 'form-control', 'data-admin-panchangtithi-target': 'date'%>
+            </div>
+            <div class='mb-3'>
+              <div class='form-label'>
+                पंचांग मास <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+              </div>
+              <%#= form.select :hindi_month_id, options_from_collection_for_select(@hindi_months, "id", "name"), {}, class: 'form-control'%>
+              <%= form.select :hindi_month_id, hindi_months.collect{|hm| [hm.name, hm.id]},
+                {}, class: 'form-control',
+                'data-panchang_id': @panchang.id, 'data-admin-panchangtithi-target': 'month',
+                'data-action': 'change->admin-panchangtithi#getTithi'%>
+            </div>
+            <div class='mb-3'>
+              <div class='form-label'>
+                पंचांग तिथियां <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+              </div>
+                <% if all_tithis.present? %>
+                  <select class="form-control" data-admin-panchangtithi-target="tithi"
+                    data-action="change->admin-panchangtithi#displayTitle" name="panchang_tithi[tithi]"
+                    id="panchang_tithi_tithi">
+                    <option value="">तिथि का चयन करे</option>
+                    <% all_tithis && all_tithis.each do |tithi| %>
+                      <% if month_tithis.index(tithi).present? %>
+                        <option value="<%= tithi %>"
+                          style="color:red" <%= "selected" if "#{panchang_tithi.paksh} #{panchang_tithi.tithi}" == tithi %>>
+                          <%= tithi %>
+                        </option>
+                      <% else %>
+                        <option value="<%= tithi %>" ><%= tithi %></option>
+                      <% end %>
+                    <% end %>
+                  </select>
+                <% else %>
+                  <%= form.select :tithi, [] , {:include_blank => "तिथि का चयन करे"}, class: 'form-control',
+                    'data-admin-panchangtithi-target': 'tithi', 'data-action': 'change->admin-panchangtithi#displayTitle'
+                  %>
+                <% end %>
+            </div>
+            <div class='mb-3'>
+              <div class='form-label'>
+                तिथि शीर्षक
+              </div>
+              <%= form.text_field :title, class: 'form-control', 'data-admin-panchangtithi-target': 'title'%>
+            </div>
+            <div class='mb-3'>
+              <div class='form-label'>
+                विवरण
+              </div>
+              <%= form.text_area :description, rows:4, class: 'form-control'%>
+            </div>
+            <div class='mb-3'>
+              <% if panchang_tithi.id.present? %>
+                <div class="row">
+                  <div class="col-md-6">
+                    <%= form.submit "तिथि अद्यतन करे", class: 'form-control btn btn-primary'%>
+                  </div>
+                  <div class="col-md-6">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"
+                      data-admin-panchangtithi-target= 'csrfToken'>
+                    <%= form.button "तिथि डिलीट करे", type: 'button', class: 'form-control btn btn-danger',
+                    'data-panchang-id': panchang.id,
+                    'data-panchang-tithi-id': panchang_tithi.id,
+                    'data-action': 'click->admin-panchangtithi#deleteTithi'%>
+                  </div>
+                </div>
+              <% else %>
+                <%= form.submit "तिथि जोड़े", class: 'form-control btn btn-primary',
+                  'data-action':'click->admin-panchangtithi#validateForm'%>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

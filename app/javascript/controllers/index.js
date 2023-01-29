@@ -23,7 +23,7 @@ import AdminAuthorController from "./admin/author_controller";
 import AdminContextController from "./admin/context_controller";
 import AdminArticleController from "./admin/article_controller";
 import AdminTagController from "./admin/tag_controller";
-import CalendarController from "./admin/panchang_controller";
+import PanchangTithiController from "./admin/panchang_tithi_controller";
 
 application.register('application', ApplicationController);
 application.register('autocomplete', Autocomplete);
@@ -44,4 +44,4 @@ application.register("admin-author", AdminAuthorController);
 application.register("admin-context", AdminContextController);
 application.register("admin-article", AdminArticleController);
 application.register("admin-tag", AdminTagController);
-application.register("admin-panchang", CalendarController);
+application.register("admin-panchangtithi", PanchangTithiController);

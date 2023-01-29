@@ -8,32 +8,36 @@
     // padding: 16px 12px;
     cursor: pointer;
     text-align:center;
+    height: 100px;
   }
   td.not-cur-month{
     // background: #DDD;
     border: 1px solid lightgray;
     text-align:center;
+    height: 100px;
     // padding: 16px 12px;
   }
   .selected{
     border: 3px solid #4169E1 !important;
   }
   .date-active{
-    border: 1px solid gray;
+    border: 1px solid lightgray;
     border-radius: 50%;
-    padding: 8px;
+    padding: 10px;
     background: #3b7ddd;
     color: white;
+    font-weight: bold;
   }
   .date-inactive{
     border: 1px solid #3b7ddd;
     border-radius: 50%;
-    padding: 8px;
+    padding: 10px;
     background: gray;
     color: white;
+    font-weight: bold;
   }
-  .utsav span{
-    background: #dc3545 !important;
+  .utsav>span{
+    background: #DC143C !important;
   }
   .month-txt{
     font-size:18px;
@@ -49,5 +53,29 @@
     font-size:14px;
     color:red;
     text-align:center;
+  }
+  .tithi-krishna-paksh{
+    padding: 5px 7px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    font-size: 12px;
+    color: white !important;
+    background: #454545 !important;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+  }
+  .tithi-shukla-paksh{
+    padding: 5px 7px;
+    border: 1px solid gray;
+    border-radius: 50%;
+    font-size: 12px;
+    color: black !important;
+    background: white !important;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
   }
 }

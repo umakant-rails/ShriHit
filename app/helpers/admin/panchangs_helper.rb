@@ -10,22 +10,22 @@ module Admin::PanchangsHelper
     # if dt == Date.parse("16/01/2023")
     #   debugger
     # end
-    
+
     month = utsavs[0].hindi_month.is_purshottam_month ? utsavs[0].hindi_month.name + "(पुर.)" : utsavs[0].hindi_month.name
 
     utsavs.each_with_index do | utsav, index |
-      tithi = utsav.paksh if (index == 0 && utsav.tithi != 15) 
+      tithi = utsav.paksh if (index == 0 && utsav.tithi != 15)
       tithi = tithi + ", " + utsav.paksh if (index == 1 && utsav.tithi == 1)
-      if utsav.tithi == 11.to_s and utsav.paksh == 'शुक्ळ पक्ष'
+      if utsav.tithi == 11 and utsav.paksh == 'शुक्ळ पक्ष'
         tithi = tithi + ", " + "एकादशी"
-      elsif utsav.tithi == 11.to_s and utsav.paksh == 'कृष्ण पक्ष'
+      elsif utsav.tithi == 11 and utsav.paksh == 'कृष्ण पक्ष'
         tithi = tithi + ", " + "एकादशी"
-      elsif utsav.tithi == 15.to_s and utsav.paksh == 'शुक्ळ पक्ष'
+      elsif utsav.tithi == 15 and utsav.paksh == 'शुक्ळ पक्ष'
         tithi = "पूर्णिमा"
-      elsif utsav.tithi == 15.to_s and utsav.paksh == 'कृष्ण पक्ष'
+      elsif utsav.tithi == 15 and utsav.paksh == 'कृष्ण पक्ष'
         tithi = "अमावस्या"
       else
-        tithi = tithi + ((index == 0) ? "-" : ", ") + utsav.tithi
+        tithi = tithi + ((index == 0) ? "-" : ", ") + utsav.tithi.to_s
       end
     end
 

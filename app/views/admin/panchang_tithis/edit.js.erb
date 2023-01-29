@@ -1,0 +1,3 @@
+$("#new_tithi_form").html(`<%= escape_javascript(render  'form',
+	  panchang_tithi: @panchang_tithi, panchang: @panchang, all_tithis: @all_tithis,
+		month_tithis: @month_tithis, hindi_months: @hindi_months)%>`);
