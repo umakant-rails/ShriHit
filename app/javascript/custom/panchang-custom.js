@@ -13,7 +13,7 @@ $(document).ready(function(){
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(['panchang_tithi_description']);
+    control.makeTransliteratable(["panchang_tithi_description"]);
   }
   google.setOnLoadCallback(onLoad);
 

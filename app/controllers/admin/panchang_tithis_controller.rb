@@ -5,15 +5,25 @@ class Admin::PanchangTithisController < ApplicationController
 	before_action :set_panchang_tithi, only: %i[edit update destroy ]
 
   def new
+    last_tithi = nil
 		if params[:start_date].present?
 			@cur_date = Date.parse(params[:start_date])
 		else
-      panchang_tithi = @panchang.panchang_tithis.order("date ASC").last
-      @cur_date = panchang_tithi.present? ? panchang_tithi.date : Date.today
+      last_tithi = @panchang.panchang_tithis.order("date ASC").last
+      @cur_date = last_tithi.present? ? last_tithi.date : Date.today
 		end
-    # debugger
+
 		@panchang_tithi = @panchang.panchang_tithis.new
     set_calendar_dates
+    
+    if last_tithi.blank?
+      @hindi_months = [@panchang.hindi_months.order("hindi_months.order ASC")[0]]
+    elsif last_tithi.paksh == "शुक्ळ पक्ष" && last_tithi.tithi == 15
+      @hindi_months = @panchang.hindi_months.where("hindi_months.order=?",last_tithi.hindi_month.order+1)
+    else
+      @hindi_months = [last_tithi.hindi_month]
+    end
+
     @all_tithis = PanchangTithi.get_all_tithis
     @month_tithis = @hindi_months[0].month_tithis
 	end
@@ -64,6 +74,7 @@ class Admin::PanchangTithisController < ApplicationController
     @all_tithis = PanchangTithi.get_all_tithis
     @month = @panchang.hindi_months.where("hindi_months.id=?", @panchang_tithi.hindi_month_id)
     @month_tithis = @month[0].month_tithis
+    @hindi_months = @panchang.hindi_months.order("hindi_months.order ASC")
 
 		respond_to do |format|
       format.html {}
@@ -141,7 +152,9 @@ class Admin::PanchangTithisController < ApplicationController
     def set_calendar_dates
 
       #@cur_date += 1.days until @cur_date.wday == 1
-
+      if @cur_date == @cur_date.end_of_month
+        @cur_date = @cur_date.next_week
+      end
       next_month_wday =  @cur_date.next_month.beginning_of_month
       next_month_wday += 1.days until next_month_wday.wday == 1
       last_month_wday =  @cur_date.last_month.beginning_of_month
@@ -152,18 +165,6 @@ class Admin::PanchangTithisController < ApplicationController
       @last_month_link = "/admin/panchangs/#{@panchang.id}/panchang_tithis/new?start_date="+last_month_wday.strftime("%d/%m/%Y")
       @panchang_tithiya = PanchangTithi.where("panchang_id=? and date between ? and ?",@panchang.id,
         @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc")
-
-  		# @hindi_months = @panchang.hindi_months.order("hindi_months.order ASC")
-      last_tithi = @panchang.panchang_tithis.order("date ASC").last
-      @hindi_months = nil
-
-      if last_tithi.blank?
-        @hindi_months = [@panchang.hindi_months.order("hindi_months.order ASC")[0]]
-      elsif last_tithi.paksh == "शुक्ळ पक्ष" && last_tithi.tithi == 15
-        @hindi_months = @panchang.hindi_months.where("hindi_months.order=?",last_tithi.hindi_month.order+1)
-      else
-        @hindi_months = [last_tithi.hindi_month]
-      end
     end
 
 end

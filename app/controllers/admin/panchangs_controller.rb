@@ -79,6 +79,30 @@ class Admin::PanchangsController < ApplicationController
     end
   end
 
+  def populate_panchang
+		@panchang_month = @panchang.hindi_months.where("id=?", params[:hindi_month_id])
+		if @panchang_month.present?
+	    begin
+				ActiveRecord::Base.transaction do
+	        tithiya = PanchangTithi.get_tithis_of_month(@panchang, @panchang_month[0])
+					tithiya.each do | tithi |
+						new_tithi = @panchang_month[0].panchang_tithis.new(tithi)
+						new_tithi.save!(validate: false)
+					end
+					flash[:success] = "पंचांग में तिथि की एंट्री सफलतापूर्वक कर दी गई है."
+				end
+	    rescue => error
+	      flash[:error] = "पंचांग में तिथि की एंट्री  करने की प्रकिया असफल हो गई है"
+	    end
+		else
+			flash[:error] = "पंचांग में तिथि की एंट्री  करने की प्रकिया असफल हो गई है"
+		end
+		respond_to do |format|
+      format.html { redirect_to admin_panchang_path(@panchang, populate: true) }
+      format.js {}
+    end
+  end
+
 	def add_purshottam_mas
 		@panchang_month = @panchang.hindi_months.where("id=?", params[:hindi_month_id])[0]
 		if @panchang_month.present?

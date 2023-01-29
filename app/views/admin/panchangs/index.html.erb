@@ -51,12 +51,12 @@
 													      </button>
 													    <% end %>
 													  </div>
-														<%#= link_to "पंचांग में तिथि जोड़े", edit_tithis_admin_panchang_path(panchang), class: "btn btn-primary" %>
+														<%= link_to "पंचांग में तिथि जोड़े", edit_tithis_admin_panchang_path(panchang), class: "btn btn-primary" %>
 														<div style="display:inline-block;">
-															<%= link_to "पुरुषोत्तम माह", 'javascript:void(0);',
+															<%= link_to "पुरुषोत्तम माह", 'javascript:void(0);', 
 																class: "btn btn-primary", "data-bs-toggle":"modal",
 																"data-bs-target": "#panchang-modal#{panchang.id}" %>
-
+															
 															<!-- Modal -->
 															<div class="modal fade" id="panchang-modal<%= panchang.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 															  <div class="modal-dialog">

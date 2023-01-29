@@ -6,6 +6,11 @@
         <strong><%= HindiMonth::ENG_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %></strong>
       <a href="<%= @next_month_link%>">>></a>
     </div>
+    <div class="col-md-4" style="font-size: 16px;text-align: right;padding-top: 5px;">कार्यवाही प्रारूप</div>
+    <div class="col-md-2">
+      <%= select_tag "mode", options_for_select([ "Add", "Edit" ], "Add"),
+        class: 'form-control', 'data-admin-panchang-target': 'mode' %>
+    </div>
   </div>
   <div class="dropdown-divider"></div>
   <div class="mt-4">
@@ -13,7 +18,7 @@
       <thead>
         <tr class="text-white bg-primary">
           <% @week_days.each do |day| %>
-            <th style="width: 14%;"><%= day %></th>
+            <th><%= day %></th>
           <% end %>
         </tr>
       </thead>
@@ -26,31 +31,17 @@
             <% if dt.month == @cur_date.month %>
               <% selected  = (tithi && dt == tithi.date) ? 'selected' : '' %>
               <% pan_tithi = tithiya ? tithiya.where("date=?", dt)[0] : nil %>
-              <% pan_tithi = tithiya ? tithiya.where("date=?", dt) : nil %>
-              <td class="current-month <%= selected %> py-4 <%= pan_tithi.present? ? "utsav" : "" %>"
+              <td class="current-month <%= selected %> py-4 <%= pan_tithi ? "utsav" : "" %>"
                 data-date="<%= dt.strftime("%d/%m/%Y")%>"
-                data-admin-panchangtithi-target="calendarDate"
-                data-action="click->admin-panchangtithi#selectDate"
-                data-panchangid="<%= params[:id] %>"
-                data-tithiid="<%= pan_tithi.present? ? pan_tithi[0].id  : ''%>"
-
+                data-admin-panchang-target="calendarDate"
+                data-action="click->admin-panchang#selectDate"
+                data-tithiid="<%= pan_tithi ? pan_tithi.id  : ''%>"
                 id="<%= "td-#{dt.day}-#{dt.month}-#{dt.year}" %>"
               >
                 <span class="date-active"
-                  data-action="click->admin-panchangtithi#selectDate" id="<%= "date-#{dt.day}-#{dt.month}-#{dt.year}" %>" >
+                  data-action="click->admin-panchang#selectDate" id="<%= "date-#{dt.day}-#{dt.month}-#{dt.year}" %>" >
                   <%= dt.strftime("%d") %>
                 </span>
-                <% if pan_tithi.present? %>
-                  <div style="margin-top: 10px;">
-                    <% pan_tithi.each do | tithi | %>
-                      <% tithi_cls = (tithi.paksh == "कृष्ण पक्ष") ? 'tithi-krishna-paksh' : 'tithi-shukla-paksh' %>
-                      <span class="<%= tithi_cls %>" data-tithiid="<%= tithi.id %>"
-                          data-panchangid="<%= tithi.panchang_id %>" data-action="click->admin-panchangtithi#editTithi">
-                        <%= "#{tithi.tithi}" %>
-                      </span>
-                    <% end %>
-                  </div>
-                <% end %>
               </td>
             <% else %>
               <td class="not-cur-month">
