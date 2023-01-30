@@ -17,8 +17,10 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @tags = Tag.approved.order("name ASC")
-    @article = Article.new
-    @article.build_image
+    author = Author.where("name=?", "अज्ञात")
+    context = Context.where("name=?", "अन्य")
+    @article = Article.new({author_id: author[0].id, context_id: context[0].id})
+    #@article.build_image
   end
 
   # GET /articles/1/edit
