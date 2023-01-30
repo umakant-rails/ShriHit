@@ -6,7 +6,7 @@
           <span class="col-md-6 text-start article-title text-primary">
             रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.present? ? @author.sampradaya.name : 'सम्प्रदाय - NA' %> )
           </span>
-          <span class="col-md-6 text-end text-primary author-mark-txt"> 
+          <span class="col-md-6 text-end text-primary author-mark-txt">
             ( योगदानकर्ता : <%= @author.user.username %> )
           </span>
         </div>
@@ -23,9 +23,9 @@
         <div class="dropdown-divider"></div>
         <% if current_user.present? %>
           <div class="">
-            <%= link_to "Edit this author", edit_author_path(@author) %> | 
-            <%= link_to "Back to authors", authors_path %> | 
-            <%= button_to("Destroy this author", author_path(@author), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
+            <%= link_to "रचनाकार अद्यतन करे", edit_author_path(@author) %> |
+            <%= link_to "रचनाकार सूची", authors_path %> |
+            <%= button_to("रचनाकर डिलीट करे", author_path(@author), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
           </div>
         <% end %>
       </div>

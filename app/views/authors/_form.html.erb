@@ -1,7 +1,7 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: author, html: {
   'data-author-target': 'form', 'data-action': 'author#submitForm'}) do |form| %>
-  <% sampradaya_list = get_sampradaya_list %>   
+  <% sampradaya_list = get_sampradaya_list %>
   <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= author.errors.present? ? 'block' : 'none' %>;" role="alert">
     <% author.errors.each do |error| %>
       <li><%= error.full_message %></li>
@@ -17,7 +17,7 @@
   </div>
   <div class='mb-3'>
     <label class='form-label'>
-      सम्प्रदाय <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      सम्प्रदाय
     </label>
     <%= form.select :sampradaya_id, options_for_select(sampradaya_list, selected: author.sampradaya_id), {:prompt => 'सम्प्रदाय चुने'}, class: 'form-control', 'data-action': 'change->author#toggleSampradaya', 'data-author-target': 'sampradayaSelect'%>
     <div data-author-target='sampradayaInput' hidden=true>
@@ -37,6 +37,10 @@
   </div>
 
   <div class='text-center mt-3 actions'>
-    <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+    <% if form.object.id.blank? %>
+      <%= form.submit "रचनाकार जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+    <% else %>
+      <%= form.submit "रचनाकार अद्यतन करेे", class: 'btn btn-lg btn-primary form-control' %>
+    <% end %>
   </div>
 <% end %>

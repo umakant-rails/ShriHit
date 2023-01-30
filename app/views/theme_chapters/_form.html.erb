@@ -1,6 +1,6 @@
 <%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
 <%= form_with(model: theme_chapter, html: {
-  'data-article-target': 'form', 'data-action': 'article#submitForm'}) do |form| %> 
+  'data-article-target': 'form', 'data-action': 'article#submitForm'}) do |form| %>
   <% themes = get_themes_hash%>
   <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= theme_chapter.errors.present? ? 'block' : 'none' %>;" role="alert">
     <% theme_chapter.errors.each do |error| %>
@@ -9,7 +9,7 @@
     <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
   </div>
   <div class="row">
-    <div class="col-md-8"> 
+    <div class="col-md-8">
       <div class='mb-3'>
         <label class='form-label'>
           उत्सव <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
@@ -28,6 +28,10 @@
     </div>
   </div>
   <div class='text-center mt-3 actions col-md-4'>
-    <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+    <% if form.object.id.blank? %>
+      <%= form.submit "उत्सव खंड/प्रकरण जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+    <% else %>
+      <%= form.submit "उत्सव खंड/प्रकरण अद्यतन करेे", class: 'btn btn-lg btn-primary form-control' %>
+    <% end %>
   </div>
 <% end %>

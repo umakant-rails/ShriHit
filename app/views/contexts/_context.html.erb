@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <% if contexts.present? %>
-      <% 
+      <%
         page = (contexts.current_page - 1)
         per_page = contexts.present? ? contexts.limit_value : 0
       %>
@@ -56,11 +56,11 @@
           <center>अभी कोई डाटा उपलब्ध नहीं है</center>
         </td>
       </tr>
-    <% end %> 
+    <% end %>
   </tbody>
 </table>
 <% if paginate(contexts).present? %>
   <%= paginate contexts, remote: true %>
   <div class="dropdown-divider"></div>
 <% end %>
-<%= link_to "New context", new_context_path %>
+<%= link_to "प्रसंग जोड़े", new_context_path %>

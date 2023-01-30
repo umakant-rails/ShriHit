@@ -1,7 +1,7 @@
 class Article < ApplicationRecord
 
-  belongs_to :author
-  belongs_to :context
+  belongs_to :author, optional: true
+  belongs_to :context, optional: true
   belongs_to :user
   belongs_to :article_type
   has_many :theme_articles
@@ -15,8 +15,8 @@ class Article < ApplicationRecord
 
   paginates_per 10
 
-  validates :content, :article_type_id, :author_id, :context_id,
-    :hindi_title, :english_title, presence: true
+  validates :content, :hindi_title, :english_title, presence: true
+  #:author_id, :context_id,
 
   scope :by_author, ->(author_id) { where('author_id = ?', author_id) }
   scope :by_context, ->(context_id) { where('context_id = ?', context_id) }

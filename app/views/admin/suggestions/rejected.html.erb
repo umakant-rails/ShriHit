@@ -7,13 +7,13 @@
             <div class="col-md-6">अस्वीकृत सुझाव सूची</div>
             <div class="col-md-6 btn-group fRight">
               <%= link_to(admin_suggestions_path, class: "btn btn-primary") do %>
-                <i class="fas fa-list"></i> Index
+                <i class="fas fa-list"></i> सुझाव सूची
               <% end %>
               <%= link_to(approved_admin_suggestions_path, class: "btn btn btn-success") do %>
-                <i class="fa-regular fa-circle-check fnt-sz-20"></i> Approved
+                <i class="fa-regular fa-circle-check fnt-sz-20"></i> स्वीकृत
               <% end %>
               <%= link_to("javascript:void(0);", class: "btn btn-danger") do %>
-                <i class="fa-regular fa-circle-xmark fnt-sz-20"></i> Rejected
+                <i class="fa-regular fa-circle-xmark fnt-sz-20"></i> अस्वीकृत
               <% end %>
             </div>
           </div>
@@ -28,7 +28,7 @@
               </tr>
             </thead>
             <tbody>
-              <% 
+              <%
                 page = params[:page].blank? ?  0 : (params[:page].to_i - 1)
                 page_size = @suggestions.present? ? @suggestions.limit_value : 0
               %>

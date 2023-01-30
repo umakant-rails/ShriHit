@@ -19,7 +19,11 @@
       <div class='text-center mt-3 actions'>
         <div class="row">
           <div class="col-md-4">
-            <%= form.submit class: 'btn btn-lg btn-primary form-control' %>
+            <% if form.object.id.blank? %>
+              <%= form.submit "प्रसंग जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+            <% else %>
+              <%= form.submit "प्रसंग अद्यतन करे", class: 'btn btn-lg btn-primary form-control' %>
+            <% end %>
           </div>
         </div>
       </div>

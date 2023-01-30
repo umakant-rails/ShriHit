@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <% unless theme_chapters.blank? %>
-    	<% 
+    	<%
 	      page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
 	      page_size = theme_chapters.present? ? theme_chapters.limit_value : 0
 	    %>
@@ -68,4 +68,4 @@
 <% if paginate(theme_chapters).present? %>
   <div class="dropdown-divider"></div>
 <% end %>
-<%= link_to "New Theme Chapter", new_theme_chapter_path %>
+<%= link_to "उत्सव खंड/प्रकरण जोड़े", new_theme_chapter_path %>
