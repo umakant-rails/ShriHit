@@ -6,10 +6,11 @@ class Admin::PanchangTithisController < ApplicationController
 
   def new
     last_tithi = nil
+    last_tithi = @panchang.panchang_tithis.order("date ASC").last
+
 		if params[:start_date].present?
 			@cur_date = Date.parse(params[:start_date])
 		else
-      last_tithi = @panchang.panchang_tithis.order("date ASC").last
       @cur_date = last_tithi.present? ? last_tithi.date : Date.today
 		end
 
@@ -38,23 +39,16 @@ class Admin::PanchangTithisController < ApplicationController
     last_tithi = @panchang.panchang_tithis.order("date ASC").order("tithi ASC").last
     new_tithi = @panchang.panchang_tithis.new(panchang_tithi_params)
 
-    if (new_tithi.paksh == last_tithi.paksh) && (new_tithi.tithi-last_tithi.tithi > 1 || new_tithi.tithi-last_tithi.tithi < 0)
-      # check for tithi must be continue on regular basis for entry in panchang tithi
-      flash[:error] = "कृपया तिथियों को क्रमवार रूप से दर्ज करे, अंतिम दर्ज की गई तिथि #{last_tithi.paksh} #{last_tithi.tithi} है
-      नई तिथि #{last_tithi.paksh} #{new_tithi.tithi} के स्थान पर तिथि #{last_tithi.paksh} #{(last_tithi.tithi+1)%15} होनी चाहिए."
-    elsif (new_tithi.paksh != last_tithi.paksh) && (new_tithi.tithi-last_tithi.tithi != -14)
-      # check for tithi must be continue after ending paksh for entry in panchang tithi
-      flash[:error] = "कृपया तिथियों को क्रमवार रूप से दर्ज करे, अंतिम दर्ज की गई तिथि #{last_tithi.paksh} #{last_tithi.tithi} है
-      नई तिथि #{new_tithi.paksh} #{new_tithi.tithi} के स्थान पर तिथि #{new_tithi.paksh} #{(last_tithi.tithi+1)%15} होनी चाहिए."
-    elsif (new_tithi.date-last_tithi.date).to_i > 1 || (new_tithi.date-last_tithi.date).to_i < 0
-      # check for date must be continue for entry in panchang tithi
-      flash[:error] = "कृपया दिनांक को क्रमवार रूप से दर्ज करे, अंतिम दर्ज की गई दिनांक #{last_tithi.date.strftime('%d/%b%Y')} है नई दिनांक #{new_tithi.date.strftime('%d/%b%Y')} के स्थान पर तिथि #{(last_tithi.date+1.day).strftime('%d/%b%Y')} होनी चाहिए"
-    elsif PanchangTithi.where("date = ? and tithi = ?", new_tithi.date, new_tithi.tithi).present?
-      flash[:error] = "इस दिनांक #{new_tithi.date.strftime("%d/%m/%Y")} और इस तिथि #{new_tithi.paksh} #{new_tithi.tithi} के साथ एंट्री की जा चुकी है."
+    error = new_tithi.validate_tithi_entry(last_tithi)
+    
+    if error.length > 0
+      flash[:error] = error
     elsif new_tithi.save
-			flash[:notice] = "तिथि की एंट्री सफलतापूर्वक की गई."
-		else
-			flash[:error] = "तिथि एंट्री की प्रकिया असफल हो गई है."
+      flash[:notice] = "तिथि की एंट्री सफलतापूर्वक की गई."
+    
+    else
+      flash[:error] = "तिथि एंट्री की प्रकिया असफल हो गई है."
+    
     end
 
     respond_to do |format|
@@ -76,29 +70,29 @@ class Admin::PanchangTithisController < ApplicationController
     @month_tithis = @month[0].month_tithis
     @hindi_months = @panchang.hindi_months.order("hindi_months.order ASC")
 
-		respond_to do |format|
+    respond_to do |format|
       format.html {}
       format.js {}
     end
-	end
+  end
 
-	def update
+  def update
     params[:panchang_tithi][:year] = params[:panchang_tithi][:date].split("/")[2].to_i
-		tithi_txt = params[:panchang_tithi][:tithi]
-		params[:panchang_tithi][:tithi] = tithi_txt[tithi_txt.rindex(" "), tithi_txt.length].strip
-		params[:panchang_tithi][:paksh] = tithi_txt[0,tithi_txt.rindex(" ")].strip
+    tithi_txt = params[:panchang_tithi][:tithi]
+    params[:panchang_tithi][:tithi] = tithi_txt[tithi_txt.rindex(" "), tithi_txt.length].strip
+    params[:panchang_tithi][:paksh] = tithi_txt[0,tithi_txt.rindex(" ")].strip
 
     if @panchang_tithi.update(panchang_tithi_params)
       flash[:success] = "तिथि को सफलतापूर्वक अद्यतित कर दिया गया है."
-		else
-			flash[:error] = "तिथि को अद्यतित करने की प्रकिया असफल हो गई है."
+    else
+      flash[:error] = "तिथि को अद्यतित करने की प्रकिया असफल हो गई है."
     end
 
     respond_to do |format|
       format.html {redirect_to new_admin_panchang_panchang_tithi_path}
       format.js {}
     end
-	end
+  end
 
   def destroy
     @cur_date = @panchang_tithi.date
@@ -107,8 +101,8 @@ class Admin::PanchangTithisController < ApplicationController
     if @panchang_tithi.destroy
       @panchang_tithi = @panchang.panchang_tithis.new
       flash[:success] = "तिथि को सफलतापूर्वक डिलीट कर दिया गया है."
-		else
-			flash[:error] = "तिथि को डिलीट करने की प्रकिया असफल हो गई है."
+    else
+      flash[:error] = "तिथि को डिलीट करने की प्रकिया असफल हो गई है."
     end
     respond_to do |format|
       format.html {redirect_to new_admin_panchang_panchang_tithi_path}

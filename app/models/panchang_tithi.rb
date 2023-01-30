@@ -17,4 +17,37 @@ class PanchangTithi < ApplicationRecord
 		return tithiya
 	end
 
+	def validate_tithi_entry(last_tithi)
+		error = ''
+
+		if last_tithi.present? && (self.paksh == last_tithi.paksh) && (self.tithi-last_tithi.tithi > 1 || self.tithi-last_tithi.tithi < 0)
+      # check for tithi must be continue on regular basis for entry in panchang tithi
+      error = "कृपया तिथियों को क्रमवार रूप से दर्ज करे, अंतिम दर्ज की गई तिथि 
+	      #{last_tithi.paksh} #{last_tithi.tithi} है नई तिथि #{last_tithi.paksh} #{self.tithi} के 
+	      स्थान पर तिथि #{last_tithi.paksh} #{(last_tithi.tithi+1)%15} होनी चाहिए."
+ 
+    elsif last_tithi.present? && (self.paksh != last_tithi.paksh && self.tithi-last_tithi.tithi != -14)
+      # check for tithi must be continue after ending paksh for entry in panchang tithi
+      error = "कृपया तिथियों को क्रमवार रूप से दर्ज करे, अंतिम दर्ज की गई तिथि 
+	      #{last_tithi.paksh} #{last_tithi.tithi} है
+	      नई तिथि #{self.paksh} #{self.tithi} के स्थान पर 
+	      तिथि #{self.paksh} #{(last_tithi.tithi+1)%15} होनी चाहिए."
+
+    elsif last_tithi.present? && ((self.date-last_tithi.date).to_i > 1 || (self.date-last_tithi.date).to_i < 0)
+      # check for date must be continue for entry in panchang tithi
+      error = "कृपया दिनांक को क्रमवार रूप से दर्ज करे, अंतिम दर्ज की गई दिनांक 
+	      #{last_tithi.date.strftime('%d/%m/%Y')} है नई दिनांक 
+	      #{self.date.strftime('%d/%m/%Y')} के स्थान पर तिथि 
+	      #{(last_tithi.date+1.day).strftime('%d/%m/%Y')} होनी चाहिए"
+ 
+    elsif PanchangTithi.where("date = ? and tithi = ?", self.date, self.tithi).present?
+      error = "इस दिनांक #{self.date.strftime("%d/%m/%Y")} और इस तिथि 
+			#{self.paksh} #{self.tithi} के साथ एंट्री की जा चुकी है."
+
+    end
+
+    return error
+
+	end
+
 end
