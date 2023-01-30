@@ -143,6 +143,7 @@ Rails.application.routes.draw do
     resources :article_types, only: [:index] do
       get '/:article_type_name' => "article_types#show", as: :articles_by_type, on: :collection
     end
+    resources :panchangs, only: [:index, :show]
   end
 
 end

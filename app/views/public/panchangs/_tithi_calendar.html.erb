@@ -1,0 +1,92 @@
+<% month, year = @cur_date.month, @cur_date.year %>
+<% dates_array = (Date.new(year, month, 1).at_beginning_of_week..Date.new(year, month, -1).at_end_of_week) %>
+<div id="custom-calendar">
+  <div class="row-fluid mb-2">
+    <div class="col-md-12 page-subject-header">
+      <a href="<%= @last_month_link%>"><<</a>
+      <strong><%= HindiMonth::ENG_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %></strong>
+      <a href="<%= @next_month_link%>">>></a>
+    </div>
+  </div>
+  <div class="dropdown-divider"></div>
+  <div class="mt-4">
+    <table class="table">
+      <thead>
+        <tr class="text-white bg-primary">
+          <% @week_days.each do |day| %>
+            <th style="width: 14%;"><%= day %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% indx = 0 %>
+        <% dates_array.each do | dt | %>
+          <% if indx%7 == 0 %>
+            <tr>
+          <% end %>
+            <% if dt.month == @cur_date.month %>
+              <% month, is_utsav_present, tithi = get_utsav(tithiya, dt) %>
+              <td class="current-month <%="utsav" if is_utsav_present %>"
+                data-date="<%= %>"
+                data-admin-panchang-target="calendarDate"
+                data-action="click->admin-panchang#selectDate"
+                >
+                <div class="month-txt">
+                  <%=raw (month.present? ? month : '<br/>') %>
+                </div>
+                <div class="date-txt">
+                  <span class="date-active">
+                    <%= dt.strftime("%d") %>
+                  </span>
+                </div>
+                <div class="tithi-txt">
+                  <%=raw (tithi.present? ? tithi : '<br/>') %>
+                </div>
+              </td>
+            <% else %>
+              <td class="not-cur-month">
+                <br/>
+                <div class="date-txt">
+                  <span class="date-inactive"><%= dt.strftime("%d") %></span>
+                </div>
+                <br/>
+              </td>
+            <% end %>
+          <% if indx%7 == 6 %>
+            </tr>
+          <% end %>
+          <% indx = indx + 1%>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<% if @panchang_utsav.length > 0 %>
+  <div class="col-md-12">
+    <div class="card1">
+      <div class="card-body1">
+        <div class="col-md-12 page-subject-header">
+          पंचांग तिथि सूची
+        </div>
+        <div class="dropdown-divider"></div>
+        <% if @panchang_utsav.length > 1 %>
+          <% panchang_utsav1, panchang_utsav2 = @panchang_utsav.in_groups(2) %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= render "tithi", panchang_utsav: panchang_utsav1, index: 0 %>
+            </div>
+            <div class="col-md-6">
+              <%= render "tithi", panchang_utsav: panchang_utsav2, index: panchang_utsav1.length %>
+            </div>
+          </div>
+        <% else %>
+          <div class="row">
+            <div class="col-md-12">
+              <%= render "tithi", panchang_utsav: @panchang_utsav, index: 0 %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -108,7 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_18_125458) do
 
   create_table "panchang_tithis", force: :cascade do |t|
     t.date "date"
-    t.string "tithi"
+    t.integer "tithi"
     t.string "paksh"
     t.text "description"
     t.string "title"

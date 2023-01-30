@@ -55,7 +55,7 @@ Theme.all.each{ | theme |
   ThemeChapter.create(user_id:1, theme_id: theme.id, name: "#{theme.name}_विविध _प्रकरण") if ThemeChapter.where(name: "#{theme.name}_विविध _प्रकरण").blank?
 }
 
-Context.create!(name: 'विविध', is_approved: true, user_id: 1) if Context.where(name: 'विविध').blank?
+Context.create!(name: 'अन्य', is_approved: true, user_id: 1) if Context.where(name: 'अन्य').blank?
 Context.create!(name: 'वन विहार', is_approved: true, user_id: 1) if Context.where(name: 'वन विहार').blank?
 Context.create!(name: 'श्रृंगार', is_approved: true, user_id: 1) if Context.where(name: 'श्रृंगार').blank?
 Context.create!(name: 'शरद ऋतु', is_approved: true, user_id: 1) if Context.where(name: 'शरद ऋतु').blank?

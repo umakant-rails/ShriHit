@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-body h-400">
+        <div class="row page-subject-header">
+          <div class="col-md-6 text-start article-title text-primary">पंचांग (<%= @panchang.title %>) विवरण</div>
+          <div class="col-md-6">
+						<% pur_month = @panchang.hindi_months.purshottam_month %>
+          	<%= link_to "पंचांग सूची", public_panchangs_path, class: "fRight btn btn-primary me-1" %>
+          </div>
+        </div>
+		    <div class="dropdown-divider"></div>
+        <div class="row" id="panchang_tithi_layout">
+        	<%= render "tithi_calendar", tithiya: @panchang_tithiya %>
+        </div>
+			</div>
+		</div>
+	</div>
+</div>

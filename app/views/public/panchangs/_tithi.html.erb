@@ -1,0 +1,36 @@
+<table class="table">
+  <thead class="table bg-primary text-white ps-0 pe-0">
+    <tr>
+    	<th>#</th>
+      <th scope="col-2">दिनांक </th>
+      <th scope="col-4">तिथि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if panchang_utsav.present? %>
+      <% panchang_utsav.each do |tithi| %>
+      	<% if tithi && tithi.description.present? %>
+	      	<tr>
+	      		<td><%=index+1%></td>
+        		<td class="text-danger">
+							<strong><%= tithi.date.strftime("%d/%b/%y") %></strong>
+	          	<br/>
+	          	<%= PanchangTithi::WEEKDAYS[tithi.date.wday] %>
+	          </td>
+	          <td class="text-primary">
+	          	<strong>
+	          		<%= tithi.hindi_month.name + " "+ tithi.paksh + "-"+ tithi.tithi.to_s %>
+	          	</strong><br/>
+	          	<%= tithi.description %>
+	          </td>
+	      	</tr>
+	      	<% index = index + 1%>
+	      <% end %>
+      <% end %>
+    <% else %>
+      <td colspan="4">
+      	अभी रिकॉर्ड उपलब्ध नहीं है.
+      </td>
+    <% end %>
+  </tbody>
+</table>
