@@ -7,6 +7,8 @@ class Context < ApplicationRecord
   scope :approved, ->() { where(is_approved: true) }
   paginates_per 10
 
+  validates :name, presence: true
+
   def self.create_context(name, user_id)
     context = self.where(name: name).first
     return (context.present? ? context : self.create(name: name, user_id: user_id))

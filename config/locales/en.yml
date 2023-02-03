@@ -30,4 +30,62 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      tag:
+        name: 'टैग्स का नाम'
+      theme:
+        name: "उत्सव का नाम"
+      theme_chapter:
+        theme: "उत्सव का नाम"
+        name: "उत्सव प्रकरण/खंड का नाम"
+      author:
+        name: "रचनाकार"
+      article:
+        article_type: "रचना प्रकार"
+        hindi_title: "हिंदी शीर्षक"
+        english_title: "इंग्लिश शीर्षक"
+        content: "रचना विवरण"
+      context:
+        name: "प्रसंग का नाम"
+      article_type:
+        name: "रचना प्रकार"
+
+    errors:
+      models:
+        tag:
+          attributes:
+            name:
+              blank: " रिक्त नहीं हो सकता है."
+        theme:
+          attributes:
+            name:
+              blank: " रिक्त नहीं हो सकता है."
+        theme_chapter:
+          attributes:
+            theme:
+              required: " रिक्त नहीं हो सकता है."
+            name:
+              blank: " रिक्त नहीं हो सकता है."
+        author:
+          attributes:
+            name:
+              blank: " रिक्त नहीं हो सकता है."
+        article:
+          attributes:
+            article_type:
+              required: " रिक्त नहीं हो सकता है."
+            hindi_title:
+                blank: " रिक्त नहीं हो सकता है."
+            english_title:
+                blank: " रिक्त नहीं हो सकता है."
+            content:
+                blank: " रिक्त नहीं हो सकता है."
+        context:
+          attributes:
+            name:
+                blank: " रिक्त नहीं हो सकता है."
+        article_type:
+          attributes:
+            name:
+                blank: " रिक्त नहीं हो सकता है."

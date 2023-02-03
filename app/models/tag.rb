@@ -4,7 +4,7 @@ class Tag < ApplicationRecord
   has_many :articles, through: :article_tags
   belongs_to :user
   validates :name, presence: true
-  # validates :cep, presence: { message: 'Your custom error message' }, unless: lambda { |o| o.location }
+  # validates :name, presence: { message: 'रिक्त नहीं हो सकता है.' } #, unless: lambda { |o| o.location }
   paginates_per 10
 
   scope :pending, ->() { where(is_approved: false) }

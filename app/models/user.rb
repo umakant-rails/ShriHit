@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, : and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :suggestions
   has_many :comments
   has_many :tags
+  has_many :themes
   belongs_to :role
   has_many :comment_reportings
   has_many :article_tags
@@ -25,7 +26,7 @@ class User < ApplicationRecord
   def is_admin
     self.role.name == "Admin"
   end
-  
+
   def is_super_admin
     self.role.name == "Super Admin"
   end
@@ -34,14 +35,14 @@ class User < ApplicationRecord
     self.role.name == "Contributor"
   end
 
-  private 
+  private
 
   def fullname
     if self.first_name.present?
       self.first_name + " " + self.last_name
     else
       self.username
-    end 
+    end
   end
 
 end

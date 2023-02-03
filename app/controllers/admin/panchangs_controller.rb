@@ -37,7 +37,7 @@ class Admin::PanchangsController < ApplicationController
 
 	def show
 		#@hindi_months = @panchang.hindi_months.includes(:panchang_tithis).order("hindi_months.order ASC")
-
+		@hindi_months = @panchang.hindi_months
     @cur_date = params[:start_date].blank? ? Date.today : Date.parse(params[:start_date])
     @cur_date += 1.days until @cur_date.wday == 1
 
@@ -51,7 +51,7 @@ class Admin::PanchangsController < ApplicationController
     @last_month_link = "/admin/panchangs/#{@panchang.id}?start_date="+last_month_wday.strftime("%d/%m/%Y")
     @panchang_tithiya = PanchangTithi.where("panchang_id=? and date between ? and ?",@panchang.id,
       @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc")
-    
+
     @panchang_utsav = PanchangTithi.where("date between ? and ? and description != ''",
       @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc").to_a
 
