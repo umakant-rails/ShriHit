@@ -41,8 +41,6 @@ Rails.application.routes.draw do
     get "/search_articles" => "themes#search_articles", as: :search_articles, on: :collection
   end
   resources :authors
-  resources :article_types
-  resources :contexts
   resources :theme_chapters
   resources :comment_reportings, only: [:index, :destroy, :create]
   post "comment_reportings/:comment_id/mark_as_read" => "comment_reportings#mark_as_read", as: :mark_as_read
@@ -56,7 +54,10 @@ Rails.application.routes.draw do
       post "/unblock_to_user" => "user_mgmts#unblock_to_user", as: :unblock_to_user, on: :member
       get "/blocked_users" => "user_mgmts#blocked_users", as: :blocked_users, on: :collection
     end
-
+    resources :article_types
+    resources :contexts do
+      get "/report" => "contexts#report", as: :report_contexts, on: :collection
+    end
     resources :articles, only: [:index, :update] do
       get "/approved" => "articles#approved", as: :approved_articles, on: :collection
       get "/pending" => "articles#pending", as: :pending_articles, on: :collection
@@ -75,14 +76,14 @@ Rails.application.routes.draw do
       get "/reject" => "authors#reject", as: :reject, on: :member
       post "/merge" => "authors#merge", as: :merge, on: :member
     end
-    resources :contexts, only: [:index, :update] do
+    #resources :contexts, only: [:index, :update] do
       # get "/approved" => "contexts#approved", as: :approved_contexts, on: :collection
       # get "/pending" => "contexts#pending", as: :pending_contexts, on: :collection
-      get "/report" => "contexts#report", as: :report_contexts, on: :collection
+      # get "/report" => "contexts#report", as: :report_contexts, on: :collection
       # get "/approve" => "contexts#approve", as: :approve, on: :member
       # get "/reject" => "contexts#reject", as: :reject, on: :member
       # post "/merge" => "contexts#merge", as: :merge, on: :member
-    end
+    #end
 
     resources :tags, only: [:index] do
       post "/reject" => "tags#reject", as: :reject, on: :member
@@ -105,7 +106,7 @@ Rails.application.routes.draw do
       post '/populate_panchang' => "panchangs#populate_panchang", on: :member, as: :populate_panchang
       post '/add_purshottam_mas' => "panchangs#add_purshottam_mas", on: :member, as: :add_purshottam_mas
       post '/remove_purshottam_mas' => "panchangs#remove_purshottam_mas", on: :member, as: :remove_purshottam_mas
-      
+
       resources :panchang_tithis do
           get '/:month_id/get_tithis' => "panchang_tithis#get_tithis", as: :get_tithis, on: :collection
       end

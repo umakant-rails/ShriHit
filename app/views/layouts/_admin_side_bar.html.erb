@@ -8,7 +8,7 @@
 </li>
 <div class="dropdown-divider1"></div>
 <%
-  app_subject_actions = ["index", "pending", "approved"]
+  app_subject_actions = ["index", "pending", "approved", "rejected"]
   report_actions = ["report"]
   is_app_subject_display = show_admin_collapse_items(app_subject_actions)
   is_report_display = show_admin_collapse_items(report_actions)
@@ -16,8 +16,8 @@
   # is_pending_active = show_admin_collapse_items("pending")
   # is_approved_active = show_admin_collapse_items("approved")
   # is_report_active = show_admin_collapse_items(["report"])
-  is_article_type_active = show_collapse_items("article_types")
-  is_contexts_active = show_collapse_items("contexts")
+  is_article_type_active = show_collapse_items("admin/article_types")
+  is_contexts_active = show_collapse_items("admin/contexts")
 %>
 <li class="sidebar-item">
   <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#appContent" role="button"
@@ -105,15 +105,15 @@
   </a>
 </li>
 <div class="collapse  <%= is_article_type_active %>" data-sidebar-target="anchorListBlock" id="articleTypeList">
-  <li class="sidebar-item <%= set_active("article_types", "new") %>">
-    <a class="sidebar-link" href="<%= new_article_type_path %>">
+  <li class="sidebar-item <%= set_active("admin/article_types", "new") %>">
+    <a class="sidebar-link" href="<%= new_admin_article_type_path %>">
       <span class="align-middle">
         रचना प्रकार जोड़े
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("article_types", "others") %>">
-    <a class="sidebar-link" href="<%= article_types_path %>">
+  <li class="sidebar-item <%= set_active("admin/article_types", "others") %>">
+    <a class="sidebar-link" href="<%= admin_article_types_path %>">
       <span class="align-middle">
         रचना प्रकार सूची
       </span>
@@ -131,15 +131,15 @@
   </a>
 </li>
 <div class="collapse  <%= is_contexts_active %>" data-sidebar-target="anchorListBlock" id="contextList">
-  <li class="sidebar-item <%= set_active("contexts", "new") %>">
-    <a class="sidebar-link" href="<%= new_context_path %>">
+  <li class="sidebar-item <%= set_active("admin/contexts", "new") %>">
+    <a class="sidebar-link" href="<%= new_admin_context_path %>">
       <span class="align-middle">
         प्रसंग जोड़े
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("contexts", "others") %>">
-    <a class="sidebar-link" href="<%= contexts_path %>">
+  <li class="sidebar-item <%= set_active("admin/contexts", "others") %>">
+    <a class="sidebar-link" href="<%= admin_contexts_path %>">
       <span class="align-middle">
         प्रसंग सूची
       </span>

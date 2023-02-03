@@ -1,4 +1,4 @@
-class ArticleTypesController < ApplicationController
+class Admin::ArticleTypesController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_admin
   before_action :set_article_type, only: %i[ show edit update destroy ]
@@ -28,7 +28,7 @@ class ArticleTypesController < ApplicationController
 
     respond_to do |format|
       if @article_type.save
-        format.html { redirect_to article_types_url, notice: "Article type was successfully created." }
+        format.html { redirect_to admin_article_types_url, notice: "Article type was successfully created." }
         format.json { render :show, status: :created, location: @article_type }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -41,7 +41,7 @@ class ArticleTypesController < ApplicationController
   def update
     respond_to do |format|
       if @article_type.update(article_type_params)
-        format.html { redirect_to article_types_url(), notice: "Article type was successfully updated." }
+        format.html { redirect_to admin_article_types_url(), notice: "Article type was successfully updated." }
         format.json { render :show, status: :ok, location: @article_type }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class ArticleTypesController < ApplicationController
     @article_type.destroy
 
     respond_to do |format|
-      format.html { redirect_to article_types_url, notice: "Article type was successfully destroyed." }
+      format.html { redirect_to admin_article_types_url, notice: "Article type was successfully destroyed." }
       format.json { head :no_content }
     end
   end

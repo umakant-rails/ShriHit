@@ -1,46 +1,13 @@
-<div class="row" data-controller="admin-context">
-	<div class="col-md-12">
-		<div class="card">
-			<div class="card-body h-400">
-				<span class="col-md-6 text-start article-title text-primary">
-		      प्रसंग सूची 
-		    </span>
-		    <div class="dropdown-divider"></div>  
-      	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-context-target="csrfToken">
-      	<div id="context_list">
-      		<table class="table">
-					  <thead class="table-dark ps-0 pe-0">
-					    <tr>
-					      <th scope="col">S. No.</th>
-					      <th scope="col">नए प्रसंग</th>
-					      <th scope="col">स्वीकृत/अस्वीकृत</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <% if @contexts.present? %>
-					      <% @contexts.each_with_index do |context, index| %>
-					        <tr class="<%= "text-success" if context.is_approved %>">
-					          <td><%= index+1 %></td>
-					          <td data-admin-context-target="contextForApproval" data-vl="<%= context.id %>">
-					          	<%= context.name %>
-					          </td>
-					          <td>
-					          	<%= context.is_approved? ? "स्वीकृत" : "अस्वीकृत" %>
-					          </td>
-					      	</tr>
-					      <% end %>
-					    <% else %>
-					      <td colspan="4">
-					      	अभी रिकॉर्ड उपलब्ध नहीं है.
-					      </td>
-					    <% end %>
-					  </tbody>
-					</table>
-      	</div>
-			</div>
-		</div>
-	</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body h-100">
+        <div class="col-md-12 page-subject-header">
+          प्रसंग सूची 
+        </div>
+        <div class="dropdown-divider"></div>
+        <%= render partial: 'context', locals: {contexts: @contexts } %>
+      </div>
+    </div>
+  </div>
 </div>
-<% content_for :head do %>
-  <%= javascript_import_module_tag "custom/dashboard/context-custom" %>
-<% end %>

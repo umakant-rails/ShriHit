@@ -1,7 +1,7 @@
 module ApplicationHelper
-  
+
   def show_admin_collapse_items(admin_actions)
-    if ["admin/contexts", "admin/authors", "admin/articles"].index(params[:controller]) != nil
+    if ["admin/authors", "admin/articles", "admin/tags"].index(params[:controller]) != nil
       return (admin_actions.index(params[:action])) ? "show" : nil
     end
   end

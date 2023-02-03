@@ -13,8 +13,11 @@
         </div>
         <div class="dropdown-divider"></div>
         <%#= link_to "रचना प्रकार देखे", @article_type %>
-        <%= link_to "रचना प्रकार सूची देखे", article_types_path %>
+        <%= link_to "रचना प्रकार सूची देखे", admin_article_types_path %>
       </div>
     </div>
   </div>
 </div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/article-type-custom" %>
+<% end %>

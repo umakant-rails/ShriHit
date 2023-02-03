@@ -3,20 +3,21 @@
     <div class="card">
       <div class="card-body">
         <div class="col-md-12 page-subject-header">
-          रचना प्रकार फॉर्म
+          प्रसंग अद्यतन फॉर्म
         </div>
         <div class="dropdown-divider"></div>
-        <div class="m-sm-4" data-controller= 'article'>
+        <div class="m-sm-4" data-controller= 'author'>
           <!-- <h3 class="card-title">New article</h3>
           <div class="dropdown-divider"></div> -->
-          <%= render "form", article_type: @article_type %>
+          <%= render "form", context: @context %>
         </div>
         <div class="dropdown-divider"></div>
-         <%= link_to "रचना प्रकार सूची देखे", article_types_path %>
+        <%#= link_to "प्रसंग देखे", @context %>
+        <%= link_to "प्रसंग सूची देखे", admin_contexts_path %>
       </div>
     </div>
   </div>
 </div>
 <% content_for :head do %>
-  <%= javascript_import_module_tag "custom/article-type-custom" %>
+  <%= javascript_import_module_tag "custom/context-custom" %>
 <% end %>
