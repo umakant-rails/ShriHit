@@ -1,7 +1,7 @@
 class AuthorsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_author, only: %i[ show edit update destroy ]
-
+  before_action :create_sampradaya, only: %i[create update]
   def index
     @authors = current_user.authors.page(params[:page])
   end
@@ -32,10 +32,6 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    if params[:author][:sampradaya_id].blank? && params[:sampradaya].present?
-      sampradaya = Sampradaya.create(name: params[:sampradaya])
-      params[:author][:sampradaya_id] = sampradaya.id
-    end
     respond_to do |format|
       if @author.update(author_params)
         format.html { redirect_to author_url(@author), notice: "Author was successfully updated." }
@@ -54,7 +50,7 @@ class AuthorsController < ApplicationController
       format.html { redirect_to authors_url, notice: "Author was successfully destroyed." }
       format.json { head :no_content }
     end
-  end 
+  end
 
   private
 
@@ -66,8 +62,15 @@ class AuthorsController < ApplicationController
     end
 
     def author_params
-      params.fetch(:author, {}).permit(:name, :sampradaya_id, :biography, 
+      params.fetch(:author, {}).permit(:name, :sampradaya_id, :biography,
         :birth_date, :death_date, :is_approved)
+    end
+
+    def create_sampradaya
+      if params[:author][:sampradaya_id].blank? && params[:sampradaya].present?
+        sampradaya = Sampradaya.create(name: params[:sampradaya])
+        params[:author][:sampradaya_id] = sampradaya.id
+      end
     end
 
 end

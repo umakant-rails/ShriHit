@@ -28,7 +28,8 @@
 					    <tr>
 					      <th scope="col">S. No.</th>
 					      <th scope="col">नए रचनाकार</th>
-					      <th scope="col">स्वीकृत/अस्वीकृत</th>
+					      <th scope="col">स्टेटस</th>
+								<th scope="col">गतिविधि</th>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -36,11 +37,41 @@
 					      <% @authors.each_with_index do |author, index| %>
 					        <tr class="<%= "text-success" if author.is_approved %>">
 					        	<td><%= index +1 %></td>
-					        	<td data-admin-author-target="authorForApproval" data-vl="<%= author.id %>"><%= author.name %>
+					        	<td data-admin-author-target="authorForApproval" data-vl="<%= author.id %>">
+											<%= link_to author.name, admin_author_path(author), class: author.is_approved ? "text-success" : ""%>
 					        	</td>
 					        	<td>
-					        		<%= author.is_approved? ? "स्वीकृत" : "अस्वीकृत" %>
+					        		<%= author.is_approved? ? "स्वीकृत" : "लंबित" %>
 					          </td>
+										<td>
+				              <div class="row">
+				  							<div class="col-md-1">
+				  								<%= link_to edit_admin_author_path(author) do %>
+				  								  <i class="fa fa-edit"></i>
+				  								<% end %>
+				  							</div>
+				  							<div class="col-md-1">
+				  								<%= form_for([:admin, author], html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+				  						      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+				  						        <i class="fa fa-trash" style="color:red;"></i>
+				  						      </button>
+				  						    <% end %>
+				  						  </div>
+												<% if !author.is_approved? %>
+													<div class="col-md-3">
+														<%= form_for(author, url: approve_admin_author_path(author), html: { method: :post }) do |f| %>
+					  						      <button type="submit" class="btn btn-primary">
+					  						        स्वीकृत
+					  						      </button>
+					  						    <% end %>
+													</div>
+												<% else %>
+													<div class="col-md-3">
+														<input type="button" value="स्वीकृत" class="btn btn-secondary"/>
+													</div>
+												<% end %>
+				  				    </div>
+				            </td>
 					        </tr>
 					      <% end %>
 					    <% else %>

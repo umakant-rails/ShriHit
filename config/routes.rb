@@ -66,11 +66,11 @@ Rails.application.routes.draw do
       post "/approve" => "articles#approve", as: :approve, on: :member
       post "/reject" => "articles#reject", as: :reject, on: :member
     end
-    resources :authors, only: [:index, :update] do
+    resources :authors do
       get "/approved" => "authors#approved", as: :approved_authors, on: :collection
       get "/pending" => "authors#pending", as: :pending_authors, on: :collection
-      get "/approve" => "authors#approve", as: :approve, on: :member
-      get "/reject" => "authors#reject", as: :reject, on: :member
+      post "/approve" => "authors#approve", as: :approve, on: :member
+      post "/reject" => "authors#reject", as: :reject, on: :member
       post "/merge" => "authors#merge", as: :merge, on: :member
     end
     #resources :contexts, only: [:index, :update] do

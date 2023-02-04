@@ -23,8 +23,8 @@
         <div class="dropdown-divider"></div>
         <% if current_user.present? %>
           <div class="">
-            <%= link_to "रचनाकार अद्यतन करे", edit_author_path(@author) %> |
-            <%= link_to "रचनाकार सूची", authors_path %> |
+            <%= link_to "रचनाकार अद्यतन करे", edit_admin_author_path(@author) %> |
+            <%= link_to "रचनाकार सूची", admin_authors_path %> |
             <%= button_to("रचनाकर डिलीट करे", author_path(@author), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
           </div>
         <% end %>

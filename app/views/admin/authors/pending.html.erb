@@ -8,7 +8,7 @@
 				    <div class="col-md-6">
 				     	<div class="btn-group fRight">
 					    	<a href="<%= admin_authors_path %>" class="text-white btn btn-primary">
-							  	<i class="fas fa-list"></i> रचनाकार सूची 
+							  	<i class="fas fa-list"></i> रचनाकार सूची
 							  </a>
 						  	<a href="<%= approved_authors_admin_authors_path %>" class="text-white btn btn-success">
 							  	<i class="far fa-check-circle"></i> स्वीकृत
@@ -28,33 +28,7 @@
 	      <div id="paginate-block">
       		<%= paginate @authors_pending, remote: true %>
       	</div>
-	      <!-- Modal -->
-	      <div class="modal fade" id="updateAuthorPopup" tabindex="-1" aria-labelledby="updateAuthorPopupLabel" aria-hidden="true">
-	        <div class="modal-dialog">
-	          <div class="modal-content">
-	            <div class="modal-header">
-	              <h3 class="modal-title" id="exampleModalLabel">
-	                लेखक का नाम अपडेट करे
-	              </h3>
-	              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	            </div>
-	            <div class="modal-body">
-	              <div class="mb-3">
-	                <label for="formFile" class="form-label">लेखक का नया नाम</label>
-	                <%= text_field_tag 'update_author_name', '', class:"form-control", 'data-admin-author-target': 'newAuthorName' %>
-	              </div>
-	            </div>
-	            <div class="modal-footer">
-	              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	              <button type="button" data-admin-author-target="saveAuthorBtn" data-index="<%=  %>" data-action="click->admin-author#updateAuthor" class="btn btn-primary">Save changes</button>
-	            </div>
-	          </div>
-	        </div>
-		    </div>
 			</div>
 		</div>
 	</div>
 </div>
-<% content_for :head do %>
-  <%= javascript_import_module_tag "custom/dashboard/author-custom" %>
-<% end %>

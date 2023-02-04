@@ -1,0 +1,46 @@
+<%#= form_with(model: article, html: { novalidate: true }, data: {controller: 'article'}) do |form| %>
+<%= form_with(model: [:admin, author], html: {
+  'data-author-target': 'form', 'data-action': 'author#submitForm'}) do |form| %>
+  <% sampradaya_list = get_sampradaya_list %>
+  <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= author.errors.present? ? 'block' : 'none' %>;" role="alert">
+    <% author.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+    <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+  </div>
+
+  <div class='mb-3'>
+    <label class='form-label'>
+      नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+    </label>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+  <div class='mb-3'>
+    <label class='form-label'>
+      सम्प्रदाय
+    </label>
+    <%= form.select :sampradaya_id, options_for_select(sampradaya_list, selected: author.sampradaya_id), {:prompt => 'सम्प्रदाय चुने'}, class: 'form-control', 'data-action': 'change->author#toggleSampradaya', 'data-author-target': 'sampradayaSelect'%>
+    <div data-author-target='sampradayaInput' hidden=true>
+      <div class="row">
+        <div class="col-md-9">
+          <%= text_field_tag 'sampradaya', nil, class: 'form-control', placeholder: 'सम्प्रदाय का नाम टाइप करे.' %>
+        </div>
+          <div class="col-md-3">
+            <a href="javascript:void(0);" data-action="author#toggleSampradaya" class="btn btn-primary">सूची प्रदर्शित करे </a>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class='mb-3'>
+    <%= form.text_area :biography, class: 'tinymce' %>
+  </div>
+
+  <div class='text-center mt-3 actions'>
+    <% if form.object.id.blank? %>
+      <%= form.submit "रचनाकार जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+    <% else %>
+      <%= form.submit "रचनाकार अद्यतन करेे", class: 'btn btn-lg btn-primary form-control' %>
+    <% end %>
+  </div>
+<% end %>
