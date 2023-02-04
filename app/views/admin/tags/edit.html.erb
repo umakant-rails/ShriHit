@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          टैग्स अद्यतन फॉर्म
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller= 'article'>
+          <%= render "form", tag: @tag %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <%#= link_to "टैग्स देखें", @tag %>
+        <%= link_to "टैग्स सूची देखें", tags_path %>
+      </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/tag-custom" %>
+<% end %>

@@ -1,14 +1,38 @@
 class Admin::TagsController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_admin
-  before_action :set_tag, only: %i[approve reject convert_tag_to_context]
+  before_action :set_tag, only: %i[edit update destroy approve reject convert_tag_to_context]
+
   def index
     @tags = Tag.order("created_at DESC").page(params[:page])
   end
 
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @tag.update(tag_params)
+        format.html { redirect_to admin_tags_url, notice: "रचनाकार को सफलतापूर्वक अद्यतित कर दिया गया है." }
+        format.json { render :show, status: :ok, location: @tag }
+      else
+        format.html { render :edit, status: :unprocessable_entity, error: "रचनाकार को अद्यतित करने की प्रकिया असफल हो गई है" }
+        format.json { render json: @tag.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @tag.destroy
+    respond_to do |format|
+      format.html { redirect_to admin_tags_url, notice: "टैग को सफलतापूर्वक डिलीट कर दिया गया है." }
+      format.json { head :no_content }
+    end
+  end
+
   def approve
     if @tag.update(is_approved: true)
-      flash[:success] = "टैग को फलतापूर्वक अस्वीकृत कर दिया है"
+      flash[:success] = "टैग को सफलतापूर्वक अस्वीकृत कर दिया है"
     else
       flash[:error] = "टैग को स्वीकृत करने की प्रकिया असफल हो गई है"
     end
@@ -65,6 +89,10 @@ class Admin::TagsController < ApplicationController
       if !current_user.is_admin && !current_user.is_super_admin
         redirect_to new_user_session_path
       end
+    end
+
+    def tag_params
+      params.fetch(:tag, {}).permit(:name)
     end
 
 end

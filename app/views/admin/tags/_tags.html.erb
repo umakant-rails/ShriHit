@@ -1,10 +1,11 @@
 <table class="table">
   <thead class="table-dark">
     <tr>
-      <th>S. No.</th>
-      <th>नाम</th>
-      <th class="d-none d-xl-table-cell">योगदानकर्ता</th>
-      <th>स्वीकृत/अस्वीकृत</th>
+      <th scope="col">S. No.</th>
+      <th scope="col">नाम</th>
+      <th scope="col" class="d-none d-xl-table-cell">योगदानकर्ता</th>
+      <th scope="col">स्वीकृत/अस्वीकृत</th>
+      <th scope="col">गतिविधि</th>
     </tr>
   </thead>
   <tbody id="tag_rows">
@@ -18,7 +19,9 @@
         <tr class="<%= tag.is_approved ? "text-primary" : "" %>">
           <th><%= ind %></th>
           <td><%= tag.name %></td>
-          <td class="d-none d-xl-table-cell"><%= tag.user.username %></td>
+          <td class="d-none d-xl-table-cell">
+            <%= tag.user.username %>
+          </td>
           <td>
             <% if parent_type == "approved" %>
               <%= link_to "javascript:void(0);", class: "btn btn-danger",
@@ -40,6 +43,22 @@
             <% else %>
               <%= tag.is_approved ? "स्वीकृत" : "अस्वीकृत" %>
             <% end %>
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-md-1">
+                <%= link_to edit_admin_tag_path(tag) do %>
+                  <i class="fa fa-edit"></i>
+                <% end %>
+              </div>
+              <div class="col-md-1">
+                <%= form_for([:admin, tag], html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+                  <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+                    <i class="fa fa-trash" style="color:red;"></i>
+                  </button>
+                <% end %>
+              </div>
+            </div>
           </td>
         </tr>
       <% end %>

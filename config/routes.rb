@@ -56,7 +56,7 @@ Rails.application.routes.draw do
     end
     resources :article_types
     resources :contexts
-    resources :articles do
+    resources :articles, only: [:index, :show, :edit, :update, :destroy] do
       get   "/tags" => "articles#tags", as: :tags, on: :member
       post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member
 
@@ -66,7 +66,7 @@ Rails.application.routes.draw do
       post "/approve" => "articles#approve", as: :approve, on: :member
       post "/reject" => "articles#reject", as: :reject, on: :member
     end
-    resources :authors do
+    resources :authors, only: [:index, :show, :edit, :update, :destroy] do
       get "/approved" => "authors#approved", as: :approved_authors, on: :collection
       get "/pending" => "authors#pending", as: :pending_authors, on: :collection
       post "/approve" => "authors#approve", as: :approve, on: :member
@@ -87,7 +87,7 @@ Rails.application.routes.draw do
       get '/contexts_report' => "reports#contexts_report", as: :contexts_report, on: :collection
     end
 
-    resources :tags, only: [:index] do
+    resources :tags, only: [:index, :show, :edit, :update, :destroy] do
       post "/reject" => "tags#reject", as: :reject, on: :member
       post "/approve" => "tags#approve", as: :approve, on: :member
       get "/approved" => "tags#approved", as: :approved_tags, on: :collection
