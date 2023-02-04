@@ -1,16 +1,24 @@
 module ApplicationHelper
 
-  def show_admin_collapse_items(admin_actions)
-    if ["admin/authors", "admin/articles", "admin/tags"].index(params[:controller]) != nil
-      return (admin_actions.index(params[:action])) ? "show" : nil
+  def show_admin_collapse_items
+    if ["admin/authors", "admin/articles", "admin/tags"].index(params[:controller])
+      return "show"
     end
   end
 
-  def set_admin_lnk_active(controller, actions)
-    if actions.index("report").present?
-      return (controller == params[:controller] && actions.index(params[:action]).present? ) ? "active" : ""
+  def set_admin_lnk_active(controller)
+    if params[:controller] == controller
+      return "active"
     else
-      (controller == params[:controller] && actions.index(params[:action]).present?) ? "active" : ""
+      return ""
+    end
+  end
+
+  def show_reports_items(controller, action)
+    if controller.present? && action.blank?
+      return (controller == params[:controller]) ? "down" : "right"
+    elsif controller.blank? && action.present?
+      (action == params[:action]) ? "active" : ""
     end
   end
 

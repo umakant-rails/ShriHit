@@ -65,7 +65,7 @@ class Admin::AuthorsController < ApplicationController
       end
     end
 
-    if !merge_failed 
+    if !merge_failed
       set_pending_records
       flash[:success] = "लेखक को सफलतापूर्वक विलय कर दिया है"
     else
@@ -82,12 +82,6 @@ class Admin::AuthorsController < ApplicationController
     else
       flash[:error] = "लेखक का नाम बदलने की प्रकिया असफल हो गई है"
     end
-  end
-
-  def report
-    @articles_by_author = Author.joins(:articles).group(:name).count
-    @approved_articles = Author.joins(:articles).where(articles: {is_approved: true}).group(:name).count
-    @pending_articles = Author.joins(:articles).where(articles: {is_approved: nil}).group(:name).count
   end
 
   private

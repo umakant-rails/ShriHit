@@ -60,12 +60,6 @@ class Admin::ContextsController < ApplicationController
     end
   end
 
-  def report
-    @articles_by_context = Context.joins(:articles).group(:name).count
-    @approved_articles = Context.joins(:articles).where(articles: {is_approved: true}).group(:name).count
-    @pending_articles = Context.joins(:articles).where(articles: {is_approved: nil}).group(:name).count
-  end
-  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_context

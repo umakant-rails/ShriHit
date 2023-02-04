@@ -8,11 +8,6 @@
 </li>
 <div class="dropdown-divider1"></div>
 <%
-  app_subject_actions = ["index", "pending", "approved", "rejected"]
-  report_actions = ["report"]
-  is_app_subject_display = show_admin_collapse_items(app_subject_actions)
-  is_report_display = show_admin_collapse_items(report_actions)
-
   # is_pending_active = show_admin_collapse_items("pending")
   # is_approved_active = show_admin_collapse_items("approved")
   # is_report_active = show_admin_collapse_items(["report"])
@@ -26,26 +21,26 @@
     <span class="align-middle">
       App विषय-सूची
     </span>
-    <i class="fa-solid fa-angle-<%= (is_app_subject_display == "show") ? "down" : "right" %>"></i>
+    <i class="fa-solid fa-angle-<%= (show_admin_collapse_items == "show") ? "down" : "right" %>"></i>
   </a>
 </li>
-<div class="collapse <%= is_app_subject_display %>"
+<div class="collapse <%= show_admin_collapse_items %>"
   data-sidebar-target="anchorListBlock" id="appContent">
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles", app_subject_actions) %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles") %>">
     <a class="sidebar-link" href="<%= admin_articles_path %>">
       <span class="align-middle">
         रचना
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors", app_subject_actions) %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors") %>">
     <a class="sidebar-link" href="<%= admin_authors_path %>">
       <span class="align-middle">
         रचनाकार
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/tags", app_subject_actions) %>">
+  <li class="sidebar-item <%= set_admin_lnk_active("admin/tags") %>">
     <a class="sidebar-link" href="<%= admin_tags_path %>">
       <span class="align-middle">
         टैग्स
@@ -67,27 +62,27 @@
     <span class="align-middle">
       रिपोर्ट्स
     </span>
-    <i class="fa-solid fa-angle-<%= (is_report_display == "show") ? "down" : "right" %>"></i>
+    <i class="fa-solid fa-angle-<%= show_reports_items("admin/reports", nil) %>"></i>
   </a>
 </li>
-<div class="collapse <%= is_report_display %>"
+<div class="collapse <%= "show" if show_reports_items("admin/reports", nil) == "down" %>"
   data-sidebar-target="anchorListBlock" id="adminReports">
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/articles", report_actions) %>">
-    <a class="sidebar-link" href="<%= report_articles_admin_articles_path %>">
+  <li class="sidebar-item <%= show_reports_items(nil,'articles_report') %>">
+    <a class="sidebar-link" href="<%= articles_report_admin_reports_path %>">
       <span class="align-middle">
         रचना
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/authors", report_actions) %>">
-    <a class="sidebar-link" href="<%= report_authors_admin_authors_path %>">
+  <li class="sidebar-item <%= show_reports_items(nil,'authors_report') %>">
+    <a class="sidebar-link" href="<%= authors_report_admin_reports_path %>">
       <span class="align-middle">
         रचनाकार
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_admin_lnk_active("admin/contexts", report_actions) %>">
-    <a class="sidebar-link" href="<%= report_contexts_admin_contexts_path %>">
+  <li class="sidebar-item <%= show_reports_items(nil,'contexts_report') %>">
+    <a class="sidebar-link" href="<%= contexts_report_admin_reports_path %>">
       <span class="align-middle">
         प्रसंग
       </span>

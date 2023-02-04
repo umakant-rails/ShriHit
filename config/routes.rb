@@ -55,13 +55,10 @@ Rails.application.routes.draw do
       get "/blocked_users" => "user_mgmts#blocked_users", as: :blocked_users, on: :collection
     end
     resources :article_types
-    resources :contexts do
-      get "/report" => "contexts#report", as: :report_contexts, on: :collection
-    end
+    resources :contexts
     resources :articles, only: [:index, :update] do
       get "/approved" => "articles#approved", as: :approved_articles, on: :collection
       get "/pending" => "articles#pending", as: :pending_articles, on: :collection
-      get "/report" => "articles#report", as: :report_articles, on: :collection
       get "/rejected" => "articles#rejected", as: :rejected_articles, on: :collection
 
       post "/approve" => "articles#approve", as: :approve, on: :member
@@ -71,7 +68,6 @@ Rails.application.routes.draw do
     resources :authors, only: [:index, :update] do
       get "/approved" => "authors#approved", as: :approved_authors, on: :collection
       get "/pending" => "authors#pending", as: :pending_authors, on: :collection
-      get "/report" => "authors#report", as: :report_authors, on: :collection
       get "/approve" => "authors#approve", as: :approve, on: :member
       get "/reject" => "authors#reject", as: :reject, on: :member
       post "/merge" => "authors#merge", as: :merge, on: :member
@@ -84,6 +80,11 @@ Rails.application.routes.draw do
       # get "/reject" => "contexts#reject", as: :reject, on: :member
       # post "/merge" => "contexts#merge", as: :merge, on: :member
     #end
+    resources :reports, only: [:index] do
+      get '/articles_report' => "reports#articles_report", as: :articles_report, on: :collection
+      get '/authors_report' => "reports#authors_report", as: :authors_report, on: :collection
+      get '/contexts_report' => "reports#contexts_report", as: :contexts_report, on: :collection
+    end
 
     resources :tags, only: [:index] do
       post "/reject" => "tags#reject", as: :reject, on: :member
