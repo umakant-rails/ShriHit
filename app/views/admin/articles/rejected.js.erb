@@ -1,1 +1,1 @@
-$("#article_list").html("<%= escape_javascript(render "article", articles: @articles_rejected, parent_type: params[:action]) %>");
+$("#article_list").html("<%= escape_javascript(render "article", articles: @articles_rejected, articles_category: params[:action]) %>");

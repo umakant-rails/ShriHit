@@ -15,10 +15,12 @@
         </div>
         <div class="modal-body">
           <% if !author.is_approved %>
-            इस रचना के लिए एक नया रचनाकार <%= link_to author.name, pending_authors_admin_authors_path(id: author.id)%> दर्ज किया गया है, इसे स्वीकृत करने के लिये <%= link_to "यहाँ", pending_authors_admin_authors_path(id: author.id) %> क्लिक करें<br/>
+            इस रचना के लिए एक नया रचनाकार <%= link_to author.name, pending_authors_admin_authors_path(id: author.id), target: :_blank%> दर्ज किया गया है,
+            इसे स्वीकृत करने के लिये <%= link_to "यहाँ", pending_authors_admin_authors_path(id: author.id), target: :_blank %> क्लिक करें<br/>
           <% end %>
           <% if !context.is_approved %>
-            इस रचना के लिए एक नया प्रसंग <%= link_to context.name, pending_authors_admin_authors_path(id: context.id) %> दर्ज किया गया है, इसे स्वीकृत करने के लिये <%= link_to "यहाँ", pending_authors_admin_authors_path(id: context.id) %> क्लिक करें<br/>
+            इस रचना के लिए एक नया प्रसंग <%= link_to context.name, pending_authors_admin_authors_path(id: context.id), target: :_blank %> दर्ज किया गया है,
+            इसे स्वीकृत करने के लिये <%= link_to "यहाँ", pending_authors_admin_authors_path(id: context.id), target: :_blank %> क्लिक करें<br/>
           <% end %>
         </div>
         <div class="modal-footer">
@@ -30,7 +32,7 @@
 <% else %>
   <input type="button" value="स्वीकृत" data-index="<%= index %>"
     data-page="<%= params[:page]%>" data-action-name="approve"
-    data-parent-type="<%= parent_type %>"
+    data-parent-type="<%= articles_category %>"
     data-action="click->admin-article#articleActions"
     class="btn btn-primary"/>
 <% end %>

@@ -56,14 +56,15 @@ Rails.application.routes.draw do
     end
     resources :article_types
     resources :contexts
-    resources :articles, only: [:index, :update] do
+    resources :articles do
+      get   "/tags" => "articles#tags", as: :tags, on: :member
+      post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member
+
       get "/approved" => "articles#approved", as: :approved_articles, on: :collection
       get "/pending" => "articles#pending", as: :pending_articles, on: :collection
       get "/rejected" => "articles#rejected", as: :rejected_articles, on: :collection
-
       post "/approve" => "articles#approve", as: :approve, on: :member
       post "/reject" => "articles#reject", as: :reject, on: :member
-      post "/delete" => "articles#delete", as: :merge, on: :member
     end
     resources :authors, only: [:index, :update] do
       get "/approved" => "authors#approved", as: :approved_authors, on: :collection

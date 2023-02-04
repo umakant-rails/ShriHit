@@ -1,6 +1,6 @@
 $(".alert").hide();
 <% if flash[:success].present? %>
-	$("#article_list").html("<%= escape_javascript(render 'article', articles: @articles, parent_type: params[:parent_type])%>");
+	$("#article_list").html("<%= escape_javascript(render 'article', articles: @articles, articles_category: params[:articles_category])%>");
 	$("#successAlert").html("<%= flash[:success] %>");
 	$("#successAlert").parent().css("display", "block");
 <% elsif flash[:error].present? %>

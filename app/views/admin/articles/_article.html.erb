@@ -10,6 +10,9 @@
       <th class="d-none d-xl-table-cell">रचनाकार</th>
       <th class="d-none d-xl-table-cell">रचना प्रकार</th>
       <th class="d-none d-xl-table-cell">योगदानकर्ता</th>
+      <% if params[:action] == "index" %>
+        <th>स्टेटस</th>
+      <% end %>
       <th>गतिविधि</th>
     </tr>
   </thead>
@@ -42,29 +45,52 @@
             <%= article.user.username %>
           </td>
           <td>
-            <% if parent_type == "approved" %>
+            <% if articles_category == "approved" %>
               <input type="button" value="अस्वीकृत" data-index="<%= index %>"
                 data-page="<%= params[:page]%>" data-action-name="reject"
-                data-parent-type="<%= parent_type %>"
+                data-parent-type="<%= articles_category %>"
                 data-action="click->admin-article#articleActions"
                 class="btn btn-danger"/>
-            <% elsif parent_type == "pending" %>
-              <%= render "article_action", article: article, index: index, parent_type: parent_type %>
+            <% elsif articles_category == "pending" %>
+              <%= render "article_action", article: article, index: index, articles_category: articles_category %>
               <input type="button" value="अस्वीकृत" data-index="<%= index %>"
                 data-page="<%= params[:page]%>" data-action-name="reject"
-                data-parent-type="<%= parent_type %>"
+                data-parent-type="<%= articles_category %>"
                 data-action="click->admin-article#articleActions" class="btn btn-danger"/>
-            <% elsif parent_type == "rejected"%>
-              <%= render "article_action", article: article, index: index, parent_type: parent_type %>
+            <% elsif articles_category == "rejected"%>
+              <%= render "article_action", article: article, index: index, articles_category: articles_category %>
               <input type="button" value="पोर्टल से हटाए" data-index="<%= index %>"
                 data-page="<%= params[:page]%>" data-action-name="delete"
-                data-parent-type="<%= parent_type %>"
+                data-parent-type="<%= articles_category %>"
                 data-action="click->admin-article#articleActions" class="btn btn-danger"/>
             <% else %>
               <%= article.is_approved.nil? ? "लंबित":(article.is_approved ? "स्वीकृत" : "अस्वीकृत") %>
             <% end %>
             <%#= article.is_approved.nil? ? "लंबित":(article.is_approved ? "स्वीकृत" : "अस्वीकृत") %>
           </td>
+          <% if params[:action] == "index" %>
+            <td>
+              <div class="row">
+  							<div class="col-md-2">
+  								<%= link_to edit_admin_article_path(article) do %>
+  								  <i class="fa fa-edit"></i>
+  								<% end %>
+  							</div>
+  							<div class="col-md-2 text-primary">
+  								<%= link_to tags_admin_article_path(article) do %>
+  						  		<i class="fa-solid fa-tag"></i>
+  						  	<% end %>
+  						  </div>
+  							<div class="col-md-2">
+  								<%= form_for([:admin, article], html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+  						      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+  						        <i class="fa fa-trash" style="color:red;"></i>
+  						      </button>
+  						    <% end %>
+  						  </div>
+  				    </div>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     <% else %>

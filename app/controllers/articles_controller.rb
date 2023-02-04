@@ -50,7 +50,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       if @article.update(article_params)
         update_tags_for_articles
-        format.html { redirect_to article_url(@article), notice: "Article was successfully updated." }
+        format.html { redirect_to article_url(@article), notice: "रचना को सफलतापूर्वक अद्यतित कर दिया गया है." }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -64,7 +64,7 @@ class ArticlesController < ApplicationController
     @article.destroy
 
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: "Article was successfully destroyed." }
+      format.html { redirect_to articles_url, notice: "रचना को सफलतापूर्वक डिलीट कर दिया गया हैै" }
       format.json { head :no_content }
     end
   end

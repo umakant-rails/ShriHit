@@ -13,10 +13,10 @@ export default class extends ApplicationController {
     let page = event.target.dataset.page;
     let csrfToken = this.csrfTokenTarget.value;
     let actionName = event.target.dataset.actionName;
-    let parentType = event.target.dataset.parentType;
+    let articlesCategory = event.target.dataset.parentType;
     let articleId = this.articleForApprovalTargets[index].dataset.vl;
     let url = "/admin/articles/"+articleId+"/" + actionName;
-    this.params.parent_type = parentType;
+    this.params.articles_category = articlesCategory;
     this.params.authenticity_token = csrfToken;
     this.update_data("post", url);
   }
