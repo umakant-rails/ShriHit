@@ -1,7 +1,7 @@
 class Admin::AuthorsController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_admin
-  before_action :set_author, only: %i[show edit update destroy]
+  before_action :set_author, only: %i[show edit update destroy mark_as_sant remove_from_sant]
   before_action :create_sampradaya, only: %i[update]
   def index
     @authors = Author.order("created_at DESC").page(params[:page])
@@ -107,6 +107,24 @@ class Admin::AuthorsController < ApplicationController
       flash[:success] = "लेखक को सफलतापूर्वक विलय कर दिया है"
     else
       flash[:error] = "लेखक को विलय करने प्रकिया असफल हो गई है"
+    end
+  end
+
+  def mark_as_sant
+    respond_to do |format|
+      if @author.update({is_saint: true})
+        format.html { redirect_to admin_authors_url, notice: "रचनाकार को सफलतापूर्वक संत चिन्हित कर दिया गया है." }
+        format.json { render :show, status: :ok, location: @author }
+      end
+    end
+  end
+
+  def remove_from_sant
+    respond_to do |format|
+      if @author.update({is_saint: false})
+        format.html { redirect_to admin_authors_url, notice: "रचनाकार को सफलतापूर्वक चिन्हित संत की सूची से हटा दिया गया है." }
+        format.json { render :show, status: :ok, location: @author }
+      end
     end
   end
 

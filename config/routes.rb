@@ -72,6 +72,8 @@ Rails.application.routes.draw do
       post "/approve" => "authors#approve", as: :approve, on: :member
       post "/reject" => "authors#reject", as: :reject, on: :member
       post "/merge" => "authors#merge", as: :merge, on: :member
+      post "/mark_as_sant" => "authors#mark_as_sant", as: :mark_as_sant, on: :member
+      post "/remove_from_sant" => "authors#remove_from_sant", as: :remove_from_sant, on: :member
     end
     #resources :contexts, only: [:index, :update] do
       # get "/approved" => "contexts#approved", as: :approved_contexts, on: :collection

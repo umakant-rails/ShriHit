@@ -70,7 +70,22 @@
 														<input type="button" value="स्वीकृत" class="btn btn-secondary"/>
 													</div>
 												<% end %>
-				  				    </div>
+												<div class="col-md-3">
+													<% if !author.is_saint? %>
+														<%= form_for(author, url: mark_as_sant_admin_author_path(author), html: { method: :post }) do |f| %>
+															<button type="submit" class="form-control btn btn-primary">
+																संत चिन्हित करे
+															</button>
+														<% end %>
+													<% else %>
+														<%= form_for(author, url: remove_from_sant_admin_author_path(author), html: { method: :post }) do |f| %>
+															<button type="submit" class="form-control btn btn-danger">
+																संत की सूची से हटाए
+															</button>
+														<% end %>
+													<% end %>
+												</div>
+										  </div>
 				            </td>
 					        </tr>
 					      <% end %>
