@@ -4,7 +4,9 @@
   <div class="row-fluid mb-2">
     <div class="col-md-12 page-subject-header">
       <a href="<%= @last_month_link%>"><<</a>
-      <strong><%= HindiMonth::ENG_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %></strong>
+      <div class="calendar-month">
+        <%= HindiMonth::ENG_MONTH[@cur_date.month-1] + ", " +@cur_date.strftime("%Y") %>
+      </div>
       <a href="<%= @next_month_link%>">>></a>
     </div>
   </div>
@@ -31,7 +33,7 @@
                 data-admin-panchang-target="calendarDate"
                 data-action="click->admin-panchang#selectDate"
                 >
-                <div class="month-txt">
+                <div class="hindi-month-txt">
                   <%=raw (month.present? ? month : '<br/>') %>
                 </div>
                 <div class="date-txt">

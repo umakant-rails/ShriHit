@@ -15,7 +15,7 @@
       %>
       <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" data-bs-toggle="collapse" href="#aricleList" role="button"  
+        <a class="sidebar-link" data-bs-toggle="collapse" href="#aricleList" role="button"
           aria-expanded="false" aria-controls="aricleList" data-id="aricleList"
           data-action="click->sidebar#toggleTab">
           <span class="align-middle">
@@ -132,6 +132,14 @@
           </a>
         </li>
       </div>
-    </ul> 
+      <div class="dropdown-divider1"></div>
+      <li class="sidebar-item <%= set_active("panchangs", "others") %>">
+        <a class="sidebar-link admin-bar-lnk" href="<%= panchangs_path %>">
+          <span class="align-middle">
+            पंचांग
+          </span>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>

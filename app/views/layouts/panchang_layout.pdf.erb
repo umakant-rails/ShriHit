@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "panchang_pdf", media="all", rel="stylesheet", type="text/css" %>
+    <%= wicked_pdf_stylesheet_link_tag "custom_calendar", media="all", rel="stylesheet", type="text/css" %>
+    <%= wicked_pdf_javascript_include_tag "number_pages" %>
+  </head>
+  <body onload='number_pages'>
+    <div id="containter" class="page">
+      <div class="pdf-page">
+        <div>
+          <div class="col-left">
+            <center>
+              <%= image_tag wicked_pdf_asset_base64('hitharivansh.png'), class: 'left-image-logo' %>
+            </center>
+          </div>
+          <div class="col-middle">
+            <center>
+              <%= image_tag wicked_pdf_asset_base64('shrihit_new.png'), class: 'middle-image-logo' %>
+            </center>
+          </div>
+          <div class="col-right">
+            <center>
+              <%= image_tag wicked_pdf_asset_base64('hitlalju.png'), class: 'right-image-logo' %>
+            </center>
+          </div>
+        </div>
+        <div class="divider-bdr"></div>
+        <br/>
+        <div class="row">
+          <center>
+            <div class="pdf-panchang-title">
+              <%= @panchang.title %>
+              <br/>
+              <%= "( व्रिकम सम्वत : #{@panchang.vikram_samvat } )"  %>
+            </div>
+          </center>
+        </div>
+        <div>
+          <center>
+            <%= image_tag wicked_pdf_asset_base64('radhavallabhlal.jpg'), class: 'pdf-panchang-image' %>
+          </center>
+        </div>
+        <div class="row pdf-footer-text">
+          <center>
+            Copyright@श्रीहित, 2023
+          </center>
+        </div>
+      </div>
+      <%= yield %>
+    </div>
+    <div></div>
+  </body>
+</html>

@@ -45,6 +45,9 @@ Rails.application.routes.draw do
   resources :comment_reportings, only: [:index, :destroy, :create]
   post "comment_reportings/:comment_id/mark_as_read" => "comment_reportings#mark_as_read", as: :mark_as_read
   resources :tags
+  resources :panchangs, only: [:index, :show] do
+    get "/pdf/export" => "panchangs#panchang_pdf", as: :export_pdf, on: :member
+  end
 
   namespace :admin do
     resources :dashboards, only: [:index] do
@@ -75,14 +78,6 @@ Rails.application.routes.draw do
       post "/mark_as_sant" => "authors#mark_as_sant", as: :mark_as_sant, on: :member
       post "/remove_from_sant" => "authors#remove_from_sant", as: :remove_from_sant, on: :member
     end
-    #resources :contexts, only: [:index, :update] do
-      # get "/approved" => "contexts#approved", as: :approved_contexts, on: :collection
-      # get "/pending" => "contexts#pending", as: :pending_contexts, on: :collection
-      # get "/report" => "contexts#report", as: :report_contexts, on: :collection
-      # get "/approve" => "contexts#approve", as: :approve, on: :member
-      # get "/reject" => "contexts#reject", as: :reject, on: :member
-      # post "/merge" => "contexts#merge", as: :merge, on: :member
-    #end
     resources :reports, only: [:index] do
       get '/articles_report' => "reports#articles_report", as: :articles_report, on: :collection
       get '/authors_report' => "reports#authors_report", as: :authors_report, on: :collection
@@ -112,7 +107,7 @@ Rails.application.routes.draw do
       post '/remove_purshottam_mas' => "panchangs#remove_purshottam_mas", on: :member, as: :remove_purshottam_mas
 
       resources :panchang_tithis do
-          get '/:month_id/get_tithis' => "panchang_tithis#get_tithis", as: :get_tithis, on: :collection
+        get '/:month_id/get_tithis' => "panchang_tithis#get_tithis", as: :get_tithis, on: :collection
       end
     end
 
@@ -131,8 +126,8 @@ Rails.application.routes.draw do
       # get "/article_contexts" => "articles#article_contexts", as: :article_contexts, on: :collection
       # get "/article_types" => "articles#article_types", as: :article_types, on: :collection
     end
-    resources :user_profiles, only: [:index, :show] do
-    end
+    resources :user_profiles, only: [:index, :show]
+
     get "/about" => "abouts#about", as: :about
     resources :suggestions, only: [:index, :new, :create, :show]
 
@@ -149,6 +144,7 @@ Rails.application.routes.draw do
       get '/:article_type_name' => "article_types#show", as: :articles_by_type, on: :collection
     end
     resources :panchangs, only: [:index, :show]
+
   end
 
 end

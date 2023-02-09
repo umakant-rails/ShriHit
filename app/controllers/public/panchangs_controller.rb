@@ -1,5 +1,5 @@
 class Public::PanchangsController < ApplicationController
-  before_action :set_panchang, only: %i[show]
+  before_action :set_panchang, only: %i[show panchang_pdf]
 
   def index
     @panchangs = Panchang.all.order("created_at DESC")
@@ -19,12 +19,12 @@ class Public::PanchangsController < ApplicationController
     @last_month_link = "/pb/panchangs/#{@panchang.id}?start_date="+last_month_wday.strftime("%d/%m/%Y")
     @panchang_tithiya = PanchangTithi.where("panchang_id=? and date between ? and ?",@panchang.id,
       @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc")
-    
+
     @panchang_utsav = PanchangTithi.where("date between ? and ? and description != ''",
       @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc").to_a
   end
 
-  private 
+  private
 
   def set_panchang
     @panchang = Panchang.find(params[:id])

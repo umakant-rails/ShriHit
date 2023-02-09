@@ -1,19 +1,19 @@
-#custom-calendar{
+ /*#custom-calendar{*/
   thead th{
     border: 1px solid lightgray;
   }
   td.current-month{
     border: 1px solid #00BFFF;
     color: #1E90FF;
-    // padding: 16px 12px;
+     /*padding: 16px 12px;*/
     cursor: pointer;
     text-align:center;
   }
   td.not-cur-month{
-    // background: #DDD;
+    /*background: #DDD;*/
     border: 1px solid lightgray;
     text-align:center;
-    // padding: 16px 12px;
+     /*padding: 16px 12px;*/
   }
   .selected{
     border: 3px solid #4169E1 !important;
@@ -32,10 +32,13 @@
     background: gray;
     color: white;
   }
-  .utsav>span{
+  .tithi_feeded>span{
+     background: #dc3545 !important;
+  }
+  .utsav>div>span{
     background: #dc3545 !important;
   }
-  .month-txt{
+  .hindi-month-txt{
     font-size:18px;
     color:red;
     text-align:center;
@@ -43,7 +46,7 @@
   }
   .date-txt{
     text-align:center;
-    margin:3px;
+    margin:12px 3px;
   }
   .tithi-txt {
     font-size:14px;
@@ -74,4 +77,9 @@
     height: 30px;
     font-weight: bold;
   }
-}
+  .calendar-month{
+    display: inline-block;
+    width: 130px;
+    text-align: center;
+  }
+ /*}*/

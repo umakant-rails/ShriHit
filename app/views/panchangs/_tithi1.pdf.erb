@@ -10,12 +10,12 @@
     </tr>
   </thead>
   <tbody>
+    <% arr_length1 = 0 if arr_length1.blank? %>
     <% if panchang_utsav.present? %>
-      <% arr_length1 = 0 if arr_length1.blank? %>
       <% panchang_utsav.each_with_index do |tithi, local_index| %>
       	<% if tithi && tithi.description.present? %>
-          <% if local_index < arr_length1 %>
-  	      	<tr class="pdf-tithi-list">
+          <tr class="pdf-tithi-list">
+            <% if local_index < arr_length1 %>
   	      		<td>
                 <strong><%= local_index+1 %></strong>
               </td>
@@ -49,7 +49,6 @@
               </td>
             <% end %>
 	      	</tr>
-	      	<%# index = index + 1%>
 	      <% end %>
       <% end %>
     <% else %>

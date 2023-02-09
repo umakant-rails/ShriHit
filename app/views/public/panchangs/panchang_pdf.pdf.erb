@@ -1,0 +1,106 @@
+<%# tithis = @panchang_months[0].panchang_tithis.order("date ASC") %>
+<% tithiya = @panchang_tithis %>
+<% @start_date, @last_date = tithiya.first.date, tithiya.last.date %>
+<% dates_array = @start_date.beginning_of_month.at_beginning_of_week..@start_date.end_of_month.at_end_of_week %>
+<% while dates_array.first <= @last_date %>
+  <div class="row pdf-page">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div id="pdf-custom-calendar" class="mb-1">
+        <div class="row page-subject-header" style="background: violet;">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-6">
+            <center>
+              <div class="pdf-calendar-month">
+                <%= HindiMonth::ENG_MONTH[@start_date.month-1] + ", " +@start_date.strftime("%Y") %>
+              </div>
+            </center>
+          </div>
+          <div class="col-md-3">
+          </div>
+        </div>
+        <div class="mt">
+          <table class="table">
+            <thead>
+              <tr class="text-white bg-primary">
+                <% @week_days.each do |day| %>
+                  <th style="width: 14%;" style="color:while;">
+                    <center><%= day %></center>
+                  </th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% indx = 0 %>
+              <% dates_array.each do | dt | %>
+                <% if indx%7 == 0 %>
+                  <tr>
+                <% end %>
+                  <% if dt.month == @start_date.month %>
+                    <% month, is_utsav_present, tithi = get_utsav(tithiya, dt) %>
+                    <td class="pdf-current-month <%="pdf-utsav" if is_utsav_present %>">
+                      <div class="pdf-hindi-month-txt">
+                        <%=raw (month.present? ? month : '<br/>') %>
+                      </div>
+                      <div class="pdf-date-txt">
+                        <span class="pdf-date-active">
+                          <%= dt.strftime("%d") %>
+                        </span>
+                      </div>
+                      <div class="pdf-tithi-txt">
+                        <%=raw (tithi.present? ? tithi : '<br/>') %>
+                      </div>
+                    </td>
+                  <% else %>
+                    <td class="pdf-not-cur-month">
+                      <br/>
+                      <div class="pdf-date-txt">
+                        <span class="pdf-date-inactive"><%= dt.strftime("%d") %></span>
+                      </div>
+                      <br/>
+                    </td>
+                  <% end %>
+                <% if indx%7 == 6 %>
+                  </tr>
+                <% end %>
+                <% indx = indx + 1%>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <% panchang_utsav = PanchangTithi.where("description != ''").where(date: dates_array).order("date ASC")%>
+      <% if panchang_utsav.length > 0 %>
+        <div class="col-md-12">
+          <div class="card1">
+            <div class="card-body1">
+              <div class="page-subject-header">
+                पंचांग तिथि सूची
+              </div>
+              <div>
+                <% if true || panchang_utsav.length > 1 %>
+                  <% panchang_utsav1, panchang_utsav2 = panchang_utsav.in_groups(2) %>
+                  <%= render "tithi1", panchang_utsav: panchang_utsav, arr_length1: panchang_utsav1.length %>
+                  <!-- <div class="col-table-50">
+                    <%#= render "tithi2", panchang_utsav: panchang_utsav1, index: 0 %>
+                  </div>
+                  <div  class="col-table-50">
+                    <%#= render "tithi2", panchang_utsav: panchang_utsav2, index: panchang_utsav1.length %>
+                  </div> -->
+                <% else %>
+                  <div class="col-md-12">
+                    <%= render "tithi", panchang_utsav: panchang_utsav, index: 0 %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <% @start_date = @start_date.next_month %>
+      <% dates_array = @start_date.beginning_of_month.at_beginning_of_week..@start_date.end_of_month.at_end_of_week %>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+<% end %>

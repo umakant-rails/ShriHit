@@ -74,12 +74,12 @@
         <% if @panchang_utsav.length > 1 %>
           <% panchang_utsav1, panchang_utsav2 = @panchang_utsav.in_groups(2) %>
           <div class="row">
-            <%= render "tithi", panchang_utsav: @panchang_utsav, arr_length1: panchang_utsav1.length %>
+            <%= render "tithi1", panchang_utsav: @panchang_utsav, arr_length1: panchang_utsav1.length %>
           </div>
         <% else %>
           <div class="row">
             <div class="col-md-12">
-              <%= render "tithi", panchang_utsav: @panchang_utsav, index: 0 %>
+              <%= render "tithi1", panchang_utsav: @panchang_utsav, index: 0 %>
             </div>
           </div>
         <% end %>

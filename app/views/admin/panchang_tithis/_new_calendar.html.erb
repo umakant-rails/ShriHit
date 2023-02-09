@@ -27,7 +27,7 @@
               <% selected  = (tithi && dt == tithi.date) ? 'selected' : '' %>
               <% pan_tithi = tithiya ? tithiya.where("date=?", dt)[0] : nil %>
               <% pan_tithi = tithiya ? tithiya.where("date=?", dt) : nil %>
-              <td class="current-month <%= selected %> py-4 <%= pan_tithi.present? ? "utsav" : "" %>"
+              <td class="current-month <%= selected %> py-4 <%= pan_tithi.present? ? "tithi_feeded" : "" %>"
                 data-date="<%= dt.strftime("%d/%m/%Y")%>"
                 data-admin-panchangtithi-target="calendarDate"
                 data-action="click->admin-panchangtithi#selectDate"
