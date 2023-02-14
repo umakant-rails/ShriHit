@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   #root to: "welcome#index"
   #root to: "homes#index"
   root to: "public/articles#index"
@@ -48,7 +47,8 @@ Rails.application.routes.draw do
   resources :panchangs, only: [:index, :show] do
     get "/pdf/export" => "panchangs#panchang_pdf", as: :export_pdf, on: :member
   end
-
+  resources :saint_bio_events
+  
   namespace :admin do
     resources :dashboards, only: [:index] do
     end
