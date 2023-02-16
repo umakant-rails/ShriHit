@@ -108,17 +108,18 @@ class ThemesController < ApplicationController
   end
 
   private
-    
+
     def get_articles_by_params
       queryy = ''
       added_articles_tmp, articles_tmp = []
       if params[:theme_chapter_id].present?
         added_articles_tmp = ThemeArticle.joins(:article).where(theme_chapter_id: params[:theme_chapter_id]).order("articles.hindi_title ASC")
         @added_articles = Kaminari.paginate_array(added_articles_tmp).page(params[:page])
+        added_articles_tmp = added_articles_tmp.blank? ? [] : added_articles_tmp.pluck(:article_id)
       end
 
       if params[:search_type] == 'by_attribute'
-        queryy = Article.by_attributes_query(params[:author_id], params[:context_id], 
+        queryy = Article.by_attributes_query(params[:author_id], params[:context_id],
           params[:article_type_id], params[:theme_chapter_id], params[:contributor_id]
         )
        elsif params[:search_type] == 'by_id'
@@ -133,7 +134,7 @@ class ThemesController < ApplicationController
       end
 
       articles_tmp = Article.where(queryy)
-        .where.not(id: added_articles_tmp.pluck(:article_id))
+        .where.not(id: added_articles_tmp)
         .order("hindi_title ASC")
 
       @articles = Kaminari.paginate_array(articles_tmp).page(params[:page])

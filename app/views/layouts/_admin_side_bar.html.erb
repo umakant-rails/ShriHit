@@ -13,6 +13,7 @@
   # is_report_active = show_admin_collapse_items(["report"])
   is_article_type_active = show_collapse_items("admin/article_types")
   is_contexts_active = show_collapse_items("admin/contexts")
+  is_bhakti_granth_active = show_collapse_items("admin/bhakti_granth")
 %>
 <li class="sidebar-item">
   <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#appContent" role="button"
@@ -117,7 +118,8 @@
 </div>
 <div class="dropdown-divider1"></div>
 <li class="sidebar-item">
-  <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#contextList"   role="button" aria-expanded="false" aria-controls="contextList" data-id="contextList"
+  <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#contextList"
+    role="button" aria-expanded="false" aria-controls="contextList" data-id="contextList"
     data-action="click->sidebar#toggleTab">
     <span class="align-middle">
       प्रसंग
@@ -137,6 +139,33 @@
     <a class="sidebar-link" href="<%= admin_contexts_path %>">
       <span class="align-middle">
         प्रसंग सूची
+      </span>
+    </a>
+  </li>
+</div>
+<div class="dropdown-divider1"></div>
+<li class="sidebar-item <%= set_active("bhakti_rachana", "others") %>">
+  <a class="sidebar-link admin-bar-lnk"  data-bs-toggle="collapse" href="#bhaktiGranthList"
+    role="button" aria-expanded="false" aria-controls="bhaktiGranthList" data-id="bhaktiGranthList"
+    data-action="click->sidebar#toggleTab">
+    <span class="align-middle">
+      भक्ति ग्रन्थ/रचना/वाणी
+    </span>
+    <i class="fa-solid fa-angle-<%= (is_bhakti_granth_active == "show") ? "down" : "right" %>"></i>
+  </a>
+</li>
+<div class="collapse  <%= is_bhakti_granth_active %>" data-sidebar-target="bhaktiGranthListBlock" id="bhaktiGranthList">
+  <li class="sidebar-item <%= set_active("admin/contexts", "new") %>">
+    <a class="sidebar-link" href="<%= new_admin_context_path %>">
+      <span class="align-middle">
+        भक्ति ग्रन्थ जोड़े
+      </span>
+    </a>
+  </li>
+  <li class="sidebar-item <%= set_active("admin/contexts", "others") %>">
+    <a class="sidebar-link" href="<%= admin_contexts_path %>">
+      <span class="align-middle">
+        भक्ति ग्रन्थ सूची
       </span>
     </a>
   </li>
