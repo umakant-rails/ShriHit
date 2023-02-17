@@ -77,3 +77,24 @@ Author.create!(name: 'कृष्णदास', is_approved: true, is_saint: tr
 Author.create!(name: 'नंददास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'नंददास').blank?
 Author.create!(name: 'परमानन्ददास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'परमानन्ददास').blank?
 Author.create!(name: 'अज्ञात', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'अज्ञात').blank?
+
+
+# ScriptureType.create!(name: "वेद") if ScriptureType.where(name: "वेद").blank?
+# ScriptureType.create!(name: "पुराण") if ScriptureType.where(name: "पुराण").blank?
+# ScriptureType.create!(name: "उपनिषद") if ScriptureType.where(name: "उपनिषद").blank?
+# ScriptureType.create!(name: "स्मृति") if ScriptureType.where(name: "स्मृति").blank?
+# ScriptureType.create!(name: "श्रुतियाँ") if ScriptureType.where(name: "श्रुतियाँ").blank?
+# ScriptureType.create!(name: "नीति") if ScriptureType.where(name: "नीति").blank?
+# ScriptureType.create!(name: "शास्त्र") if ScriptureType.where(name: "शास्त्र").blank?
+# ScriptureType.create!(name: "दर्शन") if ScriptureType.where(name: "दर्शन").blank?
+ScriptureType.create!(name: "ग्रन्थ") if ScriptureType.where(name: "ग्रन्थ").blank?
+ScriptureType.create!(name: "रसिक वाणी") if ScriptureType.where(name: "वाणीजी").blank?
+ScriptureType.create!(name: "अष्टयाम") if ScriptureType.where(name: "अष्टयाम").blank?
+
+ScriptureType.create!(name: "सहस्त्रनाम") if ScriptureType.where(name: "सहस्त्रनाम").blank?
+ScriptureType.create!(name: "कवच") if ScriptureType.where(name: "कवच").blank?
+ScriptureType.create!(name: "स्त्रोत") if ScriptureType.where(name: "स्त्रोत").blank?
+ScriptureType.create!(name: "अष्टक") if ScriptureType.where(name: "अष्टक").blank?
+ScriptureType.create!(name: "चालीसा") if ScriptureType.where(name: "चालीसा").blank?
+# ScriptureType.create!(name: "संग्रह") if ScriptureType.where(name: "संग्रह").blank?
+ScriptureType.create!(name: "आरती") if ScriptureType.where(name: "आरती").blank?
