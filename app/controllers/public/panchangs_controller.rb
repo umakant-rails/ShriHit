@@ -14,20 +14,25 @@ class Public::PanchangsController < ApplicationController
     last_month_wday =  @cur_date.last_month.beginning_of_month
     last_month_wday += 1.days until last_month_wday.wday == 1
 
-    @week_days = Date::DAYNAMES.rotate(1).map{ | d | d[0,3] }
-    @next_month_link = "/pb/panchangs/#{@panchang.id}?start_date="+next_month_wday.strftime("%d/%m/%Y")
-    @last_month_link = "/pb/panchangs/#{@panchang.id}?start_date="+last_month_wday.strftime("%d/%m/%Y")
-    @panchang_tithiya = PanchangTithi.where("panchang_id=? and date between ? and ?",@panchang.id,
-      @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc")
+    if @panchang.present?
+      @week_days = Date::DAYNAMES.rotate(1).map{ | d | d[0,3] }
+      @next_month_link = "/pb/panchangs/#{@panchang.id}?start_date="+next_month_wday.strftime("%d/%m/%Y")
+      @last_month_link = "/pb/panchangs/#{@panchang.id}?start_date="+last_month_wday.strftime("%d/%m/%Y")
+      @panchang_tithiya = PanchangTithi.where("panchang_id=? and date between ? and ?",@panchang.id,
+        @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc")
 
-    @panchang_utsav = PanchangTithi.where("date between ? and ? and description != ''",
-      @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc").to_a
+      @panchang_utsav = PanchangTithi.where("date between ? and ? and description != ''",
+        @cur_date.beginning_of_month, @cur_date.end_of_month).order("date asc").to_a
+    else
+      flash[:notice] = "आपके द्वारा जिस पंचांग की जानकारी चाही गई थी, वह उपलब्ध नहीं है | \n हमारे पास उपलब्ध पंचांग की सूची निम्नानुसार है"
+      redirect_back_or_to public_panchangs_path
+    end
   end
 
   private
 
   def set_panchang
-    @panchang = Panchang.find(params[:id])
+    @panchang = Panchang.find(params[:id]) rescue []
   end
 
 end

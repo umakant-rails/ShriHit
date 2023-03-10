@@ -10,8 +10,12 @@ class Public::ArticleTypesController < ApplicationController
     elsif params[:id].present?
       @article_type = ArticleType.find(params[:id])
     end
-
-    @articles_by_type = @article_type.articles.page(params[:page]) rescue []
+    if @article_type.present?
+      @articles_by_type = @article_type.articles.page(params[:page]) rescue []
+    else
+      flash[:notice] = "आपके द्वारा जिस रचना प्रकार की जानकारी चाही गई थी, वह उपलब्ध नहीं है |"
+      redirect_back_or_to root_path
+    end
   end
 
 end

@@ -87,7 +87,7 @@ class ArticlesController < ApplicationController
       format.html
       format.pdf do
         render pdf: @article.hindi_title,
-          save_to_file: @article.hindi_title,
+          # save_to_file: Rails.root.join('pdfs', "#{@article.hindi_title}.pdf"),
           template: "articles/article_pdf",
           layout: "pdf_layout",
           margin: {top: 14, bottom: 14, left: 8, right: 8},

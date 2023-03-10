@@ -149,7 +149,7 @@
     role="button" aria-expanded="false" aria-controls="bhaktiGranthList" data-id="bhaktiGranthList"
     data-action="click->sidebar#toggleTab">
     <span class="align-middle">
-      भक्ति ग्रन्थ/रचना/वाणी
+      रसिक वाणी/ग्रन्थ
     </span>
     <i class="fa-solid fa-angle-<%= (is_bhakti_granth_active == "show") ? "down" : "right" %>"></i>
   </a>
@@ -158,14 +158,14 @@
   <li class="sidebar-item <%= set_active("admin/contexts", "new") %>">
     <a class="sidebar-link" href="<%= new_admin_context_path %>">
       <span class="align-middle">
-        भक्ति ग्रन्थ जोड़े
+        रसिक वाणी/ग्रन्थ जोड़े
       </span>
     </a>
   </li>
   <li class="sidebar-item <%= set_active("admin/contexts", "others") %>">
-    <a class="sidebar-link" href="<%= admin_contexts_path %>">
+    <a class="sidebar-link" href="#">
       <span class="align-middle">
-        भक्ति ग्रन्थ सूची
+        रसिक वाणी/ग्रन्थ सूची
       </span>
     </a>
   </li>

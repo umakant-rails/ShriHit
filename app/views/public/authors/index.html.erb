@@ -3,7 +3,7 @@
   <div class="card">
     <div class="card-body h-100" style="min-height: 545px;">
       <div class="page-subject-header">
-        रचनाकार / कवि / भक्त सूची 
+        रचनाकार / कवि / भक्त सूची
       </div>
       <div class="dropdown-divider"></div>
       <table class="table">
@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <% 
+          <%
             page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
             page_size = @authors.present? ? @authors.limit_value : 0
           %>
@@ -48,7 +48,7 @@
           <% end %>
         </tbody>
       </table>
-      <%= paginate @authors, remote: true if @authors.present? %>
+      <%= paginate @authors if @authors.present? %>
     </div>
   </div>
 </div>
