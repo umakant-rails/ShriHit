@@ -6,9 +6,11 @@ class Admin::PanchangTithisController < ApplicationController
 
   def new
     last_tithi = nil
-    last_tithi = @panchang.panchang_tithis.order("date ASC").last
 
-		if params[:start_date].present?
+    last_tithi = @panchang.panchang_tithis.order("date ASC").order("tithi ASC").last
+    last_tithi =  PanchangTithi.get_last_tithi(last_tithi)
+
+    if params[:start_date].present?
 			@cur_date = Date.parse(params[:start_date])
 		else
       @cur_date = last_tithi.present? ? last_tithi.date : Date.today
@@ -16,7 +18,7 @@ class Admin::PanchangTithisController < ApplicationController
 
 		@panchang_tithi = @panchang.panchang_tithis.new
     set_calendar_dates
-    
+
     if last_tithi.blank?
       @hindi_months = [@panchang.hindi_months.order("hindi_months.order ASC")[0]]
     elsif last_tithi.paksh == "शुक्ळ पक्ष" && last_tithi.tithi == 15
@@ -38,17 +40,16 @@ class Admin::PanchangTithisController < ApplicationController
 
     last_tithi = @panchang.panchang_tithis.order("date ASC").order("tithi ASC").last
     new_tithi = @panchang.panchang_tithis.new(panchang_tithi_params)
+    last_tithi = PanchangTithi.get_last_tithi(last_tithi)
 
     error = new_tithi.validate_tithi_entry(last_tithi)
-    
+
     if error.length > 0
       flash[:error] = error
     elsif new_tithi.save
       flash[:notice] = "तिथि की एंट्री सफलतापूर्वक की गई."
-    
     else
       flash[:error] = "तिथि एंट्री की प्रकिया असफल हो गई है."
-    
     end
 
     respond_to do |format|

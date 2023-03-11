@@ -8,9 +8,6 @@
 Role.create!(name: 'Super Admin') if Role.where(name: 'Super Admin').blank?
 Role.create!(name: 'Admin') if Role.where(name: 'Admin').blank?
 Role.create!(name: 'Contributor') if Role.where(name: 'Contributor').blank?
-User.create!(username: 'umakant005', email: 'umakantrajpoot@gmail.com',
-  password: '12345678', password_confirmation: '12345678', role_id:1,
-  confirmed_at: Date.today) if User.where(email: 'umakantrajpoot@gmail.com').blank?
 
 State.create!(name: "Arunachal Pradesh") if State.where(name: "Arunachal Pradesh").blank?
 State.create!(name: "Himachal Pradesh") if State.where(name: "Himachal Pradesh").blank?
@@ -47,6 +44,7 @@ ArticleType.create!(name: 'कवित्त', user_id: 1) if ArticleType.where
 ArticleType.create!(name: 'सवैया', user_id: 1) if ArticleType.where(name: 'सवैया').blank?
 ArticleType.create!(name: 'दोहा', user_id: 1) if ArticleType.where(name: 'दोहा').blank?
 ArticleType.create!(name: 'भजन', user_id: 1) if ArticleType.where(name: 'भजन').blank?
+ArticleType.create!(name: 'अन्य', user_id: 1) if ArticleType.where(name: 'अन्य').blank?
 
 Theme.create!(name: 'व्याहुला', user_id: 1) if Theme.where(name: 'व्याहुला').blank?
 Theme.create!(name: 'जन्मोत्सव', user_id: 1) if Theme.where(name: 'जन्मोत्सव').blank?
@@ -67,6 +65,7 @@ Sampradaya.create!(name: 'माध्व सम्प्रदाय') if Sampr
 Sampradaya.create!(name: 'वल्लभ सम्प्रदाय') if Sampradaya.where(name: 'वल्लभ सम्प्रदाय').blank?
 Sampradaya.create!(name: 'निम्बार्क सम्प्रदाय') if Sampradaya.where(name: 'निम्बार्क सम्प्रदाय').blank?
 Sampradaya.create!(name: 'रामानंदी संप्रदाय') if Sampradaya.where(name: 'रामानंदी संप्रदाय').blank?
+Sampradaya.create!(name: 'रसिक संप्रदाय') if Sampradaya.where(name: 'रसिक संप्रदाय').blank?
 
 Author.create!(name: 'सूरदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'सूरदास').blank?
 Author.create!(name: 'कुम्भनदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'कुम्भनदास').blank?
