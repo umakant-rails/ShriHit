@@ -1,18 +1,15 @@
-<div class="row"> 
+<div class="row">
   <div class="card">
     <div class="card-body h-100" id="article-list">
       <div class="page-subject-header">
         <%= params[:article_type_name] %> ( रचना प्रकार ) : रचना सूची
       </div>
       <div class="dropdown-divider"></div>
-      <% 
+      <%
         page = params[:page].blank? ?  0 : (params[:page].to_i - 1)
         page_size = @articles_by_type.present? ? @articles_by_type.limit_value : 0
       %>
       <%= render partial: "public/shared/article", locals: {articles: @articles_by_type, page: page, page_size: page_size} %>
     </div>
   </div>
-</div>
-<div class="row">
-  <%= paginate @articles_by_type, remote: true  if @articles_by_type.present? %>
 </div>
