@@ -1,20 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="margin-left: -0.9%;margin-right: -0.9%;background-color: #fff;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<%= root_path %>" style="padding: 0px;">
+    <a class="navbar-brand" href="<%= root_path %>" style="padding: 0px;" title="बृज रस">
       <img src="/assets/lalji_icon.jpg" alt="ShriHit" class="app-icon">
-      श्रीहित
+      <span style="font-size:20px;font-weight: bold">श्रीहित</span>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<%= root_path %>">
             <i class="fa-solid fa-house"></i>
           </a>
-        </li>
-        <li class="nav-item dropdown">
+        </li> -->
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="article_type_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             रचना (प्रकार)
           </a>
@@ -41,6 +41,11 @@
               </li>
             <% end %>
           </ul>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="<%= search_public_articles_path %>" id="author_nav_link">
+            रचनाये
+          </a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="author_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -85,11 +90,11 @@
         <li class="nav-item">
           <a class="nav-link" href="<%= public_panchangs_path %>">हितोत्सव पत्रिका</a>
         </li>
-        <li class="nav-item">
+       <!--  <li class="nav-item">
           <a class="nav-link" href="<%= search_articles_public_articles_path %>">
             <i class="fa-solid fa-magnifying-glass"></i> Search Article
           </a>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="<%= public_about_path %>">पोर्टल विवरण</a>
         </li>
