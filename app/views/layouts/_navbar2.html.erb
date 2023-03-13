@@ -19,13 +19,13 @@
             रचना (प्रकार)
           </a>
           <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
-            <% @article_types && @article_types.each do |article_type| %>
+            <%# @article_types && @article_types.each do |article_type| %>
               <li>
-                <a class="dropdown-item" href="<%= articles_by_type_public_article_types_path(article_type.name) %>">
-                  <%= article_type.name %>
+                <a class="dropdown-item" href="<%#= articles_by_type_public_article_types_path(article_type.name) %>">
+                  <%#= article_type.name %>
                 </a>
               </li>
-            <% end %>
+            <%# end %>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -33,13 +33,13 @@
             रचना (प्रसंग)
           </a>
           <ul class="dropdown-menu" aria-labelledby="article_type_nav_link">
-            <% @contexts && @contexts.each do |context| %>
+            <%# @contexts && @contexts.each do |context| %>
               <li>
-                <a class="dropdown-item" href="<%= articles_by_context_public_contexts_path(context.name) %>">
-                  <%= context.name %>
+                <a class="dropdown-item" href="<%#= articles_by_context_public_contexts_path(context.name) %>">
+                  <%#= context.name %>
                 </a>
               </li>
-            <% end %>
+            <%# end %>
           </ul>
         </li> -->
         <li class="nav-item">
@@ -47,34 +47,44 @@
             रचनाये
           </a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= public_authors_path %>" id="author_nav_link">
+            रचनाकार/लेखक
+          </a>
+        </li>
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="author_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             रचनाकार/लेखक
           </a>
           <ul class="dropdown-menu" aria-labelledby="author_nav_link">
-            <% @authors && @authors.each do |author| %>
+            <%# @authors && @authors.each do |author| %>
               <li>
-                <a class="dropdown-item" href="<%= public_author_path(author) %>">
-                  <%= author.name %>
+                <a class="dropdown-item" href="<%#= public_author_path(author) %>">
+                  <%#= author.name %>
                 </a>
               </li>
-            <% end %>
+            <%# end %>
           </ul>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" href="<%= public_user_profiles_path %>" id="author_nav_link">
+            योगदानकर्ता
+          </a>
         </li>
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="contributor_nav_link" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             योगदानकर्ता
           </a>
           <ul class="dropdown-menu" aria-labelledby="contributor_nav_link">
-            <% @contributors && @contributors.each do |contributor| %>
+            <%# @contributors && @contributors.each do |contributor| %>
               <li>
-                <a class="dropdown-item" href="<%= public_user_profile_path(contributor.id) %>">
-                  <%= contributor.username.capitalize %>
+                <a class="dropdown-item" href="<%#= public_user_profile_path(contributor.id) %>">
+                  <%#= contributor.username.capitalize %>
                 </a>
               </li>
-            <% end %>
+            <%# end %>
           </ul>
-        </li>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="#">संत जीवनी</a>
         </li>
@@ -85,10 +95,10 @@
           <a class="nav-link" href="#">भक्ति प्रसंग</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%= public_suggestions_path %>">सुझाव</a>
+          <a class="nav-link" href="<%= public_panchangs_path %>">हितोत्सव पत्रिका</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%= public_panchangs_path %>">हितोत्सव पत्रिका</a>
+          <a class="nav-link" href="<%= public_suggestions_path %>">सुझाव</a>
         </li>
        <!--  <li class="nav-item">
           <a class="nav-link" href="<%= search_articles_public_articles_path %>">

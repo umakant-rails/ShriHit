@@ -1,6 +1,7 @@
 class Public::UserProfilesController < ApplicationController
 
   def index
+    @user_profiles = User.order("username ASC").page(params[:page]).per(5)
   end
 
   def show

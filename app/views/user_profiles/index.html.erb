@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-body" id="article-list">
+    <div class="page-subject-header">
+      योगदानकर्ता सूची
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="m-sm-4" data-controller='userprofile'>
+      <%#= render "form", user_profile: @user_profile %>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/user-profile-custom" %>
+<% end %>

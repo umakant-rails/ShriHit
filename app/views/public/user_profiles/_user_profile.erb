@@ -1,0 +1,35 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">योगदानकर्ता नाम</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%
+      page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
+      page_size = profiles.present? ? profiles.limit_value : 0
+    %>
+    <% if profiles.present? %>
+      <% profiles.each_with_index do | profile, index | %>
+        <tr class="article-item">
+          <th scope="row"><%= (page * page_size) + (index + 1) %></th>
+          <td>
+            <a href="<%= public_user_profile_path(profile.id)%>">
+              <%= profile.username %>
+            </a>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="2">
+          There is no data available now.
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div id="paginate-block">
+  <%= paginate profiles %>
+</div>
