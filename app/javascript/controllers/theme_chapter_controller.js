@@ -5,7 +5,7 @@ import ApplicationController from "./application_controller";
 export default class extends ApplicationController {
 
   static targets = ['theme', 'csrfToken', 'articleType', 'contextName', 'authorName', 
-    'contributorName', 'searchTermArticleBtn','clearFiltersBtn', 'languageBtn', 'themeChapter'];
+    'searchTermArticleBtn','clearFiltersBtn', 'languageBtn', 'themeChapter', 'searchBtnFirst', 'searchBtnSecond'];
 
   connect(){
     document.addEventListener("autocomplete.change", this.autocomplete.bind(this));
@@ -32,24 +32,29 @@ export default class extends ApplicationController {
       super.showErrorsByLayout("कृपया पहले खंड/प्रकरण चुने. खंड/प्रकरण चुनना आवश्यक है.");
       return;
     }
-    let searchBoxStatus = this.articleTypeTarget.disabled;
+    let searchBoxStatus = event.target.dataset.togglevalue;
 
-    if(searchBoxStatus == false){
+    if(searchBoxStatus == "second"){
       this.articleTypeTarget.disabled = true;
       this.contextNameTarget.disabled = true;
       this.authorNameTarget.disabled = true;
-      this.contributorNameTarget.disabled = true;
+      // this.contributorNameTarget.disabled = true;
       this.clearFiltersBtnTarget.disabled = true;
       $("#english_article_search_term").prop('disabled', false);
       $("#hindi_article_search_term").prop('disabled', false);
       this.searchTermArticleBtnTarget.disabled = false;
       this.languageBtnTarget.disabled = false;
       this.clearFilters();
+
+      this.searchBtnFirstTarget.classList.add('btn-outline-secondary');
+      this.searchBtnFirstTarget.classList.remove('btn-primary');
+      this.searchBtnSecondTarget.classList.add('btn-primary');
+      this.searchBtnSecondTarget.classList.remove('btn-outline-secondary');
     } else {
       this.articleTypeTarget.disabled = false
       this.contextNameTarget.disabled = false;
       this.authorNameTarget.disabled = false;
-      this.contributorNameTarget.disabled = false;
+      // this.contributorNameTarget.disabled = false;
       this.clearFiltersBtnTarget.disabled = false;
       $("#english_article_search_term").prop('disabled', true);
       $("#hindi_article_search_term").prop('disabled', true);
@@ -57,6 +62,11 @@ export default class extends ApplicationController {
       $("#hindi_article_search_term").val("");
       this.languageBtnTarget.disabled = true;
       this.searchTermArticleBtnTarget.disabled = true;
+
+      this.searchBtnFirstTarget.classList.remove('btn-outline-secondary');
+      this.searchBtnFirstTarget.classList.add('btn-primary');
+      this.searchBtnSecondTarget.classList.remove('btn-primary');
+      this.searchBtnSecondTarget.classList.add('btn-outline-secondary'); 
     }
   }
 
@@ -83,7 +93,7 @@ export default class extends ApplicationController {
     this.articleTypeTarget.value = '';
     this.contextNameTarget.value = '';
     this.authorNameTarget.value = '';
-    this.contributorNameTarget.value = '';
+    // this.contributorNameTarget.value = '';
   }
 
   searchArticlesByAttrs(){
@@ -91,13 +101,13 @@ export default class extends ApplicationController {
     let context_name = this.contextNameTarget.value
     let author_name = this.authorNameTarget.value;
     let chapterId = this.themeChapterTarget.value;
-    let contributorName = this.contributorNameTarget.value;
+    // let contributorName = this.contributorNameTarget.value;
     var searchParams = {
       article_type_id: article_type, 
       context_id: context_name,
       author_id: author_name,
       theme_chapter_id: chapterId,
-      contributor_id: contributorName,
+      // contributor_id: contributorName,
       search_type: 'by_attribute'
     };
     if(this.hasThemeChapterTarget && this.themeChapterTarget.value.length > 0){
@@ -181,13 +191,13 @@ export default class extends ApplicationController {
     //Required data to get article with existing filters
     let searchBoxStatus = this.articleTypeTarget.disabled;
     let searchArticleId = (searchType == "हिंदी") ? $("#hindi_serach_text").val() : $("#english_serach_text").val();
-    let searchTerm = $("#article_search_term").val();
+    let searchTerm = (searchType == "हिंदी") ? $("#hindi_article_search_term").val() : $("#english_article_search_term").val();
 
     if(searchBoxStatus == false){
       requiredParams.article_type_id = this.articleTypeTarget.value;
       requiredParams.context_id = this.contextNameTarget.value;
       requiredParams.author_id = this.authorNameTarget.value;
-      requiredParams.contributor_id = this.contributorNameTarget.value;
+      // requiredParams.contributor_id = this.contributorNameTarget.value;
       requiredParams.search_type = "by_attribute";
     } else if(searchArticleId != '') {
       requiredParams.article_id = searchArticleId;
@@ -252,23 +262,5 @@ export default class extends ApplicationController {
       }
     }); 
   }
-
-  // searchTerm(){
-  //   let term = $("#article_search_term").val();
-  //   if(term == "") {
-  //     location.reload();
-  //   } else {
-  //     var searchParams = {search: {term: term}};
-  //     $.ajax({
-  //       type: "get",
-  //       url: '/themes/search_term',
-  //       data: searchParams,
-  //       dataType: 'script',
-  //       success: function(data){
-  //       }
-  //     });
-  //   }
-  // }
-  /* end - js requet to get data block */
 
 }
