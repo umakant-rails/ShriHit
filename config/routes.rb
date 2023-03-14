@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   #root to: "homes#index"
   root to: "public/articles#index"
 
-  # get "/autocomplete_term", to: "welcome#autocomplete_term"
-  # get "/search_term", to: "welcome#search_term"
-  # get "/search_article/:id", to: "welcome#search_article"
+  get "/autocomplete_term", to: "welcome#autocomplete_term"
+  get "/search_term", to: "welcome#search_term"
+  get "/search_article/:id", to: "welcome#search_article"
 
   devise_for :users, controllers: {
     sessions: "users/sessions",
