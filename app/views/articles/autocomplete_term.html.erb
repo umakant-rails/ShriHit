@@ -1,0 +1,9 @@
+<% if params[:search_in] == "hindi" %>
+  <% @articles.each do | article |%>
+    <li class="list-group-item" role="option" data-autocomplete-value="<%= article.id %>"><%= article.hindi_title + " : " + article.english_title %></li>
+  <% end %>
+<% else %>
+  <% @articles.each do | article |%>
+    <li class="list-group-item" role="option" data-autocomplete-value="<%= article.id %>"><%= article.english_title + " : " + article.hindi_title %></li>
+  <% end %>
+<% end %>
