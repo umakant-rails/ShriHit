@@ -1,0 +1,75 @@
+<div class="row">
+	<!-- <div class="col-md-2">
+		<div class="row mb-2">
+			<button class="btn btn-outline-secondary form-control" data-action="click->search-v1#firstSearchOption" 
+        data-search-v1-target="searchBtnFirst">
+        Search Options
+      </button>
+		</div>
+		<div class="row">
+			<button class="btn btn-primary form-control" data-action="click->search-v1#secondSearchOption" 
+        data-search-v1-target="searchBtnSecond">
+	  	  Search Options
+	  	</button>
+		</div>
+	</div> -->
+	<!-- <div class="col-md-10"> -->
+		<div class="row mb-2">
+      <div class="col-md-2">
+        <button class="btn btn-outline-secondary form-control" data-action="click->search-v1#firstSearchOption" 
+          data-search-v1-target="searchBtnFirst">
+          Search Options
+        </button>
+      </div>
+    	<div class="col-md-2">
+    		<%= select_tag 'article_type', options_from_collection_for_select(@article_types, "id", "name", params[:article_type_id]), :prompt => "रचना प्रकार चुने", class:"form-control", 'data-search-v1-target': 'articleType', 'data-action': 'change->search-v1#searchArticlesByAttrs' %>
+    	</div>
+    	<div class="col-md-2">
+    		<%= select_tag 'context_name', options_from_collection_for_select(@contexts, "id", "name", params[:context_id]), :prompt => "प्रसंग चुने", class:"form-control", 'data-search-v1-target': 'contextName', 'data-action': 'change->search-v1#searchArticlesByAttrs' %>
+    	</div>
+    	<div class="col-md-4">
+    		<%= select_tag 'author_name', options_from_collection_for_select(@authors, "id", "name", params[:author_id]), :prompt => "लेखक चुने", class:"form-control", 'data-search-v1-target': 'authorName', 'data-action': 'change->search-v1#searchArticlesByAttrs' %>
+    	</div>
+    	<div class="col-md-2">
+  			<input type="button" id="search_article_btn" value="Clear Filter" class="form-control btn btn-primary" data-search-v1-target='clearFiltersBtn' data-action="click->search-v1#clearFiltersAndGetArticles"/>
+  		</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <button class="btn btn-primary form-control" data-action="click->search-v1#secondSearchOption" 
+          data-search-v1-target="searchBtnSecond">
+          Search Options
+        </button>
+      </div>
+    	<div class="col-md-8">
+    		<div class="row">
+    			<div class="col-md-2 mr-0 pe-0">
+            <input type="button" value="इंग्लिश"class="btn btn-primary dropdown-toggle form-control search-lbl" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-search-v1-target="languageBtn" disabled=true/>
+            <ul class="dropdown-menu col-md-2">
+              <li>
+                <a class="dropdown-item" data-vl="इंग्लिश" data-action="click->search-v1#selectSearchLang" href="#">इंग्लिश</a>
+              </li>
+              <li>
+                <a class="dropdown-item" data-vl="हिंदी" data-action="click->search-v1#selectSearchLang" href="#">हिंदी</a>
+              </li>
+            </ul>
+          </div>
+	    		<div data-controller="autocomplete" id="english_search_block" class="col-md-10 ps-0" data-autocomplete-url-value="/pb/articles/autocomplete_term?search_in=english">
+	          <input type="text" id="english_article_search_term" name="article_search_term" class="form-control" data-autocomplete-target='input' disabled=true/>
+	          <input type="hidden" id="english_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+	          <ul class="list-group" data-autocomplete-target="results"></ul>
+	        </div>
+	        <div data-controller="autocomplete" id="hindi_search_block" style="display:none;" class="col-md-10 ps-0" 
+	        data-autocomplete-url-value="/pb/articles/autocomplete_term?search_in=hindi">
+	          <input type="text" id="hindi_article_search_term" name="article_search_term" class="form-control" data-autocomplete-target='input' disabled=true/>
+	          <input type="hidden" id="hindi_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+	          <ul class="list-group" data-autocomplete-target="results"></ul>
+	        </div>
+	      </div>
+  		</div>
+  		<div class="col-md-2">
+  			<input type="button" id="search_article_btn" value="Search" class="form-control btn btn-primary" data-search-v1-target='searchTermArticleBtn' disabled=true data-action="click->search-v1#searchArticleByTerm"/>
+  		</div>
+    </div>
+	<!-- </div> -->
+</div>
