@@ -65,7 +65,7 @@
         <%#= form.text_field :hindi_title, class: 'form-control' %>
         <div data-controller="autocomplete" data-autocomplete-url-value="/articles/autocomplete_term?search_in=hindi">
           <%= form.text_field :hindi_title, class: 'form-control', 'data-autocomplete-target':'input' %>
-          <input type="hidden" id="english_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+          <input type="hidden" id="hindi_serach_text" name="search_text" data-autocomplete-target="hidden"/>
           <ul class="list-group" data-autocomplete-target="results"></ul>
         </div>
       </div>
@@ -76,6 +76,7 @@
         <label for='article_type' class='form-label'>
           इंग्लिश शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
         </label>
+        <%#= form.text_field :english_title, class: 'form-control' %>
         <div data-controller="autocomplete" data-autocomplete-url-value="/articles/autocomplete_term?search_in=english">
           <%= form.text_field :english_title, class: 'form-control', 'data-autocomplete-target':'input' %>
           <input type="hidden" id="english_serach_text" name="search_text" data-autocomplete-target="hidden"/>
