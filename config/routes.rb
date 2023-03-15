@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     get   "/tags" => "articles#tags", as: :tags, on: :member
     post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member
     get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
+    get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
   end
   resources :comments
 
