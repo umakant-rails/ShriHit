@@ -1,13 +1,25 @@
 <div class="row">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body h-450">
       <div class="page-subject-header">
-        <span class="col-md-6 text-start article-title">
-          <%= @author.blank? ? params[:author_name] : @author.name %> ( रचनाकार/कवि/भक्त ) : रचना सूची 
-        </span>
+        रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.present? ? @author.sampradaya.name : 'सम्प्रदाय - NA' %> )
       </div>
       <div class="dropdown-divider"></div>
-      <%= render partial: "public/shared/article", locals: {articles: @articles, page: 0, page_size: 0} %>
+      <div class="m-sm-2" data-controller= 'article'>
+        <% if @author.name != "अज्ञात" %>
+          <div class="article-content">
+            <% if @author && @author.biography.present? %>
+              <%= raw @author.biography %>
+            <% else %>
+              अभी <span class="author-name"><%= @author.name %></span> जी का जीवन-वृतांत उपलब्ध नहीं है
+            <% end %>
+          </div>
+          <div class="dropdown-divider"></div>
+        <% end %>
+        <div class="row-fluid">
+          <%= render partial: "public/shared/article", locals: {author: @author, articles: @articles, page: 0, page_size: 0} %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
