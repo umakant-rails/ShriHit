@@ -46,10 +46,10 @@ export default class extends ApplicationController {
       this.languageBtnTarget.disabled = false;
       this.clearFilters();
 
-      this.searchBtnFirstTarget.classList.add('btn-outline-secondary');
+      this.searchBtnFirstTarget.classList.add('btn-secondary');
       this.searchBtnFirstTarget.classList.remove('btn-primary');
       this.searchBtnSecondTarget.classList.add('btn-primary');
-      this.searchBtnSecondTarget.classList.remove('btn-outline-secondary');
+      this.searchBtnSecondTarget.classList.remove('btn-secondary');
     } else {
       this.articleTypeTarget.disabled = false
       this.contextNameTarget.disabled = false;
@@ -63,10 +63,10 @@ export default class extends ApplicationController {
       this.languageBtnTarget.disabled = true;
       this.searchTermArticleBtnTarget.disabled = true;
 
-      this.searchBtnFirstTarget.classList.remove('btn-outline-secondary');
+      this.searchBtnFirstTarget.classList.remove('btn-secondary');
       this.searchBtnFirstTarget.classList.add('btn-primary');
       this.searchBtnSecondTarget.classList.remove('btn-primary');
-      this.searchBtnSecondTarget.classList.add('btn-outline-secondary'); 
+      this.searchBtnSecondTarget.classList.add('btn-secondary'); 
     }
   }
 
