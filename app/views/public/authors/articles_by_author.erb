@@ -6,16 +6,6 @@
       </div>
       <div class="dropdown-divider"></div>
       <div class="m-sm-2" data-controller= 'article'>
-        <% if @author.name != "अज्ञात" %>
-          <div class="article-content">
-            <% if @author && @author.biography.present? %>
-              <%= raw @author.biography %>
-            <% else %>
-              अभी <span class="author-name"><%= @author.name %></span> जी का जीवन-वृतांत उपलब्ध नहीं है
-            <% end %>
-          </div>
-          <div class="dropdown-divider"></div>
-        <% end %>
         <div class="row-fluid">
           <%= render partial: "public/shared/article", locals: {author: @author, articles: @articles, page: 0, page_size: 0} %>
         </div>

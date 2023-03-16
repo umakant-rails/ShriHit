@@ -1,7 +1,7 @@
 class Public::SuggestionsController < ApplicationController
 
   def index
-    @suggestions = Suggestion.order("created_at DESC").page(params[:page]).per(10)
+    @suggestions = Suggestion.order("created_at DESC").page(params[:page])
   end
 
   def new

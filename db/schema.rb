@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.boolean "is_saint", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name_eng"
   end
 
   create_table "bhakti_prasangs", force: :cascade do |t|
@@ -214,6 +215,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.string "author"
     t.string "size"
     t.boolean "has_chapter", default: false
+    t.string "deity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

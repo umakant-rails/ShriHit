@@ -3,7 +3,7 @@ class Admin::SuggestionsController < ApplicationController
   before_action :set_suggestion, only: %i[ approve reject ]
 
   def index
-    @suggestions = Suggestion.where(is_approved: nil).page(params[:page]).per(10)
+    @suggestions = Suggestion.where(is_approved: nil).page(params[:page])
   end
 
   def show
@@ -11,11 +11,11 @@ class Admin::SuggestionsController < ApplicationController
   end
 
   def rejected
-    @suggestions = Suggestion.where(is_approved: false).page(params[:page]).per(10)
+    @suggestions = Suggestion.where(is_approved: false).page(params[:page])
   end
 
   def approved
-    @suggestions = Suggestion.where(is_approved: true).page(params[:page]).per(10)
+    @suggestions = Suggestion.where(is_approved: true).page(params[:page])
   end
 
   def approve

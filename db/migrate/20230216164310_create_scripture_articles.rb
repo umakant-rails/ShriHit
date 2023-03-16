@@ -6,10 +6,9 @@ class CreateScriptureArticles < ActiveRecord::Migration[7.0]
       t.integer   :section_id
       t.integer   :article_type_id
       t.text      :content
+      t.text      :content_eng
       t.text      :interpretation
       t.text      :interpretation_eng
-      t.string    :narrator
-      t.integer   :group_id
       t.integer   :article_index
 
       t.timestamps

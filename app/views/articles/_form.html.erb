@@ -42,17 +42,12 @@
         <label for='article_type' class='form-label'>
           लेखक
         </label>
-        <%= form.select :author_id, options_for_select(authors, selected: article.author_id), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-article-target': 'authorSelect' %>
-        <!-- <div data-article-target='authorInput' hidden=true>
-          <div class="row">
-            <div class="col-md-8">
-              <%#= text_field_tag 'author', nil, class: 'form-control', placeholder: 'लेखक का नाम टाइप करे.'  %>
-            </div>
-            <div class="col-md-4">
-              <a href="javascript:void(0);" data-action="article#toggleAuthor" class="btn btn-primary">सूची  प्रदर्शित करे </a>
-            </div>
-          </div>
-        </div> -->
+        <%#= form.select :author_id, options_for_select(authors, selected: article.author_id), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-article-target': 'authorSelect' %>
+        <div data-controller="autocomplete" data-autocomplete-url-value="/authors/autocomplete_term">
+          <%= form.hidden_field :author_id, class: 'form-control', 'data-autocomplete-target':'hidden' %>
+          <input type="text" class="form-control" data-autocomplete-target="input" autocomplete="off" spellcheck="false">
+          <ul class="list-group" data-autocomplete-target="results"></ul>
+        </div>
       </div>
     </div>
   </div>

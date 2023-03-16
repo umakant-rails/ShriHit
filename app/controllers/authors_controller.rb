@@ -52,6 +52,18 @@ class AuthorsController < ApplicationController
     end
   end
 
+  def autocomplete_term
+    search_term = params[:q].strip
+
+    @authors = Author.where("LOWER(name_eng) like ? ", "%#{search_term.downcase}%")
+
+    respond_to do |format|
+      format.html {}
+      format.json { head :no_content }
+    end
+    render layout: false
+  end
+
   private
 
     def set_author
@@ -62,7 +74,7 @@ class AuthorsController < ApplicationController
     end
 
     def author_params
-      params.fetch(:author, {}).permit(:name, :sampradaya_id, :biography,
+      params.fetch(:author, {}).permit(:name, :name_eng, :sampradaya_id, :biography,
         :birth_date, :death_date, :is_approved)
     end
 

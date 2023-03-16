@@ -17,9 +17,9 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @tags = Tag.approved.order("name ASC")
-    author = Author.where("name=?", "अज्ञात")
-    context = Context.where("name=?", "अन्य")
-    @article = Article.new({author_id: author[0].id, context_id: context[0].id})
+    author = Author.where("name=?", "अज्ञात").first
+    context = Context.where("name=?", "अन्य").first
+    @article = Article.new({author_id: author.id, context_id: context.id})
     #@article.build_image
   end
 
@@ -30,6 +30,9 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
+    author = Author.where("name=?", "अज्ञात").first
+    params[:article][:author_id] = params[:article][:author_id].blank? ? author.id : params[:article][:author_id]
+
     @article = current_user.articles.new(article_params)
     respond_to do |format|
       if @article.save
