@@ -1,5 +1,4 @@
-<%= form_with(model: [:admin, section], html: {
-  'data-context-target': 'form', 'data-action': 'context#submitForm'}) do |form| %>
+<%= form_with(model: [:admin, section], html: {}) do |form| %>
   <div class="row">
     <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= section.errors.present? ? 'block' : 'none' %>;" role="alert">
       <% section.errors.each do |error| %>

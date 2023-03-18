@@ -14,6 +14,7 @@ class Admin::ScripturesController < ApplicationController
 
   # GET /admin/scriptures/new
   def new
+    @scriptures_types = ScriptureType.all
     @scripture = Scripture.new
   end
 
@@ -24,7 +25,7 @@ class Admin::ScripturesController < ApplicationController
   # POST /admin/scriptures or /admin/scriptures.json
   def create
     # params[:scripture][:has_chapter] = params[:scripture][:has_chapter] == 'Yes' ? true : false
-
+    @scriptures_types = ScriptureType.all
     @scripture = current_user.scriptures.new(scripture_params)
 
     respond_to do |format|

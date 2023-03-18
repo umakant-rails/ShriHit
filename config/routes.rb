@@ -112,7 +112,10 @@ Rails.application.routes.draw do
 
     resources :scriptures 
     resources :sections
-    
+    resources :chapters do 
+      get '/get_sections' => "chapters#get_sections", as: :get_sections, on: :collection
+    end
+
   end
 
   namespace :public, path: :pb do

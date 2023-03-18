@@ -1,0 +1,53 @@
+<%= form_with(model: [:admin, chapter]) do |form| %>
+  <div class="row">
+    <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= chapter.errors.present? ? 'block' : 'none' %>;" role="alert">
+      <% chapter.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>
+        रसिक वाणी/ग्रन्थ <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <% 
+        scirpture_list = @scriptures.map{|scrptr| [scrptr.name, scrptr.id]}
+        section_id = params[:scripture_id].present? ? params[:scripture_id] : nil
+      %>
+      <%= form.select :scripture_id, options_for_select(scirpture_list, section_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
+        class: 'form-control', 'data-action': 'change->admin-chapter#getSections' %>
+    </div>
+    
+    <div class='mb-3'>
+      <label class='form-label'>
+        सेक्शन <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <% if form.object.id.present? %>
+        <%= form.select :section_id, @sections.map{|s| [s.title, s.id]}, {prompt: 'सेक्शन को चुनिये'}, class: 'form-control', 'data-admin-chapter-target': 'section' %>
+      <% else %>
+        <%= form.select :section_id, [], {prompt: 'सेक्शन को चुनिये'}, class: 'form-control', 'data-admin-chapter-target': 'section' %>
+      <% end %>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>
+        अध्याय का शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class='text-center mt-3 actions'>
+      <div class="row">
+        <div class="col-md-4">
+          <% if form.object.id.blank? %>
+            <%= form.submit "अध्याय जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+          <% else %>
+            <%= form.submit "अध्याय अद्यतन करे", class: 'btn btn-lg btn-primary form-control' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<% end %>

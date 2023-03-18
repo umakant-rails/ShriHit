@@ -26,7 +26,8 @@ class Admin::SectionsController < ApplicationController
   # POST /sections or /sections.json
   def create
     @section = Section.new(section_params)
-
+    @scriptures = current_user.scriptures
+    
     respond_to do |format|
       if @section.save
         format.html { redirect_to admin_sections_url, notice: "Section was successfully created." }

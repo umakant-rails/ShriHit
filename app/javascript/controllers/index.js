@@ -24,6 +24,7 @@ import AdminContextController from "./admin/context_controller";
 import AdminArticleController from "./admin/article_controller";
 import AdminTagController from "./admin/tag_controller";
 import PanchangTithiController from "./admin/panchang_tithi_controller";
+import AdminChapterController from "./admin/section_chapter_controller";
 
 application.register('application', ApplicationController);
 application.register('autocomplete', Autocomplete);
@@ -45,3 +46,4 @@ application.register("admin-context", AdminContextController);
 application.register("admin-article", AdminArticleController);
 application.register("admin-tag", AdminTagController);
 application.register("admin-panchangtithi", PanchangTithiController);
+application.register("admin-chapter", AdminChapterController);

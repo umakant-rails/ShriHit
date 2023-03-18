@@ -9,6 +9,18 @@
     </div>
 
     <div class='mb-3'>
+      <label class='form-label'>
+        नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <% 
+        scirpture_type_list = @scriptures_types.map{|scrptr| [scrptr.name, scrptr.id]}
+        section_type_id = nil
+      %>
+      <%= form.select :scripture_type_id, options_for_select(scirpture_type_list, section_type_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
+        class: 'form-control', 'data-action': 'change->admin-chapter#getSections' %>
+    </div>
+
+    <div class='mb-3'>
       <div class="row">
         <div class="col-md-6">
           <label class='form-label'>
@@ -29,7 +41,7 @@
       <div class="row">
         <div class="col-md-6">
           <label class='form-label'>
-            ग्रन्थ साइज
+            ग्रन्थ साइज <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
           </label>
           <%= form.select :size, options_for_select(['लघु', 'मध्यम', 'वृहद'], form.object.size),  {:prompt => 'ग्रन्थ का साइज चुने'}, class: 'form-control' %>
         </div>

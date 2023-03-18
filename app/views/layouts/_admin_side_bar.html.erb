@@ -170,7 +170,7 @@
     </a>
   </li>
   <li class="sidebar-item <%= set_active("admin/scriptures", "others") %>">
-    <a class="sidebar-link" href="<%= admin_scriptures_path %>">
+    <a class="sidebar-link" href="<%= new_admin_section_path %>">
       <span class="align-middle">
         सेक्शन जोड़े
       </span>
@@ -180,6 +180,20 @@
     <a class="sidebar-link" href="<%= admin_sections_path %>">
       <span class="align-middle">
         सेक्शन सूची
+      </span>
+    </a>
+  </li>
+  <li class="sidebar-item <%= set_active("admin/scriptures", "others") %>">
+    <a class="sidebar-link" href="<%= new_admin_chapter_path %>">
+      <span class="align-middle">
+        अध्याय जोड़े
+      </span>
+    </a>
+  </li>
+  <li class="sidebar-item <%= set_active("admin/scriptures", "others") %>">
+    <a class="sidebar-link" href="<%= admin_chapters_path %>">
+      <span class="align-middle">
+        अध्याय सूची
       </span>
     </a>
   </li>
