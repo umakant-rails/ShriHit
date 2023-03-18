@@ -13,7 +13,7 @@
   # is_report_active = show_admin_collapse_items(["report"])
   is_article_type_active = show_collapse_items("admin/article_types")
   is_contexts_active = show_collapse_items("admin/contexts")
-  is_bhakti_granth_active = show_collapse_items("admin/bhakti_granth")
+  is_bhakti_granth_active = show_collapse_items("admin/scriptures")
 %>
 <li class="sidebar-item">
   <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#appContent" role="button"
@@ -144,9 +144,9 @@
   </li>
 </div>
 <div class="dropdown-divider1"></div>
-<li class="sidebar-item <%= set_active("bhakti_rachana", "others") %>">
-  <a class="sidebar-link admin-bar-lnk"  data-bs-toggle="collapse" href="#bhaktiGranthList"
-    role="button" aria-expanded="false" aria-controls="bhaktiGranthList" data-id="bhaktiGranthList"
+<li class="sidebar-item">
+  <a class="sidebar-link admin-bar-lnk"  data-bs-toggle="collapse" href="#scriptureList"
+    role="button" aria-expanded="false" aria-controls="scriptureList" data-id="scriptureList"
     data-action="click->sidebar#toggleTab">
     <span class="align-middle">
       रसिक वाणी/ग्रन्थ
@@ -154,16 +154,16 @@
     <i class="fa-solid fa-angle-<%= (is_bhakti_granth_active == "show") ? "down" : "right" %>"></i>
   </a>
 </li>
-<div class="collapse  <%= is_bhakti_granth_active %>" data-sidebar-target="bhaktiGranthListBlock" id="bhaktiGranthList">
-  <li class="sidebar-item <%= set_active("admin/contexts", "new") %>">
-    <a class="sidebar-link" href="<%= new_admin_context_path %>">
+<div class="collapse  <%= is_bhakti_granth_active %>" data-sidebar-target="scriptureListBlock" id="scriptureList">
+  <li class="sidebar-item <%= set_active("admin/scriptures", "new") %>">
+    <a class="sidebar-link" href="<%= new_admin_scripture_path %>">
       <span class="align-middle">
         रसिक वाणी/ग्रन्थ जोड़े
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("admin/contexts", "others") %>">
-    <a class="sidebar-link" href="#">
+  <li class="sidebar-item <%= set_active("admin/scriptures", "others") %>">
+    <a class="sidebar-link" href="<%= admin_scriptures_path %>">
       <span class="align-middle">
         रसिक वाणी/ग्रन्थ सूची
       </span>

@@ -110,6 +110,7 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :scriptures
   end
 
   namespace :public, path: :pb do
