@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          रसिक वाणी/ग्रन्थ सेक्शन फॉर्म
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller= 'article'>
+          <%= form_with(model: [:admin, @section], html: {
+            'data-context-target': 'form', 'data-action': 'context#submitForm'}) do |form| %>
+            <div class="row">
+              <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= @section.errors.present? ? 'block' : 'none' %>;" role="alert">
+                <% @section.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+                <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <%= link_to "रसिक वाणी/ग्रन्थ सूची देखे", admin_scriptures_path %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/scripture-custom" %>
+<% end %>

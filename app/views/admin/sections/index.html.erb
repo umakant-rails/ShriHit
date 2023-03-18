@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          रसिक वाणी/ग्रन्थ सूची
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="scripture_list">
+          <%= render "section", sections: @sections %>
+        </div>
+        <!-- <div class="dropdown-divider"></div> -->
+        <div class="">
+          <%= link_to "नई रसिक वाणी/ग्रन्थ", new_admin_section_path, :class => "btn btn-primary" %> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

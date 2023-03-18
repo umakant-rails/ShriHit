@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body article-content1">
+        <div class="col-md-12 page-subject-header">
+          रसिक वाणी/ग्रन्थ सेक्शन : <%= @section.title %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-2">
+          <% if @section.description.present? %>
+            <%= @section.description %>
+          <% else %>
+             इस रसिक वाणी/ग्रन्थ का विवरण उपलब्ध नहीं है |
+          <% end %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="">
+          <%= link_to "सेक्शन अद्यतन करे", edit_admin_section_path(@section), :class => "btn btn-primary" %> 
+          <%= link_to "सेक्शन सूची", admin_sections_path, :class => "btn btn-primary" %>  
+          <%= button_to "सेक्शन डिलीट करे", @admin_section, method: :delete, :class => "btn btn-danger", form_class: 'btn ps-0 pe-0' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/section-custom" %>
+<% end %>

@@ -1,6 +1,8 @@
 class Section < ApplicationRecord
 
-  belgons_to :scripture
+  belongs_to :scripture
   has_many :scripture_articles
+
+  paginates_per 10
 
 end
