@@ -13,7 +13,7 @@ $(document).ready(function(){
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["chapter_title"]);
+    control.makeTransliteratable(["chapter_name"]);
   }
   google.setOnLoadCallback(onLoad);
 

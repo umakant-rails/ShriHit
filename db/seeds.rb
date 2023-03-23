@@ -90,10 +90,10 @@ ScriptureType.create!(name: "ग्रन्थ") if ScriptureType.where(name: "
 ScriptureType.create!(name: "रसिक वाणी") if ScriptureType.where(name: "वाणीजी").blank?
 ScriptureType.create!(name: "अष्टयाम") if ScriptureType.where(name: "अष्टयाम").blank?
 
+ScriptureType.create!(name: "आरती") if ScriptureType.where(name: "आरती").blank?
+ScriptureType.create!(name: "चालीसा") if ScriptureType.where(name: "चालीसा").blank?
+
+ScriptureType.create!(name: "स्त्रोत") if ScriptureType.where(name: "स्त्रोत").blank?
 ScriptureType.create!(name: "सहस्त्रनाम") if ScriptureType.where(name: "सहस्त्रनाम").blank?
 ScriptureType.create!(name: "कवच") if ScriptureType.where(name: "कवच").blank?
-ScriptureType.create!(name: "स्त्रोत") if ScriptureType.where(name: "स्त्रोत").blank?
 ScriptureType.create!(name: "अष्टक") if ScriptureType.where(name: "अष्टक").blank?
-ScriptureType.create!(name: "चालीसा") if ScriptureType.where(name: "चालीसा").blank?
-# ScriptureType.create!(name: "संग्रह") if ScriptureType.where(name: "संग्रह").blank?
-ScriptureType.create!(name: "आरती") if ScriptureType.where(name: "आरती").blank?

@@ -1,9 +1,15 @@
 class Chapter < ApplicationRecord
 
-  # belongs_to :scripture
-  belongs_to :section
+  belongs_to :scripture
   has_many :scripture_articles
-  validates :title, presence: true
+
+  has_many :chapters, foreign_key: 'parent_id', class_name: 'Chapter'
+  belongs_to :section, foreign_key: 'parent_id', class_name: 'Chapter', optional: true  
+
+  scope :section_scope, ->() { where(is_section: true) }
+  scope :chapters, ->() { where(is_section: false) }
+
+  validates :name, presence: true
 
   paginates_per 10
 

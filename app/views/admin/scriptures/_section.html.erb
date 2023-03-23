@@ -1,0 +1,33 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">S. No.</th>
+      <th scope="col">नाम</th>
+      <th scope="col">गतिविधि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if sections.present? %>
+      <% sections.each_with_index do |section, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td>
+            <%= section.name %>
+          </td>
+          <td>
+            <%= link_to edit_admin_chapter_path(section) do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
+            <%= button_to '<i class="fa fa-trash" style="color:red;"></i>'.html_safe, admin_chapter_path(section), method: :delete, style: "border: 0px", form: {class: 'ps-0 pe-0', style: "display:inline-block; font-size: 18px;"} %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="3">
+        अभी रिकॉर्ड उपलब्ध नहीं है.
+      </td>
+    <% end %>
+  </tbody>
+</table>
+
+

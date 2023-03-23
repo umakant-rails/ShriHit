@@ -1,0 +1,91 @@
+class Admin::ScriptureArticlesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :verify_admin
+  before_action :set_scripture, only: %i[ show edit update destroy ]
+
+  def index
+    @scripture_articles = ScriptureArticle.order("created_at DESC").page(params[:page])
+  end
+
+  def new
+    @article_types = ArticleType.all
+    @scriptures = Scripture.all
+    @scripture_article = ScriptureArticle.new()
+  end
+
+  def create
+    @scr_article = ScriptureArticle.new(scripture_article_params)
+
+    respond_to do |format|
+      if @scr_article.save
+        # format.html { redirect_to admin_scripture_article_url(@scr_article.id), notice: "Scripture Article was successfully created." }
+        #format.json { render :show, status: :created, location: @scr_article }
+        format.js {}
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @scr_article.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def edit
+    @article_types = ArticleType.all
+    @scriptures = Scripture.all
+  end
+
+  def update
+    respond_to do |format|
+      if @scripture_article.update(scripture_article_params)
+        format.html { redirect_to admin_scripture_articles_url } #admin_scripture_article_path(@scripture_article.id) }
+        format.json { render :show, status: :ok, location: @scripture_article }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @scripture_article.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+     @scripture_article.destroy
+
+    respond_to do |format|
+      format.html { redirect_to admin_scripture_articles_url, notice: "Scripture Article was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  def get_sections
+    @scripture = Scripture.find(params[:scripture_id]) rescue nil 
+    @last_article = @scripture.scripture_articles.order("article_index ASC").last rescue nil
+
+    if @scripture && @scripture.category == 2
+      @chapters = @scripture.chapters
+    elsif @scripture &&  @scripture.category == 3
+      @sections = @scripture.present? ? @scripture.sections : nil
+    end
+    #@scriptures = @scripture.present? ? @scripture.scriptures : nil
+  end
+
+  def get_section_chapters
+    @section = Chapter.find(params[:chapter_id]) rescue nil
+    @chapters = @section.present? ? @section.chapters : nil
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_scripture
+      @scripture_article = ScriptureArticle.find(params[:id])
+    end
+
+    # Only allow a list of trusted parameters through.
+    def scripture_article_params
+      params.fetch(:scripture_article, {}).permit(:scripture_id, :article_type_id, :content, :content_eng, 
+        :interpretation, :interpretation_eng, :chapter_id, :article_index)
+    end
+
+    def verify_admin
+      if !current_user.is_admin && !current_user.is_super_admin
+        redirect_back_or_to homes_path
+      end
+    end
+end

@@ -12,7 +12,7 @@
               लेखक :
             </label>
             <label class="form-label">
-              <%= @scripture.author %>
+              <%= @scripture.author.present? ? @scripture.author : 'उपलब्ध नहीं' %>
             </label>
           </div>
 
@@ -21,16 +21,21 @@
               रसिक वाणी/ग्रन्थ का साइज :
             </label>
             <label class="form-label">
-              <%= @scripture.size %>
+              <%= Scripture::CATEGORIES[@scripture.category-1][0] %>
             </label>
           </div>
 
           <div class="row">
             <label class='card-title form-control sggstion-hdr mb-3'>
-              ग्रंथ में अध्याय है :
+              ग्रंथ में सेक्शन है :
             </label>
             <label class="form-label">
-              <%= @scripture.has_chapter ? "हाँ" : "नहीं" %>
+              <% sections = @scripture.sections %>
+              <% if sections.length == 0 %>
+                नहीं
+              <% else %>
+                <%= render "section", sections: sections%>
+              <% end %>
             </label>
           </div>
 
@@ -58,6 +63,3 @@
     </div>
   </div>
 </div>
-<% content_for :head do %>
-  <%= javascript_import_module_tag "custom/scripture-custom" %>
-<% end %>

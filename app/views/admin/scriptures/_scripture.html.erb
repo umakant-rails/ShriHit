@@ -4,8 +4,7 @@
       <th scope="col">S. No.</th>
       <th scope="col">नाम</th>
       <th scope="col">लेखक</th>
-      <th scope="col">रसिक वाणी/ग्रन्थ का साइज</th>
-      <th scope="col">ग्रंथ में अध्याय है</th>
+      <th scope="col">सेक्शन जोड़े</th>
       <th scope="col">गतिविधि</th>
     </tr>
   </thead>
@@ -20,11 +19,14 @@
           <td>
             <%= scripture.author %>
           </td>
-          <td>
-            <%= scripture.size %>
-          </td>
-          <td>
-            <%= scripture.has_chapter ? "हाँ" : "नहीं" %>
+          <td class="d-none d-xl-table-cell">
+            <% if scripture.category == 3 %>
+              <%= link_to new_admin_chapter_path(scripture_id: scripture), class: "btn btn-primary" do %>
+                <i class="fa-solid fa-file-circle-plus"></i> सेक्शन जोड़े
+              <% end %>
+            <% else %>
+              -
+            <% end %> 
           </td>
           <td>
             <%= link_to admin_scripture_path(scripture) do %>
@@ -38,7 +40,7 @@
         </tr>
       <% end %>
     <% else %>
-      <td colspan="3">
+      <td colspan="5">
         अभी रिकॉर्ड उपलब्ध नहीं है.
       </td>
     <% end %>

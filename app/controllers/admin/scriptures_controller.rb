@@ -10,22 +10,24 @@ class Admin::ScripturesController < ApplicationController
 
   # GET /admin/scriptures/1 or /admin/scriptures/1.json
   def show
+    @sections = @scripture.sections
   end
 
   # GET /admin/scriptures/new
   def new
-    @scriptures_types = ScriptureType.all
+    @scripture_types = ScriptureType.all
     @scripture = Scripture.new
   end
 
   # GET /admin/scriptures/1/edit
   def edit
+    @scripture_types = ScriptureType.all
   end
 
   # POST /admin/scriptures or /admin/scriptures.json
   def create
     # params[:scripture][:has_chapter] = params[:scripture][:has_chapter] == 'Yes' ? true : false
-    @scriptures_types = ScriptureType.all
+    @scripture_types = ScriptureType.all
     @scripture = current_user.scriptures.new(scripture_params)
 
     respond_to do |format|
@@ -74,7 +76,7 @@ class Admin::ScripturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def scripture_params
-      params.fetch(:scripture, {}).permit(:name, :author, :size, :has_chapter, :description)
+      params.fetch(:scripture, {}).permit(:scripture_type_id, :name, :author, :category, :has_section, :description)
     end
 
     def verify_admin

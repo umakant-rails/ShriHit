@@ -69,8 +69,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
 
   create_table "chapters", force: :cascade do |t|
     t.integer "scripture_id"
-    t.integer "section_id"
-    t.string "title"
+    t.string "name"
+    t.integer "parent_id"
+    t.boolean "is_section", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -189,9 +190,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
   end
 
   create_table "scripture_articles", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "scripture_id"
     t.integer "chapter_id"
-    t.integer "section_id"
     t.integer "article_type_id"
     t.text "content"
     t.text "content_eng"
@@ -214,16 +214,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.string "name"
     t.text "description"
     t.string "author"
-    t.string "size"
-    t.boolean "has_chapter", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sections", force: :cascade do |t|
-    t.integer "scripture_id"
-    t.string "title"
-    t.text "description"
+    t.integer "category"
+    t.boolean "has_section", default: false
+    t.string "keywords"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

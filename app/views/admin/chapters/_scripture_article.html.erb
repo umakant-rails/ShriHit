@@ -1,0 +1,77 @@
+<%#= form_with(url: add_article_admin_chapter_path(scripture_article.chapter_id), scope: scripture_article) do |form| %>
+<%= form_with(model: [:admin, scripture_article]) do |form| %>
+  <div class="row">
+    <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= scripture_article.errors.present? ? 'block' : 'none' %>;" role="alert">
+      <% scripture_article.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+    </div>
+
+    <div class='mb-3'>
+      <div class="row">
+        <div class="col-md-6">
+          <label class='form-label'>
+            रचना प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </label>
+          <% 
+            artcle_types = article_types.map{|artcle| [artcle.name, artcle.id]}
+          %>
+          <%= form.select :article_type_id, options_for_select(artcle_types), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
+            class: 'form-control' %>
+        </div>
+        <div class="col-md-6">
+          <label class='form-label'>
+            रचना का इंडेक्स (अनुक्रम) <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </label>
+          <%= form.text_field :article_index, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+
+    <div id="hindi_block">
+      <div class='mb-3'>
+        <label class='form-label'>
+          रचना <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_area :content, class: 'tinymce' %>
+      </div>
+
+      <div class='mb-3'>
+        <label class='form-label'>
+          रचना का अर्थ <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_area :interpretation, class: 'tinymce' %>
+      </div>
+    </div>
+
+    <div id="eng_block" style="display: none;">
+      <div class='mb-3'>
+        <label class='form-label'>
+          रचना <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_area :content_eng, class: 'tinymce' %>
+      </div>
+
+      <div class='mb-3'>
+        <label class='form-label'>
+          रचना का अर्थ <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_area :interpretation_eng, class: 'tinymce' %>
+      </div>
+    </div>
+
+    <div class='text-center mt-3 actions'>
+      <div class="row">
+        <div class="col-md-4">
+          <% if form.object.id.blank? %>
+            <%= form.submit "अध्याय जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+          <% else %>
+            <%= form.submit "अध्याय अद्यतन करे", class: 'btn btn-lg btn-primary form-control' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<% end %>

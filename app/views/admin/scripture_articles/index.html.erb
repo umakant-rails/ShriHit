@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          रसिक वाणी/ग्रन्थ रचना
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller="admin-scr-article">
+          <%= render "scripture_article", scripture_articles: @scripture_articles %>
+          <%= link_to "नई रसिक वाणी/ग्रन्थ", new_admin_scripture_article_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

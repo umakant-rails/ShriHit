@@ -10,10 +10,10 @@
 
     <div class='mb-3'>
       <label class='form-label'>
-        नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        रसिक वाणी/ग्रन्थ का प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
       </label>
       <% 
-        scirpture_type_list = @scriptures_types.map{|scrptr| [scrptr.name, scrptr.id]}
+        scirpture_type_list = @scripture_types.map{|scrptr| [scrptr.name, scrptr.id]}
         section_type_id = nil
       %>
       <%= form.select :scripture_type_id, options_for_select(scirpture_type_list, section_type_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
@@ -30,7 +30,7 @@
         </div>
         <div class="col-md-6">
           <label class='form-label'>
-            लेखक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+            लेखक
           </label>
           <%= form.text_field :author, class: 'form-control' %>
         </div>
@@ -41,15 +41,15 @@
       <div class="row">
         <div class="col-md-6">
           <label class='form-label'>
-            ग्रन्थ साइज <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+            ग्रन्थ की श्रेणी <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
           </label>
-          <%= form.select :size, options_for_select(['लघु', 'मध्यम', 'वृहद'], form.object.size),  {:prompt => 'ग्रन्थ का साइज चुने'}, class: 'form-control' %>
+          <%= form.select :category, options_for_select(Scripture::CATEGORIES, form.object.category),  {:prompt => 'श्रेणी चुने'}, class: 'form-control' %>
         </div>
         <div class="col-md-6">
           <label class='form-label'>
-            ग्रंथ में अध्याय है ?
+            ग्रंथ में सेक्शन है ?
           </label>
-          <%= form.select :has_chapter, options_for_select({'Yes': true, 'No': false}, form.object.has_chapter), {}, class: 'form-control' %>
+          <%= form.select :has_section, options_for_select({'Yes': true, 'No': false}, form.object.has_section), {}, class: 'form-control' %>
         </div>
       </div>
     </div>

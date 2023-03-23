@@ -1,0 +1,126 @@
+<%#= form_with(url: add_article_admin_chapter_path(scripture_article.chapter_id), scope: scripture_article) do |form| %>
+<%= form_with(model: [:admin, scripture_article], html: {id: "scripture_article_form", 'data-admin-scr-article-target': 'form'}) do |form| %>
+  <div class="row">
+    <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= scripture_article.errors.present? ? 'block' : 'none' %>;" role="alert">
+      <% scripture_article.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+    </div>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"  data-admin-scr-article-target="csrfToken">
+
+    <div class='mb-3'>
+      <label class='form-label'>
+        रसिक ग्रन्थ/वाणी का नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <% 
+        scripture_names = scriptures.map{|at| [at.name, at.id]}
+      %>
+      <%= form.select :scripture_id, options_for_select(scripture_names, form.object.scripture_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
+        class: 'form-control', 'data-action': 'change->admin-scr-article#getScriptureSections', 
+        'data-admin-scr-article-target': 'scriptureId'
+        %>
+    </div>
+    <% 
+      chapter = form.object.id.present? ? form.object.chapter : nil
+      sections = chapter.present? ? chapter.scripture.sections : []
+      section_list = sections.present? ? sections.map{ |s| [s.name, s.id] } : []
+
+      section = chapter.present? ? chapter.section : nil
+      chapters = section.present? ? section.chapters.map{ |c| [c.name, c.id] } : []
+    %>
+    <div class='mb-3'>
+      <div class="row">
+        <div class="col-md-6">
+          <label class='form-label'>
+            सेक्शन का नाम
+          </label>
+          <% if sections.present? %>
+            <%= select_tag 'section_id', options_for_select(section_list, form.object.chapter.section.id), prompt: "सेक्शन को चुनिये", class:"form-control", 'data-action': 'change->admin-scr-article#getSectionChapters' ,
+              'data-admin-scr-article-target': 'sectionId' %>
+          <% else %>
+            <%= select_tag 'section_id', options_for_select(section_list), prompt: "सेक्शन को चुनिये", class:"form-control", 'data-action': 'change->admin-scr-article#getSectionChapters' ,
+              'data-admin-scr-article-target': 'sectionId', 'disabled': 'disabled' %>
+          <% end %> 
+        </div>
+        <div class="col-md-6">
+          <label class='form-label'>
+            अध्याय का नाम
+          </label>
+          <% if chapters.present? %>
+            <%= form.select :chapter_id, options_for_select(chapters, form.object.chapter_id), {prompt: 'अध्याय को चुनिये'}, class: 'form-control', 'data-admin-scr-article-target': 'chapterId' %>
+          <% else %>
+            <%= form.select :chapter_id, options_for_select(chapters, form.object.chapter_id), {prompt: 'अध्याय को चुनिये'}, class: 'form-control', 'data-admin-scr-article-target': 'chapterId', 'disabled': 'disabled' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class='mb-3'>
+      <div class="row">
+        <div class="col-md-6">
+          <label class='form-label'>
+            रचना प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </label>
+          <% 
+            artcle_types = article_types.map{|at| [at.name, at.id]}
+          %>
+          <%= form.select :article_type_id, options_for_select(artcle_types, form.object.article_type_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, class: 'form-control', 'data-admin-scr-article-target': 'articleTypeId' %>
+        </div>
+        <div class="col-md-6">
+          <label class='form-label'>
+            रचना का इंडेक्स (अनुक्रम) <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </label>
+          <%= form.text_field :article_index, class: 'form-control', 'data-admin-scr-article-target': 'articleIndex' %>
+        </div>
+      </div>
+    </div>
+
+    <div id="hindi_block">
+      <div class='mb-3'>
+        <label class='form-label'>
+          रचना <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_area :content, class: 'tinymce', 'data-admin-scr-article-target': 'content' %>
+      </div>
+
+      <div class='mb-3'>
+        <label class='form-label'>
+          रचना का अर्थ <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_area :interpretation, class: 'tinymce','data-admin-scr-article-target': 'interpretation' %>
+      </div>
+    </div>
+
+    <div id="eng_block" style="display: none;">
+      <div class='mb-3'>
+        <label class='form-label'>
+          रचना <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_area :content_eng, class: 'tinymce', 'data-admin-scr-article-target': 'contentEng' %>
+      </div>
+
+      <div class='mb-3'>
+        <label class='form-label'>
+          रचना का अर्थ <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_area :interpretation_eng, class: 'tinymce', 'data-admin-scr-article-target': 'interpretationEng' %>
+      </div>
+    </div>
+
+    <div class='text-center mt-3 actions'>
+      <div class="row">
+        <div class="col-md-4">
+          <% if form.object.id.blank? %>
+            <%= form.button "अध्याय जोड़े", type: 'button', class: 'btn btn-lg btn-primary form-control', 
+            'data-operation': 'new', 'data-action': 'click->admin-scr-article#formSubmit' %>
+          <% else %>
+            <%= form.submit "अध्याय अद्यतन करे", type: 'button', class: 'btn btn-lg btn-primary form-control', 
+              'data-operation': 'edit',  'data-action': 'click->admin-scr-article#formSubmit' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<% end %>

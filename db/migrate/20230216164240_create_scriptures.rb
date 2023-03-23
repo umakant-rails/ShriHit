@@ -6,9 +6,10 @@ class CreateScriptures < ActiveRecord::Migration[7.0]
       t.string    :name
       t.text      :description
       t.string    :author
-      t.string    :size
-      # t.boolean   :has_section, default: false
-      t.boolean   :has_chapter, default: false
+      t.integer   :category
+      t.boolean   :has_section, default: false
+      t.string :keywords
+
       t.timestamps
     end
   end

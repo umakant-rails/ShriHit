@@ -3,6 +3,7 @@
     <tr>
       <th>S. No.</th>
       <th>रसिक ग्रन्थ/वाणी सेक्शन</th>
+      <th>रचना जोड़े</th>
       <th>गतिविधि</th>
     </tr>
   </thead>
@@ -20,6 +21,11 @@
           </td>
           <td>
             <%= link_to section.title, admin_section_path(section) %>
+          </td>
+          <td>
+            <%= link_to new_admin_section_scripture_article_path(section.id), class: "btn btn-primary" do %>
+              <i class="fa-solid fa-file-circle-plus"></i> रचना जोड़े
+            <% end %>
           </td>
           <td>
             <%= link_to admin_section_path(section) do %>

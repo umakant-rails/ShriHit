@@ -22,12 +22,13 @@ module ApplicationHelper
     end
   end
 
-  def show_collapse_items(controller)
-    if params[:controller] == "theme_chapters"
-      return controller == "themes" ? "show" : nil
-    else
-      return (controller == params[:controller]) ? "show" : nil
-    end
+  def show_collapse_items(controllers)
+    # if params[:controller] == "theme_chapters"
+    #   return controller == "themes" ? "show" : nil
+    # else
+    #   return (controller == params[:controller]) ? "show" : nil
+    # end
+    return controllers.index(params[:controller]).present? ? "show" : nil
   end
 
   def set_active(controller, action)

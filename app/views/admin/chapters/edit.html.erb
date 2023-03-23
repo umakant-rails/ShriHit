@@ -3,13 +3,17 @@
     <div class="card">
       <div class="card-body">
         <div class="col-md-12 page-subject-header">
-          अध्याय अद्यतन फॉर्म
+          <%= @chapter.is_section ? 'सेक्शन अद्यतन फॉर्म': 'अध्याय अद्यतन फॉर्म' %>
         </div>
         <div class="dropdown-divider"></div>
         <div class="m-sm-4">
-          <%= render "form", chapter: @chapter %>
+          <% if @chapter.is_section %>
+            <%= render "section_form", chapter: @chapter, scripture_id: @scripture.id %>
+          <% else %>
+            <%= render "form", chapter: @chapter, sections: @sections %>
+          <% end %>
         </div>
-        <%= link_to "रसिक वाणी/ग्रन्थ सूची देखे", new_admin_section_path %>
+        <%= link_to "रसिक वाणी/ग्रन्थ सूची देखे", admin_chapters_path %>
       </div>
     </div>
   </div>

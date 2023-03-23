@@ -1,6 +1,6 @@
 var options = '<option value="">सेक्शन को चुनिये</option>';
 
 <% @sections && @sections.each do | section | %>
-  options = options + '<option value="<%= section.id %>"><%= section.title %></option>'
+  options = options + '<option value="<%= section.id %>"><%= section.name %></option>'
 <% end %>
-$("#chapter_section_id").html(options);
+$("#chapter_parent_id").html(options);

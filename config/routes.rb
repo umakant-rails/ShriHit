@@ -111,9 +111,12 @@ Rails.application.routes.draw do
     end
 
     resources :scriptures 
-    resources :sections
     resources :chapters do 
       get '/get_sections' => "chapters#get_sections", as: :get_sections, on: :collection
+    end
+    resources :scripture_articles do
+      get '/get_sections' => "scripture_articles#get_sections", as: :get_sections, on: :collection
+      get '/get_chapters' => "scripture_articles#get_section_chapters", as: :get_chapters, on: :collection
     end
 
   end

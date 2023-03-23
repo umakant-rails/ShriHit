@@ -5,6 +5,7 @@
       <th>अध्याय का नाम</th>
       <th>सेक्शन का नाम</th>
       <th>रसिक वाणी/ग्रन्थ का नाम</th>
+      <th>रचना जोड़े</th>
       <th>गतिविधि</th>
     </tr>
   </thead>
@@ -22,15 +23,20 @@
           </td>
           <td>
             <strong>
-              <%= link_to chapter.title, admin_chapter_path(chapter) %>
+              <%= chapter.name %>
             </strong>
           </td>
           <td>
-            <%= link_to chapter.section.title, admin_section_path(chapter.section.id) %>
+            <%= chapter.section.present? ? chapter.section.name : '-' %>
           </td>
           <td>
-            <% scripture = chapter.section.scripture %>
+            <% scripture = chapter.scripture %>
             <%= link_to scripture.name, admin_scripture_path(scripture.id) %>
+          </td>
+          <td>
+            <%= link_to new_admin_scripture_article_path, class: "btn btn-primary" do %>
+              <i class="fa-solid fa-file-circle-plus"></i> रचना जोड़े
+            <% end %>
           </td>
           <td>
             <%= link_to edit_admin_chapter_path(chapter) do %>
@@ -42,7 +48,7 @@
       <% end %>
     <% else %>
       <tr>
-        <td colspan="3">
+        <td colspan="6">
           <center>अभी कोई डाटा उपलब्ध नहीं है</center>
         </td>
       </tr>

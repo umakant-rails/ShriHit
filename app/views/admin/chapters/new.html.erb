@@ -3,13 +3,18 @@
     <div class="card">
       <div class="card-body">
         <div class="col-md-12 page-subject-header">
-          अध्याय फॉर्म
+          <%= params[:scripture_id].present? ? 'सेक्शन फॉर्म': 'अध्याय फॉर्म' %>
         </div>
         <div class="dropdown-divider"></div>
         <div class="m-sm-4" data-controller="admin-chapter">
-          <%= render "form", chapter: @chapter %>
+          <% if params[:scripture_id].present? %>
+            <%= render "section_form", chapter: @chapter, scripture_id: nil %>
+          <% else %>
+            <%= render "form", chapter: @chapter, sections: nil %>
+          <% end %>
         </div>
-        <%= link_to "रसिक वाणी/ग्रन्थ सूची देखे", new_admin_section_path %>
+        <div class="dropdown-divider"></div>
+        <%= link_to "अध्याय की सूची देखे", admin_chapters_path %>
       </div>
     </div>
   </div>

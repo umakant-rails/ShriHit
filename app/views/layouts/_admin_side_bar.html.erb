@@ -13,7 +13,8 @@
   # is_report_active = show_admin_collapse_items(["report"])
   is_article_type_active = show_collapse_items("admin/article_types")
   is_contexts_active = show_collapse_items("admin/contexts")
-  is_bhakti_granth_active = show_collapse_items("admin/scriptures")
+  is_scripture_active = show_collapse_items("admin/scriptures,admin/chapters,admin/scripture_articles")
+  is_chpater_active = show_collapse_items("admin/chapters")
 %>
 <li class="sidebar-item">
   <a class="sidebar-link admin-bar-lnk" data-bs-toggle="collapse" href="#appContent" role="button"
@@ -151,10 +152,10 @@
     <span class="align-middle">
       रसिक वाणी/ग्रन्थ
     </span>
-    <i class="fa-solid fa-angle-<%= (is_bhakti_granth_active == "show") ? "down" : "right" %>"></i>
+    <i class="fa-solid fa-angle-<%= (is_scripture_active == "show") ? "down" : "right" %>"></i>
   </a>
 </li>
-<div class="collapse  <%= is_bhakti_granth_active %>" data-sidebar-target="scriptureListBlock" id="scriptureList">
+<div class="collapse  <%= is_scripture_active %>" data-sidebar-target="scriptureListBlock" id="scriptureList">
   <li class="sidebar-item <%= set_active("admin/scriptures", "new") %>">
     <a class="sidebar-link" href="<%= new_admin_scripture_path %>">
       <span class="align-middle">
@@ -169,31 +170,31 @@
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("admin/scriptures", "others") %>">
-    <a class="sidebar-link" href="<%= new_admin_section_path %>">
-      <span class="align-middle">
-        सेक्शन जोड़े
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_active("admin/scriptures", "others") %>">
-    <a class="sidebar-link" href="<%= admin_sections_path %>">
-      <span class="align-middle">
-        सेक्शन सूची
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_active("admin/scriptures", "others") %>">
+  <li class="sidebar-item <%= set_active("admin/chapters", "new") %>">
     <a class="sidebar-link" href="<%= new_admin_chapter_path %>">
       <span class="align-middle">
         अध्याय जोड़े
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("admin/scriptures", "others") %>">
+  <li class="sidebar-item <%= set_active("admin/chapters", "others") %>">
     <a class="sidebar-link" href="<%= admin_chapters_path %>">
       <span class="align-middle">
         अध्याय सूची
+      </span>
+    </a>
+  </li>
+  <li class="sidebar-item <%= set_active("admin/scripture_articles", "new") %>">
+    <a class="sidebar-link" href="<%= new_admin_scripture_article_path %>">
+      <span class="align-middle">
+        रसिक वाणी/ग्रन्थ रचना जोड़े
+      </span>
+    </a>
+  </li>
+  <li class="sidebar-item <%= set_active("admin/scripture_articles", "others") %>">
+    <a class="sidebar-link" href="<%= admin_scripture_articles_path %>">
+      <span class="align-middle">
+        रसिक वाणी/ग्रन्थ रचना सूची
       </span>
     </a>
   </li>
