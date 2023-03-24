@@ -8,7 +8,7 @@ class CreateScriptureArticles < ActiveRecord::Migration[7.0]
       t.text      :content_eng
       t.text      :interpretation
       t.text      :interpretation_eng
-      t.integer   :article_index
+      t.integer   :index
 
       t.timestamps
     end

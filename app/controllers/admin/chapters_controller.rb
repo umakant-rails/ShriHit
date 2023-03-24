@@ -75,11 +75,37 @@ class Admin::ChaptersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def add_section_chapters
+    @scriptures = Scripture.where("category>2")
+  end
+
+  def remove_section_chapters
+    @scriptures = Scripture.where("category>2")
+  end
 
   def get_sections
-    @scripture = current_user.scriptures.find(params[:scripture_id])
-    @sections = @scripture.sections
+    @scripture = current_user.scriptures.find(params[:scripture_id]) rescue nil
+    @sections = @scripture.sections rescue nil
+    @chapters = @scripture.chapters.where("is_section is false and parent_id is null") rescue nil
   end
+
+  def get_section_chapters
+    @section = Chapter.find(params[:section_id])
+    @chapters = @section.chapters
+  end
+
+  def add_chapters_in_section
+    Chapter.where("id in (?)", params[:chapters]).update(parent_id: params[:section_id])
+    @scripture = Scripture.find(params[:scripture_id])
+    @chapters = @scripture.chapters.where("is_section is false and parent_id is null")
+  end
+
+  def remove_chapters_from_section
+    Chapter.where("id in (?)", params[:chapters]).update(parent_id: nil)
+    @section = Chapter.find(params[:section_id]) rescue nil
+    @chapters = @section.chapters rescue nil
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.

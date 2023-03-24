@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.string "name"
     t.integer "parent_id"
     t.boolean "is_section", default: false
+    t.integer "index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -197,7 +198,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.text "content_eng"
     t.text "interpretation"
     t.text "interpretation_eng"
-    t.integer "article_index"
+    t.integer "index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

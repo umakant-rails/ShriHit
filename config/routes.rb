@@ -110,13 +110,18 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :scriptures 
+    resources :scriptures
     resources :chapters do 
       get '/get_sections' => "chapters#get_sections", as: :get_sections, on: :collection
+      get '/get_section_chapters' => "chapters#get_section_chapters", as: :get_section_chapters, on: :collection
+      get '/add_section_chapters' => "chapters#add_section_chapters", as: :add_section_chapters, on: :collection
+      get '/remove_section_chapters' => "chapters#remove_section_chapters", as: :remove_section_chapters, on: :collection
+      post '/add_chapters_in_section' => "chapters#add_chapters_in_section", as: :add_chapters_in_section, on: :collection
+      post '/remove_chapters_from_section' => "chapters#remove_chapters_from_section", as: :remove_chapters_from_section, on: :collection
     end
     resources :scripture_articles do
-      get '/get_sections' => "scripture_articles#get_sections", as: :get_sections, on: :collection
-      get '/get_chapters' => "scripture_articles#get_section_chapters", as: :get_chapters, on: :collection
+      get '/get_chapters' => "scripture_articles#get_chapters", as: :get_chapters, on: :collection
+      get '/get_index' => "scripture_articles#get_index", as: :get_index, on: :collection
     end
 
   end

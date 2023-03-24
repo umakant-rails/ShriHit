@@ -8,49 +8,34 @@
       <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
     </div>
     <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"  data-admin-scr-article-target="csrfToken">
-
-    <div class='mb-3'>
-      <label class='form-label'>
-        रसिक ग्रन्थ/वाणी का नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-      </label>
-      <% 
-        scripture_names = scriptures.map{|at| [at.name, at.id]}
-      %>
-      <%= form.select :scripture_id, options_for_select(scripture_names, form.object.scripture_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
-        class: 'form-control', 'data-action': 'change->admin-scr-article#getScriptureSections', 
-        'data-admin-scr-article-target': 'scriptureId'
-        %>
-    </div>
     <% 
-      chapter = form.object.id.present? ? form.object.chapter : nil
-      sections = chapter.present? ? chapter.scripture.sections : []
-      section_list = sections.present? ? sections.map{ |s| [s.name, s.id] } : []
-
-      section = chapter.present? ? chapter.section : nil
-      chapters = section.present? ? section.chapters.map{ |c| [c.name, c.id] } : []
+      scripture = form.object.id.present? ? form.object.scripture : nil
+      chapters = scripture.present? ? scripture.chapters.map{|c| [c.name, c.id]} : []
     %>
     <div class='mb-3'>
       <div class="row">
         <div class="col-md-6">
           <label class='form-label'>
-            सेक्शन का नाम
+            रसिक ग्रन्थ/वाणी का नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
           </label>
-          <% if sections.present? %>
-            <%= select_tag 'section_id', options_for_select(section_list, form.object.chapter.section.id), prompt: "सेक्शन को चुनिये", class:"form-control", 'data-action': 'change->admin-scr-article#getSectionChapters' ,
-              'data-admin-scr-article-target': 'sectionId' %>
-          <% else %>
-            <%= select_tag 'section_id', options_for_select(section_list), prompt: "सेक्शन को चुनिये", class:"form-control", 'data-action': 'change->admin-scr-article#getSectionChapters' ,
-              'data-admin-scr-article-target': 'sectionId', 'disabled': 'disabled' %>
-          <% end %> 
+          <% 
+            scripture_names = scriptures.map{|at| [at.name, at.id]}
+          %>
+          <%= form.select :scripture_id, options_for_select(scripture_names, form.object.scripture_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
+            class: 'form-control', 'data-action': 'change->admin-scr-article#getChapters', 
+            'data-admin-scr-article-target': 'scriptureId'
+            %>
         </div>
         <div class="col-md-6">
           <label class='form-label'>
             अध्याय का नाम
           </label>
           <% if chapters.present? %>
-            <%= form.select :chapter_id, options_for_select(chapters, form.object.chapter_id), {prompt: 'अध्याय को चुनिये'}, class: 'form-control', 'data-admin-scr-article-target': 'chapterId' %>
+            <%= form.select :chapter_id, options_for_select(chapters, form.object.chapter_id), {prompt: 'अध्याय को चुनिये'}, class: 'form-control', 'data-action': 'change->admin-scr-article#getIndex',
+             'data-admin-scr-article-target': 'chapterId' %>
           <% else %>
-            <%= form.select :chapter_id, options_for_select(chapters, form.object.chapter_id), {prompt: 'अध्याय को चुनिये'}, class: 'form-control', 'data-admin-scr-article-target': 'chapterId', 'disabled': 'disabled' %>
+            <%= form.select :chapter_id, options_for_select(chapters, form.object.chapter_id), {prompt: 'अध्याय को चुनिये'}, class: 'form-control', 'data-action': 'change->admin-scr-article#getIndex',
+              'data-admin-scr-article-target': 'chapterId', 'disabled': 'disabled' %>
           <% end %>
         </div>
       </div>
@@ -71,7 +56,7 @@
           <label class='form-label'>
             रचना का इंडेक्स (अनुक्रम) <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
           </label>
-          <%= form.text_field :article_index, class: 'form-control', 'data-admin-scr-article-target': 'articleIndex' %>
+          <%= form.text_field :index, class: 'form-control', 'data-admin-scr-article-target': 'articleIndex' %>
         </div>
       </div>
     </div>

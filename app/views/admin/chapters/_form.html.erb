@@ -21,14 +21,6 @@
 
     <div class='mb-3'>
       <label class='form-label'>
-        सेक्शन
-      </label>
-      <% section_list = form.object.parent_id.present? ? sections.map{|s| [s.name, s.id]} : []%>
-      <%= form.select :parent_id, options_for_select(section_list, form.object.parent_id), {prompt: "सेक्शन को चुनिये"}, class: 'form-control' %>
-    </div>
-
-    <div class='mb-3'>
-      <label class='form-label'>
         अध्याय का शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
       </label>
       <%= form.text_field :name, class: 'form-control' %>

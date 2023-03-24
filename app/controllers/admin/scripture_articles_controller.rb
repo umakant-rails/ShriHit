@@ -54,21 +54,15 @@ class Admin::ScriptureArticlesController < ApplicationController
     end
   end
 
-  def get_sections
-    @scripture = Scripture.find(params[:scripture_id]) rescue nil 
-    @last_article = @scripture.scripture_articles.order("article_index ASC").last rescue nil
-
-    if @scripture && @scripture.category == 2
-      @chapters = @scripture.chapters
-    elsif @scripture &&  @scripture.category == 3
-      @sections = @scripture.present? ? @scripture.sections : nil
-    end
-    #@scriptures = @scripture.present? ? @scripture.scriptures : nil
+  def get_chapters
+    @scripture = Scripture.find(params[:scripture_id]) rescue nil
+    @chapters = @scripture.present? ? @scripture.chapters : nil
+    @last_article = @scripture.scripture_articles.order("index ASC").last rescue nil
   end
 
-  def get_section_chapters
-    @section = Chapter.find(params[:chapter_id]) rescue nil
-    @chapters = @section.present? ? @section.chapters : nil
+  def get_index
+    @chapter = Chapter.find(params[:chapter_id])
+    @last_article = @chapter.scripture_articles.order("index ASC").last rescue nil
   end
 
   private
@@ -80,7 +74,7 @@ class Admin::ScriptureArticlesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def scripture_article_params
       params.fetch(:scripture_article, {}).permit(:scripture_id, :article_type_id, :content, :content_eng, 
-        :interpretation, :interpretation_eng, :chapter_id, :article_index)
+        :interpretation, :interpretation_eng, :chapter_id, :index)
     end
 
     def verify_admin

@@ -21,7 +21,7 @@
 <% end %>
 
 <% if @last_article.present? %>
-  $("#scripture_article_article_index").val(<%= @last_article.article_index + 1 %>);
+  $("#scripture_article_index").val(<%= @last_article.index + 1 %>);
 <% else %>
-  $("#scripture_article_article_index").val(1);
+  $("#scripture_article_index").val(1);
 <% end %>

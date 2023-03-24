@@ -1,0 +1,15 @@
+<% if @chapters.present? %>
+  var chapters_str = '';
+  <% @chapters && @chapters.each do |chapter|%>
+    chapters_str += `<div class="chapter-element" data-action="click->admin-chapter#updateCheckboxStatus">
+      <input class="form-check-input" type="checkbox" data-admin-chapter-target="chapter"
+        value="<%= chapter.id %>" checked id="chapter-<%=chapter.id%>">
+        <label for="chapter-<%=chapter.id%>">
+          <%= chapter.name %>
+        </label>
+    </div>`
+  <% end %>
+  $("#chapter-block").html(chapters_str);
+<% else %>
+  $("#chapter-block").html('इस सेक्शन में कोई भी अध्याय नहीं है');
+<% end %>

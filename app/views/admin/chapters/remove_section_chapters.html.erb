@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          <%= params[:action_type] == "add_chapter" ? "सेक्शन में अध्याय जोड़े" : "सेक्शन से अध्याय हटायें" %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller= 'admin-chapter'>
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"  data-admin-chapter-target="csrfToken">
+          <div class='mb-3'>
+            <%= hidden_field_tag 'action_type', 'remove_chapter', class:"form-control", 'data-admin-chapter-target': 'actionType' %>
+          </div>
+          <div class='mb-3'>
+            <label class='form-label'>
+              रसिक वाणी/ग्रन्थ
+            </label>
+            <%= select_tag 'scripture', options_from_collection_for_select(@scriptures, "id", "name"), :prompt => "रसिक ग्रन्थ/वाणी चुने", class:"form-control", 'data-admin-chapter-target': 'scripture', 'data-action': 'change->admin-chapter#getSections' %>
+          </div>
+          <div class='mb-3'>
+            <label class='form-label'>
+              सेक्शन
+            </label>
+            <% if params[:action_type] == "add_chapter" %>
+               <%= select_tag 'section', options_for_select([]), :prompt => "सेक्शन चुने", class:"form-control", 'data-admin-chapter-target': 'section' %>
+            <% else %>
+              <%= select_tag 'section', options_for_select([]), :prompt => "सेक्शन चुने", class:"form-control", 'data-admin-chapter-target': 'section', 'data-action': 'change->admin-chapter#getSectionChapters' %>
+            <% end %>
+          </div>
+          <div class='mb-3'>
+            <div id="chapter-block" class="p-sm-2">
+            </div>
+          </div>
+          <div class='mb-3'>
+            <% if params[:action_type] == "add_chapter" %>
+              <div class="col-md-3">
+                <input type="button" class="form-control btn btn-primary" value="सेक्शन में अध्याय जोड़े" 
+                  data-action="click->admin-chapter#addChaptersInSection" />
+              </div>
+            <% else %>
+              <div class="col-md-3">
+                <input type="button" class="form-control btn btn-danger" value="सेक्शन से अध्याय हटायें" 
+                  data-action="click->admin-chapter#removeChaptersFromSection" />
+              </div>
+            <% end %>
+            <!-- <div class="row">
+              <div class="col-md-3">
+                <input type="button" class="form-control btn btn-primary" value="सेक्शन में अध्याय जोड़े" 
+                  data-action="click->admin-chapter#addChaptersInSection" />
+              </div>
+              <div class="col-md-3">
+                <input type="button" class="form-control btn btn-danger" value="सेक्शन से अध्याय हटायें" 
+                  data-action="click->admin-chapter#removeChaptersFromSection" />
+              </div>
+            </div> -->
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+      </div>
+    </div>
+  </div>
+</div>

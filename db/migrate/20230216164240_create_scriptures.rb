@@ -8,7 +8,7 @@ class CreateScriptures < ActiveRecord::Migration[7.0]
       t.string    :author
       t.integer   :category
       t.boolean   :has_section, default: false
-      t.string :keywords
+      t.string    :keywords
 
       t.timestamps
     end

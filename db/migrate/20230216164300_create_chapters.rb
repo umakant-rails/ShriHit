@@ -5,6 +5,7 @@ class CreateChapters < ActiveRecord::Migration[7.0]
       t.string    :name
       t.integer   :parent_id
       t.boolean   :is_section, default: false
+      t.integer   :index
       
       t.timestamps
     end

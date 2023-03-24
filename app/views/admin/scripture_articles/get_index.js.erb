@@ -1,0 +1,7 @@
+<% if @last_article.present? %>
+  $("#scripture_article_index").val(<%= @last_article.index + 1 %>);
+<% else %>
+  $("#scripture_article_index").val(1);
+<% end %>
+
+

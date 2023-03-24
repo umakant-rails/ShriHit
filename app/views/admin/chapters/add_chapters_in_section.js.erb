@@ -1,10 +1,4 @@
-var options = '<option value="">सेक्शन को चुनिये</option>';
-<% @sections && @sections.each do | section | %>
-  options = options + '<option value="<%= section.id %>"><%= section.name %></option>'
-<% end %>
-$("#section").html(options);
-
-<% if @chapters.present? and params[:action_type] == "add_chapter" %>
+<% if @chapters.present? %>
   var chapters_str = '';
   <% @chapters && @chapters.each do |chapter|%>
     chapters_str += `<div class="chapter-element" data-action="click->admin-chapter#updateCheckboxStatus">
@@ -18,5 +12,5 @@ $("#section").html(options);
   <% end %>
   $("#chapter-block").html(chapters_str);
 <% else %>
-   $("#chapter-block").html('');
+  $("#chapter-block").html('इस रसिक वाणी/ग्रन्थ के सभी अध्याय लिंक किये जा चुके है');
 <% end %>

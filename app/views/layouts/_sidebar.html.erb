@@ -8,11 +8,13 @@
         <%= render partial: "layouts/admin_side_bar" %>
       <% end %>
       <%
-       is_articles_active = show_collapse_items("articles")
-       is_authors_active = show_collapse_items("authors")
-       is_themes_active = show_collapse_items("themes,theme_chapters")
-       is_tags_active = show_collapse_items("tags")
-       is_sant_bio_active = show_collapse_items("saint_bio_events")
+        is_articles_active = show_collapse_items("articles")
+        is_authors_active = show_collapse_items("authors")
+        is_themes_active = show_collapse_items("themes,theme_chapters")
+        is_tags_active = show_collapse_items("tags")
+        is_sant_bio_active = show_collapse_items("saint_bio_events")
+        new_actions = ['new'] 
+        other_actions = ['index', 'show', 'edit']
       %>
       <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
@@ -26,14 +28,14 @@
         </a>
       </li>
       <div class="collapse <%= is_articles_active %>" data-sidebar-target="anchorListBlock" id="aricleList">
-        <li class="sidebar-item <%= set_active("articles", "new") %>">
+        <li class="sidebar-item <%= set_active("articles", new_actions) %>">
           <a class="sidebar-link" href="<%= new_article_path %>">
             <span class="align-middle">
               नई रचना जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active("articles", "others") %>">
+        <li class="sidebar-item <%= set_active("articles", other_actions) %>">
           <a class="sidebar-link" href="<%= articles_path %>">
             <span class="align-middle">
               रचना सूची
@@ -52,14 +54,14 @@
         </a>
       </li>
       <div class="collapse <%= is_authors_active %>" data-sidebar-target="anchorListBlock" id="authorList">
-        <li class="sidebar-item <%= set_active("authors", "new") %>">
+        <li class="sidebar-item <%= set_active("authors", new_actions) %>">
           <a class="sidebar-link" href="<%= new_author_path %>">
             <span class="align-middle">
               रचनाकार जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active("authors", "others") %>">
+        <li class="sidebar-item <%= set_active("authors", other_actions) %>">
           <a class="sidebar-link" href="<%= authors_path %>">
             <span class="align-middle">
               रचनाकार सूची
@@ -78,28 +80,28 @@
         </a>
       </li>
       <div class="collapse  <%= is_themes_active %>" data-sidebar-target="anchorListBlock" id="themeList">
-        <li class="sidebar-item <%= set_active("themes", "new") %>">
+        <li class="sidebar-item <%= set_active("themes", new_actions) %>">
           <a class="sidebar-link" href="<%= new_theme_path %>">
             <span class="align-middle">
               उत्सव जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active("themes", "others") %>">
+        <li class="sidebar-item <%= set_active("themes", other_actions) %>">
           <a class="sidebar-link" href="<%= themes_path %>">
             <span class="align-middle">
               उत्सव सूची
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active("theme_chapters", "new") %>">
+        <li class="sidebar-item <%= set_active("theme_chapters", new_actions) %>">
           <a class="sidebar-link" href="<%= new_theme_chapter_path %>">
             <span class="align-middle">
               उत्सव का खंड/प्रकरण जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active("theme_chapters", "others") %>">
+        <li class="sidebar-item <%= set_active("theme_chapters", other_actions) %>">
           <a class="sidebar-link" href="<%= theme_chapters_path %>">
             <span class="align-middle">
               उत्सव के खंड/प्रकरण सूची
@@ -118,14 +120,14 @@
         </a>
       </li>
       <div class="collapse  <%= is_tags_active %>" data-sidebar-target="anchorListBlock" id="tagList">
-        <li class="sidebar-item <%= set_active("tags", "new") %>">
+        <li class="sidebar-item <%= set_active("tags", new_actions) %>">
           <a class="sidebar-link" href="<%= new_tag_path %>">
             <span class="align-middle">
               टैग्स जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active("tags", "others") %>">
+        <li class="sidebar-item <%= set_active("tags", other_actions) %>">
           <a class="sidebar-link" href="<%= tags_path %>">
             <span class="align-middle">
               टैग्स सूची
@@ -134,7 +136,7 @@
         </li>
       </div>
       <div class="dropdown-divider1"></div>
-      <li class="sidebar-item <%= set_active("panchangs", "others") %>">
+      <li class="sidebar-item <%= set_active("panchangs", other_actions) %>">
         <a class="sidebar-link" href="<%= panchangs_path %>">
           <span class="align-middle">
             पंचांग
@@ -153,14 +155,14 @@
       </li>
       <div class="dropdown-divider1"></div>
       <div class="collapse <%= is_sant_bio_active %>" data-sidebar-target="anchorListBlock" id="saintBioEvents">
-        <li class="sidebar-item <%= set_active("saint_bio_events", "new") %>">
+        <li class="sidebar-item <%= set_active("saint_bio_events", new_actions) %>">
           <a class="sidebar-link" href="<%= new_saint_bio_event_path %>">
             <span class="align-middle">
               संत जीवनी जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%= set_active("saint_bio_events", "others") %>">
+        <li class="sidebar-item <%= set_active("saint_bio_events", other_actions) %>">
           <a class="sidebar-link" href="<%= saint_bio_events_path %>">
             <span class="align-middle">
               संत जीवनी सूची
@@ -169,7 +171,7 @@
         </li>
       </div>
       <!-- <div class="dropdown-divider1"></div>
-      <li class="sidebar-item <%#= set_active("panchangs", "others") %>">
+      <li class="sidebar-item <%#= set_active("panchangs", other_actions) %>">
         <a class="sidebar-link" data-bs-toggle="collapse" href="#bhaktiPrasang"  role="button" aria-expanded="false"
           aria-controls="tagList" data-id="bhaktiPrasang" data-action="click->sidebar#toggleTab">
           <span class="align-middle">
@@ -179,14 +181,14 @@
         </a>
       </li>
       <div class="collapse <%#= is_bhakti_prasang_active %>" data-sidebar-target="anchorListBlock" id="bhaktiPrasang">
-        <li class="sidebar-item <%#= set_active("bhakti_prasangs", "new") %>">
+        <li class="sidebar-item <%#= set_active("bhakti_prasangs", new_actions) %>">
           <a class="sidebar-link" href="<%#= new_bhakti_prasang_path %>">
             <span class="align-middle">
               भक्ति प्रसंग जोड़े
             </span>
           </a>
         </li>
-        <li class="sidebar-item <%#= set_active("bhakti_prasangs", "others") %>">
+        <li class="sidebar-item <%#= set_active("bhakti_prasangs", other_actions) %>">
           <a class="sidebar-link" href="<%#= bhakti_prasangs_path %>">
             <span class="align-middle">
               भक्ति प्रसंग सूची
