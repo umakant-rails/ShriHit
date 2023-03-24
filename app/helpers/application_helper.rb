@@ -34,7 +34,7 @@ module ApplicationHelper
     # end
     # if controller == params[:controller] && action == "others"
     #   return "active"
-    if controller == params[:controller] && action.index(params[:action]).present?
+    if controller.index(params[:controller]).present? && action.index(params[:action]).present?
       return "active"
     else
       return nil
