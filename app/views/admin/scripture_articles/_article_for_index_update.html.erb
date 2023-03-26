@@ -4,9 +4,6 @@
       <th>S. No.</th>
       <th>रचना</th>
       <th>अनुक्रम</th>
-      <th>अध्याय</th>
-      <th>रसिक वाणी/ग्रन्थ</th>
-      <th>गतिविधि</th>
     </tr>
   </thead>
   <tbody>
@@ -17,7 +14,7 @@
       %>
       <% scripture_articles.each_with_index do |scr_article, index| %>
         <% ind = (page * per_page) + (index + 1) %>
-        <tr>
+        <tr id="scr_article_<%= scr_article.id %>">
           <td scope="row">
             <%= ind %>
           </td>
@@ -25,19 +22,9 @@
             <%=raw scr_article.content %>
           </td>
           <td>
-            <%= scr_article.index %>
-          </td>
-          <td>
-            <%= scr_article.chapter.present? ? scr_article.chapter.name : '-' %>
-          </td>
-          <td>
-            <%= scr_article.scripture.name %>
-          </td>
-          <td>
-            <%= link_to edit_admin_scripture_article_path(scr_article) do %>
-              <i class="fa fa-edit"></i>
-            <% end %>
-            <%= button_to '<i class="fa fa-trash" style="color:red;"></i>'.html_safe, admin_scripture_article_path(scr_article), method: :delete, style: "border: 0px", form: {class: 'ps-0 pe-0', style: "display:inline-block; font-size: 18px;"} %>
+            <%= number_field_tag "index", scr_article.index, style: "width: 60px", 'data-admin-scr-article-target': 'articleIndex' %>
+            <%= button_tag 'अनुक्रम अद्यतित करे', type:"button", class: "btn btn-primary", style:"display:inline-block;", 'data-articleId': scr_article.id,
+              'data-action': 'click->admin-scr-article#updateArticleIndex' %>
           </td>
         </tr>
       <% end %>
@@ -54,3 +41,4 @@
   <%= paginate scripture_articles, remote: true %>
   <div class="dropdown-divider"></div>
 <% end %>
+<%= link_to "नई रसिक वाणी/ग्रन्थ", new_admin_scripture_article_path %>

@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" data-controller="admin-scr-article">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          रसिक वाणी/ग्रन्थ रचना
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-2" id="scr-article-list">
+          <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-scr-article-target="csrfToken">
+          <div class="row">
+            <div class="col-md-6">
+              <label class='form-label'>
+                रसिक वाणी/ग्रन्थ
+              </label>
+              <%= select_tag 'scripture', options_from_collection_for_select(@scriptures, "id", "name"), :prompt => "रसिक ग्रन्थ/वाणी चुने", class:"form-control", 'data-admin-scr-article-target': 'scripture', 'data-action': 'change->admin-scr-article#getChapters' %>
+            </div>
+            <div class='col-md-6'>
+              <label class='form-label'>
+                सेक्शन
+              </label>
+              <%= select_tag 'chapter', options_for_select([]), :prompt => "सेक्शन चुने", class:"form-control", 'data-admin-scr-article-target': 'chapter', 'id': 'scripture_article_chapter_id',
+                'data-action': 'change->admin-scr-article#getArticles' %>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="article-list">
+          अभी कोई डाटा उपलब्ध नहीं है
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

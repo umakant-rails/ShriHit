@@ -14,10 +14,10 @@ class Admin::ScriptureArticlesController < ApplicationController
   end
 
   def create
-    @scr_article = ScriptureArticle.new(scripture_article_params)
+    @scripture_article = ScriptureArticle.new(scripture_article_params)
 
     respond_to do |format|
-      if @scr_article.save
+      if @scripture_article.save
         # format.html { redirect_to admin_scripture_article_url(@scr_article.id), notice: "Scripture Article was successfully created." }
         #format.json { render :show, status: :created, location: @scr_article }
         format.js {}
@@ -46,11 +46,28 @@ class Admin::ScriptureArticlesController < ApplicationController
   end
 
   def destroy
-     @scripture_article.destroy
+    @scripture_article.destroy
 
     respond_to do |format|
       format.html { redirect_to admin_scripture_articles_url, notice: "Scripture Article was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def edit_article_index
+    @scriptures = Scripture.all
+  end
+
+  def update_article_index
+    @scripture_article = ScriptureArticle.find(params[:article_id])
+    respond_to do |format|
+      if @scripture_article.update({index: params[:article_index]})
+        format.html { }
+        format.js { render status: 200 }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @scripture_article.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -60,13 +77,18 @@ class Admin::ScriptureArticlesController < ApplicationController
     @last_article = @scripture.scripture_articles.order("index ASC").last rescue nil
   end
 
+  def get_chapter_articles
+    @chapter = Chapter.find(params[:chapter_id])
+    @articles = @chapter.scripture_articles.order("index ASC").page(params[:page])
+  end
+
   def get_index
     @chapter = Chapter.find(params[:chapter_id])
     @last_article = @chapter.scripture_articles.order("index ASC").last rescue nil
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup or constraints between actions.    
     def set_scripture
       @scripture_article = ScriptureArticle.find(params[:id])
     end

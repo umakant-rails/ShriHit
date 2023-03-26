@@ -3,8 +3,8 @@ import ApplicationController from "../application_controller";
 
 export default class extends ApplicationController {
   static targets = ['scriptureId',  'chapterId', 'articleTypeId', 'articleIndex', 
-    'content', 'interpretation', 'contentEng', 'interpretationEng', 'csrfToken', 'form'];
-  //'sectionId',
+    'content', 'interpretation', 'contentEng', 'interpretationEng', 'csrfToken', 'form',
+    'articleIndex'];
 
   connect(){
     this.params = {};
@@ -74,14 +74,44 @@ export default class extends ApplicationController {
     if(operation_type == 'edit') {
       this.formTarget.submit();
     } else {
-      this.get_data('POST', '/admin/scripture_articles', this.params)
+      this.get_data('POST', '/admin/scripture_articles', this.params).then(data => {
+        super.showsuccessMsgByLayout("रचना को सफलतापूर्वक बना दिया गया है.");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     }
 
   }
 
+  getArticles(){
+    this.params = {};
+    let chapterId = event.target.value;
+    this.params.chapter_id = chapterId;
+    if(chapterId != ''){
+      this.get_data('GET', '/admin/scripture_articles/get_chapter_articles', this.params);
+    } else {
+      $("#article-list").html("अभी कोई डाटा उपलब्ध नहीं है");
+    }
+  }
+
+  updateArticleIndex(){
+    this.params = {};
+    let articleIndex = event.target.parentElement.children[0].value;
+    let articleId = event.target.dataset.articleid;
+    let csrfToken = this.csrfTokenTarget.value;
+    let url = '/admin/scripture_articles/update_article_index';
+
+    this.params.authenticity_token = csrfToken;
+    this.params.article_id = articleId;
+    this.params.article_index = articleIndex;
+    this.get_data('POST', url, this.params).then(data => {
+      super.showsuccessMsgByLayout("रचना का अनुक्रम सफलतापूर्वक अद्यतित कर दिया गया है.");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   /* start js block - make ajax requext */
   get_data(requestType, url, params){
-    $.ajax({
+    return $.ajax({
       type: requestType,
       url: url,
       data: params,

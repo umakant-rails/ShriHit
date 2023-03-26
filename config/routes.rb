@@ -122,6 +122,9 @@ Rails.application.routes.draw do
     resources :scripture_articles do
       get '/get_chapters' => "scripture_articles#get_chapters", as: :get_chapters, on: :collection
       get '/get_index' => "scripture_articles#get_index", as: :get_index, on: :collection
+      get '/edit_article_index' => "scripture_articles#edit_article_index", as: :edit_article_index, on: :collection
+      post '/update_article_index' => "scripture_articles#update_article_index", as: :update_article_index, on: :collection
+      get '/get_chapter_articles' => "scripture_articles#get_chapter_articles", as: :get_chapter_articles, on: :collection
     end
 
   end

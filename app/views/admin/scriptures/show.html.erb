@@ -45,7 +45,7 @@
             </label>
             <label class="form-label">
               <% if @scripture.description.present? %>
-                <%= @scripture.description %>
+                <%= raw @scripture.description %>
               <% else %>
                  इस रसिक वाणी/ग्रन्थ का विवरण उपलब्ध नहीं है |
               <% end %>
