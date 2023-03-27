@@ -4,6 +4,7 @@ class CreateScriptures < ActiveRecord::Migration[7.0]
       t.integer   :scripture_type_id
       t.integer   :user_id
       t.string    :name
+      t.string    :name_eng
       t.text      :description
       t.string    :author
       t.integer   :category

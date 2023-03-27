@@ -213,6 +213,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.integer "scripture_type_id"
     t.integer "user_id"
     t.string "name"
+    t.string "name_eng"
     t.text "description"
     t.string "author"
     t.integer "category"
