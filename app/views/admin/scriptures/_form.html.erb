@@ -8,16 +8,26 @@
       <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
     </div>
 
+    <% 
+      scirpture_type_list = @scripture_types.map{|scrptr| [scrptr.name, scrptr.id]}
+      section_type_id = nil
+    %>
     <div class='mb-3'>
-      <label class='form-label'>
-        रसिक वाणी/ग्रन्थ का प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-      </label>
-      <% 
-        scirpture_type_list = @scripture_types.map{|scrptr| [scrptr.name, scrptr.id]}
-        section_type_id = nil
-      %>
-      <%= form.select :scripture_type_id, options_for_select(scirpture_type_list, section_type_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
-        class: 'form-control', 'data-action': 'change->admin-chapter#getSections' %>
+      <div class="row">
+        <div class="col-md-6">
+          <label class='form-label'>
+            रसिक वाणी/ग्रन्थ का प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </label>
+          <%= form.select :scripture_type_id, options_for_select(scirpture_type_list, section_type_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, 
+            class: 'form-control', 'data-action': 'change->admin-chapter#getSections' %>
+        </div>
+        <div class="col-md-6">
+          <label class='form-label'>
+            ग्रन्थ की श्रेणी <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </label>
+          <%= form.select :category, options_for_select(Scripture::CATEGORIES, form.object.category),  {:prompt => 'श्रेणी चुने'}, class: 'form-control' %>
+        </div>
+      </div>
     </div>
 
     <div class='mb-3'>
@@ -30,9 +40,9 @@
         </div>
         <div class="col-md-6">
           <label class='form-label'>
-            लेखक
+            नाम (अंग्रेजी) <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
           </label>
-          <%= form.text_field :author, class: 'form-control' %>
+          <%= form.text_field :name_eng, class: 'form-control' %>
         </div>
       </div>
     </div>
@@ -41,9 +51,9 @@
       <div class="row">
         <div class="col-md-6">
           <label class='form-label'>
-            ग्रन्थ की श्रेणी <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+            लेखक
           </label>
-          <%= form.select :category, options_for_select(Scripture::CATEGORIES, form.object.category),  {:prompt => 'श्रेणी चुने'}, class: 'form-control' %>
+          <%= form.text_field :author, class: 'form-control' %>
         </div>
         <div class="col-md-6">
           <label class='form-label'>

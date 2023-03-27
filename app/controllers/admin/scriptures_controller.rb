@@ -76,7 +76,7 @@ class Admin::ScripturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def scripture_params
-      params.fetch(:scripture, {}).permit(:scripture_type_id, :name, :author, :category, :has_section, :description)
+      params.fetch(:scripture, {}).permit(:scripture_type_id, :name, :name_eng,:author, :category, :has_section, :description)
     end
 
     def verify_admin
