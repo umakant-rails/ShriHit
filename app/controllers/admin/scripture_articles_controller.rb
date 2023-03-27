@@ -78,8 +78,15 @@ class Admin::ScriptureArticlesController < ApplicationController
   end
 
   def get_chapter_articles
-    @chapter = Chapter.find(params[:chapter_id])
-    @articles = @chapter.scripture_articles.order("index ASC").page(params[:page])
+    
+    if params[:scripture_id].present?
+      @scripture = Scripture.find(params[:scripture_id]) rescue nil
+      @chapters = @scripture.present? ? @scripture.chapters : nil
+      @articles = @chapters.blank? ? @scripture.scripture_articles.order("index ASC").page(params[:page]) : nil
+    else
+      @chapter = Chapter.find(params[:chapter_id])
+      @articles = @chapter.scripture_articles.order("index ASC").page(params[:page])
+    end
   end
 
   def get_index

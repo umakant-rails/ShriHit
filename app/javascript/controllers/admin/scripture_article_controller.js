@@ -82,14 +82,20 @@ export default class extends ApplicationController {
 
   }
 
-  getArticles(){
+  getChaptersOrArticles(){
     this.params = {};
-    let chapterId = event.target.value;
-    this.params.chapter_id = chapterId;
-    if(chapterId != ''){
+    let id = event.target.value;
+    let dataType = event.target.dataset.datatype;
+    if(dataType == 'chapters') {
+      this.params.scripture_id = id;
+    } else {
+      this.params.chapter_id = id;
+    }
+
+    if(id != ''){
       this.get_data('GET', '/admin/scripture_articles/get_chapter_articles', this.params);
     } else {
-      $("#article-list").html("अभी कोई डाटा उपलब्ध नहीं है");
+      $("#article-list").html("<center>अभी कोई डाटा उपलब्ध नहीं है<center><div class='dropdown-divider'></div>");
     }
   }
 

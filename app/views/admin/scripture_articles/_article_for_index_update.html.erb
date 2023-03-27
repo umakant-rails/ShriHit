@@ -37,8 +37,7 @@
     <% end %>
   </tbody>
 </table>
-<% if paginate(scripture_articles).present? %>
+<% if scripture_articles.present? && paginate(scripture_articles).present? %>
   <%= paginate scripture_articles, remote: true %>
   <div class="dropdown-divider"></div>
 <% end %>
-<%= link_to "नई रसिक वाणी/ग्रन्थ", new_admin_scripture_article_path %>
