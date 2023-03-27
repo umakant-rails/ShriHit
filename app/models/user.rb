@@ -4,6 +4,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, : and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :trackable
+
+  validates_length_of :password, :within => 8..20, :if => :password_required?
+
   has_many :articles, dependent: :nullify
   has_many :authors, dependent: :nullify
   has_many :article_types, dependent: :nullify
