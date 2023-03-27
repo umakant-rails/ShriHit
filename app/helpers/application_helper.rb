@@ -23,7 +23,8 @@ module ApplicationHelper
   end
 
   def show_collapse_items(controllers)
-    return controllers.index(params[:controller]).present? ? "show" : nil
+    controller_arry = controllers.split(",")
+    return controller_arry.index(params[:controller]).present? ? "show" : nil
   end
 
   def set_active(controller, action)
@@ -34,7 +35,8 @@ module ApplicationHelper
     # end
     # if controller == params[:controller] && action == "others"
     #   return "active"
-    if controller.index(params[:controller]).present? && action.index(params[:action]).present?
+    controller_arr = controller.split(",")
+    if controller_arr.index(params[:controller]).present? && action.index(params[:action]).present?
       return "active"
     else
       return nil
