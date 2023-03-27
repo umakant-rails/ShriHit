@@ -3,6 +3,7 @@ class CreateScriptures < ActiveRecord::Migration[7.0]
     create_table :scriptures do |t|
       t.integer   :scripture_type_id
       t.string    :name
+      t.string    :name_eng
       t.text      :description
       t.integer   :author_id
       t.string    :size
