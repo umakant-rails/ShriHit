@@ -211,7 +211,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
   create_table "scriptures", force: :cascade do |t|
     t.integer "scripture_type_id"
     t.string "name"
-    t.string "name_eng"
     t.text "description"
     t.integer "author_id"
     t.string "size"
