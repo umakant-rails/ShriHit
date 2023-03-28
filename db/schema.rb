@@ -219,6 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.integer "category"
     t.boolean "has_section", default: false
     t.string "keywords"
+    t.integer "sampradaya_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

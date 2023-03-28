@@ -10,6 +10,7 @@ class CreateScriptures < ActiveRecord::Migration[7.0]
       t.integer   :category
       t.boolean   :has_section, default: false
       t.string    :keywords
+      t.integer   :sampradaya_id
 
       t.timestamps
     end
