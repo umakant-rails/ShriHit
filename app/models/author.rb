@@ -2,6 +2,7 @@ class Author < ApplicationRecord
 
   has_many :articles
   has_many :saint_bio_events
+  has_many :scriptures
   belongs_to :user
   belongs_to :sampradaya, optional: true
   paginates_per 10

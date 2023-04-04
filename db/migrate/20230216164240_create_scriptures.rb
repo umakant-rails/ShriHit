@@ -6,7 +6,7 @@ class CreateScriptures < ActiveRecord::Migration[7.0]
       t.string    :name
       t.string    :name_eng
       t.text      :description
-      t.string    :author
+      t.integer   :author_id
       t.integer   :category
       t.boolean   :has_section, default: false
       t.string    :keywords

@@ -1,0 +1,2 @@
+class StrotaArticle < ApplicationRecord
+end

@@ -19,6 +19,7 @@ class ArticlesController < ApplicationController
     @tags = Tag.approved.order("name ASC")
     author = Author.where("name=?", "अज्ञात").first
     context = Context.where("name=?", "अन्य").first
+    @scriptures = Scripture.all
     @article = Article.new({author_id: author.id, context_id: context.id})
     #@article.build_image
   end

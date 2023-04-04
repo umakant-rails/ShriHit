@@ -1,0 +1,2 @@
+class Strotum < ApplicationRecord
+end

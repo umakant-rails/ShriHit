@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_084224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_approved"
+    t.integer "scripture_id"
+    t.text "content_eng"
+    t.text "interpretation_eng"
+    t.integer "index"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -215,7 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.string "name"
     t.string "name_eng"
     t.text "description"
-    t.string "author"
+    t.integer "author_id"
     t.integer "category"
     t.boolean "has_section", default: false
     t.string "keywords"
@@ -225,6 +229,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
   end
 
   create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.integer "scripture_id"
+    t.string "title"
+    t.text "story"
+    t.integer "author_id"
+    t.integer "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strota", force: :cascade do |t|
+    t.string "name"
+    t.text "source"
+    t.integer "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strota_articles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strota_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
