@@ -248,7 +248,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_084224) do
   create_table "strota", force: :cascade do |t|
     t.string "name"
     t.text "source"
-    t.integer "category"
+    t.integer "strota_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

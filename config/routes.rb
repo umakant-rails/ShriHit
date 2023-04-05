@@ -127,6 +127,9 @@ Rails.application.routes.draw do
       post '/update_article_index' => "scripture_articles#update_article_index", as: :update_article_index, on: :collection
       get '/get_chapter_articles' => "scripture_articles#get_chapter_articles", as: :get_chapter_articles, on: :collection
     end
+
+    resources :strota
+    resources :strota_articles
   end
 
   namespace :public, path: :pb do

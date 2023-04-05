@@ -1,0 +1,54 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th>स्त्रोत/आरती का नाम</th>
+      <th>मूल ग्रन्थ (स्रोत)</th>
+      <th>स्त्रोत/आरती का प्रकार</th>
+      <th>गतिविधि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if strota.present? %>
+      <%
+        page = (strota.current_page - 1)
+        per_page = strota.present? ? strota.limit_value : 0
+      %>
+      <% strota.each_with_index do |strotum, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr>
+          <td scope="row">
+            <%= ind %>
+          </td>
+          <td>
+            <strong>
+              <%= strotum.name %>
+            </strong>
+          </td>
+          <td>
+            <%= strotum.source %>
+          </td>
+          <td>
+            <%= strotum.strota_type.name %>
+          </td>
+          <td>
+            <%= link_to edit_admin_strotum_path(strotum) do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
+            <%= button_to '<i class="fa fa-trash" style="color:red;"></i>'.html_safe, admin_strotum_path(strotum), method: :delete, style: "border: 0px", form: {class: 'ps-0 pe-0', style: "display:inline-block; font-size: 18px;"} %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if strota && paginate(strota).present? %>
+  <%= paginate strota %>
+  <div class="dropdown-divider"></div>
+<% end %>

@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          स्त्रोत/आरती अद्यतन फॉर्म 
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller="admin-chapter">
+          <%= render "form", strotum: @strotum %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <%= link_to "स्त्रोत/आरती की सूची देखे", admin_strota_path %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/chapter-custom" %>
+<% end %>
