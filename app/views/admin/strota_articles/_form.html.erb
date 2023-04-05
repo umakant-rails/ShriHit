@@ -1,0 +1,65 @@
+<%= form_with(model: [:admin, strota_article]) do |form| %>
+  <div class="row">
+    <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= strota_article.errors.present? ? 'block' : 'none' %>;" role="alert">
+      <% strota_article.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+    </div>
+
+    <div class='mb-3'>
+      <div class="row">
+        <div class="col-md-4">
+          <label class='form-label'>
+            स्त्रोत/आरती <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </label>
+          <% strota_list = strota.collect{|s| [s.name, s.id]} %>
+          <%= form.select :strotum_id, options_for_select(strota_list, form.object.strotum_id), 
+            {prompt: 'स्त्रोत/आरती को चुनिये'}, class: 'form-control' %>
+        </div>
+        <div class="col-md-4">
+          <label class='form-label'>
+            रचना प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          </label>
+          <% article_type_list = article_types.collect{|at| [at.name, at.id]} %>
+          <%= form.select :article_type_id, options_for_select(article_type_list, form.object.article_type_id), 
+            {prompt: 'रचना प्रकार को चुनिये'}, class: 'form-control' %>
+        </div>
+      
+         <div class="col-md-4">
+          <label class='form-label'>
+            रचना अनुक्रम
+          </label>
+          <%= form.number_field :index, class: 'form-control' %>
+        </div>
+      </div>
+    </div>
+   
+
+    <div class='mb-3 mt-2'>
+      <label class='form-label'>
+        स्त्रोत/आरती नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <%= form.text_area :content, class: 'tinymce' %>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>
+        मूल ग्रन्थ (स्रोत)
+      </label>
+      <%= form.text_area :interpretation, class: 'tinymce' %>
+    </div>
+
+    <div class='text-center mt-3 actions'>
+      <div class="row">
+        <div class="col-md-4">
+          <% if form.object.id.blank? %>
+            <%= form.submit "स्त्रोत/आरती जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+          <% else %>
+            <%= form.submit "स्त्रोत/आरती अद्यतन करे", class: 'btn btn-lg btn-primary form-control' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
