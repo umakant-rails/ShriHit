@@ -12,10 +12,6 @@ class Admin::StrotaArticlesController < ApplicationController
 
   # GET /strota_articles/new
   def new
-
-    # strotum_id = params[:strota_article][:strotum_id].present? ? params[:strota_article][:strotum_id] : nil
-    # article_type_id = params[:strota_article][:article_type_id].present? ? params[:strota_article][:article_type_id] : nil
-    # indexx = params[:strota_article][:index].present? ? params[:strota_article][:index] : 0
     @article = StrotaArticle.find(params[:article_id]) rescue nil
     @strota = Strotum.all
     @article_types = ArticleType.all
@@ -71,6 +67,32 @@ class Admin::StrotaArticlesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to strota_articles_url, notice: "Strota article was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def get_strota_articles
+    @strotum = Strotum.find(params[:id])
+    @articles = @strotum.strota_articles.order("index ASC").page(params[:page])
+  end
+
+  def get_index
+    @strotum = Strotum.find(params[:strota_id])
+    @article = @strotum.strota_articles.order("index ASC").last rescue nil
+  end
+
+  def edit_article_index
+    @strota = Strotum.all
+  end
+
+  def update_article_index
+    @article = StrotaArticle.find(params[:id])
+    
+    respond_to do |format|
+      if @article.update(index: params[:index])
+        flash[:notice] = "रचना का अनुक्रम अद्यतित कर दिया गया है."
+        format.js { render status: 200}
+        format.json { head :no_content }
+      end
     end
   end
 

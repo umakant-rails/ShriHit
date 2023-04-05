@@ -15,7 +15,7 @@
           </label>
           <% strota_list = strota.collect{|s| [s.name, s.id]} %>
           <%= form.select :strotum_id, options_for_select(strota_list, form.object.strotum_id), 
-            {prompt: 'स्त्रोत/आरती को चुनिये'}, class: 'form-control' %>
+            {prompt: 'स्त्रोत/आरती को चुनिये'}, class: 'form-control', 'data-action': 'change->admin-str-article#getIndex' %>
         </div>
         <div class="col-md-4">
           <label class='form-label'>
@@ -23,14 +23,14 @@
           </label>
           <% article_type_list = article_types.collect{|at| [at.name, at.id]} %>
           <%= form.select :article_type_id, options_for_select(article_type_list, form.object.article_type_id), 
-            {prompt: 'रचना प्रकार को चुनिये'}, class: 'form-control' %>
+            {prompt: 'रचना प्रकार को चुनिये'}, class: 'form-control', 'data-admin-str-article': 'articleType' %>
         </div>
       
          <div class="col-md-4">
           <label class='form-label'>
             रचना अनुक्रम
           </label>
-          <%= form.number_field :index, class: 'form-control' %>
+          <%= form.number_field :index, class: 'form-control  %>
         </div>
       </div>
     </div>

@@ -26,6 +26,7 @@ import AdminTagController from "./admin/tag_controller";
 import PanchangTithiController from "./admin/panchang_tithi_controller";
 import AdminChapterController from "./admin/chapter_controller";
 import AdminScriptureArticleController from "./admin/scripture_article_controller";
+import AdmintStrotaArticleController from "./admin/strota_article_controller";
 
 application.register('application', ApplicationController);
 application.register('autocomplete', Autocomplete);
@@ -49,3 +50,4 @@ application.register("admin-tag", AdminTagController);
 application.register("admin-panchangtithi", PanchangTithiController);
 application.register("admin-chapter", AdminChapterController);
 application.register("admin-scr-article", AdminScriptureArticleController);
+application.register("admin-str-article", AdmintStrotaArticleController)

@@ -1,0 +1,6 @@
+<% if flash[:notice].present? %>
+  $("#article_index_<%= @article.id %>").val("<%= @article.index %>");
+  $("#successAlert").html("<%= flash[:notice] %>");
+  $("#successAlert").parent().css("display", "block");
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+<% end %>

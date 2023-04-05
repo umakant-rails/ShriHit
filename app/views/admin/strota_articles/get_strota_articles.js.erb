@@ -1,0 +1,5 @@
+<% if @articles.present? %>
+  $("#article-list").html("<%= escape_javascript(render 'article_for_index_update', strota_articles: @articles)%>");
+<% else %>
+  $("#article-list").html("<%= escape_javascript(render 'article_for_index_update', strota_articles: [])%>");
+<% end %>
