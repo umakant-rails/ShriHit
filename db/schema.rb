@@ -240,6 +240,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_084224) do
     t.text "story"
     t.integer "author_id"
     t.integer "index"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

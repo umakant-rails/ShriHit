@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     get "/pdf/export" => "panchangs#panchang_pdf", as: :export_pdf, on: :member
   end
   resources :saint_bio_events
+  resources :stories
   
   namespace :admin do
     resources :dashboards, only: [:index] do
@@ -126,7 +127,6 @@ Rails.application.routes.draw do
       post '/update_article_index' => "scripture_articles#update_article_index", as: :update_article_index, on: :collection
       get '/get_chapter_articles' => "scripture_articles#get_chapter_articles", as: :get_chapter_articles, on: :collection
     end
-
   end
 
   namespace :public, path: :pb do

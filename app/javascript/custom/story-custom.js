@@ -1,7 +1,7 @@
 $(document).ready(function(){
   tinymce.init({
     selector: '.tinymce',
-    height: 250,
+    height: 350,
     menubar: false,
     plugins: [
       'advlist autolink lists link image charmap print preview anchor',
@@ -28,7 +28,7 @@ $(document).ready(function(){
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["article_hindi_title", "article_content_ifr", "tag-input-field"]);
+    control.makeTransliteratable(["story_title", "story_story_ifr"]);
   }
   google.setOnLoadCallback(onLoad);
 

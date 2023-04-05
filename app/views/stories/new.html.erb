@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          संत चरित्र/प्रेरक प्रसंग फॉर्म <br/>
+          <div class="contributer-text">
+            (यहाँ पर संत/ महात्माओ  के जीवन चरित्र/प्रेरक प्रसंग को जोड़ सकते है)
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4 row">
+          <div class="col-md-12 offset-0">
+            <%= render "form", story: @story, sants: @sants, scriptures: @scriptures %>
+          </div>
+        </div>
+        <div class="divider-bdr"></div>
+        <%= link_to "संत जीवनी सूची", saint_bio_events_path %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/story-custom" %>
+<% end %>

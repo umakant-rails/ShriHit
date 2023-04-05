@@ -6,6 +6,7 @@ class CreateStories < ActiveRecord::Migration[7.0]
       t.text     :story
       t.integer  :author_id
       t.integer  :index
+      t.integer  :user_id
 
       t.timestamps
     end

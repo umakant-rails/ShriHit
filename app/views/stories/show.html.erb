@@ -1,0 +1,45 @@
+<p style="color: green"><%= notice %></p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          संत चरित्र/प्रेरक प्रसंग: <%= @story.title %>
+          <div class="contributer-text">
+            (योगदानकर्ता :
+              <strong>
+                <%= link_to @story.user.username.capitalize, public_user_profile_path(@story.user.id) %>
+              </strong>,
+              सृजन तिथि :
+              <strong class="text-primary">
+                <%= link_to @story.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
+              </strong>,
+              सम्बंधित संत -
+              <strong class="text-primary fnt-sz-14">
+                <% if @story.author.present? %>
+                  <%= link_to @story.author.name, public_author_path(@story.author.id) %>
+                <% else %>
+                  NA
+                <% end %>
+              </strong>
+            )
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4 row">
+          <div class="col-md-12 offset-0">
+            <%= raw @story.story %>
+          </div>
+        </div>
+        <div class="divider-bdr"></div>
+        <div>
+          <%= link_to "संत चरित्र/प्रेरक प्रसंग अद्यतन करे ", edit_story_path(@story), class: "btn btn-primary" %>
+          <%= link_to "संत चरित्र/प्रेरक प्रसंग सूची", stories_path, class: "btn btn-primary" %>
+          <div style="display:inline-block;">
+            <%= button_to "संत चरित्र/प्रेरक प्रसंग डिलीट करे", @story, method: :delete, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

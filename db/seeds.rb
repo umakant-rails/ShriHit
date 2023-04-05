@@ -91,6 +91,7 @@ Author.create!(name: 'अज्ञात', is_approved: true, is_saint: true, us
 # ScriptureType.create!(name: "दर्शन") if ScriptureType.where(name: "दर्शन").blank?
 ScriptureType.create!(name: "ग्रन्थ") if ScriptureType.where(name: "ग्रन्थ").blank?
 ScriptureType.create!(name: "रसिक वाणी") if ScriptureType.where(name: "रसिक वाणी").blank?
+ScriptureType.create!(name: "story") if ScriptureType.where(name: "story").blank?
 # ScriptureType.create!(name: "अष्टयाम") if ScriptureType.where(name: "अष्टयाम").blank?
 
 StrotaType.create!(name: "आरती") if StrotaType.where(name: "आरती").blank?

@@ -133,8 +133,13 @@
     <label for='article_type' class='form-label'>
       रचना <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
     </label>
-    <%#= text_area(:article, :content, cols: 30, rows: 12, class: 'form-control', 'data-article-target': 'content') %>
     <%= form.text_area :content, class: 'tinymce' %>
+  </div>
+  <div class='mb-3'>
+    <label for='article_type' class='form-label'>
+      रचना का अर्थ
+    </label>
+    <%= form.text_area :interpretation, class: 'tinymce' %>
   </div>
   <!-- <div class='mb-3'>
     <label for='article_type' class='form-label'>

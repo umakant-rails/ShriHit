@@ -5,6 +5,7 @@ class Author < ApplicationRecord
   has_many :scriptures
   belongs_to :user
   belongs_to :sampradaya, optional: true
+  has_many    :stories
   paginates_per 10
 
   validates :name, presence: true
