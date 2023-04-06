@@ -8,7 +8,7 @@
         <div class="dropdown-divider"></div>
         <div class="m-sm-4" data-controller="admin-chapter">
           <% if params[:scripture_id].present? %>
-            <%= render "section_form", chapter: @chapter, scripture_id: nil %>
+            <%= render "section_form", chapter: @chapter, scripture_id: params[:scripture_id] %>
           <% else %>
             <%= render "form", chapter: @chapter, sections: nil %>
           <% end %>

@@ -10,7 +10,7 @@ class Scripture < ApplicationRecord
   has_many :stories
 
 
-  validates :name, :category, presence: true
+  validates :name, presence: true
 
   CATEGORIES = [['लघु', 1],['मध्यम', 2],['वृहद', 3]]
 

@@ -13,7 +13,7 @@ export default class extends ApplicationController {
     let strotaId = event.target.value;
     this.params.strota_id = strotaId;
     if(strotaId == ''){ return; }
-    this.get_data('get', '/admin/strota_articles/get_oindex', this.params)
+    this.get_data('get', '/admin/strota_articles/get_index', this.params)
   }
 
   getStrotumArticles(){

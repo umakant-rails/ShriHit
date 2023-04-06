@@ -17,16 +17,12 @@
             <%= link_to scripture.name, admin_scripture_path(scripture) %>
           </td>
           <td>
-            <%= scripture.author %>
+            <%= scripture.author.name %>
           </td>
           <td class="d-none d-xl-table-cell">
-            <% if scripture.category == 3 %>
-              <%= link_to new_admin_chapter_path(scripture_id: scripture), class: "btn btn-primary" do %>
-                <i class="fa-solid fa-file-circle-plus"></i> सेक्शन जोड़े
-              <% end %>
-            <% else %>
-              -
-            <% end %> 
+            <%= link_to new_admin_chapter_path(scripture_id: scripture), class: "btn btn-primary" do %>
+              <i class="fa-solid fa-file-circle-plus"></i> सेक्शन जोड़े
+            <% end %>
           </td>
           <td>
             <%= link_to admin_scripture_path(scripture) do %>

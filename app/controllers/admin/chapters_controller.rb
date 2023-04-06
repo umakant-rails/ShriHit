@@ -8,11 +8,7 @@ class Admin::ChaptersController < ApplicationController
   end
 
   def new
-    if params[:scripture_id].present?
-      @scriptures = current_user.scriptures.where(category: 3)
-    else
-      @scriptures = current_user.scriptures.where("category > ?", 1)
-    end
+    @scriptures = current_user.scriptures
     @chapter = Chapter.new
   end
 
@@ -29,6 +25,7 @@ class Admin::ChaptersController < ApplicationController
         end
         format.json { render :show, status: :created, location: @chapter }
       else
+        params[:scripture_id] = params[:chapter][:scripture_id]
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @chapter.errors, status: :unprocessable_entity }
       end
@@ -77,11 +74,11 @@ class Admin::ChaptersController < ApplicationController
   end
   
   def add_section_chapters
-    @scriptures = Scripture.where("category>2")
+    @scriptures = Scripture.all
   end
 
   def remove_section_chapters
-    @scriptures = Scripture.where("category>2")
+    @scriptures = Scripture.all
   end
 
   def get_sections

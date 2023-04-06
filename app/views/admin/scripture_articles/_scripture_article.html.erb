@@ -22,7 +22,8 @@
             <%= ind %>
           </td>
           <td>
-            <%=raw scr_article.content %>
+            <% content_text = Nokogiri::HTML(scr_article.content).text %>
+            <%= truncate(content_text, length: 60) %>
           </td>
           <td>
             <%= scr_article.index %>

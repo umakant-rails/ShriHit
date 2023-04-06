@@ -56,12 +56,9 @@ en:
         author:       "रसिक वाणी/ग्रन्थ के रचनाकार का नाम"
         size:         "रसिक वाणी/ग्रन्थ साइज फील्ड"
         #has_chapter:  "रसिक वाणी/ग्रन्थ का अध्याय फील्ड"
-      section:
-        scripture: "रसिक वाणी/ग्रन्थ का नाम"
-        title:     "सेक्शन का नाम"
       chapter:
         section:   "सेक्शन का नाम"
-        title:     "अध्याय का नाम"
+        name:     "नाम"
 
     errors:
       models:
@@ -113,15 +110,9 @@ en:
               blank: " रिक्त नहीं हो सकता है."
             #has_chapter:
               #blank: " रिक्त नहीं हो सकता है."
-        section:
-          attributes:
-            scripture:  
-              required: " रिक्त नहीं हो सकता है."
-            title:
-              blank:    " रिक्त नहीं हो सकता है."
         chapter:
           attributes:
             section:  
               required: " रिक्त नहीं हो सकता है."
-            title:
+            name:
               blank:  " रिक्त नहीं हो सकता है."

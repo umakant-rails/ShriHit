@@ -220,8 +220,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_084224) do
     t.string "name_eng"
     t.text "description"
     t.integer "author_id"
-    t.integer "category"
-    t.boolean "has_section", default: false
     t.string "keywords"
     t.integer "sampradaya_id"
     t.datetime "created_at", null: false
