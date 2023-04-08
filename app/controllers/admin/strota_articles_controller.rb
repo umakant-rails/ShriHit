@@ -1,4 +1,6 @@
 class Admin::StrotaArticlesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :verify_admin
   before_action :set_strota_article, only: %i[ show edit update destroy ]
 
   # GET /strota_articles or /strota_articles.json
@@ -105,5 +107,11 @@ class Admin::StrotaArticlesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def strota_article_params
       params.require(:strota_article).permit(:strotum_id, :article_type_id, :index, :content, :interpretation)
+    end
+
+    def verify_admin
+      if !current_user.is_admin && !current_user.is_super_admin
+        redirect_back_or_to homes_path
+      end
     end
 end

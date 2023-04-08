@@ -21,8 +21,9 @@
           </td>
           <td>
             <strong>
+              <% content_text = Nokogiri::HTML(article.content).text %>
               <%= link_to admin_strota_article_path(article) do %>
-                <%=raw article.content %>
+                <%= truncate(content_text, length: 50) %>
               <% end %>
             </strong>
           </td>
