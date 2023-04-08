@@ -12,7 +12,7 @@
 				        </span>
 				      </div>
 				      <div class="col-md-4">
-			    			<%= select_tag 'theme_chapters_name', options_from_collection_for_select(@theme_chapters, "id", "name"), prompt: "खंड/प्रकरण चुने", class:"form-control theme-chapter-name", 'data-themechapter-target': 'themeChapter', 'data-action': 'change->themechapter#searchArticlesByChapter' %>
+			    			<%= select_tag 'theme_chapters_name', options_from_collection_for_select(@theme_chapters, "id", "name"), prompt: "अध्याय चुने", class:"form-control theme-chapter-name", 'data-themechapter-target': 'themeChapter', 'data-action': 'change->themechapter#searchArticlesByChapter' %>
 			    		</div>
 			    	<% else %>
 			    		<div class="col-md-6">
@@ -21,7 +21,7 @@
 				        </span>
 				      </div>
 				    	<div class="col-md-6 theme-chapter-bdr">
-				    		आपने इस उत्सव (<%= @theme.name %>) में कोई खंड/प्रकरण नहीं जोड़ा है अगर आप खंड/प्रकरण जोड़ना चाहते है तो यहाँ <a href="<%= theme_new_theme_chapter_path(@theme) %>">click</a> करे 
+				    		आपने इस उत्सव (<%= @theme.name %>) में कोई अध्याय नहीं जोड़ा है अगर आप अध्याय जोड़ना चाहते है तो यहाँ <a href="<%= theme_new_theme_chapter_path(@theme) %>">click</a> करे 
 				    	</div>
 			    	<% end %>
 		      </div>
@@ -41,7 +41,7 @@
 		    	<div class="row">
 		    		<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-themechapter-target="csrfToken">
 		    		<span class="text-primary chapter-article-header">
-		          <%= @theme_chapters.blank? ? "उत्सव में जोड़ी गयी रचनाये" : "उत्सव के खंड/प्रकरण में जोड़ने के लिए उपलब्ध रचनाये"%>
+		          <%= @theme_chapters.blank? ? "उत्सव में जोड़ी गयी रचनाये" : "उत्सव के अध्याय में जोड़ने के लिए उपलब्ध रचनाये"%>
 		        </span>
 		        <div class="dropdown-divider"></div>
 			    	<ul class="list-group" id="theme-article-list">
@@ -56,7 +56,7 @@
 		    <div class="card-body h-100">
 		    	<div class="row">
 		    		<span class="text-primary chapter-article-header">
-		          <%= @theme_chapters.blank? ? "उत्सव में जोड़ी गयी रचनाये" : "उत्सव के खंड/प्रकरण में जोड़ी गयी रचनाये"%>
+		          <%= @theme_chapters.blank? ? "उत्सव में जोड़ी गयी रचनाये" : "उत्सव के अध्याय में जोड़ी गयी रचनाये"%>
 		        </span>
 		        <div class="dropdown-divider"></div>
 			    	<ul class="list-group" id="theme-added-article-list">
