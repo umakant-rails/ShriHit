@@ -5,20 +5,25 @@
 	    <div class="card">
 	      <div class="card-body h-100">
 	      	<div class="row">
-	      		<div class="col-md-8">
-			        <span class="col-md-6 text-start article-title text-primary" data-themechapter-target="theme" data-theme-id="<%= @theme.id %>">
-			          उत्सव (<span class="text-success"><%= @theme.name %></span>) में रचनाये जोड़े 
-			        </span>
-			      </div>
-			      <div class="col-md-4">
-			    		<% if @theme_chapters.present? %>
-				    		<%= select_tag 'theme_chapters_name', options_from_collection_for_select(@theme_chapters, "id", "name"), prompt: "खंड/प्रकरण चुने", class:"form-control theme-chapter-name", 'data-themechapter-target': 'themeChapter', 'data-action': 'change->themechapter#searchArticlesByChapter' %>
-				    	<% else %>
-					    	<div class="theme-chapter-bdr">
-					    		आपने इस उत्सव (<%= @theme.name %>) में कोई खंड/प्रकरण नहीं जोड़ा है अगर आप खंड/प्रकरण जोड़ना चाहते है तो यहाँ <a href="<%= theme_new_theme_chapter_path(@theme) %>">click</a> करे 
-					    	</div>
-				    	<% end %>
-			      </div>
+	      		<% if @theme_chapters.present? %>
+		    			<div class="col-md-8">
+				        <span class="text-start article-title text-primary" data-themechapter-target="theme" data-theme-id="<%= @theme.id %>">
+				          उत्सव (<span class="text-success"><%= @theme.name %></span>) में रचनाये जोड़े 
+				        </span>
+				      </div>
+				      <div class="col-md-4">
+			    			<%= select_tag 'theme_chapters_name', options_from_collection_for_select(@theme_chapters, "id", "name"), prompt: "खंड/प्रकरण चुने", class:"form-control theme-chapter-name", 'data-themechapter-target': 'themeChapter', 'data-action': 'change->themechapter#searchArticlesByChapter' %>
+			    		</div>
+			    	<% else %>
+			    		<div class="col-md-6">
+				        <span class="text-start article-title text-primary" data-themechapter-target="theme" data-theme-id="<%= @theme.id %>">
+				          उत्सव (<span class="text-success"><%= @theme.name %></span>) में रचनाये जोड़े 
+				        </span>
+				      </div>
+				    	<div class="col-md-6 theme-chapter-bdr">
+				    		आपने इस उत्सव (<%= @theme.name %>) में कोई खंड/प्रकरण नहीं जोड़ा है अगर आप खंड/प्रकरण जोड़ना चाहते है तो यहाँ <a href="<%= theme_new_theme_chapter_path(@theme) %>">click</a> करे 
+				    	</div>
+			    	<% end %>
 		      </div>
 	        <div class="dropdown-divider"></div>
 	        <div class="search-block" data-action="click->themechapter#isSearchEnable">
