@@ -146,33 +146,6 @@
       </li>
       <div class="dropdown-divider1"></div>
       <li class="sidebar-item">
-        <a class="sidebar-link" data-bs-toggle="collapse" href="#saintBioEvents"  role="button" aria-expanded="false"
-          aria-controls="saintBioEvents" data-id="saintBioEvents" data-action="click->sidebar#toggleTab">
-          <span class="align-middle">
-            संत जीवनी
-          </span>
-          <i class="fa-solid fa-angle-<%= (is_sant_bio_active == "show") ? "down" : "right" %>"></i>
-        </a>
-      </li>
-      <div class="dropdown-divider1"></div>
-      <div class="collapse <%= is_sant_bio_active %>" data-sidebar-target="anchorListBlock" id="saintBioEvents">
-        <li class="sidebar-item <%= set_active("saint_bio_events", new_actions) %>">
-          <a class="sidebar-link" href="<%= new_saint_bio_event_path %>">
-            <span class="align-middle">
-              संत जीवनी जोड़े
-            </span>
-          </a>
-        </li>
-        <li class="sidebar-item <%= set_active("saint_bio_events", other_actions) %>">
-          <a class="sidebar-link" href="<%= saint_bio_events_path %>">
-            <span class="align-middle">
-              संत जीवनी सूची
-            </span>
-          </a>
-        </li>
-      </div>
-      <div class="dropdown-divider1"></div>
-      <li class="sidebar-item">
         <a class="sidebar-link" data-bs-toggle="collapse" href="#stories"  role="button" aria-expanded="false"
           aria-controls="stories" data-id="stories" data-action="click->sidebar#toggleTab">
           <span class="align-middle">

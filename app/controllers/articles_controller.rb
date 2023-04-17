@@ -31,7 +31,7 @@ class ArticlesController < ApplicationController
   def create
     author = Author.where("name=?", "अज्ञात").first
     params[:article][:author_id] = params[:article][:author_id].blank? ? author.id : params[:article][:author_id]
-
+    debugger
     @article = current_user.articles.new(article_params)
     respond_to do |format|
       if @article.save

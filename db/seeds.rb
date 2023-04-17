@@ -50,7 +50,7 @@ Theme.create!(name: 'व्याहुला', user_id: 1) if Theme.where(name:
 Theme.create!(name: 'जन्मोत्सव', user_id: 1) if Theme.where(name: 'जन्मोत्सव').blank?
 Theme.create!(name: 'होली', user_id: 1) if Theme.where(name: 'होली').blank?
 Theme.all.each{ | theme |
-  ThemeChapter.create(user_id:1, theme_id: theme.id, name: "#{theme.name}_विविध _प्रकरण") if ThemeChapter.where(name: "#{theme.name}_विविध _प्रकरण").blank?
+  ThemeChapter.create(user_id:1, theme_id: theme.id, name: "#{theme.name} अध्याय") if ThemeChapter.where(name: "#{theme.name}_विविध _प्रकरण").blank?
 }
 
 Context.create!(name: 'अन्य', is_approved: true, user_id: 1) if Context.where(name: 'अन्य').blank?
@@ -91,7 +91,7 @@ Author.create!(name: 'अज्ञात', is_approved: true, is_saint: true, us
 # ScriptureType.create!(name: "दर्शन") if ScriptureType.where(name: "दर्शन").blank?
 ScriptureType.create!(name: "ग्रन्थ") if ScriptureType.where(name: "ग्रन्थ").blank?
 ScriptureType.create!(name: "रसिक वाणी") if ScriptureType.where(name: "रसिक वाणी").blank?
-ScriptureType.create!(name: "story") if ScriptureType.where(name: "story").blank?
+ScriptureType.create!(name: "कथायें") if ScriptureType.where(name: "कथायें").blank? 
 # ScriptureType.create!(name: "अष्टयाम") if ScriptureType.where(name: "अष्टयाम").blank?
 
 StrotaType.create!(name: "आरती") if StrotaType.where(name: "आरती").blank?

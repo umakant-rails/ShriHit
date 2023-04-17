@@ -16,7 +16,7 @@ pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 #pin "@hotwired/stimulus", to: "https://ga.jspm.io/npm:@hotwired/stimulus@3.0.1/dist/stimulus.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin "stimulus-validation", to: "https://ga.jspm.io/npm:stimulus-validation@1.0.1-beta.3/dist/validation-controller.js"
-pin "stimulus", to: "https://ga.jspm.io/npm:stimulus@1.1.1/dist/stimulus.umd.js"
+pin "stimulus", to: "https://ga.jspm.io/npm:stimulus@3.2.1/dist/stimulus.js"
 pin "validate.js", to: "https://ga.jspm.io/npm:validate.js@0.12.0/validate.js"
 pin "stimulus-autocomplete", to: "https://ga.jspm.io/npm:stimulus-autocomplete@3.0.2/src/autocomplete.js"
 pin "stimulus-flatpickr", to: "https://ga.jspm.io/npm:stimulus-flatpickr@3.0.0-0/dist/index.m.js"

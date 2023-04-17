@@ -46,7 +46,7 @@ Rails.application.routes.draw do
   resources :panchangs, only: [:index, :show] do
     get "/pdf/export" => "panchangs#panchang_pdf", as: :export_pdf, on: :member
   end
-  resources :saint_bio_events
+  
   resources :stories
   
   namespace :admin do
