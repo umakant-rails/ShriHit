@@ -6,7 +6,8 @@ import "bootstrap";
 import "controllers";
 import "tinymce";
 import "chartkick"
-import "Chart.bundle"
+import "Chart.bundle";
+import "swiper";
 
 Rails.start();
 

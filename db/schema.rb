@@ -159,15 +159,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_084224) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "saint_bio_events", force: :cascade do |t|
-    t.string "title"
-    t.text "event"
-    t.integer "user_id"
-    t.integer "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "saint_biographies", force: :cascade do |t|
     t.string "title"
     t.text "event"

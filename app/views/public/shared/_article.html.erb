@@ -1,35 +1,48 @@
-<table class="table">
-  <thead class="table-primary">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">रचनायें</th>
-    </tr>
-  </thead>
-  <tbody>
-    <%
-      page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
-      page_size = articles.present? ? articles.limit_value : 0
-    %>
-    <% if articles.present? %>
-      <% articles.each_with_index do | article, index | %>
-        <tr class="article-item">
-          <th scope="row"><%= (page * page_size) + (index + 1) %></th>
-          <td>
-            <a href="<%= article_by_title_public_articles_path(article.hindi_title)%>">
-              <%= article.hindi_title %>
-            </a>
-          </td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td colspan="2">
-          कोई रचना उपलब्ध नहीं है
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if articles.present? %>
+  <% articles.each_with_index do | article, index | %>
+   <div class="card">
+    <div class="card-body">
+      <div class="row p-2 article-box">
+        <div class="col-md-3 ps-0">
+          <img src="/assets/shrihit.png" class="article-img" alt="Avatar">
+        </div>
+        <div class="col-md-9">
+          <div class="row mb-3">
+            <%= link_to articles_by_type_public_article_types_path(article.article_type.name), class: "col-md-2 me-3 article-type-txt" do %>
+                <%= article.article_type.name %>
+            <% end %>
+            <div class="col-md-2 article-date-txt"><%= article.created_at.strftime("%d/%m/%Y") %></div>
+          </div>
+          <div class="row pb-3 btm-bdr">
+            <%= link_to article_by_title_public_articles_path(article.hindi_title) do %>
+              <div class="pb-3 article-title">
+                <%= article.hindi_title %>
+              </div>
+              <% contnt = Nokogiri::HTML(article.content).text %>
+              <div class="article-text"><%= truncate(contnt, length: 300) %></div>
+            <% end %>
+          </div>
+          <div class="row mt-2 d-block">
+            <div >
+              <%= link_to public_author_path(article.author) do %>
+                <div class="user-icon-div">
+                  <i class="fa-solid fa-circle-user me-2 user-icon" ></i>
+                </div>
+                <div class="user-txt"><%= article.author.name %></div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% else %>
+  <div >
+    कोई रचना उपलब्ध नहीं है
+  </div>
+<% end %>
+
 <div id="paginate-block">
   <%= paginate articles if articles.present?%>
 </div>
