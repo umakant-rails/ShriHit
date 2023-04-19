@@ -1,0 +1,57 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th>रचना</th>
+      <th>अनुक्रम</th>
+      <th>अध्याय</th>
+      <th>रसिक वाणी/ग्रन्थ</th>
+      <th>गतिविधि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if scripture_articles.present? %>
+      <%
+        page = (scripture_articles.current_page - 1)
+        per_page = scripture_articles.present? ? scripture_articles.limit_value : 0
+      %>
+      <% scripture_articles.each_with_index do |scr_article, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr>
+          <td scope="row">
+            <%= ind %>
+          </td>
+          <td>
+            <% content_text = Nokogiri::HTML(scr_article.content).text %>
+            <%= truncate(content_text, length: 60) %>
+          </td>
+          <td>
+            <%= scr_article.index %>
+          </td>
+          <td>
+            <%= scr_article.chapter.present? ? scr_article.chapter.name : '-' %>
+          </td>
+          <td>
+            <%= scr_article.scripture.name %>
+          </td>
+          <td>
+            <%= link_to edit_admin_scripture_article_path(scr_article) do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
+            <%= button_to '<i class="fa fa-trash" style="color:red;"></i>'.html_safe, admin_scripture_article_path(scr_article), method: :delete, style: "border: 0px", form: {class: 'ps-0 pe-0', style: "display:inline-block; font-size: 18px;"} %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if paginate(scripture_articles).present? %>
+  <%= paginate scripture_articles, remote: true %>
+  <div class="dropdown-divider"></div>
+<% end %>

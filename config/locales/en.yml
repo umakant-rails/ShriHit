@@ -50,6 +50,15 @@ en:
         name: "प्रसंग का नाम"
       article_type:
         name: "रचना प्रकार"
+      scripture:
+        scripture_type: "रसिक वाणी/ग्रन्थ का प्रकार"
+        name:         "रसिक वाणी/ग्रन्थ का नाम"
+        author:       "रसिक वाणी/ग्रन्थ के रचनाकार का नाम"
+        size:         "रसिक वाणी/ग्रन्थ साइज फील्ड"
+        #has_chapter:  "रसिक वाणी/ग्रन्थ का अध्याय फील्ड"
+      chapter:
+        section:   "सेक्शन का नाम"
+        name:     "नाम"
 
     errors:
       models:
@@ -89,3 +98,21 @@ en:
           attributes:
             name:
                 blank: " रिक्त नहीं हो सकता है."
+        scripture:
+          attributes:
+            scripture_type:
+              required: " रिक्त नहीं हो सकता है."
+            name:
+              blank: " रिक्त नहीं हो सकता है."
+            author:
+              blank: " रिक्त नहीं हो सकता है."
+            size:
+              blank: " रिक्त नहीं हो सकता है."
+            #has_chapter:
+              #blank: " रिक्त नहीं हो सकता है."
+        chapter:
+          attributes:
+            section:  
+              required: " रिक्त नहीं हो सकता है."
+            name:
+              blank:  " रिक्त नहीं हो सकता है."

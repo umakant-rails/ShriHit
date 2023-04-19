@@ -1,0 +1,48 @@
+<%= form_with(model: [:admin, section], html: {}) do |form| %>
+  <div class="row">
+    <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= section.errors.present? ? 'block' : 'none' %>;" role="alert">
+      <% section.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>
+        रसिक वाणी <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <% 
+        scirpture_list = @scriptures.map{|scrptr| [scrptr.name, scrptr.id]}
+        section_id = params[:scripture_id].present? ? params[:scripture_id] : nil
+      %>
+      <%= form.select :scripture_id, options_for_select(scirpture_list, section_id), {prompt: 'रसिक ग्रन्थ/वाणी को चुनिये'}, class: 'form-control' %>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>
+        शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>
+        विवरण <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+      </label>
+      <%= form.text_area :description, class: 'tinymce' %>
+    </div>
+
+    <div class='text-center mt-3 actions'>
+      <div class="row">
+        <div class="col-md-4">
+          <% if form.object.id.blank? %>
+            <%= form.submit "सेक्शन जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+          <% else %>
+            <%= form.submit "सेक्शन अद्यतन करे", class: 'btn btn-lg btn-primary form-control' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<% end %>

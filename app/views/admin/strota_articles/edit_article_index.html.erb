@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" data-controller="admin-str-article">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          रचना अनुक्रम अद्यतन पेज
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-2" id="scr-article-list">
+          <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-str-article-target="csrfToken">
+          <div class="row">
+            <label class='form-label'>
+              स्त्रोत/आरती
+            </label>
+            <%= select_tag 'scripture', options_from_collection_for_select(@strota, "id", "name"), :prompt => "स्त्रोत/आरती चुने", class:"form-control", 'data-action': 'change->admin-str-article#getStrotumArticles' %>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="article-list">
+          <%= render 'article_for_index_update', strota_articles: []%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

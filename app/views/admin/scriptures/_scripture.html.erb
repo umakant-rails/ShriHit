@@ -1,0 +1,46 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col">S. No.</th>
+      <th scope="col">नाम</th>
+      <th scope="col">लेखक</th>
+      <th scope="col">सेक्शन जोड़े</th>
+      <th scope="col">गतिविधि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @scriptures.present? %>
+      <% @scriptures.each_with_index do |scripture, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td>
+            <%= link_to scripture.name, admin_scripture_path(scripture) %>
+          </td>
+          <td>
+            <%= scripture.author.name %>
+          </td>
+          <td class="d-none d-xl-table-cell">
+            <%= link_to new_admin_chapter_path(scripture_id: scripture), class: "btn btn-primary" do %>
+              <i class="fa-solid fa-file-circle-plus"></i> सेक्शन जोड़े
+            <% end %>
+          </td>
+          <td>
+            <%= link_to admin_scripture_path(scripture) do %>
+              <i class="fa fa-eye"></i>
+            <% end %>
+            <%= link_to edit_admin_scripture_path(scripture) do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
+            <%= button_to '<i class="fa fa-trash" style="color:red;"></i>'.html_safe, admin_scripture_path(scripture), method: :delete, style: "border: 0px", form: {class: 'ps-0 pe-0', style: "display:inline-block; font-size: 18px;"} %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <td colspan="5">
+        अभी रिकॉर्ड उपलब्ध नहीं है.
+      </td>
+    <% end %>
+  </tbody>
+</table>
+
+

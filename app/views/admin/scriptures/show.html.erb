@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body article-content1">
+        <div class="col-md-12 page-subject-header">
+          रसिक वाणी/ग्रन्थ : <%= @scripture.name %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4">
+          <div class="row">
+            <label class='card-title form-control sggstion-hdr mb-3'>
+              लेखक :
+            </label>
+            <label class="form-label">
+              <%= @scripture.author.present? ? @scripture.author.name : 'उपलब्ध नहीं' %>
+            </label>
+          </div>
+
+          <div class="row">
+            <label class='card-title form-control sggstion-hdr mb-3'>
+              ग्रंथ में सेक्शन है :
+            </label>
+            <label class="form-label">
+              <% sections = @scripture.sections %>
+              <% if sections.length == 0 %>
+                नहीं
+              <% else %>
+                <%= render "section", sections: sections%>
+              <% end %>
+            </label>
+          </div>
+
+          <div class="row">
+            <label class='card-title form-control sggstion-hdr mb-3'>
+              विवरण :
+            </label>
+            <label class="form-label">
+              <% if @scripture.description.present? %>
+                <%= raw @scripture.description %>
+              <% else %>
+                 इस रसिक वाणी/ग्रन्थ का विवरण उपलब्ध नहीं है |
+              <% end %>
+            </label>
+          </div>
+
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="">
+          <%= link_to "रसिक वाणी/ग्रन्थ अद्यतन करे", edit_admin_scripture_path(@scripture), :class => "btn btn-primary" %> 
+          <%= link_to "रसिक वाणी/ग्रन्थ सूची", admin_scriptures_path, :class => "btn btn-primary" %>  
+          <%= button_to "रसिक वाणी/ग्रन्थ डिलीट करे", @admin_scripture, method: :delete, :class => "btn btn-danger", form_class: 'btn ps-0 pe-0' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

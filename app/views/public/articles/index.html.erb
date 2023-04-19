@@ -1,131 +1,62 @@
+<div class="row mb-3">
+	<div class="col-md-12">
+		<div class="article-header-yellow">नवीनतम रचनायें</div>
+	</div>
+</div>
+<div class="row mb-3">
+  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+    slides-per-view="3">
+  	<% @articles && @articles.each do | article | %>
+      <swiper-slide>
+    		<div class="col-md">
+    			<a href="<%= public_article_path(article) %>">
+      			<div class="card">
+      			  <img src="/assets/shriji_charan.png" class="card-img-top" alt="Shrihit" style="border-bottom:2px solid #D3D3D3;">
+      			  <div class="card-body">
+      			    <div class="card-title article-header-yellow">
+      			    	<%= article.hindi_title %>
+      			    </div>
+      			    <p class="card-text" style="min-height: 82px;">
+      			    	<% txt = Nokogiri::HTML(article.content).text %>
+      				   	<%=truncate(txt, length: 150)  %>
+      				  </p>
+      				  <div class="dropdown-divider"></div>
+      				  <div class="contributer-text" style="min-height: 44px;">
+                  ( 
+                    सृजन तिथि : 
+                    <strong class="text-primary">
+                      <%= link_to article.created_at.strftime("%b %d, %Y"), "javascript:void(0);" %>
+                    </strong>,
+                    रचना प्रकार - 
+                    <strong class="text-primary fnt-sz-14">
+                      <%= link_to article.article_type.name, articles_by_type_public_article_types_path(article.article_type.name) %>
+                    </strong>,
+                    रचनाकार - 
+                    <strong class="text-primary fnt-sz-14">
+                      <%= link_to article.author.name, public_author_path(article.author.id) %>
+                    </strong>
+                  )
+                </div>
+                <div class="dropdown-divider mb-4"></div>
+      			    <a href="<%= public_article_path(article) %>" class="btn btn-warning">रचना देखें</a>
+      			  </div>
+      			</div>
+      		</a>
+    		</div>
+      </swiper-slide>
+  	<% end %>
+  </swiper-container>
+</div>
+
 <div class="row">
-	<div class="col-md-9 ps-0">
-		<div class="card">
-			<div class="card-body h-100" id="article-list">
-				<% @articles && @articles.limit(5).each do | article | %>
-					<div class="row">
-	          <% article_tags = article.tags %>
-	          <div class="col-md-12 page-subject-header mb-3">
-	          	<div class="article-title">
-		            <a href="<%= article_by_title_public_articles_path (article.hindi_title) %>" class="article-title text-primary">
-		              रचना : <%= article.hindi_title %>
-		            </a>
-		            <% if current_user.present? %> 
-		              <%= link_to(export_pdf_article_path(article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
-		                <!-- <i class="fa-solid fa-file-export"></i> -->
-		                 <i class="fas fa-file-download"></i>
-		              <% end %>
-		            <% else %>
-		              <%= link_to(new_user_session_path, class: "export-pdf fRight", onclick: "alert('Pdf डाउनलोड करने के लिए पहले लॉगिन करे')" ) do %>
-		                  <!-- <i class="fa-solid fa-file-export"></i> -->
-		                 <i class="fas fa-file-download"></i>
-		              <% end %> 
-		            <% end %>
-		          </div>
-	            <div class="contributer-text">
-	              (योगदानकर्ता : 
-	                <strong>
-	                  <%= link_to article.user.username.capitalize, public_user_profile_path(article.user.id) %>
-	                </strong>, 
-	                सृजन तिथि : 
-	                <strong class="text-primary">
-	                  <%= link_to article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
-	                </strong>,
-	                रचना प्रकार - 
-	                <strong class="text-primary fnt-sz-14">
-	                  <%= link_to article.article_type.name, articles_by_type_public_article_types_path(article.article_type.name) %>
-	                </strong>,
-	                रचनाकार - 
-	                <strong class="text-primary fnt-sz-14">
-	                  <%= link_to article.author.name, public_author_path(article.author.id) %>
-	                </strong>
-	              )
-	            </div>
-	          </div>
-	        </div>
-	        <div class="page-subject-header1">
-	          <div class="m-sm-1 article-body mb-3 pb-2" data-controller= 'article'>
-	            <div class="article-content">
-	              <%= raw article.content %>
-	            </div>
-	            <% if article_tags.present?%>
-	              <div class="article-tag-txt text-primary mt-3">
-	                <strong>सम्बंधित बिषय :-</strong>&nbsp;&nbsp;
-	                <% article_tags.each do | tag | %>
-	                  <a href="<%= articles_by_tag_public_tags_path(tag.name) %>" class='tags-txt'>
-	                    <i class="fa-solid fa-tag"></i> <%= tag.name %>
-	                  </a>
-	                <% end %>
-	              </div>
-	            <% end %>
-	          </div>
-		        <div class="m-sm-2">
-		          <div class="row mb-2 ms-0">
-		            <div class="ps-0" style="color:#6c757d;">
-		              <strong>Comments</strong>
-		            </div>
-		          </div>
-		        </div>
-		        <div class="m-sm-2">
-		          <div class="row mb-2 ms-0" id="comment-section">
-		            <% if article.comments.present? %>
-		              <% article.comments.limit(5).each do | comment | %>
-		              <div class="parent-comment-body">
-		                <%= render partial: "comments/comment", locals: {comment: comment, 
-		                  article: article, parent: article, parent_name: article.class.name, 
-		                  level: 1} %>
-		              </div>
-		              <% end %>
-		            <% else %>
-		              <div class="d-flex">
-		                <div class="no-comment-msg">
-		                  There is not comment available now.
-		                </div>
-		              </div>
-		            <% end %>
-		          </div>
-		        </div>
-		      </div>
-		      <br/>
-				<% end %>
-				<div class="dropdown-divider"></div>
-				<div class="paginante-block mt-3">
-					<%= paginate @articles %>
-				</div>
-		  </div>
-		</div>
-  </div>
-  <div class="col-md-3 ps-0 pe-0">
-    <div class="card">
-      <div class="card-body h-100" style="min-height: 545px;">
-        <div class="col-md-12 page-subject-header mb-3">
-          <div>रचनाकार / कवि / भक्त सूची</div>
-          <div class="contributer-text">&nbsp;</div>
-        </div>
-        <div class="dropdown-divider"></div>
-          <ul class="list-group">
-					  <% if @authors.present? %>
-					    <% @authors && @authors.each do | author | %>
-					      <%= render partial: "author", locals: {author: author} %>
-					    <% end %>
-					    <% if @authors.length > 9 %>
-						    <li class="list-group-item">
-								  <%= link_to public_authors_path do %>
-								    View more रचनाकार ...
-								  <% end %>
-								</li>
-							<% end %>
-					  <% else %>
-							<li class="list-group-item">
-								There is no data available now.
-							</li>
-					  <% end %>
-					</ul>
-        </div>
-      </div>
+  <div class="card mb-2 pt-2">
+    <div class="article-header-violet mb-3 mb-2">प्रसंग सूची</div>
+    <div class="mb-3" style="text-align:center;">
+      <% @contexts && @contexts.each do | context | %>
+        <a href="<%= articles_by_context_public_contexts_path(context.name) %>">
+          <div class="context-lbl"><%= context.name %></div>
+        </a>
+      <% end %>
     </div>
   </div>
 </div>
-<% content_for :head do %>
-  <%#= javascript_import_module_tag "custom/welcome-custom" %>
-<% end %>

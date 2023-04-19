@@ -1,0 +1,43 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th>रचना</th>
+      <th>अनुक्रम</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if strota_articles.present? %>
+      <%
+        page = (strota_articles.current_page - 1)
+        per_page = strota_articles.present? ? strota_articles.limit_value : 0
+      %>
+      <% strota_articles.each_with_index do |str_article, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr id="str_article_<%= str_article.id %>">
+          <td scope="row">
+            <%= ind %>
+          </td>
+          <td>
+            <%=raw str_article.content %>
+          </td>
+          <td>
+            <%= number_field_tag "index", str_article.index, style: "width: 60px", 'data-admin-str-article-target': 'articleIndex', id: "article_index_#{str_article.id}" %>
+            <%= button_tag 'अनुक्रम अद्यतित करे', type:"button", class: "btn btn-primary", style:"display:inline-block;", 'data-articleId': str_article.id,
+              'data-action': 'click->admin-str-article#updateArticleIndex' %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if strota_articles.present? && paginate(strota_articles).present? %>
+  <%= paginate strota_articles, remote: true %>
+  <div class="dropdown-divider"></div>
+<% end %>

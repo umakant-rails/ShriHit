@@ -22,7 +22,7 @@ class ThemesController < ApplicationController
     respond_to do |format|
       if @theme.save
         current_user.theme_chapters.create(
-          {theme_id: @theme.id, name:"#{@theme.name}_विविध _प्रकरण", is_default: true}
+          {theme_id: @theme.id, name:"#{@theme.name} अध्याय", is_default: true}
         )
         format.html { redirect_to theme_url(@theme), notice: "Theme was successfully created." }
         format.json { render :show, status: :created, location: @theme }
@@ -72,8 +72,9 @@ class ThemesController < ApplicationController
   end
 
   def add_article_in_theme
-    if current_user.theme_articles.where(theme_article_params).blank?
+    if @theme.theme_articles.where({article_id: params[:theme_article][:article_id]}).blank?
       @theme_article = current_user.theme_articles.new(theme_article_params)
+
       if @theme_article.save
         flash[:success] = "उत्सव में रचना सफलतापूर्वक जोड़ दी गई है."
       else
@@ -92,7 +93,8 @@ class ThemesController < ApplicationController
   end
 
   def remove_article_from_theme
-    @theme_article = current_user.theme_articles.find(params[:theme_article_id]) rescue nil
+    @theme_chapter = ThemeChapter.find(params[:theme_chapter_id])
+    @theme_article = @theme_chapter.theme_articles.find(params[:theme_article_id]) rescue nil
 
     if @theme_article && @theme_article.destroy
       flash[:success] = "उत्सव से रचना सफलतापूर्वक हटा दी गई है."
@@ -100,6 +102,7 @@ class ThemesController < ApplicationController
       flash[:error] = "उत्सव में रचना हटाने की प्रकिया असफल हो गई है."
     end
     get_articles_by_params
+
     respond_to do |format|
       format.html {}
       format.js {}
@@ -113,7 +116,7 @@ class ThemesController < ApplicationController
       queryy = ''
       added_articles_tmp, articles_tmp = []
       if params[:theme_chapter_id].present?
-        added_articles_tmp = ThemeArticle.joins(:article).where(theme_chapter_id: params[:theme_chapter_id]).order("articles.hindi_title ASC")
+        added_articles_tmp = ThemeChapter.find(params[:theme_chapter_id]).theme_articles.joins(:article).order("articles.hindi_title ASC")
         @added_articles = Kaminari.paginate_array(added_articles_tmp).page(params[:page])
         added_articles_tmp = added_articles_tmp.blank? ? [] : added_articles_tmp.pluck(:article_id)
       end
@@ -133,9 +136,7 @@ class ThemesController < ApplicationController
         end
       end
 
-      articles_tmp = Article.where(queryy)
-        .where.not(id: added_articles_tmp)
-        .order("hindi_title ASC")
+      articles_tmp = Article.where(queryy).where.not(id: added_articles_tmp).order("hindi_title ASC")
 
       @articles = Kaminari.paginate_array(articles_tmp).page(params[:page])
     end

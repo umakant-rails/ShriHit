@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          स्त्रोत/आरती रचना अद्यतन फॉर्म 
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller="admin-chapter">
+          <%= render "form", strota_article: @strota_article, strota: @strota, article_types: @article_types %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <%= link_to "स्त्रोत/आरती रचना देखे", admin_strota_article_path(@strota_article) %>
+        <%= link_to "स्त्रोत/आरती रचना की सूची", admin_strota_articles_path %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/strota-article-custom" %>
+<% end %>

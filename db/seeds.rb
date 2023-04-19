@@ -1,4 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
+  # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or create!d alongside the database with db:setup).
 #
 # Examples:
@@ -50,7 +50,7 @@ Theme.create!(name: 'व्याहुला', user_id: 1) if Theme.where(name:
 Theme.create!(name: 'जन्मोत्सव', user_id: 1) if Theme.where(name: 'जन्मोत्सव').blank?
 Theme.create!(name: 'होली', user_id: 1) if Theme.where(name: 'होली').blank?
 Theme.all.each{ | theme |
-  ThemeChapter.create(user_id:1, theme_id: theme.id, name: "#{theme.name}_विविध _प्रकरण") if ThemeChapter.where(name: "#{theme.name}_विविध _प्रकरण").blank?
+  ThemeChapter.create(user_id:1, theme_id: theme.id, name: "#{theme.name} अध्याय") if ThemeChapter.where(name: "#{theme.name}_विविध _प्रकरण").blank?
 }
 
 Context.create!(name: 'अन्य', is_approved: true, user_id: 1) if Context.where(name: 'अन्य').blank?
@@ -67,6 +67,9 @@ Sampradaya.create!(name: 'निम्बार्क सम्प्रदा�
 Sampradaya.create!(name: 'रामानंदी संप्रदाय') if Sampradaya.where(name: 'रामानंदी संप्रदाय').blank?
 Sampradaya.create!(name: 'रसिक संप्रदाय') if Sampradaya.where(name: 'रसिक संप्रदाय').blank?
 
+Author.create!(name: 'हित हरिवंश चंद्र जू', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'हित हरिवंश चंद्र जू').blank?
+Author.create!(name: 'स्वामी श्री हरिदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'स्वामी श्री हरिदास').blank?
+Author.create!(name: 'हरिराम व्यास जी', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'हरिराम व्यास जी').blank?
 Author.create!(name: 'सूरदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'सूरदास').blank?
 Author.create!(name: 'कुम्भनदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'कुम्भनदास').blank?
 Author.create!(name: 'चतुर्भुजदास', is_approved: true, is_saint: true, user_id: 1) if Author.where(name: 'चतुर्भुजदास').blank?
@@ -87,13 +90,14 @@ Author.create!(name: 'अज्ञात', is_approved: true, is_saint: true, us
 # ScriptureType.create!(name: "शास्त्र") if ScriptureType.where(name: "शास्त्र").blank?
 # ScriptureType.create!(name: "दर्शन") if ScriptureType.where(name: "दर्शन").blank?
 ScriptureType.create!(name: "ग्रन्थ") if ScriptureType.where(name: "ग्रन्थ").blank?
-ScriptureType.create!(name: "रसिक वाणी") if ScriptureType.where(name: "वाणीजी").blank?
-ScriptureType.create!(name: "अष्टयाम") if ScriptureType.where(name: "अष्टयाम").blank?
+ScriptureType.create!(name: "रसिक वाणी") if ScriptureType.where(name: "रसिक वाणी").blank?
+ScriptureType.create!(name: "कथायें") if ScriptureType.where(name: "कथायें").blank? 
+# ScriptureType.create!(name: "अष्टयाम") if ScriptureType.where(name: "अष्टयाम").blank?
 
-ScriptureType.create!(name: "सहस्त्रनाम") if ScriptureType.where(name: "सहस्त्रनाम").blank?
-ScriptureType.create!(name: "कवच") if ScriptureType.where(name: "कवच").blank?
-ScriptureType.create!(name: "स्त्रोत") if ScriptureType.where(name: "स्त्रोत").blank?
-ScriptureType.create!(name: "अष्टक") if ScriptureType.where(name: "अष्टक").blank?
-ScriptureType.create!(name: "चालीसा") if ScriptureType.where(name: "चालीसा").blank?
-# ScriptureType.create!(name: "संग्रह") if ScriptureType.where(name: "संग्रह").blank?
-ScriptureType.create!(name: "आरती") if ScriptureType.where(name: "आरती").blank?
+StrotaType.create!(name: "आरती") if StrotaType.where(name: "आरती").blank?
+StrotaType.create!(name: "चालीसा") if StrotaType.where(name: "चालीसा").blank?
+
+StrotaType.create!(name: "स्त्रोत") if StrotaType.where(name: "स्त्रोत").blank?
+StrotaType.create!(name: "सहस्त्रनाम") if StrotaType.where(name: "सहस्त्रनाम").blank?
+StrotaType.create!(name: "कवच") if StrotaType.where(name: "कवच").blank?
+StrotaType.create!(name: "अष्टक") if StrotaType.where(name: "अष्टक").blank?

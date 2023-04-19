@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :comment_reportings
   has_many :article_tags
   has_many :saint_bio_events
+  has_many :scriptures
+  has_many :stories
 
   scope :unblocked_users, ->(){ where(is_blocked: false, role_id: 3) }
   scope :blocked_users, ->(){ where(is_blocked: true) }

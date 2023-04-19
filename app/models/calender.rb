@@ -1,2 +1,0 @@
-class Calender < ApplicationRecord
-end

@@ -9,12 +9,21 @@
     <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>
           रचना का प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
         </label>
-        <%= form.select :article_type_id, options_for_select(article_types, selected: article.article_type_id), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-article-target': 'articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
+        <%= form.select :article_type_id, options_for_select(article_types, selected: form.object.article_type_id), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-article-target': 'articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class='mb-3'>
+        <label for='article_type' class='form-label'>
+          रसिक वाणी
+        </label>
+        <% scripture_list = scriptures.present? ? scriptures.map{|s|[s.name, s.id]} : [] %>
+        <%= form.select :scripture_id, options_for_select(scripture_list, selected: form.object.scripture_id), {:prompt => 'रसिक वाणी चुने'}, class: 'form-control'%>
       </div>
     </div>
   </div>
@@ -125,8 +134,13 @@
     <label for='article_type' class='form-label'>
       रचना <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
     </label>
-    <%#= text_area(:article, :content, cols: 30, rows: 12, class: 'form-control', 'data-article-target': 'content') %>
     <%= form.text_area :content, class: 'tinymce' %>
+  </div>
+  <div class='mb-3'>
+    <label for='article_type' class='form-label'>
+      रचना का अर्थ
+    </label>
+    <%= form.text_area :interpretation, class: 'tinymce' %>
   </div>
   <!-- <div class='mb-3'>
     <label for='article_type' class='form-label'>

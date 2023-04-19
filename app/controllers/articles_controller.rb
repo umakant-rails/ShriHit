@@ -1,8 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article, only: %i[ show edit update destroy tags tags_update ]
-  before_action :create_author, only: [:create]
-  before_action :create_context, only: [:create]
 
   # GET /articles or /articles.json
   def index
@@ -19,6 +17,7 @@ class ArticlesController < ApplicationController
     @tags = Tag.approved.order("name ASC")
     author = Author.where("name=?", "अज्ञात").first
     context = Context.where("name=?", "अन्य").first
+    @scriptures = Scripture.all
     @article = Article.new({author_id: author.id, context_id: context.id})
     #@article.build_image
   end
@@ -32,7 +31,7 @@ class ArticlesController < ApplicationController
   def create
     author = Author.where("name=?", "अज्ञात").first
     params[:article][:author_id] = params[:article][:author_id].blank? ? author.id : params[:article][:author_id]
-
+    debugger
     @article = current_user.articles.new(article_params)
     respond_to do |format|
       if @article.save
@@ -179,19 +178,5 @@ class ArticlesController < ApplicationController
     def article_params
       params.fetch(:article, {}).permit(:content, :author_id, :article_type_id,
         :theme_id, :context_id, :hindi_title, :english_title, image_attributes:[:image])
-    end
-
-    def create_author
-      if params[:author_id].blank? && params[:author].present?
-        @author = Author.create_author(params[:author], current_user.id)
-        params[:article][:author_id] = @author.id
-      end
-    end
-
-    def create_context
-      if params[:context_id].blank? && params[:context].present?
-        @context = Context.create_context(params[:context], current_user.id)
-        params[:article][:context_id] = @context.id
-      end
     end
 end

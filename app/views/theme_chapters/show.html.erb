@@ -3,12 +3,12 @@
     <div class="card">
       <div class="card-body h-100">
         <div class="col-md-12 page-subject-header">
-          खंड/प्रकरण विवरण
+          अध्याय विवरण
         </div>
         <div class="dropdown-divider"></div>
         <div class="row mb-3">
           <div class="col-md-12">
-            <div class='profile-title'>खंड/प्रकरण का नाम</div>
+            <div class='profile-title'>अध्याय का नाम</div>
             <div class='profile-content'>
               <%= @theme_chapter.name %>
             </div>
@@ -32,9 +32,9 @@
         </div>
         <div class="dropdown-divider"></div>
         <div class="">
-          <%= link_to "उत्सव खंड/प्रकरण अद्यतन करे ", edit_theme_chapter_path(@theme_chapter) %> |
-          <%= link_to "उत्सव खंड/प्रकरण सूची देखे", theme_chapters_path %> |
-          <%= button_to("उत्सव खंड/प्रकरण डिलीट करे", theme_chapter_path(@theme_chapter), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
+          <%= link_to "उत्सव अध्याय अद्यतन करे ", edit_theme_chapter_path(@theme_chapter) %> |
+          <%= link_to "उत्सव अध्याय सूची देखे", theme_chapters_path %> |
+          <%= button_to("उत्सव अध्याय डिलीट करे", theme_chapter_path(@theme_chapter), method: :delete, :class => "btn btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
           </div>
         </div>
       </div>

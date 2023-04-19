@@ -1,0 +1,56 @@
+<%= form_with(model: story) do |form| %>
+  <% if story.errors.any? %>
+    <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= story.errors.present? ? 'block' : 'none' %>;" role="alert">
+      <% story.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+      <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+    </div>
+  <% end %>
+
+  <div class='mb-3'>
+    <div class="row">
+      <div class="col-md-6">
+        <label class='form-label'>
+          संत का नाम
+        </label>
+        <%= form.select :author_id, options_for_select(sants, selected: story.author_id), {:prompt => 'संत का नाम चुने'},
+          class: 'form-control' %>
+      </div>
+      <div class="col-md-6">
+        <label class='form-label'>
+          ग्रन्थ/बुक का नाम
+        </label>
+        <%= form.select :scripture_id, options_for_select(scriptures.map{|s| [s.name, s.id]}, selected: story.scripture_id), {:prompt => 'ग्रन्थ/बुक चुने'},
+          class: 'form-control' %>
+      </div>
+    </div>
+  </div>
+
+
+  <div class='mb-3'>
+    <label class='form-label'>
+      शीर्षक
+    </label>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class='mb-3'>
+    <label class='form-label'>
+      जीवन वृतांत <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+    </label>
+    <%= form.text_area :story, class: 'tinymce' %>
+  </div>
+
+  <div class='text-center mt-3 actions'>
+    <div class="row">
+      <div class="col-md-4">
+        <% if form.object.id.blank? %>
+          <%= form.submit "जीवन वृतांत जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+        <% else %>
+          <%= form.submit "जीवन वृतांत अद्यतन करे", class: 'btn btn-lg btn-primary form-control' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

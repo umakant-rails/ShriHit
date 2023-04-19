@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          <%= params[:scripture_id].present? ? 'सेक्शन फॉर्म': 'अध्याय फॉर्म' %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller="admin-chapter">
+          <% if params[:scripture_id].present? %>
+            <%= render "section_form", chapter: @chapter, scripture_id: params[:scripture_id] %>
+          <% else %>
+            <%= render "form", chapter: @chapter, sections: nil %>
+          <% end %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <%= link_to "अध्याय की सूची देखे", admin_chapters_path %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/chapter-custom" %>
+<% end %>

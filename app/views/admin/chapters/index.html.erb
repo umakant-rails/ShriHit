@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          रसिक वाणी/ग्रन्थ अध्याय सूची
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="scripture_list">
+          <%= render "chapter", chapters: @chapters %>
+          <%= link_to "नया अध्याय", new_admin_chapter_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

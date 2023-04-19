@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_04_084224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_approved"
+    t.integer "scripture_id"
+    t.text "content_eng"
+    t.text "interpretation_eng"
+    t.integer "index"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -69,8 +73,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
 
   create_table "chapters", force: :cascade do |t|
     t.integer "scripture_id"
-    t.integer "section_id"
-    t.string "title"
+    t.string "name"
+    t.integer "parent_id"
+    t.boolean "is_section", default: false
+    t.integer "index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -153,15 +159,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "saint_bio_events", force: :cascade do |t|
-    t.string "title"
-    t.text "event"
-    t.integer "user_id"
-    t.integer "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "saint_biographies", force: :cascade do |t|
     t.string "title"
     t.text "event"
@@ -189,15 +186,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
   end
 
   create_table "scripture_articles", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "scripture_id"
     t.integer "chapter_id"
-    t.integer "section_id"
     t.integer "article_type_id"
     t.text "content"
     t.text "content_eng"
     t.text "interpretation"
     t.text "interpretation_eng"
-    t.integer "article_index"
+    t.integer "index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -210,25 +206,53 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_16_164310) do
 
   create_table "scriptures", force: :cascade do |t|
     t.integer "scripture_type_id"
+    t.integer "user_id"
     t.string "name"
+    t.string "name_eng"
     t.text "description"
     t.integer "author_id"
-    t.string "size"
-    t.boolean "has_section", default: false
-    t.boolean "has_chapter", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sections", force: :cascade do |t|
-    t.integer "scripture_id"
-    t.string "title"
-    t.text "description"
+    t.string "keywords"
+    t.integer "sampradaya_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.integer "scripture_id"
+    t.string "title"
+    t.text "story"
+    t.integer "author_id"
+    t.integer "index"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strota", force: :cascade do |t|
+    t.string "name"
+    t.text "source"
+    t.integer "strota_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strota_articles", force: :cascade do |t|
+    t.integer "strotum_id"
+    t.integer "article_type_id"
+    t.integer "index"
+    t.text "content"
+    t.text "interpretation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strota_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

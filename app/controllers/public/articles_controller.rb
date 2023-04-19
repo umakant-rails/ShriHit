@@ -5,7 +5,7 @@ class Public::ArticlesController < ApplicationController
     @article_types = ArticleType.order("name ASC")
     @contexts = Context.order("name ASC")
     @authors = Author.order("name ASC").limit(10)
-    @articles = Article.order("created_at DESC").page(params[:page]).per(5)
+    @articles = Article.order("created_at DESC").page(params[:page]).per(9)
     @contributors = User.all
   end
 

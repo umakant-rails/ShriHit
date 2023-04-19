@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body h-400">
+        <div class="page-subject-header">
+          <div class="col-md-12 text-start article-title text-primary">
+            संत चरित्र/प्रेरक प्रसंग सूची
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <table class="table">
+          <thead class="table-primary ps-0 pe-0">
+            <tr>
+              <th>#</th>
+              <th>शीर्षक</th>
+              <th>संत का नाम</th>
+              <th>गतिविधि</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @stories.present? %>
+              <% @stories.each_with_index do |story, index| %>
+                <tr>
+                  <td><%=index+1%></td>
+                  <td class="text-primary1">
+                    <%= link_to story.title, story_path(story) %>
+                  </td>
+                  <td class="text-primary1">
+                    <% if story.author_id.present? %>
+                      <%= link_to story.author.name, author_path(story.author_id) %>
+                    <% else %>
+                      -
+                    <% end %>
+                  </td>
+                  <td>
+        						<div class="row">
+        							<div class="col-md-2">
+        								<%= link_to story do %>
+        								  <i class="fa fa-eye"></i>
+        								<% end %>
+        							</div>
+        							<div class="col-md-2">
+        								<%= link_to edit_story_path(story) do %>
+        								  <i class="fa fa-edit"></i>
+        								<% end %>
+        							</div>
+        							<div class="col-md-2">
+        								<%= form_for(story, html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+        						      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+        						        <i class="fa fa-trash" style="color:red;"></i>
+        						      </button>
+        						    <% end %>
+        						  </div>
+        				    </div>
+        					</td>
+                </tr>
+                <% index = index + 1%>
+              <% end %>
+            <% else %>
+              <td colspan="4">
+                अभी रिकॉर्ड उपलब्ध नहीं है.
+              </td>
+            <% end %>
+          </tbody>
+        </table>
+        <%= link_to "संत चरित्र/प्रेरक प्रसंग जोड़े", new_story_path, class: "mt-2" %>
+      </div>
+    </div>
+  </div>
+</div>

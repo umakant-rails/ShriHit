@@ -1,0 +1,27 @@
+
+<% if @scripture.category == 3 %>
+  var options = '<option value="">सेक्शन को चुनिये</option>';
+  <% @sections.each do | section | %>
+    options = options + '<option value="<%= section.id %>"><%= section.name %></option>'
+  <% end %>
+  $("#section_id").html(options);
+  $("#section_id").prop('disabled', false)
+  $("#scripture_article_chapter_id").val('').prop('disabled', true)
+<% elsif @scripture.category == 2 %>
+  var options = '<option value="">अध्याय को चुनिये</option>';
+  <% @chapters.each do | chapter | %>
+    options = options + '<option value="<%= chapter.id %>"><%= chapter.name %></option>'
+  <% end %>
+  $("#scripture_article_chapter_id").html(options);
+  $("#section_id").val('').prop('disabled', true)
+  $("#scripture_article_chapter_id").prop('disabled', false)
+<% else %>
+  $("#section_id").val('').prop('disabled', true)
+  $("#scripture_article_chapter_id").val('').prop('disabled', true)
+<% end %>
+
+<% if @last_article.present? %>
+  $("#scripture_article_index").val(<%= @last_article.index + 1 %>);
+<% else %>
+  $("#scripture_article_index").val(1);
+<% end %>

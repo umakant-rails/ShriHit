@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          <%= @chapter.is_section ? 'सेक्शन अद्यतन फॉर्म': 'अध्याय अद्यतन फॉर्म' %>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4">
+          <% if @chapter.is_section %>
+            <%= render "section_form", chapter: @chapter, scripture_id: @scripture.id %>
+          <% else %>
+            <%= render "form", chapter: @chapter, sections: @sections %>
+          <% end %>
+        </div>
+        <%= link_to "रसिक वाणी/ग्रन्थ सूची देखे", admin_chapters_path %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/chapter-custom" %>
+<% end %>

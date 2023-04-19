@@ -1,0 +1,61 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th>अध्याय का नाम</th>
+      <th>सेक्शन का नाम</th>
+      <th>रसिक वाणी/ग्रन्थ का नाम</th>
+      <th>रचना जोड़े</th>
+      <th>गतिविधि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if chapters.present? %>
+      <%
+        page = (chapters.current_page - 1)
+        per_page = chapters.present? ? chapters.limit_value : 0
+      %>
+      <% chapters.each_with_index do |chapter, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr>
+          <td scope="row">
+            <%= ind %>
+          </td>
+          <td>
+            <strong>
+              <%= chapter.name %>
+            </strong>
+          </td>
+          <td>
+            <%= chapter.section.present? ? chapter.section.name : '-' %>
+          </td>
+          <td>
+            <% scripture = chapter.scripture %>
+            <%= link_to scripture.name, admin_scripture_path(scripture.id) %>
+          </td>
+          <td>
+            <%= link_to new_admin_scripture_article_path, class: "btn btn-primary" do %>
+              <i class="fa-solid fa-file-circle-plus"></i> रचना जोड़े
+            <% end %>
+          </td>
+          <td>
+            <%= link_to edit_admin_chapter_path(chapter) do %>
+              <i class="fa fa-edit"></i>
+            <% end %>
+            <%= button_to '<i class="fa fa-trash" style="color:red;"></i>'.html_safe, admin_chapter_path(chapter), method: :delete, style: "border: 0px", form: {class: 'ps-0 pe-0', style: "display:inline-block; font-size: 18px;"} %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if paginate(chapters).present? %>
+  <%= paginate chapters, remote: true %>
+  <div class="dropdown-divider"></div>
+<% end %>

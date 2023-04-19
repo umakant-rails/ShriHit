@@ -14,7 +14,7 @@ export default class extends ApplicationController {
   isSearchEnable(){
     if(this.hasThemeChapterTarget && this.themeChapterTarget.value.length == 0){
       this.clearFilters();
-      super.showErrorsByLayout("कृपया पहले खंड/प्रकरण चुने. खंड/प्रकरण चुनना आवश्यक है.");
+      super.showErrorsByLayout("कृपया पहले अध्याय चुने. अध्याय चुनना आवश्यक है.");
     }
   }
   
@@ -29,7 +29,7 @@ export default class extends ApplicationController {
 
   toggleSearchOptions(){
     if(this.hasThemeChapterTarget && this.themeChapterTarget.value.length == 0){
-      super.showErrorsByLayout("कृपया पहले खंड/प्रकरण चुने. खंड/प्रकरण चुनना आवश्यक है.");
+      super.showErrorsByLayout("कृपया पहले अध्याय चुने. अध्याय चुनना आवश्यक है.");
       return;
     }
     let searchBoxStatus = event.target.dataset.togglevalue;
@@ -174,7 +174,7 @@ export default class extends ApplicationController {
 
   additionOrDeletionOfArticles(actionType, articleId, themeArticleId){
     if(this.hasThemeChapterTarget && this.themeChapterTarget.value.length == 0){
-      super.showErrorsByLayout("कृपया पहले खंड/प्रकरण चुने. खंड/प्रकरण चुनना आवश्यक है.");
+      super.showErrorsByLayout("कृपया पहले अध्याय चुने. अध्याय चुनना आवश्यक है.");
       return;
     }
 

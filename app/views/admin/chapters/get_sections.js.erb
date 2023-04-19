@@ -1,0 +1,22 @@
+var options = '<option value="">सेक्शन को चुनिये</option>';
+<% @sections && @sections.each do | section | %>
+  options = options + '<option value="<%= section.id %>"><%= section.name %></option>'
+<% end %>
+$("#section").html(options);
+
+<% if @chapters.present? and params[:action_type] == "add_chapter" %>
+  var chapters_str = '';
+  <% @chapters && @chapters.each do |chapter|%>
+    chapters_str += `<div class="chapter-element" data-action="click->admin-chapter#updateCheckboxStatus">
+      <input class="form-check-input" type="checkbox" 
+        data-admin-chapter-target="chapter"
+        value="<%= chapter.id %>" id="chapter-<%=chapter.id%>">
+        <label for="chapter-<%=chapter.id%>">
+          <%= chapter.name %>
+        </label>
+    </div>`
+  <% end %>
+  $("#chapter-block").html(chapters_str);
+<% else %>
+   $("#chapter-block").html('');
+<% end %>

@@ -1,0 +1,43 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th>रचना</th>
+      <th>अनुक्रम</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if scripture_articles.present? %>
+      <%
+        page = (scripture_articles.current_page - 1)
+        per_page = scripture_articles.present? ? scripture_articles.limit_value : 0
+      %>
+      <% scripture_articles.each_with_index do |scr_article, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr id="scr_article_<%= scr_article.id %>">
+          <td scope="row">
+            <%= ind %>
+          </td>
+          <td>
+            <%=raw scr_article.content %>
+          </td>
+          <td>
+            <%= number_field_tag "index", scr_article.index, style: "width: 60px", 'data-admin-scr-article-target': 'articleIndex' %>
+            <%= button_tag 'अनुक्रम अद्यतित करे', type:"button", class: "btn btn-primary", style:"display:inline-block;", 'data-articleId': scr_article.id,
+              'data-action': 'click->admin-scr-article#updateArticleIndex' %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if scripture_articles.present? && paginate(scripture_articles).present? %>
+  <%= paginate scripture_articles, remote: true %>
+  <div class="dropdown-divider"></div>
+<% end %>

@@ -3,8 +3,8 @@
     <tr>
       <th>S. No.</th>
       <th>उत्सव नाम</th>
-      <th class="d-none d-xl-table-cell">खंड/प्रकरण जोड़े</th>
-      <th>पद/रचना जोड़े</th>
+      <th class="d-none d-xl-table-cell">अध्याय जोड़े</th>
+      <th>रचना जोड़े</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -25,13 +25,13 @@
 						<% end %>
 					</td>
 					<td class="d-none d-xl-table-cell">
-						<a href="<%= theme_new_theme_chapter_path(theme) %>">
-							<i class="fa-solid fa-circle-plus text-primary"></i>
+						<a href="<%= theme_new_theme_chapter_path(theme) %>" class="btn btn-primary text-white">
+							<i class="fa-solid fa-circle-plus"></i> अध्याय जोड़े
 						</a>
 					</td>
 					<td>
-						<a href="<%= add_articles_page_theme_path(theme) %>">
-							<i class="fa-solid fa-file-circle-plus text-primary"></i>
+						<a href="<%= add_articles_page_theme_path(theme) %>" class="btn btn-primary text-white">
+							<i class="fa-solid fa-file-circle-plus"></i> रचना जोड़े
 						</a>
 					</td>
 					<td>

@@ -46,7 +46,8 @@ Rails.application.routes.draw do
   resources :panchangs, only: [:index, :show] do
     get "/pdf/export" => "panchangs#panchang_pdf", as: :export_pdf, on: :member
   end
-  resources :saint_bio_events
+  
+  resources :stories
   
   namespace :admin do
     resources :dashboards, only: [:index] do
@@ -110,6 +111,30 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :scriptures
+    resources :chapters do 
+      get '/get_sections' => "chapters#get_sections", as: :get_sections, on: :collection
+      get '/get_section_chapters' => "chapters#get_section_chapters", as: :get_section_chapters, on: :collection
+      get '/add_section_chapters' => "chapters#add_section_chapters", as: :add_section_chapters, on: :collection
+      get '/remove_section_chapters' => "chapters#remove_section_chapters", as: :remove_section_chapters, on: :collection
+      post '/add_chapters_in_section' => "chapters#add_chapters_in_section", as: :add_chapters_in_section, on: :collection
+      post '/remove_chapters_from_section' => "chapters#remove_chapters_from_section", as: :remove_chapters_from_section, on: :collection
+    end
+    resources :scripture_articles do
+      get '/get_chapters' => "scripture_articles#get_chapters", as: :get_chapters, on: :collection
+      get '/get_index' => "scripture_articles#get_index", as: :get_index, on: :collection
+      get '/edit_article_index' => "scripture_articles#edit_article_index", as: :edit_article_index, on: :collection
+      post '/update_article_index' => "scripture_articles#update_article_index", as: :update_article_index, on: :collection
+      get '/get_chapter_articles' => "scripture_articles#get_chapter_articles", as: :get_chapter_articles, on: :collection
+    end
+
+    resources :strota
+    resources :strota_articles do 
+      get '/get_strota_articles' => 'strota_articles#get_strota_articles', as: :get_strota_articles, on: :member
+      get '/get_index' => "strota_articles#get_index", as: :get_index, on: :collection
+      get '/edit_article_index' => "strota_articles#edit_article_index", as: :edit_article_index, on: :collection
+      post '/update_article_index' => "strota_articles#update_article_index", as: :update_article_index, on: :member
+    end
   end
 
   namespace :public, path: :pb do

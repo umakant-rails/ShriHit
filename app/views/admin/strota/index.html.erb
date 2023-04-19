@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          स्त्रोत/आरती सूची
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="strota_list">
+          <%= render "strotum", strota: @strota %>
+          <%= link_to "नया स्त्रोत/आरती", new_admin_strotum_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
