@@ -43,6 +43,14 @@ export default class extends Controller {
       }
     }
   }
+
+  setHindiTitle(){
+    let txt = tinymce.get("article_content").getContent({format: 'text'});
+      if(txt.length >  5 ){
+      let indx = txt.indexOf("\n")
+      event.target.value = txt.substring(0, indx);
+    }
+  }
   // submitForm(event) {
   //   if(!this.validateForm){
   //     //this.errorsTarget.innerHTML(errorContainer);
