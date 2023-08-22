@@ -1,0 +1,5 @@
+<% @authors.each do | author |%>
+  <li class="list-group-item" role="option" data-autocomplete-value="<%= author.id %>"><%= author.name %></li>
+<% end %>
+
+<%#= article.english_title + " : " + article.hindi_title %>

@@ -3,7 +3,7 @@
   <div class="card">
     <div class="card-body h-100" style="min-height: 545px;">
       <div class="page-subject-header">
-        रचनाकार / कवि / भक्त सूची 
+        रचनाकार / कवि / भक्त सूची
       </div>
       <div class="dropdown-divider"></div>
       <table class="table">
@@ -13,11 +13,10 @@
             <th scope="col">नाम    </th>
             <th scope="col">सम्प्रदाय</th>
             <th scope="col">रचनायें</th>
-            <th scope="col">योगदानकर्ता</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <% 
+          <%
             page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
             page_size = @authors.present? ? @authors.limit_value : 0
           %>
@@ -26,16 +25,13 @@
               <tr>
                 <th scope="row"><%= (page * page_size) + (index + 1) %></th>
                 <td>
-                  <a href="<%= articles_by_author_public_authors_path(author.name)%>">
+                  <a href="<%= public_author_path(author.id)%>">
                     <%= author.name %>
                   </a>
                 </td>
                 <td><%= author.sampradaya.present? ? author.sampradaya.name : '-' %></td>
-                <td>रचनाये देखें</td>
                 <td>
-                  <a href="<%= public_user_profile_path(author.user.id) %>">
-                    <%= author.user.username %>
-                  </a>
+                  <%= link_to "रचनाये देखें", articles_by_author_public_authors_path(author.name) %>
                 </td>
               </tr>
             <% end %>
@@ -48,7 +44,7 @@
           <% end %>
         </tbody>
       </table>
-      <%= paginate @authors, remote: true if @authors.present? %>
+      <%= paginate @authors if @authors.present? %>
     </div>
   </div>
 </div>

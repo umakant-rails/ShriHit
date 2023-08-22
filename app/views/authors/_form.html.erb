@@ -10,10 +10,20 @@
   </div>
 
   <div class='mb-3'>
-    <label class='form-label'>
-      नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-    </label>
-    <%= form.text_field :name, class: 'form-control' %>
+    <div class="row">
+      <div class="col-md-6">
+        <label class='form-label'>
+          नाम (हिंदी) <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="col-md-6">
+        <label class='form-label'>
+          नाम (अंग्रेजी) <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.text_field :name_eng, class: 'form-control' %>
+      </div>
+    </div>
   </div>
   <div class='mb-3'>
     <label class='form-label'>

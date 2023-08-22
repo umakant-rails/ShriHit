@@ -42,7 +42,11 @@
         <%= raw @article.content %>
       </div>
       <div class="author-mark-txt text-primary">
-        ( रचनाकार/लेखक - श्री : <%= @article.author.name %> जी )
+        <% if @article.author.name == "अज्ञात" %>
+          ( रचनाकार/लेखक : <%= @article.author.name %> )
+        <% else %>
+          ( रचनाकार/लेखक - श्री : <%= @article.author.name %> जी )
+        <% end %>
       </div>
       <% if article_tags.present?%>
         <div class="article-tag-txt text-primary mt-3">

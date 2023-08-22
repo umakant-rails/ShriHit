@@ -6,42 +6,46 @@ import ApplicationController from "./application_controller";
 // Connects to data-controller="article"
 export default class extends ApplicationController {
 
-  static targets = ['articleType', 'contextName', 'authorName', 'contributorName', 'contributorName', 'searchTermArticleBtn',
-  'clearFiltersBtn', 'languageBtn'];
+  static targets = ['articleType', 'contextName', 'authorName', 'searchTermArticleBtn',
+  'clearFiltersBtn', 'languageBtn', 'searchBtnFirst', 'searchBtnSecond'];
 
   connect(){
     document.addEventListener("autocomplete.change", this.autocomplete.bind(this));
   }
 
-  toggleSearchOptions(){
-    
-    let searchBoxStatus = this.articleTypeTarget.disabled;
+  firstSearchOption(){
+    this.articleTypeTarget.disabled = false
+    this.contextNameTarget.disabled = false;
+    this.authorNameTarget.disabled = false;
+    this.clearFiltersBtnTarget.disabled = false;
+    $("#english_article_search_term").prop('disabled', true);
+    $("#hindi_article_search_term").prop('disabled', true);
+    // $("#english_article_search_term").val("");
+    // $("#hindi_article_search_term").val("");
+    this.languageBtnTarget.disabled = true;
+    this.searchTermArticleBtnTarget.disabled = true;
+    this.clearFilters();
+    this.searchBtnFirstTarget.classList.remove('btn-secondary');
+    this.searchBtnFirstTarget.classList.add('btn-primary');
+    this.searchBtnSecondTarget.classList.remove('btn-primary');
+    this.searchBtnSecondTarget.classList.add('btn-secondary');
+  }
 
-    if(searchBoxStatus == false){
-      this.articleTypeTarget.disabled = true;
-      this.contextNameTarget.disabled = true;
-      this.authorNameTarget.disabled = true;
-      this.contributorNameTarget.disabled = true;
-      this.clearFiltersBtnTarget.disabled = true;
-      $("#english_article_search_term").prop('disabled', false);
-      $("#hindi_article_search_term").prop('disabled', false);
-      this.searchTermArticleBtnTarget.disabled = false;
-      this.languageBtnTarget.disabled = false;
-      this.clearFilters();
-    } else {
-      this.articleTypeTarget.disabled = false
-      this.contextNameTarget.disabled = false;
-      this.authorNameTarget.disabled = false;
-      this.contributorNameTarget.disabled = false;
-      this.clearFiltersBtnTarget.disabled = false;
-      $("#english_article_search_term").prop('disabled', true);
-      $("#hindi_article_search_term").prop('disabled', true);
-      // $("#english_article_search_term").val("");
-      // $("#hindi_article_search_term").val("");
-      this.languageBtnTarget.disabled = true;
-      this.searchTermArticleBtnTarget.disabled = true;
-      this.clearFilters();
-    }
+  secondSearchOption(){
+    this.articleTypeTarget.disabled = true;
+    this.contextNameTarget.disabled = true;
+    this.authorNameTarget.disabled = true;
+    this.clearFiltersBtnTarget.disabled = true;
+    $("#english_article_search_term").prop('disabled', false);
+    $("#hindi_article_search_term").prop('disabled', false);
+    this.searchTermArticleBtnTarget.disabled = false;
+    this.languageBtnTarget.disabled = false;
+    this.clearFilters();
+
+    this.searchBtnFirstTarget.classList.add('btn-secondary');
+    this.searchBtnFirstTarget.classList.remove('btn-primary');
+    this.searchBtnSecondTarget.classList.add('btn-primary');
+    this.searchBtnSecondTarget.classList.remove('btn-secondary');
   }
 
   selectSearchLang(){
@@ -67,7 +71,6 @@ export default class extends ApplicationController {
     this.articleTypeTarget.value = '';
     this.contextNameTarget.value = '';
     this.authorNameTarget.value = '';
-    this.contributorNameTarget.value = '';
     $("#english_article_search_term").val("");
     $("#hindi_article_search_term").val("");
   }
@@ -76,12 +79,10 @@ export default class extends ApplicationController {
     let articleType = this.articleTypeTarget.value;
     let contextName = this.contextNameTarget.value
     let authorName = this.authorNameTarget.value;
-    let contributorName = this.contributorNameTarget.value;
     var searchParams = {
       article_type_id: articleType, 
       context_id: contextName,
       author_id: authorName,
-      contributor_id: contributorName,
       search_type: 'by_attribute'
     };
     this.getArticles(searchParams);
@@ -138,7 +139,7 @@ export default class extends ApplicationController {
     $.ajax({
       type: "get",
       //url: '/themes/search_articles',
-      url: '/pb/articles/search_articles',
+      url: '/pb/articles/search',
       data: searchParams,
       dataType: 'script',
       success: function(data){

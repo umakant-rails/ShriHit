@@ -17,9 +17,9 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @tags = Tag.approved.order("name ASC")
-    author = Author.where("name=?", "अज्ञात")
-    context = Context.where("name=?", "अन्य")
-    @article = Article.new({author_id: author[0].id, context_id: context[0].id})
+    author = Author.where("name=?", "अज्ञात").first
+    context = Context.where("name=?", "अन्य").first
+    @article = Article.new({author_id: author.id, context_id: context.id})
     #@article.build_image
   end
 
@@ -30,6 +30,9 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
+    author = Author.where("name=?", "अज्ञात").first
+    params[:article][:author_id] = params[:article][:author_id].blank? ? author.id : params[:article][:author_id]
+
     @article = current_user.articles.new(article_params)
     respond_to do |format|
       if @article.save
@@ -87,7 +90,7 @@ class ArticlesController < ApplicationController
       format.html
       format.pdf do
         render pdf: @article.hindi_title,
-          save_to_file: @article.hindi_title,
+          # save_to_file: Rails.root.join('pdfs', "#{@article.hindi_title}.pdf"),
           template: "articles/article_pdf",
           layout: "pdf_layout",
           margin: {top: 14, bottom: 14, left: 8, right: 8},
@@ -117,6 +120,21 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def autocomplete_term
+    search_term = params[:q].strip
+
+    if params[:search_in] == "english"
+      @articles = Article.where("LOWER(english_title) like ? or LOWER(hindi_title) like ?",
+        "%#{search_term.downcase}%", "%#{search_term.downcase}%")
+    else
+      @articles = Article.where("hindi_title like ? or content like ?", "%#{search_term}%", "%#{search_term}%")
+    end
+    respond_to do |format|
+      format.html {}
+      format.json { head :no_content }
+    end
+    render layout: false
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

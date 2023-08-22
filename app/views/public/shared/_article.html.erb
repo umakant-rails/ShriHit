@@ -24,12 +24,12 @@
     <% else %>
       <tr>
         <td colspan="2">
-          There is no data available now.
+          अभी <span class="author-name"><%= @author.name %></span> जी की रचनायें उपलब्ध नहीं है
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <div id="paginate-block">
-  <%= paginate articles, remote: true %>
+  <%= paginate articles if articles.present?%>
 </div>
