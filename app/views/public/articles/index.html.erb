@@ -16,10 +16,10 @@
       			    <div class="card-title article-header-yellow">
       			    	<%= article.hindi_title %>
       			    </div>
-      			    <p class="card-text" style="min-height: 82px;">
-      			    	<% txt = Nokogiri::HTML(article.content).text %>
-      				   	<%=truncate(txt, length: 150)  %>
-      				  </p>
+      			    <div class="card-text" style="max-height: 82px; overflow: hidden">
+      			    	<%# txt = article.content #Nokogiri::HTML(article.content).text %>
+      				   	<%= raw article.content.strip %>
+      				  </div>
       				  <div class="dropdown-divider"></div>
       				  <div class="contributer-text" style="min-height: 44px;">
                   ( 
