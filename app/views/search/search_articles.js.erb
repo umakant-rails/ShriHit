@@ -1,0 +1,9 @@
+<% if params[:search_by] == 'admin' %>
+  $("#article_list").html(`<%= escape_javascript(render partial: 'admin/articles/article', 
+    locals: {articles: @articles, articles_category: nil })%>`);
+<% elsif params[:search_by] == 'user' %>
+  $("#article_list").html(`<%= escape_javascript(render partial: 'admin/articles/article', 
+    locals: {articles: @articles, articles_category: nil })%>`);
+<% else %>
+  $("#article_list").html("<%= escape_javascript(render partial: 'article', locals: {articles: @articles })%>");
+<% end %>

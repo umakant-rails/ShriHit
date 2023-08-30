@@ -7,7 +7,7 @@ import ApplicationController from "./application_controller";
 export default class extends ApplicationController {
 
   static targets = ['articleType', 'contextName', 'authorName', 'searchTermArticleBtn',
-  'clearFiltersBtn', 'languageBtn', 'searchBtnFirst', 'searchBtnSecond'];
+  'clearFiltersBtn', 'languageBtn', 'searchBtnFirst', 'searchBtnSecond', 'searchUrl'];
 
   connect(){
     document.addEventListener("autocomplete.change", this.autocomplete.bind(this));
@@ -136,10 +136,14 @@ export default class extends ApplicationController {
   /* start - js requet to get data block */
 
   getArticles(searchParams){
+    var searchUrl = this.searchUrlTarget.value;
+    var searchBy = this.searchUrlTarget.dataset.searchBy;
+    searchParams['search_by'] = searchBy;
+
     $.ajax({
       type: "get",
       //url: '/themes/search_articles',
-      url: '/pb/articles/search',
+      url: searchUrl,
       data: searchParams,
       dataType: 'script',
       success: function(data){

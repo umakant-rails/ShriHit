@@ -48,7 +48,11 @@ Rails.application.routes.draw do
   end
   
   resources :stories
-  
+  resources :search, only: [] do
+    get "/autocomplete_term" => "search#autocomplete_term", as: :autocomplete_term, on: :collection
+    get "/articles" => "search#search_articles", as: :search_articles, on: :collection
+  end
+
   namespace :admin do
     resources :dashboards, only: [:index] do
     end
