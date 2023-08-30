@@ -62,8 +62,6 @@ export default class extends ApplicationController {
 
   autocomplete(event) {
     let articleId = event.detail.value;
-    //let searchParams = {article_id: vl}
-    //this.getArticles(searchParams);
     this.searchArticlesById(articleId);
   }
 
@@ -139,7 +137,6 @@ export default class extends ApplicationController {
     var searchUrl = this.searchUrlTarget.value;
     var searchBy = this.searchUrlTarget.dataset.searchBy;
     searchParams['search_by'] = searchBy;
-
     $.ajax({
       type: "get",
       //url: '/themes/search_articles',
