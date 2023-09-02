@@ -25,8 +25,8 @@ Rails.application.routes.draw do
     get   "/tags" => "articles#tags", as: :tags, on: :member
     post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member
     get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
-    get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
-    get "/search" => "articles#search", as: :article_search, on: :collection
+    #get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
+    #get "/search" => "articles#search", as: :article_search, on: :collection
   end
 
   resources :comments
@@ -146,17 +146,12 @@ Rails.application.routes.draw do
   namespace :public, path: :pb do
 
     resources :articles, only: [:index, :show] do
-      # get "/type/:article_type" => "articles#articles_by_type", as: :articles_by_type, on: :collection
-      # get "/contexts/:context_name" => "articles#articles_by_context", as: :articles_by_context, on: :collection
       get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
-      #get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
       get "/search" => "articles#search", as: :search, on: :collection
       #get "/search_article/:id" => "articles#search_article", as: :search_article, on: :collection
       #get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
       get "/article_by_title/:hindi_title" => "articles#article_by_title", as: :article_by_title, on: :collection
-      # get "/article_contexts" => "articles#article_contexts", as: :article_contexts, on: :collection
-      # get "/article_types" => "articles#article_types", as: :article_types, on: :collection
-    end
+     end
 
     resources :user_profiles, only: [:index, :show]
 
