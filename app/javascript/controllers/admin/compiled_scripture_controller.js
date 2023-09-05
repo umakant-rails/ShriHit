@@ -170,7 +170,7 @@ export default class extends ApplicationController {
     }
   }
 
-  additionOrDeletionOfArticles(actionType, articleId, scriptureArticleId){
+  additionOrDeletionOfArticles(actionType, articleId){
     if(this.hasChapterTarget && this.chapterTarget.value.length == 0){
       super.showErrorsByLayout("कृपया पहले अध्याय चुने. अध्याय चुनना आवश्यक है.");
       return;
@@ -212,18 +212,18 @@ export default class extends ApplicationController {
       };
       this.addArticleInCsSripture(scriptureId, requiredParams);
     } else {
-      requiredParams.scripture_article_id = scriptureArticleId;
+      requiredParams.cs_article_id = articleId;
       this.removeArticleFromCsSripture(scriptureId, requiredParams);
     }
   }
 
   addArticlesInScripture(event){
     let articleId = event.currentTarget.dataset.id;
-    this.additionOrDeletionOfArticles('addition', articleId, null);
+    this.additionOrDeletionOfArticles('addition', articleId);
   }
   removeArticlesFromScripture(event){
     let scriptureArticleId = event.currentTarget.dataset.id;
-    this.additionOrDeletionOfArticles('removal', null, scriptureArticleId);
+    this.additionOrDeletionOfArticles('removal',scriptureArticleId);
   }
 
   getChapterArticles(){

@@ -1,3 +1,3 @@
 $("#article-list").html("<%= escape_javascript(render partial: 'article', locals: {articles: @articles} )%>");
-$("#added-article-list").html("<%= escape_javascript(render partial: 'added_article', locals: { articles: @added_articles})%>");
+$("#added-article-list").html("<%= escape_javascript(render partial: 'added_article', locals: { cs_articles: @added_articles})%>");
 //$("#paginate-block").html("<%#= escape_javascript(paginate @articles, remote: true) %>");

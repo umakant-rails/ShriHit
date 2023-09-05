@@ -8,12 +8,12 @@
     </tr>
   </thead>
   <tbody>
-    <% if @cs_articles.present? %>
+    <% if cs_articles.present? %>
       <%
-        page = (@cs_articles.current_page - 1)
-        per_page = @cs_articles.present? ? @cs_articles.limit_value : 0
+        page = (cs_articles.current_page - 1)
+        per_page = cs_articles.present? ? cs_articles.limit_value : 0
       %>
-      <% @cs_articles.each_with_index do |scr_article, index| %>
+      <% cs_articles.each_with_index do |scr_article, index| %>
         <% ind = (page * per_page) + (index + 1) %>
         <tr id="scr_article_<%= scr_article.id %>">
           <td scope="row">
@@ -39,4 +39,4 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @cs_articles, remote: true if @cs_articles.present? %>
+<%= paginate cs_articles, remote: true if cs_articles.present? %>

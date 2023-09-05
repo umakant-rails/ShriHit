@@ -33,13 +33,21 @@ class Admin::CompiledScripturesController < ApplicationController
   end
 
   def add_article
-
+    is_article_exist = nil
     #if @scripture.compiled_scriptures.where({article_id: params[:compiled_scripture][:article_id]}).blank?
-    if @scripture.cs_articles.where({article_id: params[:cs_article][:article_id]}).blank?
+    params[:cs_article][:user_id] = current_user.id
+    if params[:cs_article][:chapter_id].present? 
+      @chapter = Chapter.find(params[:cs_article][:chapter_id])
+      is_article_exist = @chapter.cs_articles.where({article_id: params[:cs_article][:article_id]})
+    else
+      is_article_exist = @scripture.cs_articles.where({article_id: params[:cs_article][:article_id]})
+    end
+
+    if is_article_exist.blank?
       # @compiled_scripture = current_user.compiled_scriptures.new(compiled_scripture_params)
       @cs_article = current_user.cs_articles.new(cs_article_params)
 
-      if @cs_article.save
+      if @cs_article.save!
         flash[:success] = "उत्सव में रचना सफलतापूर्वक जोड़ दी गई है."
       else
         flash[:error] = "उत्सव में रचना जोड़ने की प्रकिया असफल हो गई है."
@@ -58,7 +66,12 @@ class Admin::CompiledScripturesController < ApplicationController
 
   def remove_article
     @chapter = Chapter.find(params[:chapter_id]) rescue nil
-    @article = @scripture.cs_articles.find(params[:scripture_article_id])
+
+    if @chapter.present?
+      @article = @chapter.cs_articles.find(params[:cs_article_id])
+    else
+      @article = @scripture.cs_articles.find(params[:cs_article_id])
+    end
 
     if @article && @article.destroy!
       flash[:success] = "उत्सव से रचना सफलतापूर्वक हटा दी गई है."
@@ -128,15 +141,14 @@ class Admin::CompiledScripturesController < ApplicationController
       queryy = ''
       added_articles_tmp, articles_tmp = []
       if params[:chapter_id].present?
-        added_articles_tmp = Chapter.find(params[:chapter_id]).articles.order("articles.hindi_title ASC")
+        added_articles_tmp = Chapter.find(params[:chapter_id]).cs_articles
       else
-        added_articles_tmp = @scripture.articles.order("articles.hindi_title ASC")
+        added_articles_tmp = @scripture.cs_articles
       end
 
       @added_articles = Kaminari.paginate_array(added_articles_tmp).page(params[:page])
       added_articles_tmp = added_articles_tmp.blank? ? [] : added_articles_tmp.pluck(:article_id)
-      
-
+    
       if params[:search_type] == 'by_attribute'
         queryy = Article.by_attributes_query(params[:author_id], params[:context_id],
           params[:article_type_id], params[:theme_chapter_id], params[:contributor_id]
