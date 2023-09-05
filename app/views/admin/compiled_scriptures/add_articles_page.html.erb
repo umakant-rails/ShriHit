@@ -1,0 +1,73 @@
+<div class="" data-controller="admin-cscripture">
+  <div class="row">
+    <!-- <div class="col-md-1"></div> -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body h-100">
+          <div class="row">
+            <% if @scripture.chapters.present? %>
+              <div class="col-md-8">
+                <span class="text-start article-title text-primary" data-admin-cscripture-target="scripture" data-scripture-id="<%= @scripture.id %>">
+                  उत्सव (<span class="text-success"><%= @scripture.name %></span>) में रचनाये जोड़े 
+                </span>
+              </div>
+              <div class="col-md-4">
+                <%= select_tag 'theme_chapters_name', options_from_collection_for_select(@scripture.chapters, "id", "name"), prompt: "अध्याय चुने", class:"form-control theme-chapter-name", 'data-admin-cscripture-target': 'chapter', 'data-action': 'change->admin-cscripture#searchArticlesByChapter' %>
+              </div>
+            <% else %>
+              <div class="col-md-6">
+                <span class="text-start article-title text-primary" data-admin-cscripture-target="scripture" data-scripture-id="<%= @scripture.id %>">
+                  उत्सव (<span class="text-success"><%= @scripture.name %></span>) में रचनाये जोड़े 
+                </span>
+              </div>
+              <div class="col-md-6 theme-chapter-bdr">
+                आपने इस उत्सव (<%= @scripture.name %>) में कोई अध्याय नहीं जोड़ा है अगर आप अध्याय जोड़ना चाहते है तो यहाँ <a href="<%= admin_scripture_chapters_new_path(@scripture) %>">click</a> करे 
+              </div>
+            <% end %>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div class="search-block" data-action="click->admin-cscripture#isSearchEnable">
+            <%= render 'search_options' %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-1"></div> -->
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body h-100">
+          <div class="row">
+            <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-cscripture-target="csrfToken">
+            <span class="text-primary chapter-article-header">
+              <%= @theme_chapters.blank? ? "उत्सव में जोड़ी गयी रचनाये" : "उत्सव के अध्याय में जोड़ने के लिए उपलब्ध रचनाये"%>
+            </span>
+            <div class="dropdown-divider"></div>
+            <ul class="list-group" id="article-list">
+              <%= render partial: "article", locals: {articles: @articles} %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body h-100">
+          <div class="row">
+            <span class="text-primary chapter-article-header">
+              <%= @theme_chapters.blank? ? "उत्सव में जोड़ी गयी रचनाये" : "उत्सव के अध्याय में जोड़ी गयी रचनाये"%>
+            </span>
+            <div class="dropdown-divider"></div>
+            <ul class="list-group" id="added-article-list">
+              <%= render partial: "added_article", locals: {articles: @added_articles} %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%#= javascript_import_module_tag "custom/add-article-page-custom" %>
+<% end %>

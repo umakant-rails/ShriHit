@@ -12,6 +12,7 @@ class Article < ApplicationRecord
   has_many :tags, through: :article_tags
   has_one :image, as: :imageable, dependent: :destroy
   accepts_nested_attributes_for :image
+  has_many :cs_article
 
   paginates_per 10
 

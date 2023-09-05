@@ -1,0 +1,45 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th>रचना</th>
+      <th>अनुक्रम</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if cs_articles.present? %>
+      <%
+        page = (cs_articles.current_page - 1)
+        per_page = cs_articles.present? ? cs_articles.limit_value : 0
+      %>
+      <% cs_articles.each_with_index do |scr_article, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr id="scr_article_<%= scr_article.id %>">
+          <td scope="row">
+            <%= ind %>
+          </td>
+          <td>
+            <div class="" style="max-height: 50px; overflow: hidden;">
+              <%=raw scr_article.article.content %>
+            </div>
+          </td>
+          <td>
+            <%= number_field_tag "index", scr_article.index, style: "width: 60px", 'data-admin-cscripture-target': 'articleIndex' %>
+            <%= button_tag 'अनुक्रम अद्यतित करे', type:"button", class: "btn btn-primary", style:"display:inline-block;", 'data-articleId': scr_article.id,
+              'data-action': 'click->admin-cscripture#updateArticleIndex' %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if cs_articles.present? && paginate(cs_articles).present? %>
+  <%= paginate cs_articles, remote: true %>
+  <div class="dropdown-divider"></div>
+<% end %>

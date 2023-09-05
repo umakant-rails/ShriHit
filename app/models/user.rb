@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_many :saint_bio_events
   has_many :scriptures
   has_many :stories
+  has_many :cs_articles
 
   scope :unblocked_users, ->(){ where(is_blocked: false, role_id: 3) }
   scope :blocked_users, ->(){ where(is_blocked: true) }

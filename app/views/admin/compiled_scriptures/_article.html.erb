@@ -1,0 +1,22 @@
+<%
+  page = (articles.current_page - 1)
+  page_size = articles.present? ? articles.limit_value : 0
+%>
+<% articles && articles.each_with_index do |article, index|%>
+  <li class="list-group-item">
+    <span class="fLeft" id="aritcle-title-<%= article.id %>">
+      <strong><%= (page*page_size) + (index+1)%>.</strong> <%= article.hindi_title %>    
+    </span>
+    <span class="fRight add-article-icon" data-action="click->admin-cscripture#addArticlesInScripture" data-id="<%= article.id %>">
+      <i class="fa-solid fa-angle-right pull-right"></i>
+    </span>
+  </li>
+<% end %>
+<br>
+<div id="paginate-block">
+  <% if params[:action] == "add_articles_page" %> 
+    <%= paginate articles %>
+  <% else %>
+    <%= paginate articles, remote: true, :params => { controller: :'/admin/compiled_scriptures', action: :search_articles } %>
+  <% end %>
+</div>

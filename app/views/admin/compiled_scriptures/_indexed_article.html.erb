@@ -1,0 +1,42 @@
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th>S.No.</th>
+      <th>रचना</th>
+      <th>अध्याय</th>
+      <th>अनुक्रम</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @cs_articles.present? %>
+      <%
+        page = (@cs_articles.current_page - 1)
+        per_page = @cs_articles.present? ? @cs_articles.limit_value : 0
+      %>
+      <% @cs_articles.each_with_index do |scr_article, index| %>
+        <% ind = (page * per_page) + (index + 1) %>
+        <tr id="scr_article_<%= scr_article.id %>">
+          <td scope="row">
+            <%= ind %>
+          </td>
+          <td>
+            <div class="" style="max-height: 50px; overflow: hidden;">
+              <%=raw scr_article.article.content %>
+            </div>
+          </td>
+          <td><%= scr_article.chapter.name %> (<%= (scr_article.chapter.index) %>)</td>
+          <td>
+            <%= scr_article.index %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6">
+          <center>अभी कोई डाटा उपलब्ध नहीं है</center>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @cs_articles, remote: true if @cs_articles.present? %>

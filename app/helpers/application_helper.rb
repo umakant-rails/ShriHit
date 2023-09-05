@@ -28,13 +28,6 @@ module ApplicationHelper
   end
 
   def set_active(controller, action)
-    # if params[:action] == "new" && action == "new"
-    #   return controller == params[:controller] ? "active" : nil
-    # elsif params[:action] != "new" && action == "others"
-    #   return (controller == params[:controller]) ? "active" : nil
-    # end
-    # if controller == params[:controller] && action == "others"
-    #   return "active"
     controller_arr = controller.split(",")
     if controller_arr.index(params[:controller]).present? && action.index(params[:action]).present?
       return "active"

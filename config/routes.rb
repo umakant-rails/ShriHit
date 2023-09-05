@@ -117,7 +117,21 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :scriptures
+    resources :scriptures do
+      get "/chapters/new" => "chapters#new", as: :chapters_new
+    end
+
+    resources :compiled_scriptures, only: [:index, :show] do
+      get '/get_articles' => "compiled_scriptures#get_articles", as: :get_articles
+      get '/add_articles_page' => "compiled_scriptures#add_articles_page", as: :add_articles_page
+      post '/add_article' => "compiled_scriptures#add_article", as: :add_articles
+      post '/remove_article' => "compiled_scriptures#remove_article", as: :remove_articles
+      get '/search_articles' => "compiled_scriptures#search_articles", as: :search_articles, on: :collection
+
+      get '/get_chapter_articles' => "compiled_scriptures#get_chapter_articles", as: :get_chapter_articles
+      get '/update_article_index' => "compiled_scriptures#update_article_index", as: :update_article_index
+    end
+
     resources :chapters do 
       get '/get_sections' => "chapters#get_sections", as: :get_sections, on: :collection
       get '/get_section_chapters' => "chapters#get_section_chapters", as: :get_section_chapters, on: :collection
@@ -130,6 +144,7 @@ Rails.application.routes.draw do
       get '/get_chapters' => "scripture_articles#get_chapters", as: :get_chapters, on: :collection
       get '/get_index' => "scripture_articles#get_index", as: :get_index, on: :collection
       get '/edit_article_index' => "scripture_articles#edit_article_index", as: :edit_article_index, on: :collection
+      # get '/:scripture_type/edit_article_index' => "scripture_articles#edit_article_index", as: :edit_article_index, on: :collection
       post '/update_article_index' => "scripture_articles#update_article_index", as: :update_article_index, on: :collection
       get '/get_chapter_articles' => "scripture_articles#get_chapter_articles", as: :get_chapter_articles, on: :collection
     end

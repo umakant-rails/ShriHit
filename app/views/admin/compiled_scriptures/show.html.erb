@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card" data-controller="admin-cscripture">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          संकलित ग्रन्थ "<%= @scripture.name %>" - रचना अनुक्रम अद्यतन पेज
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="row">
+          <div class='col-md-12'>
+            <% chapter_list = @scripture.chapters.collect { |c| [c.name, c.id] } %>
+            <%= select_tag 'chapter', options_for_select(chapter_list, selected: nil), :prompt => "अध्याय चुने", class:"form-control", 'data-admin-cscripture-target': 'chapter', 'id': 'article_chapters', 'data-action': 'change->admin-cscripture#getChapterArticles', 
+              'data-cs-scripture-id': @scripture.id %>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="article-list">
+          <%= render "indexed_article" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

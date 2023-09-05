@@ -112,7 +112,7 @@ class Admin::ChaptersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def chapter_params
-      params.fetch(:chapter, {}).permit(:name, :is_section, :parent_id, :scripture_id)
+      params.fetch(:chapter, {}).permit(:name, :is_section, :parent_id, :scripture_id, :index)
     end
 
     def verify_admin

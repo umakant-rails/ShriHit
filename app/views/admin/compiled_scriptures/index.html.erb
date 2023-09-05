@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-md-12 page-subject-header">
+          संकलित ग्रन्थ सूची
+        </div>
+        <div class="dropdown-divider"></div>
+        <div id="compiled_scripture_list">
+          <table class="table">
+            <thead class="table-primary">
+              <tr>
+                <th>#</th>
+                <th>संकलित ग्रन्थ नाम</th>
+                <th>अध्याय जोड़े</th>
+                <th>रचनाये जोड़े</th>
+                <th>अनुक्रम अद्यतन</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if @scriptures.present? %>
+                <% @scriptures.each_with_index do | scripture, index | %>
+                  <tr>
+                    <td><%= index + 1%></td>
+                    <td>
+                      <%= link_to scripture.name, admin_compiled_scripture_path(scripture) %>
+                    </td>
+                    <td>
+                      <a href="<%= admin_scripture_chapters_new_path(scripture.id) %>" 
+                        class="btn btn-primary text-white">
+                        <i class="fa-solid fa-circle-plus fnt-sz-18"></i> अध्याय जोड़े
+                      </a>
+                    </td>
+                    <td>
+                      <a href="<%= admin_compiled_scripture_add_articles_page_path(scripture) %>" class="btn btn-primary text-white">
+                        <i class="fa-solid fa-file-circle-plus fnt-sz-18"></i> रचनाये जोड़े
+                      </a>
+                    </td>
+                    <td>
+                      <a href="<%= admin_compiled_scripture_update_article_index_path(scripture) %>" class="btn btn-primary text-white">
+                        <i class="fa-solid fa-pencil fnt-sz-18"></i> अनुक्रम अद्यतन
+                      </a>
+                    </td>
+                  </tr>
+                <% end %>
+              <% else %>
+              <% end %>
+            </tbody>
+          </table>
+          <%= link_to "नया अध्याय", new_admin_chapter_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
