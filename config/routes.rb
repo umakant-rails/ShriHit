@@ -128,8 +128,13 @@ Rails.application.routes.draw do
       post '/remove_article' => "compiled_scriptures#remove_article", as: :remove_articles
       get '/search_articles' => "compiled_scriptures#search_articles", as: :search_articles, on: :collection
 
+      get '/scriptures_for_indexing' => "compiled_scriptures#scriptures_for_indexing", as: :scriptures_for_indexing, on: :collection
+      get '/:scripture_id/edit_article_index' => "compiled_scriptures#edit_article_index", as: :edit_article_index, on: :collection
       get '/get_chapter_articles' => "compiled_scriptures#get_chapter_articles", as: :get_chapter_articles
-      get '/update_article_index' => "compiled_scriptures#update_article_index", as: :update_article_index
+      get '/update_articles_index' => "compiled_scriptures#update_articles_index", as: :update_articles_index
+      
+      get '/get_indexed_articles' => "compiled_scriptures#get_indexed_articles", as: :get_indexed_articles
+      post '/update_article_index' => "compiled_scriptures#update_article_index", as: :update_article_index
     end
 
     resources :chapters do 

@@ -1,7 +1,7 @@
 class Admin::CompiledScripturesController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_admin
-  before_action :set_scripture, only: %i[add_articles_page add_article remove_article edit_article_index]
+  before_action :set_scripture, only: %i[add_articles_page add_article remove_article]
 
   def index
     @scripture_type = ScriptureType.where(name: "प्रचलित संकलन").first
@@ -10,7 +10,7 @@ class Admin::CompiledScripturesController < ApplicationController
   
   def show
     @scripture = Scripture.find(params[:id])
-    @cs_articles = @scripture.cs_articles.joins(:article).order("chapter_id").page(params[:page])
+    @cs_articles = @scripture.cs_articles.joins(:article).order("index").page(params[:page])
   end
 
   def add_articles_page
@@ -87,7 +87,14 @@ class Admin::CompiledScripturesController < ApplicationController
     render layout: false
   end
 
+
+  def scriptures_for_indexing
+    @scripture_type = ScriptureType.where(name: "प्रचलित संकलन").first
+    @scriptures = @scripture_type.scriptures
+  end
+
   def edit_article_index
+    @scripture = Scripture.find(params[:scripture_id])
     if params[:indexed] == "true"
       @cs_articles = @scripture.cs_articles.where("index is not null").page(params[:page])
     else
@@ -96,42 +103,51 @@ class Admin::CompiledScripturesController < ApplicationController
   end
 
   def update_article_index
-    indx = 1
     @scripture = Scripture.find(params[:compiled_scripture_id])
-    chapters = @scripture.chapters
-    if chapters.present?
-      chapters.each do | chapter | 
-        chapter.cs_articles.each do | cs_article |
-          cs_article.update(index: indx)
-          indx = indx + 1
-        end
-      end
-    else
-      @scripture.cs_articles.each do | cs_article |
-        cs_article.update(index: indx)
-        indx = indx + 1
-      end
-    end
+    @cs_article = @scripture.cs_articles.find(params[:article_id]) rescue nil
 
     respond_to do |format|
-      format.html { redirect_to admin_compiled_scriptures_path, notice: "Scripture was successfully indexed." }
-      # if @cs_article.update({index: params[:article_index]})
-      #   format.html { }
-      #   format.js { render status: 200 }
-      # else
-      #   format.html { render :edit, status: :unprocessable_entity }
-      #   format.json { render json: @scripture_article.errors, status: :unprocessable_entity }
-      # end
+      if @cs_article.blank? and params[:bulk_updation] == "true"
+        indx = 1
+        @scripture = Scripture.find(params[:compiled_scripture_id])
+        chapters = @scripture.chapters.present? ? @scripture.chapters.order("index") : [@scripture]
+
+        chapters.each do | chapter | 
+          chapter.cs_articles.each do | cs_article |
+            cs_article.update(index: indx)
+            indx = indx + 1
+          end
+        end    
+        format.html { redirect_to admin_compiled_scriptures_path, notice: "Scripture was successfully indexed." }
+      elsif @cs_article.update({index: params[:article_index]})
+        get_indexed_articles
+        format.html { }
+        format.js { render status: 200 }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @cs_article.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def get_chapter_articles
     @chapter = Chapter.find(params[:chapter_id]) rescue nil
-    if @chapter.present?
-      @articles = @chapter.cs_articles.order("index ASC").page(params[:page])
+    parent = @chapter.present? ? @chapter : Scripture.find(params[:compiled_scripture_id])
+    @articles = parent.cs_articles.order("index ASC").page(params[:page])
+  end
+
+  def get_indexed_articles
+    @chapter = Chapter.find(params[:chapter_id]) rescue nil
+    parent = @chapter.present? ? @chapter : Scripture.find(params[:compiled_scripture_id])
+
+    if params[:action_type] == "Indexed"
+      @articles = parent.cs_articles.where("index is not null").order("index ASC").page(params[:page])
+    elsif params[:action_type] == "Non-Indexed"
+      @articles = parent.cs_articles.where("index is null").order("index ASC").page(params[:page])
+    elsif params[:requested_data_type] == "Indexed"
+      @articles = parent.cs_articles.where("index is not null").order("index ASC").page(params[:page])
     else
-      @scripture = Scripture.find(params[:compiled_scripture_id])
-      @articles = @scripture.cs_articles.order("index ASC").page(params[:page])
+      @articles = parent.cs_articles.where("index is null").order("index ASC").page(params[:page])
     end
   end
 

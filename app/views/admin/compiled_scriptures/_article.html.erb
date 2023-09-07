@@ -7,7 +7,8 @@
     <span class="fLeft" id="aritcle-title-<%= article.id %>">
       <strong><%= (page*page_size) + (index+1)%>.</strong> <%= article.hindi_title %>    
     </span>
-    <span class="fRight add-article-icon" data-action="click->admin-cscripture#addArticlesInScripture" data-id="<%= article.id %>">
+    <span class="fRight add-article-icon" data-id="<%= article.id %>" data-action-name="addition"
+      data-action="click->admin-cscripture#articlesAdditionDeletion" >
       <i class="fa-solid fa-angle-right pull-right"></i>
     </span>
   </li>

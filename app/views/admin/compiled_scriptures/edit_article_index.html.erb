@@ -2,51 +2,45 @@
   <div class="col-md-12">
     <div class="card" data-controller="admin-cscripture">
       <div class="card-body">
-        <div class="col-md-12 page-subject-header">
-          संकलित ग्रन्थ "<%= @scripture.name %>" - रचना अनुक्रम अद्यतन पेज
-        </div>
-        <div class="dropdown-divider"></div>
-        <div class="m-sm-2">
-          <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-cscripture-target="csrfToken">
-          <% if @scripture.chapters.present? %>
-            <% if params[:indexed] != "true" %>
-              <div class="row">
-                <div class='col-md-4'>
-                  <label class='form-label'>
-                    अध्याय
-                  </label>
-                  <% chapter_list = @scripture.chapters.collect { |c| [c.name, c.id] } %>
-                  <%= select_tag 'chapter', options_for_select(chapter_list, selected: nil), :prompt => "अध्याय चुने", class:"form-control", 'data-admin-cscripture-target': 'chapter', 'id': 'article_chapters', 'data-action': 'change->admin-cscripture#getChapterArticles', 
-                    'data-cs-scripture-id': @scripture.id %>
-                </div>
-                <div class="offset-md-4 col-md-3">
-                  <label class='form-label'>&nbsp;</label>
-                  <%#= link_to "अनुक्रमित डेटा प्राप्त करें", admin_compiled_scripture_edit_article_index_path(params[:compiled_scripture_id], params: {index:true}), class:"form-control btn btn-primary" %>
-                  <button class="form-control btn btn-primary" data-action="click->admin-cscripture#openEditArticleIndex" data-indexed="true">अनुक्रमित डेटा प्राप्त करें</button>
-                </div>
+        <div class="row page-subject-header">
+          <div class="col-md-9" data-admin-cscripture-target="scripture" data-scripture-id="<%= @scripture.id %>">
+            संकलित ग्रन्थ "<%= @scripture.name %>" - रचना अनुक्रम अद्यतन पेज
+          </div>
+          <% if @scripture.chapters.blank? %>
+            <div class="col-md-3">
+              <div class="btn-group fRight" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-primary non-index-tgl" data-admin-cscripture-target="indexingStatus" data-action="click->admin-cscripture#getIndexedArticles">Non-Indexed</button>
+                <button type="button" class="btn btn-secondary index-tgl" data-admin-cscripture-target="indexingStatus" data-action="click->admin-cscripture#getIndexedArticles">Indexed</button>
               </div>
-            <% else %>
-              <div class="row">
-                <div class='col-md-4'>
-                  <label class='form-label'>
-                    अध्याय
-                  </label>
-                  <% chapter_list = @scripture.chapters.collect { |c| [c.name, c.id] } %>
-                  <%= select_tag 'chapter', options_for_select(chapter_list, selected: nil), :prompt => "अध्याय चुने", class:"form-control", 'data-admin-cscripture-target': 'chapter', 'id': 'article_chapters', 'data-action': 'change->admin-cscripture#getChapterArticles', 
-                    'data-cs-scripture-id': @scripture.id %>
-                </div>
-                <div class="offset-md-4 col-md-3">
-                  <label class='form-label'>&nbsp;</label>
-                  <button class="form-control btn btn-secondary" data-action="click->admin-cscripture#openEditArticleIndex" data-indexed="false">अनुक्रमण के लिए डेटा प्राप्त करें</button>
-                  <%#= link_to "अनुक्रमण के लिए डेटा प्राप्त करें", admin_compiled_scripture_edit_article_index_path(params[:compiled_scripture_id]), class:"form-control btn btn-secondary" %>
-                </div>
-              </div>
-            <% end %>
+            </div>
           <% end %>
         </div>
         <div class="dropdown-divider"></div>
+        <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-admin-cscripture-target="csrfToken">
+        <% if @scripture.chapters.present? %>
+          <div class="m-sm-2">
+            <div class="row mb-2">
+              <label class='col-md-9 pt-2'>
+                अध्याय
+              </label>
+            </div>
+            <div class="row">
+              <div class='col-md-9'>
+                <% chapter_list = @scripture.chapters.collect { |c| [c.name, c.id] } %>
+                <%= select_tag 'chapter', options_for_select(chapter_list, selected: nil), :prompt => "अध्याय चुने", class:"form-control", 'data-admin-cscripture-target': 'chapter', 'id': 'article_chapters', 'data-action': 'change->admin-cscripture#getIndexedArticles' %>
+              </div>
+              <div class="col-md-3">
+                <div class="btn-group fRight" role="group" aria-label="Basic mixed styles example">
+                  <button type="button" class="btn btn-primary non-index-tgl" data-admin-cscripture-target="indexingStatus" data-action="click->admin-cscripture#getIndexedArticles">Non-Indexed</button>
+                   <button type="button" class="btn btn-secondary index-tgl" data-admin-cscripture-target="indexingStatus" data-action="click->admin-cscripture#getIndexedArticles">Indexed</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+        <% end %>
         <div id="article-list">
-          <%= render 'article_for_index_update', cs_articles: @cs_articles%>
+          <%= render 'unindexed_article', cs_articles: @cs_articles, scripture: @scripture%>
         </div>
       </div>
     </div>

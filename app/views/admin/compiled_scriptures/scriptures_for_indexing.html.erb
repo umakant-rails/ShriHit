@@ -12,8 +12,6 @@
               <tr>
                 <th>#</th>
                 <th>संकलित ग्रन्थ नाम</th>
-                <th>अध्याय जोड़े</th>
-                <th>रचनाये जोड़े</th>
                 <th>अनुक्रम अद्यतन</th>
               </tr>
             </thead>
@@ -26,23 +24,9 @@
                       <%= link_to scripture.name, admin_compiled_scripture_path(scripture) %>
                     </td>
                     <td>
-                      <a href="<%= admin_scripture_chapters_new_path(scripture.id) %>" 
-                        class="btn btn-primary text-white">
-                        <i class="fa-solid fa-circle-plus fnt-sz-18"></i> अध्याय जोड़े
+                      <a href="<%= edit_article_index_admin_compiled_scriptures_path(scripture) %>" class="btn btn-primary text-white">
+                        <i class="fa-solid fa-pencil fnt-sz-18"></i> अनुक्रम अद्यतन
                       </a>
-                    </td>
-                    <td>
-                      <a href="<%= admin_compiled_scripture_add_articles_page_path(scripture) %>" class="btn btn-primary text-white">
-                        <i class="fa-solid fa-file-circle-plus fnt-sz-18"></i> रचनाये जोड़े
-                      </a>
-                    </td>
-                    <td>
-                      <%= form_tag admin_compiled_scripture_update_article_index_path(scripture) do | form | %>
-                        <%= hidden_field_tag "bulk_updation", true %>
-                        <button  type="submit" class="btn btn-primary text-white">
-                          <i class="fa-solid fa-pencil fnt-sz-18"></i>एक साथ अनुक्रम अद्यतन
-                        </button>
-                      <% end %>
                     </td>
                   </tr>
                 <% end %>

@@ -1,3 +1,6 @@
+<div class="row">
+  
+</div>
 <table class="table">
   <thead class="table-primary">
     <tr>
@@ -25,8 +28,7 @@
           </td>
           <td>
             <%= number_field_tag "index", scr_article.index, style: "width: 60px", 'data-admin-cscripture-target': 'articleIndex' %>
-            <%= button_tag 'अनुक्रम अद्यतित करे', type:"button", class: "btn btn-primary", style:"display:inline-block;", 'data-articleId': scr_article.id,
-              'data-action': 'click->admin-cscripture#updateArticleIndex' %>
+            <%= button_tag 'अनुक्रम अद्यतित करे', type:"button", class: "btn btn-primary", style:"display:inline-block;", 'data-articleId': scr_article.id, 'data-action': 'click->admin-cscripture#updateArticleIndex' %>
           </td>
         </tr>
       <% end %>

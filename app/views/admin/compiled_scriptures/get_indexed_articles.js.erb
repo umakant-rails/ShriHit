@@ -1,0 +1,9 @@
+<% if params[:action_type] == 'Non-Indexed' %>
+  $(".index-tgl").addClass("btn-secondary").removeClass("btn-primary");
+  $(".non-index-tgl").removeClass("btn-secondary").addClass("btn-primary");
+<% elsif params[:action_type] == 'Indexed' %>
+  $(".non-index-tgl").addClass("btn-secondary").removeClass("btn-primary");
+  $(".index-tgl").removeClass("btn-secondary").addClass("btn-primary");
+<% end %>
+
+$("#article-list").html(`<%= escape_javascript(render 'unindexed_article', cs_articles: @articles)%>`);
