@@ -17,7 +17,7 @@
             <%= link_to scripture.name, admin_scripture_path(scripture) %>
           </td>
           <td>
-            <%= scripture.author.name %>
+            <%= scripture.author.present? ? scripture.author.name : '-' %>
           </td>
           <td class="d-none d-xl-table-cell">
             <%= link_to new_admin_chapter_path(scripture_id: scripture), class: "btn btn-primary" do %>

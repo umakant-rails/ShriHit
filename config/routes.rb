@@ -25,8 +25,8 @@ Rails.application.routes.draw do
     get   "/tags" => "articles#tags", as: :tags, on: :member
     post  "/tags_update" => "articles#tags_update", as: :tags_update, on: :member
     get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
-    #get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
-    #get "/search" => "articles#search", as: :article_search, on: :collection
+    get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
+    get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
   end
 
   resources :comments
@@ -74,6 +74,9 @@ Rails.application.routes.draw do
       get "/rejected" => "articles#rejected", as: :rejected_articles, on: :collection
       post "/approve" => "articles#approve", as: :approve, on: :member
       post "/reject" => "articles#reject", as: :reject, on: :member
+      
+      get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
+      get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
     end
     resources :authors, only: [:index, :show, :edit, :update, :destroy] do
       get "/approved" => "authors#approved", as: :approved_authors, on: :collection
@@ -167,7 +170,8 @@ Rails.application.routes.draw do
 
     resources :articles, only: [:index, :show] do
       get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
-      get "/search" => "articles#search", as: :search, on: :collection
+      get "/search" => "articles#search_page", as: :search_page, on: :collection
+      get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
       #get "/search_article/:id" => "articles#search_article", as: :search_article, on: :collection
       #get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
       get "/article_by_title/:hindi_title" => "articles#article_by_title", as: :article_by_title, on: :collection

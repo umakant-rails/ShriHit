@@ -17,13 +17,21 @@
         <%= form.select :article_type_id, options_for_select(article_types, selected: form.object.article_type_id), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-article-target': 'articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>
           रसिक वाणी
         </label>
         <% scripture_list = scriptures.present? ? scriptures.map{|s|[s.name, s.id]} : [] %>
         <%= form.select :scripture_id, options_for_select(scripture_list, selected: form.object.scripture_id), {:prompt => 'रसिक वाणी चुने'}, class: 'form-control'%>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class='mb-3'>
+        <label for='article_type' class='form-label'>
+          रसिक वाणी पद अनुक्रम
+        </label>
+        <%= form.number_field :index, class: 'form-control' %>
       </div>
     </div>
   </div>
@@ -34,16 +42,6 @@
           प्रसंग
         </label>
         <%= form.select :context_id, options_for_select(contexts, selected: article.context_id), {:prompt => 'प्रसंग चुने'}, class: 'form-control', 'data-action': 'change->article#toggleContext', 'data-article-target': 'contextSelect'%>
-        <!-- <div data-article-target='contextInput' hidden=true>
-          <div class="row">
-            <div class="col-md-8">
-              <%#= text_field_tag 'context', nil, class: 'form-control', placeholder: 'प्रसंग का नाम टाइप करे.' %>
-            </div>
-            <div class="col-md-4">
-              <a href="javascript:void(0);" data-action="article#toggleContext" class="btn btn-primary">सूची  प्रदर्शित करे </a>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
     <div class="col-md-6">
@@ -51,7 +49,6 @@
         <label for='article_type' class='form-label'>
           लेखक
         </label>
-        <%#= form.select :author_id, options_for_select(authors, selected: article.author_id), {:prompt => 'लेखक चुने'}, class: 'form-control', 'data-action': 'change->article#toggleAuthor', 'data-article-target': 'authorSelect' %>
         <div data-controller="autocomplete" data-autocomplete-url-value="/authors/autocomplete_term">
           <%= form.hidden_field :author_id, class: 'form-control', 'data-autocomplete-target':'hidden' %>
           <input type="text" class="form-control" data-autocomplete-target="input" autocomplete="off" spellcheck="false">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_04_084224) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_04_104341) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -108,6 +108,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_04_084224) do
     t.boolean "is_approved", default: false
     t.integer "user_id"
     t.integer "theme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cs_articles", force: :cascade do |t|
+    t.integer "scripture_id"
+    t.integer "chapter_id"
+    t.integer "article_id"
+    t.integer "user_id"
+    t.integer "index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

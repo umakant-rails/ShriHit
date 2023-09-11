@@ -77,7 +77,7 @@ export default class extends ApplicationController {
     let csrfToken = this.csrfTokenTarget.value;
     let sectionId = this.sectionTarget.value;
     for(let chapter of this.chapterTargets){
-      chapter.checked ? null : chapter_arry.push(chapter.value);
+      chapter.checked ? chapter_arry.push(chapter.value) : null;
     }
 
     this.params.section_id = sectionId;
