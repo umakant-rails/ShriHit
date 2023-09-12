@@ -8,10 +8,12 @@
         </div>
         <div class="col-md-9">
           <div class="row mb-3">
-            <%= link_to articles_by_type_public_article_types_path(article.article_type.name), class: "col-md-2 me-3 article-type-txt" do %>
-                <%= article.article_type.name %>
+            <%= link_to articles_by_type_public_article_types_path(article.article_type.name), class: "col-md-3 me-3 article-type-txt" do %>
+              रचना प्रकार : <%= article.article_type.name %>
             <% end %>
-            <div class="col-md-2 article-date-txt"><%= article.created_at.strftime("%d/%m/%Y") %></div>
+            <div class="col-md-3 article-date-txt">
+              सृजन तिथि : <%= format_dt(article.created_at) %>
+            </div>
           </div>
           <div class="row pb-3 btm-bdr">
             <%= link_to article_by_title_public_articles_path(article.hindi_title) do %>
