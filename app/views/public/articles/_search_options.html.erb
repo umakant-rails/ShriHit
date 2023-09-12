@@ -1,5 +1,5 @@
-<div class="mb-3">
-  <div class="row" id="firstSearchRow" data-action="click->search-v1#firstSearchOption" data-search-v1-target="searchBtnFirst" style="z-index: 100;">
+<div class="search-box-items">
+  <div class="row pt-1 pb-1" id="firstSearchRow" data-action="click->search-v1#firstSearchOption" data-search-v1-target="searchBtnFirst" style="z-index: 100;">
     <input type="hidden" value="/pb/articles/search_articles" data-search-v1-target="searchUrl"/>
     <div class="col-md-3 mb-2">
       <%= select_tag 'article_type', options_from_collection_for_select(@article_types, "id", "name", params[:article_type_id]), :prompt => "रचना प्रकार चुने", class:"form-control", 'data-search-v1-target': 'articleType', 'data-action': 'change->search-v1#searchArticlesByAttrs' %>
@@ -14,7 +14,7 @@
       <input type="button" id="search_article_btn" value="Clear Filter" class="form-control btn btn-primary" data-search-v1-target='clearFiltersBtn' data-action="click->search-v1#clearFiltersAndGetArticles"/>
     </div>
   </div>
-  <div class="row" id="secondSearchRow" data-action="click->search-v1#secondSearchOption" data-search-v1-target="searchBtnSecond">
+  <div class="row pb-1 pt-1" id="secondSearchRow" data-action="click->search-v1#secondSearchOption" data-search-v1-target="searchBtnSecond">
     <div class="col-md-3 mb-2 ps-4 pe-4">
       <input type="hidden" value="इंग्लिश" data-search-v1-target="languageBtn"/>
       <!-- <ul class="dropdown-menu col-md-3">
