@@ -9,17 +9,16 @@
           <div class="col-md-9">
             <div class="row mb-3">
               <%= link_to articles_by_type_public_article_types_path(article.article_type.name), class: "col-md-2 me-3 article-type-txt" do %>
-                  <%= article.article_type.name %>
+                रचना प्रकार : <%= article.article_type.name %>
               <% end %>
-              <div class="col-md-2 article-date-txt"><%= article.created_at.strftime("%d/%m/%Y") %></div>
+              <div class="col-md-2 article-date-txt">सृजन तिथि : <%= article.created_at.strftime("%d/%m/%Y") %></div>
             </div>
             <div class="row pb-3 btm-bdr">
               <%= link_to article_by_title_public_articles_path(article.hindi_title) do %>
                 <div class="pb-3 article-title">
                   <%= article.hindi_title %>
                 </div>
-                <% contnt = Nokogiri::HTML(article.content).text %>
-                <div class="article-text"><%= truncate(contnt, length: 300) %></div>
+                <div class="article-text"><%= raw article.content %></div>
               <% end %>
             </div>
             <div class="row mt-2 d-block">

@@ -124,6 +124,7 @@
   .user-icon{font-size: 30px;}
   .user-txt{font-weight: bold; }
   .article-text{
-    min-height: 80px;
+    height: 80px;overflow-y: hidden;
   }
+
 }

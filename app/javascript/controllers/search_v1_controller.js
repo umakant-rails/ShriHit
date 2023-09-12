@@ -14,47 +14,59 @@ export default class extends ApplicationController {
   }
 
   firstSearchOption(){
-    this.articleTypeTarget.disabled = false
-    this.contextNameTarget.disabled = false;
-    this.authorNameTarget.disabled = false;
-    this.clearFiltersBtnTarget.disabled = false;
-    $("#english_article_search_term").prop('disabled', true);
-    $("#hindi_article_search_term").prop('disabled', true);
-    // $("#english_article_search_term").val("");
-    // $("#hindi_article_search_term").val("");
-    this.languageBtnTarget.disabled = true;
-    this.searchTermArticleBtnTarget.disabled = true;
-    this.clearFilters();
-    this.searchBtnFirstTarget.classList.remove('btn-secondary');
-    this.searchBtnFirstTarget.classList.add('btn-primary');
-    this.searchBtnSecondTarget.classList.remove('btn-primary');
-    this.searchBtnSecondTarget.classList.add('btn-secondary');
+    // this.searchBtnFirstTarget.classList.remove('disabled');
+    // this.searchBtnSecondTarget.classList.add('disabled');
+
+    if(this.articleTypeTarget.disabled){
+      this.articleTypeTarget.disabled = false
+      this.contextNameTarget.disabled = false;
+      this.authorNameTarget.disabled = false;
+      this.clearFiltersBtnTarget.disabled = false;
+      $("#english_article_search_term").prop('disabled', true);
+      $("#hindi_article_search_term").prop('disabled', true);
+      //this.languageBtnTarget.disabled = true;
+      this.searchTermArticleBtnTarget.disabled = true;
+      this.clearFilters();
+    }
+
+    // this.searchBtnFirstTarget.classList.remove('btn-secondary');
+    // this.searchBtnFirstTarget.classList.add('btn-primary');
+    // this.searchBtnSecondTarget.classList.remove('btn-primary');
+    // this.searchBtnSecondTarget.classList.add('btn-secondary');
   }
 
   secondSearchOption(){
-    this.articleTypeTarget.disabled = true;
-    this.contextNameTarget.disabled = true;
-    this.authorNameTarget.disabled = true;
-    this.clearFiltersBtnTarget.disabled = true;
-    $("#english_article_search_term").prop('disabled', false);
-    $("#hindi_article_search_term").prop('disabled', false);
-    this.searchTermArticleBtnTarget.disabled = false;
-    this.languageBtnTarget.disabled = false;
-    this.clearFilters();
+    
+    if(this.searchTermArticleBtnTarget.disabled){
+      this.articleTypeTarget.disabled = true;
+      this.contextNameTarget.disabled = true;
+      this.authorNameTarget.disabled = true;
+      this.clearFiltersBtnTarget.disabled = true;
+      $("#english_article_search_term").prop('disabled', false);
+      $("#hindi_article_search_term").prop('disabled', false);
+      this.searchTermArticleBtnTarget.disabled = false;
+      //this.languageBtnTarget.disabled = false;
+      this.clearFilters();
+    }
 
-    this.searchBtnFirstTarget.classList.add('btn-secondary');
-    this.searchBtnFirstTarget.classList.remove('btn-primary');
-    this.searchBtnSecondTarget.classList.add('btn-primary');
-    this.searchBtnSecondTarget.classList.remove('btn-secondary');
+    // this.searchBtnFirstTarget.classList.add('btn-secondary');
+    // this.searchBtnFirstTarget.classList.remove('btn-primary');
+    // this.searchBtnSecondTarget.classList.add('btn-primary');
+    // this.searchBtnSecondTarget.classList.remove('btn-secondary');
   }
 
   selectSearchLang(){
-    let vl = event.currentTarget.dataset.vl;
+    let vl = event.currentTarget.querySelector('input').value;
+    event.currentTarget.querySelector('input').checked = true;
+
     this.languageBtnTarget.value = vl;
     if(this.languageBtnTarget.value == "हिंदी") {
+      $("#english_article_search_term").val("");
+
       $("#english_search_block").hide();
       $("#hindi_search_block").show();  
     } else {
+      $("#hindi_article_search_term").val("");
       $("#hindi_search_block").hide();
       $("#english_search_block").show();
     }
@@ -114,7 +126,9 @@ export default class extends ApplicationController {
       searchIn = "english";
     }
     if(term == "") {
-      location.reload();
+      super.showErrorsByLayout("कृपया सर्च बॉक्स में कुछ टाइप करे, अभी सर्च बॉक्स में कुछ भी नहीं लिखा गया है |");
+      return;
+      // location.reload();
     } else if (term.indexOf(":") >= 0){
       let searchParams = {
         search_type: 'by_id',
