@@ -122,12 +122,12 @@ class ArticlesController < ApplicationController
   def autocomplete_term
     search_term = params[:q].strip
 
-    if params[:search_in] == "english"
-      @articles = Article.by_search_english_term(search_term)
-    else
-      @articles = Article.by_search_hindi_term(search_term)
-    end
-
+    # if params[:search_in] == "english"
+    #   @articles = Article.by_search_english_term(search_term)
+    # else
+    #   @articles = Article.by_search_hindi_term(search_term)
+    # end
+    @articles = current_user.articles.by_search_term(search_term).page(params[:page])
     respond_to do |format|
       format.html {}
       format.json { head :no_content }
@@ -145,11 +145,12 @@ class ArticlesController < ApplicationController
       @articles = current_user.articles.where(id: params[:article_id]).page(params[:page])
     elsif params[:search_type] == 'by_term'
       search_term = params[:term]
-      if params[:search_in] == "english"
-        @articles = current_user.articles.by_search_english_term(search_term).page(params[:page])
-      else
-        @articles = current_user.articles.by_search_hindi_term(search_term).page(params[:page])
-      end
+      # if params[:search_in] == "english"
+      #   @articles = current_user.articles.by_search_english_term(search_term).page(params[:page])
+      # else
+      #   @articles = current_user.articles.by_search_hindi_term(search_term).page(params[:page])
+      # end
+      @articles = current_user.articles.by_search_term(search_term).page(params[:page])
     else
       @articles = current_user.articles.order("created_at desc").page(params[:page])
     end

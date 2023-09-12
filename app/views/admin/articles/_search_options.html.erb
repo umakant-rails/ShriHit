@@ -1,6 +1,6 @@
 <div class="mb-3">
   <div class="row" id="firstSearchRow" data-action="click->search-v1#firstSearchOption" data-search-v1-target="searchBtnFirst">
-    <input type="hidden" value="/pb/articles/search_articles" data-search-v1-target="searchUrl"/>
+    <input type="hidden" value="/admin/articles/search_articles" data-search-v1-target="searchUrl"/>
     <div class="col-md-3 mb-2">
       <%= select_tag 'article_type', options_from_collection_for_select(@article_types, "id", "name", params[:article_type_id]), :prompt => "रचना प्रकार चुने", class:"form-control", 'data-search-v1-target': 'articleType', 'data-action': 'change->search-v1#searchArticlesByAttrs' %>
     </div>
@@ -15,31 +15,35 @@
     </div>
   </div>
   <div class="row" id="secondSearchRow" data-action="click->search-v1#secondSearchOption" data-search-v1-target="searchBtnSecond">
-   <div class="col-md-3 mb-2">
+    <div class="col-md-3 mb-2 ps-4 pe-4">
       <input type="hidden" value="इंग्लिश" data-search-v1-target="languageBtn"/>
-      <div class="row ps-3">
-        <div class="col-md-6 form-check"  data-action="click->search-v1#selectSearchLang">
-          <input class="form-check-input" type="radio" value="इंग्लिश" name="search_option" checked />
-          <label class="form-check-label" for="eng_option">
-            इंग्लिश
-          </label>
+      <div class="row srch-lang-box">
+        <div class="col-md-6">
+          <div class="form-check"  data-action="click->search-v1#selectSearchLang">
+            <input class="form-check-input" type="radio" value="इंग्लिश" name="search_option" checked />
+            <label class="form-check-label" for="eng_option">
+              इंग्लिश
+            </label>
+          </div>
         </div>
-        <div class="col-md-6 form-check"  data-action="click->search-v1#selectSearchLang">
-          <input class="form-check-input" type="radio" value="हिंदी" name="search_option" />
-          <label class="form-check-label" for="hindi_option">
-            हिंदी
-          </label>
+        <div class="col-md-6">
+          <div class="form-check"  data-action="click->search-v1#selectSearchLang">
+            <input class="form-check-input" type="radio" value="हिंदी" name="search_option" />
+            <label class="form-check-label" for="hindi_option">
+              हिंदी
+            </label>
+          </div>
         </div>
       </div>
     </div>
-    <div data-controller="autocomplete" id="english_search_block" class="col-md-6 mb-2" data-autocomplete-url-value="/pb/articles/autocomplete_term?search_in=english">
+    <div data-controller="autocomplete" id="english_search_block" class="col-md-6 mb-2" data-autocomplete-url-value="/admin/articles/autocomplete_term?search_in=english">
       <input type="text" id="english_article_search_term" placeholder="Type Here..." name="article_search_term" class="form-control" data-autocomplete-target='input' disabled=true/>
       <input type="hidden" id="english_serach_text" name="search_text" data-autocomplete-target="hidden"/>
       <ul class="list-group" data-autocomplete-target="results"></ul>
     </div>
     <div data-controller="autocomplete" id="hindi_search_block" style="display:none;" 
       class="col-md-6 mb-2" 
-      data-autocomplete-url-value="/pb/articles/autocomplete_term?search_in=hindi">
+      data-autocomplete-url-value="/admin/articles/autocomplete_term?search_in=hindi">
       <input type="text" id="hindi_article_search_term" name="article_search_term" placeholder="यहाँ लिखे..." class="form-control" data-autocomplete-target='input' disabled=true/>
       <input type="hidden" id="hindi_serach_text" name="search_text" data-autocomplete-target="hidden"/>
       <ul class="list-group" data-autocomplete-target="results"></ul>
