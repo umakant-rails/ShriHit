@@ -68,3 +68,9 @@ StrotaType.create!(name: "स्त्रोत") if StrotaType.where(name: "स
 StrotaType.create!(name: "सहस्त्रनाम") if StrotaType.where(name: "सहस्त्रनाम").blank?
 StrotaType.create!(name: "कवच") if StrotaType.where(name: "कवच").blank?
 StrotaType.create!(name: "अष्टक") if StrotaType.where(name: "अष्टक").blank?
+
+context_list = ["अन्य", "वन विहार", "श्रृंगार", "शरद ऋतु", "वर्षा ऋतु", "नौका विहार", "होली", "व्याहुला", "झूलन उत्सव", "जन्म उत्सव", "फूल बंगला उत्सव", "खिचड़ी उत्सव", "शीत ऋतू", "दान लीला", "रास लीला", "जनकलली जमनोत्सव", "वृषभानुलली जमनोत्सव", "श्रीकृष्ण जन्मोत्सव", "श्रीकृष्ण जन्मोत्सव"]
+
+context_list.each do | context |
+  User.first.contexts.create!(name: context) if Context.where(name: context).blank?
+end

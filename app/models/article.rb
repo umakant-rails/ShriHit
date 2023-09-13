@@ -28,7 +28,7 @@ class Article < ApplicationRecord
   scope :by_search_hindi_term, ->(term) {where("content like ? or LOWER(hindi_title) like ?", "%#{term.strip}%", "%#{term.strip}%")}
   
   scope :by_search_term, ->(term) {where("content like ? or LOWER(hindi_title) like ? or LOWER(english_title) like ?", 
-    "%#{term.strip}%", "%#{term.strip}%", "%#{term.strip}%")}
+    "%#{term.strip.downcase}%", "%#{term.strip.downcase}%", "%#{term.strip.downcase}%")}
   scope :approved, ->(){ where(is_approved: true) }
   scope :pending, ->(){ where(is_approved: nil) }
   scope :rejected, ->(){ where(is_approved: false) }
