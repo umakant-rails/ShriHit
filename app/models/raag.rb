@@ -1,0 +1,2 @@
+class Raag < ApplicationRecord
+end
