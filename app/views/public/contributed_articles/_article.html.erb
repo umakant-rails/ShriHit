@@ -1,0 +1,65 @@
+<%
+  page = (articles.current_page - 1) rescue 0
+  per_page = articles.present? ? articles.limit_value : 0
+%>
+<table class="table table-hover my-0">
+  <thead class="table-primary">
+    <tr>
+      <th>S. No.</th>
+      <th >नई रचना</th>
+      <th class="d-none d-xl-table-cell">योगदानकर्ता</th>
+      <th>स्टेटस</th>
+      <th>गतिविधि</th>
+    </tr>
+  </thead>
+  <tbody>
+    <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>"
+      data-admin-article-target="csrfToken">
+    <% if articles.present? %>
+      <% articles.each_with_index do |article, index| %>
+        <%
+          ind = (page * per_page) + (index + 1)
+          approved_cls = ""
+          # approved_cls = article.is_approved.nil? ? "text-warning" : (article.is_approved ? "text-success" : "text-danger")
+        %>
+        <tr class="<%= approved_cls %>">
+          <td><%= ind %></td>
+          <td data-admin-article-target="articleForApproval" data-vl="<%= article.id %>">
+            <a href="<%= article_path(article.id) %>" class="<%= approved_cls %>">
+              <%= raw article.content %>
+            </a>
+          </td>
+          <td class="d-none d-xl-table-cell">
+          </td>
+          <td>
+          </td>
+          <td>
+            <div class="row">
+							<div class="col-md-2">
+								<%#= link_to edit_public_contributed_article_path(article) do %>
+								  <!-- <i class="fa fa-edit"></i> -->
+								<%# end %>
+							</div>
+							<div class="col-md-2">
+								<%= form_for(article, url: public_contributed_article_path(article), html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');" }) do |f| %>
+						      <button type="submit" class="btn" style="padding: 0;margin-bottom: 1px;">
+						        <i class="fa fa-trash" style="color:red;"></i>
+						      </button>
+						    <% end %>
+						  </div>
+				    </div>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="3">
+          अभी रिकॉर्ड उपलब्ध नहीं है.
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div id="paginate-block">
+  <%= paginate articles %>
+</div>

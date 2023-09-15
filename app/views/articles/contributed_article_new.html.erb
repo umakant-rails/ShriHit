@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row page-subject-header">
+          <div class="col-md-6">
+            <div class="">
+              रचना फॉर्म
+            </div>
+          </div>
+          <div class="col-md-6">
+            <% if @c_article.present? %>
+              <%= form_for(@c_article, url: public_contributed_article_path(@c_article), html: { method: :delete, onSubmit: "return confirm('Are you sure you wish to delete?');", class:"fRight"}) do |f| %>
+                <input type="hidden" name="redirect" value="true" />
+                <button type="submit" class="btn btn-danger">
+                  Delete
+                </button>
+              <% end %>
+              <%= link_to "Hold & Next", public_contributed_article_hold_and_next_path(@c_article.id), class: "fRight me-2 btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <div class="m-sm-4" data-controller= 'article tagging'>
+          <%= render "form", article: @article, scriptures: @scriptures %>
+        </div>
+        <div class="divider-bdr"></div>
+        <%= link_to "रचना सूची देखें", articles_path %>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/article-custom" %>
+  <%= javascript_import_module_tag "custom/article-tags-update" %>
+  <%#= javascript_import_module_tag "custom/tagify-custom" %>
+<% end %>

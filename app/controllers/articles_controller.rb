@@ -121,12 +121,6 @@ class ArticlesController < ApplicationController
 
   def autocomplete_term
     search_term = params[:q].strip
-
-    # if params[:search_in] == "english"
-    #   @articles = Article.by_search_english_term(search_term)
-    # else
-    #   @articles = Article.by_search_hindi_term(search_term)
-    # end
     @articles = current_user.articles.by_search_term(search_term).page(params[:page])
     respond_to do |format|
       format.html {}
@@ -158,6 +152,25 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html {}
       format.js {}
+    end
+  end
+
+  def contributed_article_new
+    @tags = Tag.approved.order("name ASC")
+    author = Author.where("name=?", "अज्ञात").first
+    context = Context.where("name=?", "अन्य").first
+    @scriptures = Scripture.all
+    @c_article = ContributedArticle.where("is_read = ? and is_hold = ?", false, false).first
+    content = @c_article.content rescue nil
+
+    if @c_article.present?
+      @article = Article.new({
+        article_type_id: @c_article.article_type_id, scripture_id: @c_article.scripture_id,
+        index: @c_article.article_index, raag_id: @c_article.id, hindi_title: @c_article.hindi_title,
+        author_id: author.id, context_id: context.id, content: content
+      })
+    else
+      @article = Article.new({author_id: author.id, context_id: context.id, user_id: current_user.id})
     end
   end
 

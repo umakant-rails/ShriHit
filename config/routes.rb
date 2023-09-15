@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
     get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
     get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
+    get "/contribution/new" => "articles#contributed_article_new", as: :contributed_article_new, on: :collection
   end
 
   resources :comments
@@ -195,6 +196,10 @@ Rails.application.routes.draw do
       get '/:article_type_name' => "article_types#show", as: :articles_by_type, on: :collection
     end
     resources :panchangs, only: [:index, :show]
+
+    resources :contributed_articles, only: [:index, :destroy] do
+      get '/hold_and_next' => "contributed_articles#hold_and_next", as: :hold_and_next
+    end
 
   end
 

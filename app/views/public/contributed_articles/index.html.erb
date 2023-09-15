@@ -1,0 +1,14 @@
+<div class="card" data-controller="dashboard">
+	<div class="card-body h-400">
+    <div class="page-subject-header">
+    	<div class="row">
+	      <div class="col-md-6">रचना सूची</div>
+			</div>
+		</div>
+    <div class="dropdown-divider"></div>
+  	<input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>" data-dashboard-target="csrfToken">
+  	<div id="article_list">
+			<%= render "article", articles: @c_articles %>
+    </div>
+	</div>
+</div>

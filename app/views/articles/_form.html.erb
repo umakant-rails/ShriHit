@@ -17,7 +17,17 @@
         <%= form.select :article_type_id, options_for_select(article_types, selected: form.object.article_type_id), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-article-target': 'articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
+      <div class='mb-3'>
+        <label for='article_type' class='form-label'>
+          राग <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        </label>
+        <%= form.select :raag_id, options_for_select(article_types, selected: form.object.article_type_id), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-article-target': 'articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>
           रसिक वाणी
@@ -26,7 +36,7 @@
         <%= form.select :scripture_id, options_for_select(scripture_list, selected: form.object.scripture_id), {:prompt => 'रसिक वाणी चुने'}, class: 'form-control'%>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>
           रसिक वाणी पद अनुक्रम
@@ -51,7 +61,7 @@
         </label>
         <div data-controller="autocomplete" data-autocomplete-url-value="/authors/autocomplete_term">
           <%= form.hidden_field :author_id, class: 'form-control', 'data-autocomplete-target':'hidden' %>
-          <input type="text" class="form-control" data-autocomplete-target="input" autocomplete="off" spellcheck="false">
+          <input type="text" class="form-control" value="<%= form.object.author.name_eng %>" data-autocomplete-target="input" autocomplete="off" spellcheck="false">
           <ul class="list-group" data-autocomplete-target="results"></ul>
         </div>
       </div>
