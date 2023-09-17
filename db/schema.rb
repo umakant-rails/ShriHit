@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_104341) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_13_072353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_104341) do
     t.text "content_eng"
     t.text "interpretation_eng"
     t.integer "index"
+    t.integer "raag_id"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -103,11 +104,42 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_104341) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
   end
 
+  create_table "compiled_scriptures", force: :cascade do |t|
+    t.integer "scripture_id"
+    t.integer "chapter_id"
+    t.integer "article_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contexts", force: :cascade do |t|
     t.string "name"
     t.boolean "is_approved", default: false
     t.integer "user_id"
     t.integer "theme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contributed_articles", force: :cascade do |t|
+    t.string "contributor"
+    t.integer "mobile"
+    t.text "content"
+    t.text "interpretation"
+    t.string "article_type_id"
+    t.string "raag"
+    t.string "author_id"
+    t.integer "user_id"
+    t.integer "context_id"
+    t.string "hindi_title"
+    t.string "english_title"
+    t.string "video_link"
+    t.integer "scripture_id"
+    t.string "source_book"
+    t.integer "article_index"
+    t.boolean "is_read", default: false
+    t.boolean "is_hold", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -159,6 +191,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_104341) do
     t.string "panchang_type"
     t.integer "vikram_samvat"
     t.boolean "is_tithi_populated"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "raags", force: :cascade do |t|
+    t.string "name"
+    t.string "name_eng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -17,7 +17,6 @@ class ArticlesController < ApplicationController
     @tags = Tag.approved.order("name ASC")
     author = Author.where("name=?", "अज्ञात").first
     context = Context.where("name=?", "अन्य").first
-    @scriptures = Scripture.all
     @article = Article.new({author_id: author.id, context_id: context.id})
     #@article.build_image
   end
@@ -215,7 +214,7 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.fetch(:article, {}).permit(:content, :author_id, :article_type_id,
+      params.fetch(:article, {}).permit(:content, :raag_id, :scripture_id, :index, :author_id, :article_type_id,
         :theme_id, :context_id, :hindi_title, :english_title, image_attributes:[:image])
     end
 end

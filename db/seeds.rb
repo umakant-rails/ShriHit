@@ -77,11 +77,23 @@ context_list.each do | context |
   User.first.contexts.create!(name: context) if Context.where(name: context).blank?
 end
 
-raag_list = ['मल्हार', 'विहाग', 'पूरवी', 'भैरव', 'आसावरी', 'कमोद', 'टोडी', 'धनाश्री', 'सोरठ', 'रामकली', 'विभास', 
-  'गौड़', 'जयजयवन्ती', 'कालिंगडा', 'बसंत', 'देवगंधार', 'सारंग', 'कल्याण', 'मारू', 'गौरी', 'भूपाली', 'हमीर', 'देश', 'बिलावल', 
-  'काफ़ी', 'नायकी', 'मालकौंस', 'अडानो', 'परज', 'सिंधुरा', 'तथा', 'खमाज', 'पीलू', 'झिंझोटी', 'अल्हैया', 'ललित', 'रायसो', 
-  'मुल्तानी', 'जंगला', 'हिंडोल', 'भीमपलासी', 'कलावती', 'श्री', 'कान्हरौ', 'षट', 'केदारौ', 'जिला', 'नट', 'शहानौ'];
+raag_list = [{name: 'मल्हार', name_eng: 'malhar'}, {name:'विहाग', name_eng:'vihag'}, {name:'पूरवी', name_eng:'vihag'}, 
+  {name:'भैरव', name_eng: 'bhairav'}, {name:'आसावरी', name_eng: 'asawari'}, {name: 'कमोद', name_eng:'kamod'}, 
+  {name: 'टोडी', name_eng: 'todi'}, {name:'धनाश्री', name_eng: 'dhanashri'}, {name:'सोरठ', name_eng:'sorath'}, 
+  {name:'रामकली', name_eng:'ramkali'}, {name:'विभास', name_eng:'vibhas'}, {name:'गौड़', name_eng: 'gound'},
+  {name:'जयजयवन्ती', name_eng: 'jayjayvanti'}, {name:'कालिंगडा', name_eng:'kalinga'}, {name:'बसंत', name_eng:'basanti'}, 
+  {name:'देवगंधार', name_eng:'devgandhar'}, {name:'सारंग', name_eng:'sarang'}, {name:'कल्याण', name_eng: 'kalyan'}, 
+  {name: 'मारू', name_eng: 'maru'}, {name:'गौरी', name_eng: 'gouri'}, {name:'भूपाली', name_eng: 'bhupali'}, 
+  {name: 'हमीर', name_eng: 'hamir'}, {name:'देश', name_eng: 'desh'}, {name:'बिलावल', name_eng:'bilawal'},
+  {name: 'काफ़ी', name_eng:'kafi'}, {name: 'नायकी', name_eng: 'nayaki'}, {name:'मालकौंस', name_eng:'maalkons'}, 
+  {name: 'अडानो', name_eng: 'adano'}, {name:'परज', name_eng:'paraj'}, {name:'सिंधुरा', name_eng:'sindhura'}, 
+  {name: 'तथा', name_eng: 'tatha'}, {name:'खमाज', name_eng:'khamaj'}, {name: 'पीलू', name_eng: 'pilu'}, 
+  {name: 'झिंझोटी', name_eng: 'jhinjhoti'}, {name: 'अल्हैया', name_eng: 'alhaiya'}, {name: 'ललित', name_eng: 'lalit'}, 
+  {name: 'रायसो', name_eng: 'rayaso'}, {name:'मुल्तानी', name_eng: 'multani'}, {name:'जंगला', name_eng: 'jangala'}, 
+  {name: 'हिंडोल', name_eng: 'hindol'}, {name:'भीमपलासी', name_eng: 'bheempalasi'}, {name:'कलावती', name_eng:'kalavati'}, 
+  {name: 'श्री', name_eng: 'shri'}, {name:'कान्हरौ', name_eng: 'kanharo'}, {name:'षट', name_eng:'kshat'}, 
+  {name: 'केदारौ', name_eng: 'kedaro'}, {name:'जिला', name_eng: 'jila'}, {name: 'नट', name_eng: 'nat'}, {name: 'शहानौ', name_eng: 'shahano'}];
 
 raag_list.each do | raag |
-  Raag.create!(name: raag) if Raag.where(name: raag).blank?
+  Raag.create!(raag) if Raag.where(raag).blank?
 end
