@@ -7,7 +7,7 @@ class CreateContributedArticles < ActiveRecord::Migration[7.0]
       t.text    :content
       t.text    :interpretation
       t.string  :article_type_id
-      t.string  :raag
+      t.integer :raag_id
       t.string  :author_id
       t.integer :user_id
       t.integer :context_id

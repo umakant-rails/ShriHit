@@ -16,13 +16,174 @@
                   Delete
                 </button>
               <% end %>
-              <%= link_to "Hold & Next", public_contributed_article_hold_and_next_path(@c_article.id), class: "fRight me-2 btn btn-primary" %>
+              <%= link_to "Hold & Next", public_contributed_article_hold_and_next_path(@c_article.id, status: 'hold'), class: "fRight me-2 btn btn-primary" %>
+              <%= link_to "Remaining: #{@c_articles.length}", "javascript:void(0)", class: "fRight me-2 btn btn-outline-danger" %>
             <% end %>
           </div>
         </div>
         <div class="dropdown-divider"></div>
         <div class="m-sm-4" data-controller= 'article tagging'>
-          <%= render "form", article: @article, scriptures: @scriptures %>
+          <%#= render "form", article: @article, scriptures: @scriptures %>
+          <%= form_with(model: @article, url: contributed_article_create_articles_path, html: {
+            'data-article-target': 'form', 'data-action': 'article#submitForm'}) do |form| %>
+            <% article_types, authors, contexts, raags, scriptures = get_data_for_article_creation(current_user) %>
+            <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display: <%= @article.errors.present? ? 'block' : 'none' %>;" role="alert">
+              <% @article.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+              <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
+            </div>
+            <%= hidden_field_tag "contributed_article_id", @c_article.id %>
+            <div class="row">
+              <div class="col-md-6">
+                <div class='mb-3'>
+                  <label for='article_type' class='form-label'>
+                    रचना का प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+                  </label>
+                  <%= form.select :article_type_id, options_for_select(article_types, selected: form.object.article_type_id), {:prompt => 'रचना प्रकार चुने'}, class: 'form-control', 'data-article-target': 'articleTypeId', 'data-action': 'change->article#setBhajanContext'%>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class='mb-3'>
+                  <label for='article_type' class='form-label'>
+                    राग
+                  </label>
+                  <%= form.select :raag_id, options_for_select(raags, selected: form.object.raag_id), {:prompt => 'राग चुने'}, class: 'form-control'%>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class='mb-3'>
+                  <label for='article_type' class='form-label'>
+                    रसिक वाणी
+                  </label>
+                  <%# scripture_list = scriptures.present? ? scriptures.map{|s|[s.name, s.id]} : [] %>
+                  <%= form.select :scripture_id, options_for_select(scriptures, selected: form.object.scripture_id), {:prompt => 'रसिक वाणी चुने'}, class: 'form-control'%>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class='mb-3'>
+                  <label for='article_type' class='form-label'>
+                    रसिक वाणी पद अनुक्रम
+                  </label>
+                  <%= form.number_field :index, class: 'form-control' %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class='mb-3'>
+                  <label class='form-label'>
+                    प्रसंग
+                  </label>
+                  <%= form.select :context_id, options_for_select(contexts, selected:form.object.context_id), {:prompt => 'प्रसंग चुने'}, class: 'form-control' %>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class='mb-3'>
+                  <label for='article_type' class='form-label'>
+                    लेखक
+                  </label>
+                  <%= form.select :author_id, options_for_select(authors, selected: form.object.author_id), {:prompt => 'प्रसंग चुने'}, class: 'form-control'%>
+                </div>
+              </div>
+            </div>
+             <div class="row">
+              <div class="col-md-6">
+                <div class='mb-3'>
+                  <label for='hindi_title' class='form-label'>
+                    हिंदी शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+                  </label>
+                  <%#= form.text_field :hindi_title, class: 'form-control' %>
+                  <div data-controller="autocomplete" data-autocomplete-url-value="/articles/autocomplete_term?search_in=hindi">
+                    <%= form.text_field :hindi_title, class: 'form-control', 'data-autocomplete-target':'input', 'data-action': 'focus->article#setHindiTitle' %>
+                    <input type="hidden" id="hindi_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+                    <ul class="list-group" data-autocomplete-target="results"></ul>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col-md-6">
+                <div class='mb-3'>
+                  <label for='article_type' class='form-label'>
+                    इंग्लिश शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+                  </label>
+                  <%#= form.text_field :english_title, class: 'form-control' %>
+                  <div data-controller="autocomplete" data-autocomplete-url-value="/articles/autocomplete_term?search_in=english">
+                    <%= form.text_field :english_title, class: 'form-control', 'data-autocomplete-target':'input' %>
+                    <input type="hidden" id="english_serach_text" name="search_text" data-autocomplete-target="hidden"/>
+                    <ul class="list-group" data-autocomplete-target="results"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <% article_tags = @article.tags %>
+              <label for='tags' class='form-label'>टैग्स</label>
+              <div class="row">
+                <div class="col-md-10">
+                  <%= hidden_field_tag "article[tags]", article_tags.pluck(:name).join(","),
+                    'data-tagging-target': 'articleTags', 'data-tag-array': article_tags.pluck(:name).each{|nm| nm.strip!}.join(",") %>
+                  <select class="form-control"
+                    data-tags="<%=@tags.pluck(:name).each{|nm| nm.strip!}.join(',')%>"
+                    data-action= "focus->tagging#showTagsDataList click->tagging#selectTag"
+                    data-tagging-target= "tagSelectInput">
+                  </select>
+                </div>
+                <div class="col-md-2">
+                  <a href="javascript:void(0);" data-action="tagging#showTagInput" data-tagging-target="showTagInputBtn"
+                    class="btn btn-primary">नया टैग टाइप करे</a>
+                </div>
+              </div>
+              <div data-tagging-target="newTagBlock" style="display:none;">
+                <div class="row">
+                  <div class="col-md-9">
+                    <%= text_field_tag "new_tag", nil, id: "tag-input-field",
+                    'data-tagging-target': 'newTag', class: 'form-control',
+                    placeholder: "New Tage Type here...", "data-action": "keyup->tagging#createTagByInput"%>
+                  </div>
+                  <div class="col-md-3">
+                    <a href="javascript:void(0);" data-action="tagging#createTagByButton" class="btn btn-primary">टैग बनाये</a>
+                    <a href="javascript:void(0);" data-action="tagging#showtagList" class="btn btn-primary">सूची प्रदर्शित करे </a>
+                  </div>
+                </div>
+              </div>
+              <div id="tag-list" data-tagging-target="tagList" class="">
+                <% article_tags && article_tags.each do | tag | %>
+                  <span class='tags'>
+                    <%= tag.name %>
+                    <i class='fa-solid fa-xmark tags-cross' data-tags-target='crossTag'
+                      data-action='click->tagging#removeTag'></i>
+                  </span>
+                <% end %>
+              </div>
+            </div>
+            <div class='mb-3'>
+              <label for='article_type' class='form-label'>
+                रचना <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+              </label>
+              <%= form.text_area :content, class: 'tinymce' %>
+            </div>
+            <div class='mb-3'>
+              <label for='article_type' class='form-label'>
+                रचना का अर्थ
+              </label>
+              <%= form.text_area :interpretation, class: 'tinymce' %>
+            </div>
+            <div class='text-center mt-3 actions'>
+              <div class="row">
+                <div class="col-md-4 offset-0">
+                  <% if form.object.id.blank? %>
+                    <%= form.submit "रचना जोड़े", class: 'btn btn-lg btn-primary form-control' %>
+                  <% else %>
+                    <%= form.submit "रचना अद्यतन करे", class: 'btn btn-lg btn-primary form-control' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
         </div>
         <div class="divider-bdr"></div>
         <%= link_to "रचना सूची देखें", articles_path %>

@@ -128,7 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_072353) do
     t.text "content"
     t.text "interpretation"
     t.string "article_type_id"
-    t.string "raag"
+    t.integer "raag_id"
     t.string "author_id"
     t.integer "user_id"
     t.integer "context_id"

@@ -37,6 +37,7 @@ class ArticlesController < ApplicationController
         if params[:article][:tags].present?
           create_tags_for_articles
         end
+
         format.html { redirect_to article_url(@article), notice: "Article was successfully created." }
         format.json { render :show, status: :created, location: @article }
       else
@@ -156,20 +157,43 @@ class ArticlesController < ApplicationController
 
   def contributed_article_new
     @tags = Tag.approved.order("name ASC")
-    author = Author.where("name=?", "अज्ञात").first
-    context = Context.where("name=?", "अन्य").first
+    author_id = Author.where("name=?", "अज्ञात").first.id
+    context_id = Context.where("name=?", "अन्य").first.id
     @scriptures = Scripture.all
+    @c_articles = ContributedArticle.where("is_read = ? and is_hold = ?", false, false)
     @c_article = ContributedArticle.where("is_read = ? and is_hold = ?", false, false).first
-    content = @c_article.content rescue nil
+    context_id = @c_article.context_id.blank? ? context_id : @c_article.context_id
+    author_id = @c_article.author_id.blank? ? author_id : @c_article.author_id
 
     if @c_article.present?
       @article = Article.new({
         article_type_id: @c_article.article_type_id, scripture_id: @c_article.scripture_id,
-        index: @c_article.article_index, raag_id: @c_article.id, hindi_title: @c_article.hindi_title,
-        author_id: author.id, context_id: context.id, content: content
+        index: @c_article.article_index, raag_id: @c_article.raag_id, hindi_title: @c_article.hindi_title,
+        author_id: author_id, context_id:context_id, content: @c_article.content
       })
     else
       @article = Article.new({author_id: author.id, context_id: context.id, user_id: current_user.id})
+    end
+  end
+
+  def contributed_article_create
+    author = Author.where("name=?", "अज्ञात").first
+    params[:article][:author_id] = params[:article][:author_id].blank? ? author.id : params[:article][:author_id]
+
+    @article = current_user.articles.new(article_params)
+    respond_to do |format|
+      if @article.save
+
+        if params[:article][:tags].present?
+          create_tags_for_articles
+        end
+        ContributedArticle.find(params[:contributed_article_id]).update(is_read: true)
+        format.html { redirect_to contributed_article_new_articles_path, notice: "Article was successfully created." }
+        format.json { render :show, status: :created, location: @article }
+      else
+        format.html { render :contributed_article_new, status: :unprocessable_entity }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
+      end
     end
   end
 

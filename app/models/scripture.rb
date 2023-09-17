@@ -9,8 +9,8 @@ class Scripture < ApplicationRecord
   has_many :scripture_articles, dependent: :destroy 
   has_many :stories
   has_many :cs_articles
-  has_many :articles, :through => :cs_articles
-
+  has_many :c_articles, :through => :cs_articles
+  has_many :articles
 
   validates :name, presence: true
 

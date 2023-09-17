@@ -24,7 +24,11 @@
               <%=raw scr_article.article.content %>
             </div>
           </td>
-          <td><%= scr_article.chapter.name %> (<%= (scr_article.chapter.index) %>)</td>
+          <% if scr_article.chapter.present? %>
+            <td><%= scr_article.chapter.name %> (<%= (scr_article.chapter.index) %>)</td>
+          <% else %>
+          <td>-</td>
+          <% end %>
           <td>
             <%= scr_article.index %>
           </td>

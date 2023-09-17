@@ -20,7 +20,7 @@
     <div class="col-md-6">
       <div class='mb-3'>
         <label for='article_type' class='form-label'>
-          राग <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+          राग
         </label>
         <%= form.select :raag_id, options_for_select(raags, selected: form.object.raag_id), {:prompt => 'राग चुने'}, class: 'form-control'%>
       </div>
@@ -145,14 +145,6 @@
     </label>
     <%= form.text_area :interpretation, class: 'tinymce' %>
   </div>
-  <!-- <div class='mb-3'>
-    <label for='article_type' class='form-label'>
-      तस्वीर/फोटो <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-    </label>
-    <%#= form.fields_for :image do | image |  %>
-      <%#= image.file_field :image, class: "form-control" %>
-    <%# end %>
-  </div> -->
   <div class='text-center mt-3 actions'>
     <div class="row">
       <div class="col-md-4 offset-0">

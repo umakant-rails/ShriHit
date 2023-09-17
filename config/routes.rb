@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get "/autocomplete_term" => "articles#autocomplete_term", as: :autocomplete_term, on: :collection
     get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
     get "/contribution/new" => "articles#contributed_article_new", as: :contributed_article_new, on: :collection
+    post "contribution/create" => "articles#contributed_article_create", as: :contributed_article_create, on: :collection
   end
 
   resources :comments
