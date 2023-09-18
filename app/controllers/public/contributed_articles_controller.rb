@@ -1,7 +1,7 @@
 class Public::ContributedArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :verify_admin, except: [:new, :create]
-  before_action :set_contributed_article, only: %i[edit update destroy]
+  # before_action :set_contributed_article, only: %i[edit update destroy]
 
   def index
     @c_articles = ContributedArticle.all.page(params[:page])
@@ -18,15 +18,8 @@ class Public::ContributedArticlesController < ApplicationController
   end
 
   def destroy
-    respond_to do |format|
-      if @c_article.destroy
-        if params[:redirect] == "true"
-          redirect_to contributed_article_new_articles_path
-        else
-          format.html { redirect_to public_contributed_articles_path, notice: "रचना को सफलतापूर्वक डिलीट कर दिया गया हैै" }
-        end
-      end
-    end
+    @c_article = ContributedArticle.find(params[:id])
+    redirect_to contributed_article_new_articles_path
   end
 
   private
