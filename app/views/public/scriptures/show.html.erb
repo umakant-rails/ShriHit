@@ -2,7 +2,7 @@
   <div class="col-md-2"></div>
   <div class="col-md-8">
     <center>
-      <div class="card mb-2 page-a4">
+      <div class="card mb-2 page">
         <div class="card-body h-100 pb-2" id="article-list">
           <div class="page-subject-header-violet mb-5">
             <span class="fLeft cpointer" data-action="click->scripture#displayPageIndexing">
@@ -41,14 +41,14 @@
                     <div class="mb-5 fnt-sz-24 fnt-b title-text">
                       <span><%= index + 1 %>. <%= article.hindi_title %></span>
                     </div>
-                    <div><%= raw article.content %></div>
+                    <div class="fnt-sz-22"><%= raw article.content %></div>
                   </div>
                 <% else %>
                   <div class="article-pad hide" data-scripture-target="page" data-page="<%= index + 1 %>">
                     <div class="mb-5 fnt-sz-24 fnt-b title-text">
                       <%= index + 1 %>. <%= article.hindi_title %>
                     </div>
-                    <div><%= raw article.content %></div>
+                    <div class="fnt-sz-22"><%= raw article.content %></div>
                   </div>
                 <% end %>
               <% end %>
