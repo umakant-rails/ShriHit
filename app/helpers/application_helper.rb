@@ -50,4 +50,8 @@ module ApplicationHelper
     date.strftime("%d/%m/%Y")
   end
 
+  def string_format(name, delimeter=nil)
+    delimeter = "_" if delimeter.blank?
+    name.split(" ").collect{|txt| txt.downcase }.join(delimeter)
+  end
 end

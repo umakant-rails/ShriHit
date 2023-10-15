@@ -202,6 +202,8 @@ Rails.application.routes.draw do
       get '/hold_and_next' => "contributed_articles#hold_and_next", as: :hold_and_next
     end
 
+    resources :scriptures , only: [:index, :show]
+
   end
 
 end

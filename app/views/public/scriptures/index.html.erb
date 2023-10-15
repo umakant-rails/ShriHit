@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="card mb-2">
+    <div class="card-body h-100 pb-2" id="article-list">
+      <div class="row-fluid">
+        <% @scripture_types.each do | type | %>
+          <% scriptures = type.scriptures %>
+          <% if scriptures.length > 0 %>
+            <div class="page-subject-header mb-3"><%= type.name %></div>
+            <% scriptures.each do | scripture | %>
+              <%= link_to public_scripture_path(scripture.name_eng) do %>
+                <img src="/assets/<%= string_format(scripture.name_eng) %>.png" width="180px">
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

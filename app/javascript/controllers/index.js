@@ -18,6 +18,7 @@ import SidebarController from "./sidebar_controller";
 import CommentController from "./comment_controller";
 import CommentReportingController from "./comment_reporting_controller";
 import TaggingController from "./tagging_controller";
+import ScriptureController from "./scripture_controller";
 
 import AdminAuthorController from "./admin/author_controller";
 import AdminContextController from "./admin/context_controller";
@@ -43,6 +44,7 @@ application.register("comment", CommentController);
 application.register("comment-reporting", CommentReportingController);
 //application.register("dashboard", DashboardController);
 application.register("tagging", TaggingController);
+application.register("scripture", ScriptureController);
 
 application.register("admin-author", AdminAuthorController);
 application.register("admin-context", AdminContextController);

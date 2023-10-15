@@ -65,7 +65,10 @@ a:hover{
 .fnt-sz-18{font-size: 18px;}
 .fnt-sz-19{font-size: 19px;}
 .fnt-sz-20{font-size: 20px;}
-.fnt-sz-25{font-size: 25px;}
+.fnt-sz-22{font-size: 22px;}
+.fnt-sz-24{font-size: 24px;}
+.fnt-sz-26{font-size: 26px;}
+.fnt-sz-28{font-size: 28px;}
 .fnt-sz-30{font-size: 30px;}
 .fnt-b {font-weight: bold;}
 
@@ -83,7 +86,21 @@ a:hover{
   font-weight: bold;
   color: #3b7ddd;
 }
+.page-subject-header-violet {
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(255,255,255,1)),color-stop(100%,rgba(255,248,243,1)));
+  background: -webkit-linear-gradient(90deg,rgba(255,255,255,1) 0%,#B06EFD 100%);
+  background: -o-linear-gradient(90deg,rgba(255,255,255,1) 0%, #B06EFD 100%);
+  background: -ms-linear-gradient(90deg,rgba(255,255,255,1) 0%,#B06EFD 100%);
+  background: linear-gradient(0deg, white 0%, #B06EFD 100%);
+  background: -moz-linear-gradient(90deg, white 0%, #B06EFD 100%);
 
+  border-bottom: 2px solid #8F00FF;
+  border-top: 1px solid #8F00FF;
+  padding: 12px 8px;
+  font-size: 22px;
+  font-weight: bold;
+  color: darkslategray;
+}
 .req-field{
   color: red;
   font-size: 10px;

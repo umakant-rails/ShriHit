@@ -1,0 +1,65 @@
+<div class="row" data-controller="scripture">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <center>
+      <div class="card mb-2 page-a4">
+        <div class="card-body h-100 pb-2" id="article-list">
+          <div class="page-subject-header-violet mb-5">
+            <span class="fLeft cpointer" data-action="click->scripture#displayPageIndexing">
+              <i class="fa-solid fa-list"></i>
+            </span>
+            <span class="fnt-sz-26"><%= @scripture.name %> </span>
+          </div>
+          <div class="row">
+            <div class="page-indexing hide fnt-sz-25" data-scripture-target="indexingPage" >
+              
+              <div class="mb-4 fnt-sz-26 fnt-b title-text text-center">
+                अनुक्रमाणिका
+                <div class="fRight text-danger" data-action="click->scripture#displayPageIndexing"><i class="fa-regular fa-circle-xmark"></i></div>
+              </div>
+              <div class="page-list fnt-sz-22" style="text-align: left; height: 500px !important;overflow-y: scroll;">
+                <% @articles.each_with_index do | article, index | %>
+                  <div class="fnt-b" >
+                    <%= index + 1 %>. 
+                    <a href="javascript:void(0);" data-index="<%= index + 1 %>" data-action="click->scripture#displayPage">
+                      <%= article.hindi_title %>
+                    </a>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" data-scripture-target="pageParent">
+            <div class="col-md-1 vm-align">
+              <i class="fa-solid fa-chevron-left fnt-sz-30" data-action="click->scripture#previous" data-scripture-target="previous"></i>
+            </div>
+            <div class="col-md-10 fnt-sz-24">
+              <% @articles.each_with_index do | article, index | %>
+                <% if index == 0 %>
+                  <div class="article-pad" data-scripture-target="page" data-page="<%= index + 1 %>">
+                    <div class="mb-5 fnt-sz-24 fnt-b title-text">
+                      <span><%= index + 1 %>. <%= article.hindi_title %></span>
+                    </div>
+                    <div><%= raw article.content %></div>
+                  </div>
+                <% else %>
+                  <div class="article-pad hide" data-scripture-target="page" data-page="<%= index + 1 %>">
+                    <div class="mb-5 fnt-sz-24 fnt-b title-text">
+                      <%= index + 1 %>. <%= article.hindi_title %>
+                    </div>
+                    <div><%= raw article.content %></div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="col-md-1 vm-align">
+              <i class="fa-solid fa-chevron-right fnt-sz-30" data-action="click->scripture#next"  data-scripture-target="next"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </center>
+  </div>
+  <div class="col-md-2"></div>
+</div>
