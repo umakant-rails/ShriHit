@@ -63,6 +63,7 @@ end
 # ScriptureType.create!(name: "अष्टयाम") if ScriptureType.where(name: "अष्टयाम").blank?
 StrotaType.create!(name: "आरती") if StrotaType.where(name: "आरती").blank?
 StrotaType.create!(name: "चालीसा") if StrotaType.where(name: "चालीसा").blank?
+StrotaType.create!(name: "शतक") if StrotaType.where(name: "शतक").blank?
 
 StrotaType.create!(name: "स्त्रोत") if StrotaType.where(name: "स्त्रोत").blank?
 StrotaType.create!(name: "सहस्त्रनाम") if StrotaType.where(name: "सहस्त्रनाम").blank?
