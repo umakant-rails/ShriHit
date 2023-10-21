@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="card">
+      <div class="card-body">
+        <% if @sant.present? %>
+          <div class="row">
+            <div class="article-header-green">
+              <%= @sant.name %>
+            </div>
+            <div class="mb-3">
+              <%= raw @sant.biography %>
+            </div>
+          </div>
+        <% else %>
+          <center>There is no data available.</center>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <div class="article-header-green">
+          <% articles = @sant.articles rescue nil%>
+          <%= @sant.name %>जी की रचनाये ( <%= articles.length %>)
+        </div>
+        <ul class="list-group">
+          <% if articles.length > 0 %>
+            <% articles.limit(10).each_with_index do |article, index | %>
+              <li class="list-group-item">
+                <%= link_to article_by_title_public_articles_path(article.hindi_title) do %>
+                  <%= index + 1 %>. <%= article.hindi_title %>
+                <% end %>
+              </li>
+            <% end %>
+            <% if articles.length > 10 %>
+              <li class="list-group-item">
+                <%= link_to articles_by_author_public_authors_path(@sant.name) do %>
+                  View more ...
+                <% end %>
+              </li>
+            <% end %>
+          <% else %>
+            <li class="list-group-item">
+              कोई रचना उपलब्ध नहीं है 
+            </ll>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="article-header-green">
+          संतो की सूची
+        </div>
+        <ul class="list-group">
+          <% @sants.each_with_index do |sant, index | %>
+            <li class="list-group-item"><%= index + 1 %>. <%= sant.name %>
+          <% end %>
+        <ul>
+      </div>
+    </div>
+  </div>
+</div>

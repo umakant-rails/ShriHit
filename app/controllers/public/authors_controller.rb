@@ -18,4 +18,13 @@ class Public::AuthorsController < ApplicationController
     @articles = @author.articles.page(params[:page]) rescue nil
   end
 
+  def sants
+    @sants = Author.where("biography!= ''") rescue []
+  end
+
+  def sant_biography
+    @sants = Author.where("biography!= ''") rescue []
+    @sant = Author.find(params[:id]) rescue nil
+  end
+
 end

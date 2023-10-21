@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="card">
+    <div class="card-body">
+      <% if @sants.present? %>
+        <div class="row article-header-green mb-3">
+          संतो की सूची
+        </div>
+        <div class="articles">
+          <% @sants.each_with_index do |sant, index | %>
+            <%= link_to sant_biography_public_author_path(sant.id) do %>
+              <div class="row p-2 mb-3 article-box ">
+                <div class="col-md-3 ps-0">
+                  <img src="/assets/shrihit.png" class="article-img" alt="Avatar">
+                </div>
+                <div class="col-md-9">
+                  <div class="row mb-2 article-header-green">
+                    <%= sant.name %>
+                  </div>
+                  <div class="row biography-block pb-3 btm-bdr">
+                    <div class="article-text"><%= raw sant.biography %></div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% else %>
+      <% end %>
+    </div>
+  </div>  
+</div>

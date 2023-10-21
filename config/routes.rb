@@ -186,6 +186,8 @@ Rails.application.routes.draw do
 
     resources :authors, only: [:index, :show] do
       get '/articles_by_author/:author_name' => "authors#articles_by_author", as: :articles_by_author, on: :collection
+      get '/sants' => "authors#sants", as: :sants, on: :collection
+      get '/sant_biography' => "authors#sant_biography", as: :sant_biography, on: :member
     end
     resources :tags, only: [:index] do
       get '/:tag_name' => "tags#show", as: :articles_by_tag, on: :collection
@@ -203,6 +205,8 @@ Rails.application.routes.draw do
     end
 
     resources :scriptures , only: [:index, :show]
+
+    resources :strota, only: [:index, :show]
 
   end
 

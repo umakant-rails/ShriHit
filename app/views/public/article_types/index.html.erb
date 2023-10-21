@@ -8,7 +8,9 @@
       <div class="row-fluid">
         <% if @article_types.present? %>
           <% @article_types.each do | article_type | %>
-            <%= link_to article_type.name, articles_by_type_public_article_types_path(article_type.name), class: "btn btn-primary" %>
+            <%= link_to articles_by_type_public_article_types_path(article_type.name) do %>
+              <div class="context-lbl m-1"><%= article_type.name %></div>
+            <% end %>
           <% end %>
         <% end %>
       </div>

@@ -8,7 +8,9 @@
       <div class="row-fluid">
         <% if @contexts.present? %>
           <% @contexts.each do | context | %>
-            <%= link_to context.name, articles_by_context_public_contexts_path(context.name), class: "btn btn-primary" %>
+            <%= link_to articles_by_context_public_contexts_path(context.name) do %>
+              <div class="context-lbl m-1"><%= context.name %></div>
+            <% end %>
           <% end %>
         <% end %>
       </div>
