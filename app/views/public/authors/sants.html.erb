@@ -7,7 +7,7 @@
         </div>
         <div class="articles">
           <% @sants.each_with_index do |sant, index | %>
-            <%= link_to sant_biography_public_author_path(sant.id) do %>
+            <%= link_to sant_biography_public_author_path(sant.name_eng) do %>
               <div class="row p-2 mb-3 article-box ">
                 <div class="col-md-3 ps-0">
                   <img src="/assets/shrihit.png" class="article-img" alt="Avatar">

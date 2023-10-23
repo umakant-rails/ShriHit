@@ -2,20 +2,12 @@ class Public::ArticlesController < ApplicationController
   layout :set_layout
 
   def index
-    @article_types = ArticleType.order("name ASC")
-    @contexts = Context.order("name ASC")
-    @authors = Author.order("name ASC").limit(10)
-    @articles = Article.order("created_at DESC").page(params[:page]).per(9)
+    @articles = Article.order("created_at DESC").page(params[:page]).per(10)
     @contributors = User.all
   end
 
   def show
-    @article = Article.find(params[:id])
-    @comments = @article.comments.order("created_at DESC")
-  end
-
-  def article_by_title
-    @article = Article.where(hindi_title: params[:hindi_title])[0]
+    @article = Article.where(hindi_title: params[:id])[0] rescue nil
     if @article.present?
       @comments = @article.comments.order("created_at DESC")
     else
@@ -23,20 +15,15 @@ class Public::ArticlesController < ApplicationController
       redirect_back_or_to public_articles_path
     end
   end
+
   # def articles_by_type
-  #   @page_size = 10
   #   @articles = Article.joins(:article_type).where(article_types: {name: params[:article_type]})
   #     .page(params[:page]).per(10)
   # end
 
   # def articles_by_context
-  #   @page_size = 10
   #   @articles = Article.joins(:context).where("contexts.name = ?",params[:context_name])
   #     .page(params[:page]).per(10)
-  # end
-
-  # def article_types
-  #   @article_types = ArticleType.order("created_at ASC").page(params[:page]).per(10)
   # end
 
   # def article_contexts
@@ -60,7 +47,7 @@ class Public::ArticlesController < ApplicationController
     render layout: false
   end
 
-  def search_page  
+  def search_page
     @articles = Article.order("created_at desc").page(params[:page])
 
     respond_to do |format|

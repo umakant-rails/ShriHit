@@ -176,8 +176,7 @@ Rails.application.routes.draw do
       get "/search_articles" => "articles#search_articles", as: :search_articles, on: :collection
       #get "/search_article/:id" => "articles#search_article", as: :search_article, on: :collection
       #get "/export_pdf" => "articles#article_pdf", as: :export_pdf, on: :member
-      get "/article_by_title/:hindi_title" => "articles#article_by_title", as: :article_by_title, on: :collection
-     end
+    end
 
     resources :user_profiles, only: [:index, :show]
 
@@ -206,7 +205,9 @@ Rails.application.routes.draw do
 
     resources :scriptures , only: [:index, :show]
 
-    resources :strota, only: [:index, :show]
+    resources :strota, only: [:index, :show] do 
+      get '/type/:strota_type' => "strota#get_strota_by_type", as: :get_strota_by_type, on: :collection
+    end
 
   end
 

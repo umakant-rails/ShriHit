@@ -56,7 +56,11 @@
         </div>
         <ul class="list-group">
           <% @sants.each_with_index do |sant, index | %>
-            <li class="list-group-item"><%= index + 1 %>. <%= sant.name %>
+            <%= link_to sant_biography_public_author_path(sant.name_eng) do %>
+              <li class="list-group-item text-primary">
+                <i class="fa-solid fa-circle-user me-2 user-icon text-primary" ></i> <%= sant.name %>
+              </li>
+            <% end %>
           <% end %>
         <ul>
       </div>

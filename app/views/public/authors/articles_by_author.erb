@@ -1,14 +1,86 @@
-<div class="row">
-  <div class="card">
-    <div class="card-body h-450">
-      <div class="page-subject-header">
-        रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.present? ? @author.sampradaya.name : 'सम्प्रदाय - NA' %> )
-      </div>
-      <div class="dropdown-divider"></div>
-      <div class="m-sm-2" data-controller= 'article'>
-        <div class="row-fluid">
-          <%= render partial: "public/shared/article", locals: {author: @author, articles: @articles, page: 0, page_size: 0} %>
+<div class="card">
+  <div class="card-body h-450">
+    <div class="page-subject-header">
+      रचनाकार/कवि/भक्त: <%= @author.name %> ( <%= @author.sampradaya.present? ? @author.sampradaya.name : 'सम्प्रदाय - NA' %> )
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="m-sm-2" data-controller='article'>
+          <div class="row-fluid">
+            <%= render partial: "public/shared/article", locals: {author: @author, articles: @articles, page: 0, page_size: 0} %>
+          </div>
         </div>
+      </div>
+      <div class="col-md-4">
+        <% if @authors.present? %>
+          <div class="page-subject-header-violet">
+            लेखक/रचनाकार
+          </div>
+          <ul class="list-group list-group-flush">
+            <% @authors.limit(10).each do | author | %>
+              <li class="list-group-item text-primary">
+                <%= link_to articles_by_author_public_authors_path(author.name) do %>
+                  <i class="fa-solid fa-circle-user me-2 user-icon text-primary" ></i> 
+                  <%= author.name %>
+                <% end %>
+              </li>
+            <% end %>
+            <% if @authors.length > 10 %>
+              <li class="list-group-item text-primary">
+                <%= link_to public_authors_path do %>
+                  View more ...
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <% if @contexts.present? %>
+          <div class="page-subject-header-violet">
+            प्रसंग
+          </div>
+          <ul class="list-group list-group-flush">
+            <% @contexts.limit(10).each do | context | %>
+              <li class="list-group-item text-primary">
+                <%= link_to articles_by_context_public_contexts_path(context.name) do %>
+                  <i class="fa-solid fa-file-lines me-2 user-icon text-primary" ></i>
+                  <%= context.name %>
+                <% end %>
+              </li>
+            <% end %>
+            <% if @contexts.length > 10 %>
+              <li class="list-group-item text-primary">
+                <%= link_to public_authors_path do %>
+                  View more ...
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <% if @article_types.present? %>
+          <div class="page-subject-header-violet">
+            रचना प्रकार
+          </div>
+          <ul class="list-group list-group-flush">
+            <% @article_types.limit(10).each do | article_type | %>
+              <li class="list-group-item text-primary">
+                <%= link_to articles_by_type_public_article_types_path(article_type.name) do %>
+                  <i class="fa-solid fa-file me-2 user-icon text-primary" ></i> 
+                  <%= article_type.name %>
+                <% end %>
+              </li>
+            <% end %>
+            <% if @article_types.length > 10 %>
+              <li class="list-group-item text-primary">
+                <%= link_to public_article_types_path do %>
+                  View more ...
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
       </div>
     </div>
   </div>

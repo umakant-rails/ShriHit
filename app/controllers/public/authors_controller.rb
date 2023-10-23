@@ -24,7 +24,7 @@ class Public::AuthorsController < ApplicationController
 
   def sant_biography
     @sants = Author.where("biography!= ''") rescue []
-    @sant = Author.find(params[:id]) rescue nil
+    @sant = Author.where(name_eng: params[:id].strip).first rescue nil
   end
 
 end

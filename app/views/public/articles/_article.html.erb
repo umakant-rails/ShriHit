@@ -1,45 +1,40 @@
-<% if  articles.present? %>
+<% if articles.present? %>  
   <% articles.each_with_index do | article, index | %>
-    <div class="card">
-      <div class="card-body">
-        <div class="row p-2 article-box">
-          <div class="col-md-3 ps-0">
-            <img src="/assets/shrihit.png" class="article-img" alt="Avatar">
-          </div>
-          <div class="col-md-9">
-            <div class="row mb-2">
-              <%= link_to articles_by_type_public_article_types_path(article.article_type.name), class: "col-md-3 me-3 article-type-txt" do %>
-                रचना प्रकार : <%= article.article_type.name %>
-              <% end %>
-              <div class="col-md-3 article-date-txt">
-                सृजन तिथि : <%= format_dt(article.created_at) %>
-              </div>
-            </div>
-            <div class="row pb-3 btm-bdr">
-              <%= link_to article_by_title_public_articles_path(article.hindi_title) do %>
-                <div class="pb-1 article-title">
-                  <%= article.hindi_title %>
-                </div>
-                <div class="article-text"><%= raw article.content %></div>
-              <% end %>
-            </div>
-            <div class="row mt-2 d-block">
-              <div >
-                <%= link_to public_author_path(article.author) do %>
-                  <div class="user-icon-div">
-                    <i class="fa-solid fa-circle-user me-2 user-icon" ></i>
-                  </div>
-                  <div class="user-txt"><%= article.author.name %></div>
-                <% end %>
-              </div>
-            </div>
+    <div class="row p-2 article-box mb-3">
+      <div class="col-md-4 ps-0">
+        <img src="/assets/shrihit.png" class="article-img" alt="Avatar">
+      </div>
+      <div class="col-md-8">
+        <div class="row mb-2">
+          <div class="col-md-12 article-title">
+            <%= link_to public_article_path(article.hindi_title), class: "txt-chocolate fnt-sz-22" do %>
+              <%= article.hindi_title %>
+            <% end %>
           </div>
         </div>
+        <div class="row pb-3">
+          <%= link_to public_article_path(article.hindi_title) do %>
+            <div class="article-text">
+              <%= raw article.content %>
+            </div>
+          <% end %>
+        </div>
+        <span class="badge bg-primary">
+          <%= link_to article.article_type.name, articles_by_type_public_article_types_path(article.article_type.name), class: "text-white" %>
+        </span>
+        <span class="badge bg-danger">
+          <%= link_to article.author.name, public_author_path(article.author.id), class: "text-white" %>
+        </span>
+        <span class="badge bg-secondary"><%= format_dt(article.created_at) %></span>
       </div>
     </div>
+    <hr>  
   <% end %>
+  <div id="paginate-block">
+    <%= paginate articles %>
+  </div>
+<% else %>
+  <div id="paginate-block">
+    There is no data available now.
+  </div>
 <% end %>
-
-<div id="paginate-block">
-  <%= paginate articles %>
-</div>
