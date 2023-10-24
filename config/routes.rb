@@ -209,6 +209,8 @@ Rails.application.routes.draw do
       get '/type/:strota_type' => "strota#get_strota_by_type", as: :get_strota_by_type, on: :collection
     end
 
+    resources :stories, only: [:index, :show]
+
   end
 
 end

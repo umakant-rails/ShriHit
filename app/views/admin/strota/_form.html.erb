@@ -18,9 +18,16 @@
 
     <div class='mb-3'>
       <label class='form-label'>
-        स्त्रोत/आरती नाम <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
+        स्त्रोत/आरती शीर्षक <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
       </label>
-      <%= form.text_field :name, class: 'form-control' %>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+
+    <div class='mb-3'>
+      <label class='form-label'>
+        टिप्पणी/टैग
+      </label>
+      <%= form.text_field :keyword, class: 'form-control' %>
     </div>
 
     <div class='mb-3'>

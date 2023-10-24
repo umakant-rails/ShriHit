@@ -10,7 +10,7 @@ $(document).ready(function(){
     };
     var control =
         new google.elements.transliteration.TransliterationControl(options);
-    control.makeTransliteratable(["strotum_name", "strotum_source"]);
+    control.makeTransliteratable(["strotum_title", "strotum_keyword", "strotum_source"]);
   }
   google.setOnLoadCallback(onLoad);
 

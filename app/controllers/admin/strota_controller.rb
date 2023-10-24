@@ -69,7 +69,7 @@ class Admin::StrotaController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def strotum_params
-      params.require(:strotum).permit(:name, :source, :strota_type_id)
+      params.require(:strotum).permit(:title, :source, :strota_type_id, :keyword)
     end
 
     def verify_admin

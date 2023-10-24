@@ -1,5 +1,5 @@
 class Public::StrotaController < ApplicationController
-   before_action :set_required_data
+  before_action :set_required_data
 
   def index 
     @strota_types = StrotaType.all
@@ -7,8 +7,14 @@ class Public::StrotaController < ApplicationController
   end
 
   def show
-    @strotum = Strotum.where(name: params[:id]).first 
+    @strotum = Strotum.where(title: params[:id]).first 
     @articles = @strotum.strota_articles rescue []
+
+    @strota = Strotum.where("strota_type_id = ? and id not in (?)",
+      @strotum.strota_type_id, @strotum.id) rescue []
+    if @strotum.blank?
+      redirect_back_or_to public_strota_path 
+    end
   end
 
   def get_strota_by_type

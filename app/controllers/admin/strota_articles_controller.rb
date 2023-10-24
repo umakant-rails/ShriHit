@@ -16,12 +16,10 @@ class Admin::StrotaArticlesController < ApplicationController
   def new
     @article = StrotaArticle.find(params[:article_id]) rescue nil
     @strota = Strotum.all
-    @article_types = ArticleType.all
 
     if @article.present?
       @strota_article = StrotaArticle.new(
         strotum_id: @article.strotum_id, 
-        article_type_id: @article.article_type_id, 
         index: @article.index+1)
     else
       @strota_article = StrotaArticle.new

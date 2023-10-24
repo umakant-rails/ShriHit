@@ -1,26 +1,37 @@
-<div class="row" data-controller="scripture">
-  <div class="col-md-1"></div>
-  <div class="col-md-10">
-    <div class="card mb-2 page-a4">
-      <div class="card-body h-100 pb-2" id="article-list">
-        <div class="page-subject-header-purple mb-5">
-          <span class="fnt-sz-26"><%= @strotum.name %> </span>
-        </div>
-        <div class="row" data-scripture-target="pageParent">
-          <div class="col-md-8 fnt-sz-24">
-            <div class="article-pad" data-scripture-target="page" >
-              <% @articles.each do | article | %>
-                <div class="fnt-sz-22">
-                  <%= raw article.content %>
-                </div>
-              <% end %>
+<div class="card mb-2">
+  <div class="card-body h-100 pb-2" id="article-list">
+    <div class="page-subject-header-purple mb-5">
+      <span class="fnt-sz-26"><%= @strotum.title %> </span>
+    </div>
+    <div class="row" data-scripture-target="pageParent">
+      <div class="col-md-8 fnt-sz-24">
+        <div class="article-pad" data-scripture-target="page" >
+          <% @articles.each do | article | %>
+            <div class="fnt-sz-22">
+              <%= raw article.content %>
             </div>
-          </div>
-          <div class="col-md-4 vm-align">
-          </div>
+          <% end %>
         </div>
+      </div>
+      <div class="col-md-4">
+        <div class="page-subject-header-lemon">
+          सम्बन्धित बिषय
+        </div>
+        <% if @strota.present? %>
+          <ul class="list-group list-group-flush mb-4">
+            <% @strota.each_with_index do | strotum, index | %>
+              <%= link_to public_strotum_path(strotum.title) do %>
+                <li class="list-group-item">
+                  <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
+                  <%= strotum.title %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% else %>
+          There is no more data available now.
+        <% end %>
       </div>
     </div>
   </div>
-  <div class="col-md-1"></div>
 </div>

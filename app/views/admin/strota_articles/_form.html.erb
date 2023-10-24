@@ -9,24 +9,15 @@
 
     <div class='mb-3'>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <label class='form-label'>
             स्त्रोत/आरती <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
           </label>
-          <% strota_list = strota.collect{|s| [s.name, s.id]} %>
+          <% strota_list = strota.collect{|s| [s.title, s.id]} %>
           <%= form.select :strotum_id, options_for_select(strota_list, form.object.strotum_id), 
             {prompt: 'स्त्रोत/आरती को चुनिये'}, class: 'form-control', 'data-action': 'change->admin-str-article#getIndex' %>
         </div>
-        <div class="col-md-4">
-          <label class='form-label'>
-            रचना प्रकार <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
-          </label>
-          <% article_type_list = article_types.collect{|at| [at.name, at.id]} %>
-          <%= form.select :article_type_id, options_for_select(article_type_list, form.object.article_type_id), 
-            {prompt: 'रचना प्रकार को चुनिये'}, class: 'form-control', 'data-admin-str-article': 'articleType' %>
-        </div>
-      
-         <div class="col-md-4">
+         <div class="col-md-6">
           <label class='form-label'>
             रचना अनुक्रम
           </label>

@@ -12,7 +12,7 @@
             <label class='form-label'>
               स्त्रोत/आरती
             </label>
-            <%= select_tag 'scripture', options_from_collection_for_select(@strota, "id", "name"), :prompt => "स्त्रोत/आरती चुने", class:"form-control", 'data-action': 'change->admin-str-article#getStrotumArticles' %>
+            <%= select_tag 'scripture', options_from_collection_for_select(@strota, "id", "title"), :prompt => "स्त्रोत/आरती चुने", class:"form-control", 'data-action': 'change->admin-str-article#getStrotumArticles' %>
           </div>
         </div>
         <div class="dropdown-divider"></div>

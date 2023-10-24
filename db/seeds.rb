@@ -66,9 +66,7 @@ StrotaType.create!(name: "चालीसा") if StrotaType.where(name: "चा
 StrotaType.create!(name: "शतक") if StrotaType.where(name: "शतक").blank?
 
 StrotaType.create!(name: "स्त्रोत") if StrotaType.where(name: "स्त्रोत").blank?
-StrotaType.create!(name: "सहस्त्रनाम") if StrotaType.where(name: "सहस्त्रनाम").blank?
-StrotaType.create!(name: "कवच") if StrotaType.where(name: "कवच").blank?
-StrotaType.create!(name: "अष्टक") if StrotaType.where(name: "अष्टक").blank?
+StrotaType.create!(name: "अन्य") if StrotaType.where(name: "अन्य").blank?
 
 context_list = ["अन्य", "वन विहार", "श्रृंगार", "शरद ऋतु", "वर्षा ऋतु", "नौका विहार", "होली", "व्याहुला", "झूलन उत्सव", 
   "जन्म उत्सव", "फूल बंगला उत्सव", "खिचड़ी उत्सव", "शीत ऋतू", "दान लीला", "रास लीला", "जनकलली जमनोत्सव", 

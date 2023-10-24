@@ -1,0 +1,34 @@
+
+<div class="card">
+  <div class="card-body h-100 pb-2" id="article-list">
+    <div class="row" data-scripture-target="pageParent">
+      <div class="page-subject-header-purple mb-5 fnt-sz-26">
+        <%= @story.title %>
+      </div>
+      <div class="col-md-8 fnt-sz-24">
+        <div class="article-pad" data-scripture-target="page" >
+          <div class="fnt-sz-22">
+            <%= raw @story.story %>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="page-subject-header-lemon">
+          सम्बन्धित बिषय
+        </div>
+        <% if @stories.present? %>
+          <ul class="list-group list-group-flush mb-4">
+            <% @stories.each_with_index do | story, index | %>
+              <li class="list-group-item">
+                <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
+                <%= story.title %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          There is no more data available now.
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
