@@ -5,9 +5,9 @@
         <% article_tags = @article.tags %>
         <div class="col-md-12 page-subject-header mb-3">
           <div>
-            <a href="javascript:void(0);" class="article-title text-primary">
+            <span href="javascript:void(0);" class="article-title">
               रचना : <%= @article.hindi_title %>
-            </a>
+            </span>
             <% if current_user.present? %>
               <%= link_to(export_pdf_article_path(@article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
                 <!-- <i class="fa-solid fa-file-export"></i> -->
@@ -21,14 +21,7 @@
             <% end %>
           </div>
           <div class="contributer-text">
-            (योगदानकर्ता :
-              <strong>
-                <%= link_to @article.user.username.capitalize, public_user_profile_path(@article.user.id) %>
-              </strong>,
-              सृजन तिथि :
-              <strong class="text-primary">
-                <%= link_to @article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
-              </strong>,
+            (
               रचना प्रकार -
               <strong class="text-primary fnt-sz-14">
                 <%= link_to @article.article_type.name, articles_by_type_public_article_types_path(@article.article_type.name) %>
@@ -36,6 +29,10 @@
               रचनाकार -
               <strong class="text-primary fnt-sz-14">
                 <%= link_to @article.author.name, public_author_path(@article.author.id) %>
+              </strong>,
+              सृजन तिथि :
+              <strong class="text-primary">
+                <%= link_to @article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
               </strong>
             )
           </div>

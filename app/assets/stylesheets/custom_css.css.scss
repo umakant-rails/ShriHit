@@ -79,7 +79,7 @@ a:hover{text-decoration: none;}
   color: #191970;
 }
 
-.page-subject-header {
+.page-subject-header1 {
   background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(255,255,255,1)),color-stop(100%,rgba(255,248,243,1)));
   background: -webkit-linear-gradient(90deg,rgba(255,255,255,1) 0%,#b3ffff 100%);
   background: -o-linear-gradient(90deg,rgba(255,255,255,1) 0%, #b3ffff 100%);
@@ -92,6 +92,23 @@ a:hover{text-decoration: none;}
   font-size: 22px;
   font-weight: bold;
   color: #3b7ddd;
+}
+
+.page-subject-header {
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#6666ff),color-stop(100%,#6666ff));
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#6666ff),color-stop(100%,#6666ff));
+  background: -webkit-linear-gradient(90deg,#6666ff 0%,#6666ff 100%);
+  background: -o-linear-gradient(90deg,#6666ff 0%, #6666ff 100%);
+  background: -ms-linear-gradient(90deg,#6666ff 0%,#6666ff 100%);
+  background: linear-gradient(0deg, white 0%, #6666ff 100%);
+  background: -moz-linear-gradient(90deg, white 0%, #6666ff 100%);
+
+  border-bottom: 2px solid #66f;
+  border-top: 1px solid #66f;
+  padding: 12px 8px;
+  font-size: 22px;
+  font-weight: bold;
+  color: black;
 }
 .page-subject-header-violet, .article-header-violet  {
   background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(255,255,255,1)),color-stop(100%,rgba(255,248,243,1)));
@@ -239,3 +256,5 @@ a:hover{text-decoration: none;}
 .fnt-sz-30{font-size: 30px;}
 .fnt-b {font-weight: bold;}
 .fnt-u{text-decoration: underline;}
+
+.txt-black{color:black;}
