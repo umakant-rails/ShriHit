@@ -1,50 +1,48 @@
 <%#= render partial: 'search_bar'%>
-<div class="row">
-  <div class="card">
-    <div class="card-body h-100" style="min-height: 545px;">
-      <div class="page-subject-header">
-        रचनाकार / कवि / भक्त सूची
-      </div>
-      <div class="dropdown-divider"></div>
-      <table class="table">
-        <thead class="table-primary">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">नाम    </th>
-            <th scope="col">सम्प्रदाय</th>
-            <th scope="col">रचनायें</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <%
-            page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
-            page_size = @authors.present? ? @authors.limit_value : 0
-          %>
-          <% if @authors.present? %>
-            <% @authors.each_with_index do | author, index | %>
-              <tr>
-                <th scope="row"><%= (page * page_size) + (index + 1) %></th>
-                <td>
-                  <a href="<%= public_author_path(author.id)%>">
-                    <%= author.name %>
-                  </a>
-                </td>
-                <td><%= author.sampradaya.present? ? author.sampradaya.name : '-' %></td>
-                <td>
-                  <%= link_to "रचनाये देखें", articles_by_author_public_authors_path(author.name) %>
-                </td>
-              </tr>
-            <% end %>
-          <% else %>
+
+<div class="card">
+  <div class="page-subject-header">
+    रचनाकार / कवि / भक्त सूची
+  </div>
+  <div class="card-body h-100" style="min-height: 545px;">
+    <table class="table">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">नाम    </th>
+          <th scope="col">सम्प्रदाय</th>
+          <th scope="col">रचनायें</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <%
+          page = params[:page].blank? ? 0 : (params[:page].to_i - 1)
+          page_size = @authors.present? ? @authors.limit_value : 0
+        %>
+        <% if @authors.present? %>
+          <% @authors.each_with_index do | author, index | %>
             <tr>
-              <td colspan="5">
-                There is no data available now.
+              <th scope="row"><%= (page * page_size) + (index + 1) %></th>
+              <td>
+                <a href="<%= public_author_path(author.id)%>">
+                  <%= author.name %>
+                </a>
+              </td>
+              <td><%= author.sampradaya.present? ? author.sampradaya.name : '-' %></td>
+              <td>
+                <%= link_to "रचनाये देखें", articles_by_author_public_authors_path(author.name) %>
               </td>
             </tr>
           <% end %>
-        </tbody>
-      </table>
-      <%= paginate @authors if @authors.present? %>
-    </div>
+        <% else %>
+          <tr>
+            <td colspan="5">
+              There is no data available now.
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @authors if @authors.present? %>
   </div>
 </div>

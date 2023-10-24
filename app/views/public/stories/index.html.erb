@@ -1,73 +1,71 @@
-<div class="row">
-  <div class="card mb-2">
-    <div class="row page-subject-header-blue   mb-3 text-center">
-      <span class="fnt-sz-26">आरती/स्त्रोत</span>
-    </div>
-    <div class="card-body h-100 pb-2" id="article-list">
-      <div class="row"> 
-        <div class="col-md-8">
-          <% if @stories.length > 0 %>
-            <% @stories.each_with_index do | story | %>
-              <div class="row p-2 strota-item-box mb-3">
-                <div class="col-md-4 ps-0">
-                  <img src="/assets/shrihit.png" class="article-img" alt="Avatar">
-                </div>
-                <div class="col-md-8">
-                  <div class="row mb-2">
-                    <div class="col-md-12 article-type-txt">
-                      <%= link_to public_story_path(story.title), class: "txt-chocolate" do %>
-                        <%= story.title %>
-                      <% end %>
-                    </div>
-                  </div>
-                  <div class="row pb-3">
-                    <%= link_to public_story_path(story.title) do %>
-                      <div class="article-text">
-                        <%= raw story.story %>
-                      </div>
+<div class="card mb-2">
+  <div class="page-subject-header-blue   mb-3 text-center">
+    <span class="fnt-sz-26">भक्ति/प्रेरक प्रसंग</span>
+  </div>
+  <div class="card-body h-100 pb-2" id="article-list">
+    <div class="row"> 
+      <div class="col-md-8">
+        <% if @stories.length > 0 %>
+          <% @stories.each_with_index do | story | %>
+            <div class="row p-2 strota-item-box mb-3">
+              <div class="col-md-4 ps-0">
+                <img src="/assets/shrihit.png" class="article-img" alt="Avatar">
+              </div>
+              <div class="col-md-8">
+                <div class="row mb-2">
+                  <div class="col-md-12 article-type-txt">
+                    <%= link_to public_story_path(story.title), class: "txt-chocolate" do %>
+                      <%= story.title %>
                     <% end %>
                   </div>
                 </div>
+                <div class="row pb-3">
+                  <%= link_to public_story_path(story.title) do %>
+                    <div class="article-text">
+                      <%= raw story.story %>
+                    </div>
+                  <% end %>
+                </div>
               </div>
-              <hr>  
+            </div>
+            <hr>  
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <div class="page-subject-header-lemon">
+          रसिक वाणी
+        </div>
+        <% if @scriptures.present? %>
+          <ul class="list-group list-group-flush mb-4">
+            <% @scriptures.each_with_index do | scr | %>
+              <li class="list-group-item">
+                <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
+                <%= scr.name %>
+              </li>
             <% end %>
-          <% end %>
+          </ul>
+        <% else %>
+          <ul class="list-group list-group-flush mb-4">
+            <li class="list-group-item">There is no data available.</li>
+          </ul>
+        <% end %>
+        <div class="page-subject-header-lemon">
+          संत चऱित्र
         </div>
-        <div class="col-md-4">
-          <div class="page-subject-header-lemon">
-            रसिक वाणी
-          </div>
-          <% if @scriptures.present? %>
-            <ul class="list-group list-group-flush mb-4">
-              <% @scriptures.each_with_index do | scr | %>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
-                  <%= scr.name %>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <ul class="list-group list-group-flush mb-4">
-              <li class="list-group-item">There is no data available.</li>
-            </ul>
-          <% end %>
-          <div class="page-subject-header-lemon">
-            संत चऱित्र
-          </div>
-          <% if @sants.present? %>
-            <ul class="list-group list-group-flush">
-              <% @sants.each_with_index do | sant | %>
-                <li class="list-group-item">
-                  <i class="fa-solid fa-circle-user me-2 user-icon text-primary" ></i> <%= sant.name %>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">There is no data available.</li>
-            </ul>
-          <% end %>
-        </div>
+        <% if @sants.present? %>
+          <ul class="list-group list-group-flush">
+            <% @sants.each_with_index do | sant | %>
+              <li class="list-group-item">
+                <i class="fa-solid fa-circle-user me-2 user-icon text-primary" ></i> <%= sant.name %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">There is no data available.</li>
+          </ul>
+        <% end %>
       </div>
     </div>
   </div>

@@ -3,13 +3,14 @@
   <div class="col-md-8">
     <center>
       <div class="card mb-2 page">
+        <div class="page-subject-header-violet mb-5">
+          <span class="fLeft cpointer" data-action="click->scripture#displayPageIndexing">
+            <i class="fa-solid fa-list"></i>
+          </span>
+          <span class="fnt-sz-26"><%= @scripture.name %> </span>
+        </div>
         <div class="card-body h-100 pb-2" id="article-list">
-          <div class="page-subject-header-violet mb-5">
-            <span class="fLeft cpointer" data-action="click->scripture#displayPageIndexing">
-              <i class="fa-solid fa-list"></i>
-            </span>
-            <span class="fnt-sz-26"><%= @scripture.name %> </span>
-          </div>
+          
           <div class="row">
             <div class="page-indexing hide fnt-sz-25" data-scripture-target="indexingPage" >
               

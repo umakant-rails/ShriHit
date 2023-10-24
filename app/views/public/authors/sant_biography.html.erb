@@ -28,7 +28,7 @@
           <% if articles.length > 0 %>
             <% articles.limit(10).each_with_index do |article, index | %>
               <li class="list-group-item">
-                <%= link_to article_by_title_public_articles_path(article.hindi_title) do %>
+                <%= link_to public_article_path(article.hindi_title) do %>
                   <%= index + 1 %>. <%= article.hindi_title %>
                 <% end %>
               </li>

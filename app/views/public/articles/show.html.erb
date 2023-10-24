@@ -1,125 +1,122 @@
-<div class="row" data-controller="comment comment-reporting">
-  <div class="card mb-2">
-    <div class="card-body h-100 pb-2" id="article-list">
-      <div class="row-fluid">
-        <% article_tags = @article.tags %>
-        <div class="col-md-12 page-subject-header mb-3">
-          <div>
-            <span href="javascript:void(0);" class="article-title">
-              रचना : <%= @article.hindi_title %>
-            </span>
-            <% if current_user.present? %>
-              <%= link_to(export_pdf_article_path(@article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
-                <!-- <i class="fa-solid fa-file-export"></i> -->
-                 <i class="fas fa-file-download"></i>
-              <% end %>
-            <% else %>
-              <%= link_to(new_user_session_path, class: "export-pdf fRight", onclick: "alert('Pdf डाउनलोड करने के लिए पहले लॉगिन करे')" ) do %>
-                  <!-- <i class="fa-solid fa-file-export"></i> -->
-                 <i class="fas fa-file-download"></i>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="contributer-text">
-            (
-              रचना प्रकार -
-              <strong class="text-primary fnt-sz-14">
-                <%= link_to @article.article_type.name, articles_by_type_public_article_types_path(@article.article_type.name) %>
-              </strong>,
-              रचनाकार -
-              <strong class="text-primary fnt-sz-14">
-                <%= link_to @article.author.name, public_author_path(@article.author.id) %>
-              </strong>,
-              सृजन तिथि :
-              <strong class="text-primary">
-                <%= link_to @article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
-              </strong>
-            )
-          </div>
-        </div>
-      </div>
 
-      <div class="col-md-8">
-        <div class="row">
-          <div class="m-sm-1 article-body" data-controller= 'article'>
-            <% if @article.image.present? %>
-              <div class="mb-3">
-                <img src="<%= @article.image.image %>" alt="no image" style="width: 100%;"/>
-              </div>
-            <% end %>
-            <div class="article-content mb-5">
-              <%= raw @article.content %>
-            </div>
-            <% if article_tags.present?%>
-              <div class="article-tag-txt text-primary mt-3">
-                <strong>सम्बंधित बिषय :-</strong>&nbsp;&nbsp;
-                <% article_tags.each do | tag | %>
-                  <a href="<%= articles_by_tag_public_tags_path(tag.name) %>" class='tags-txt'>
-                    <i class="fa-solid fa-tag"></i> <%= tag.name %>
-                  </a>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <br/>
-        <div class="m-sm-2">
-          <div class="row ms-0">
-            <div class="col-md-9 ps-0 mb-2">
-              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" data-comment-target="csrfToken">
-              <textarea class="form-control article-comment-input" rows="2" id="article_new_comment" data-article_id="<%= @article.id %>" data-comment-target="newComment" placeholder="Type here..."></textarea>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-9 ps-0">
-              <button class="btn btn-sm btn-outline-secondary fRight" <%= current_user.present? ? '' : 'disabled' %> data-action="click->comment#cancelNewComment">
-                Cancel
-              </button>
-              <button class="btn btn-sm btn-primary fRight me-2"
-                <%= current_user.present? ? '' : 'disabled' %>
-                data-parent_id="<%= @article.id %>"
-                data-depth="0"
-                data-parent_name="<%= @article.class.name %>"
-                data-action="click->comment#submitNewComment"
-              >
-                Comment
-              </button>
-            </div>
-          </div>
-        </div>
-       <!--  <br/> -->
-        <div class="m-sm-2">
-          <div class="row mb-2 ms-0">
-            <div class="ps-0" style="color:#6c757d;">
-              Comments
-            </div>
-          </div>
-        </div>
-        <div class="m-sm-2">
-          <div class="row mb-2 ms-0" id="comment-section">
-            <% if @comments.present? %>
-              <% @comments.each do | comment | %>
-              <div class="parent-comment-body">
-                <%= render partial: "comments/comment", locals: {comment: comment,
-                  article: @article, parent: @article, parent_name: @article.class.name,
-                  level: 1} %>
-              </div>
-              <% end %>
-            <% else %>
-              <div class="d-flex">
-                <div class="no-comment-msg">
-                  There is not comment available now.
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4"></div>
+<div class="card mb-2" data-controller="comment comment-reporting">
+  <% article_tags = @article.tags %>
+  <div class="page-subject-header mb-3">
+    <div>
+      <span href="javascript:void(0);" class="article-title">
+        रचना : <%= @article.hindi_title %>
+      </span>
+      <% if current_user.present? %>
+        <%= link_to(export_pdf_article_path(@article.id, format: :pdf), class: "export-pdf fRight", target: "_blank") do %>
+          <!-- <i class="fa-solid fa-file-export"></i> -->
+           <i class="fas fa-file-download"></i>
+        <% end %>
+      <% else %>
+        <%= link_to(new_user_session_path, class: "export-pdf fRight", onclick: "alert('Pdf डाउनलोड करने के लिए पहले लॉगिन करे')" ) do %>
+            <!-- <i class="fa-solid fa-file-export"></i> -->
+           <i class="fas fa-file-download"></i>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="contributer-text">
+      (
+        रचना प्रकार -
+        <strong class="text-primary fnt-sz-14">
+          <%= link_to @article.article_type.name, articles_by_type_public_article_types_path(@article.article_type.name) %>
+        </strong>,
+        रचनाकार -
+        <strong class="text-primary fnt-sz-14">
+          <%= link_to @article.author.name, public_author_path(@article.author.id) %>
+        </strong>,
+        सृजन तिथि :
+        <strong class="text-primary">
+          <%= link_to @article.created_at.strftime("%B %d, %Y"), "javascript:void(0);" %>
+        </strong>
+      )
     </div>
   </div>
-  <%= render partial: "comments/comment_report_modal" %>
+  <div class="card-body h-100 pb-2" id="article-list">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="m-sm-1 article-body" data-controller= 'article'>
+          <% if @article.image.present? %>
+            <div class="mb-3">
+              <img src="<%= @article.image.image %>" alt="no image" style="width: 100%;"/>
+            </div>
+          <% end %>
+          <div class="article-content mb-5">
+            <%= raw @article.content %>
+          </div>
+          <% if article_tags.present?%>
+            <div class="article-tag-txt text-primary mt-3">
+              <strong>सम्बंधित बिषय :-</strong>&nbsp;&nbsp;
+              <% article_tags.each do | tag | %>
+                <a href="<%= articles_by_tag_public_tags_path(tag.name) %>" class='tags-txt'>
+                  <i class="fa-solid fa-tag"></i> <%= tag.name %>
+                </a>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <br/>
+      <div class="m-sm-2">
+        <div class="row ms-0">
+          <div class="col-md-9 ps-0 mb-2">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" data-comment-target="csrfToken">
+            <textarea class="form-control article-comment-input" rows="2" id="article_new_comment" data-article_id="<%= @article.id %>" data-comment-target="newComment" placeholder="Type here..."></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-9 ps-0">
+            <button class="btn btn-sm btn-outline-secondary fRight" <%= current_user.present? ? '' : 'disabled' %> data-action="click->comment#cancelNewComment">
+              Cancel
+            </button>
+            <button class="btn btn-sm btn-primary fRight me-2"
+              <%= current_user.present? ? '' : 'disabled' %>
+              data-parent_id="<%= @article.id %>"
+              data-depth="0"
+              data-parent_name="<%= @article.class.name %>"
+              data-action="click->comment#submitNewComment"
+            >
+              Comment
+            </button>
+          </div>
+        </div>
+      </div>
+     <!--  <br/> -->
+      <div class="m-sm-2">
+        <div class="row mb-2 ms-0">
+          <div class="ps-0" style="color:#6c757d;">
+            Comments
+          </div>
+        </div>
+      </div>
+      <div class="m-sm-2">
+        <div class="row mb-2 ms-0" id="comment-section">
+          <% if @comments.present? %>
+            <% @comments.each do | comment | %>
+            <div class="parent-comment-body">
+              <%= render partial: "comments/comment", locals: {comment: comment,
+                article: @article, parent: @article, parent_name: @article.class.name,
+                level: 1} %>
+            </div>
+            <% end %>
+          <% else %>
+            <div class="d-flex">
+              <div class="no-comment-msg">
+                There is not comment available now.
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
 </div>
+<%= render partial: "comments/comment_report_modal" %>
+
 <% content_for :head do %>
   <%= javascript_import_module_tag "custom/comment-custom" %>
 <% end %>

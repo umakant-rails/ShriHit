@@ -1,52 +1,47 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-body h-400">
-        <div class="row page-subject-header">
-          <div class="col-md-12 text-start article-title text-primary">पंचांग सूची</div>
-        </div>
-        <div class="dropdown-divider"></div>
-        <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>"
-          data-admin-context-target="csrfToken">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card1">
-              <div class="card-body1">
-                <table class="table">
-                  <thead class="table bg-primary text-white ps-0 pe-0">
+<div class="card">
+  <div class="page-subject-header">
+    पंचांग सूची
+  </div>
+  <div class="card-body h-400">
+    <input type=hidden name="authenticity_token" value="<%= form_authenticity_token %>"
+      data-admin-context-target="csrfToken">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card1">
+          <div class="card-body1">
+            <table class="table">
+              <thead class="table bg-primary text-white ps-0 pe-0">
+                <tr>
+                  <th>#</th>
+                  <th>शीर्षक</th>
+                  <th>पंचांग का प्रकार</th>
+                  <th>विक्रम सम्वत</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if @panchangs.present? %>
+                  <% @panchangs.each_with_index do |panchang, index| %>
                     <tr>
-                      <th>#</th>
-                      <th>शीर्षक</th>
-                      <th>पंचांग का प्रकार</th>
-                      <th>विक्रम सम्वत</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <% if @panchangs.present? %>
-                      <% @panchangs.each_with_index do |panchang, index| %>
-                        <tr>
-                          <td><%=index+1%></td>
-                          <td class="text-primary1">
-                            <%= link_to panchang.title, public_panchang_path(panchang) %>
-                          </td>
-                          <td class="text-primary1">
-                            <%= panchang.panchang_type %>
-                          </td>
-                          <td class="text-primary1">
-                            <%= panchang.vikram_samvat %>
-                          </td>
-                        </tr>
-                        <% index = index + 1%>
-                      <% end %>
-                    <% else %>
-                      <td colspan="4">
-                        अभी रिकॉर्ड उपलब्ध नहीं है.
+                      <td><%=index+1%></td>
+                      <td class="text-primary1">
+                        <%= link_to panchang.title, public_panchang_path(panchang) %>
                       </td>
-                    <% end %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                      <td class="text-primary1">
+                        <%= panchang.panchang_type %>
+                      </td>
+                      <td class="text-primary1">
+                        <%= panchang.vikram_samvat %>
+                      </td>
+                    </tr>
+                    <% index = index + 1%>
+                  <% end %>
+                <% else %>
+                  <td colspan="4">
+                    अभी रिकॉर्ड उपलब्ध नहीं है.
+                  </td>
+                <% end %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

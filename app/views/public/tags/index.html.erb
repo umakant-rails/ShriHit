@@ -1,19 +1,18 @@
-<div class="row">
-  <div class="card">
-    <div class="card-body h-100" style="min-height: 545px;">
-      <div class="page-subject-header">
-        टैग्स सूची
-      </div>
-      <div class="dropdown-divider"></div>
-      <div class="row-fluid">
-        <% if @tags.present? %>
-          <% @tags.each do | tag | %>
-            <%= link_to articles_by_tag_public_tags_path(tag.name) do %>
-              <div class="context-lbl m-1"><%= tag.name %></div>
-            <% end %>
+<div class="card">
+  <div class="page-subject-header">
+    टैग्स सूची
+  </div>
+  <div class="card-body h-100" style="min-height: 545px;">
+    
+    <div class="dropdown-divider"></div>
+    <div class="row-fluid">
+      <% if @tags.present? %>
+        <% @tags.each do | tag | %>
+          <%= link_to articles_by_tag_public_tags_path(tag.name) do %>
+            <div class="context-lbl m-1"><%= tag.name %></div>
           <% end %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
