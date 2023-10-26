@@ -8,9 +8,6 @@
         <div class="dropdown-divider"></div>
         <div class="m-sm-4">
           <div class="mb-3">
-            <div class="card-title form-control sggstion-hdr mb-3">
-              <%= @strota_article.article_type == "अन्य" ? "रचना" : @strota_article.article_type.name %>
-            </div>
             <div class="ps-3">
               <%=raw @strota_article.content %>
             </div>
@@ -20,7 +17,7 @@
               व्याख्या
             </div>
             <div class="ps-3">
-              <%=raw @strota_article.interpretation.present? ? @strota_article.interpretation : 'NA' %>
+              <%=raw @strota_article.interpretation.present? ? @strota_article.interpretation : 'उपलब्ध नहीं' %>
             </div>
           </div>
         </div>

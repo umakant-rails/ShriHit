@@ -8,7 +8,7 @@ class Public::StrotaController < ApplicationController
 
   def show
     @strotum = Strotum.where(title: params[:id]).first 
-    @articles = @strotum.strota_articles rescue []
+    @articles = @strotum.strota_articles.order("index ASC") rescue []
 
     @strota = Strotum.where("strota_type_id = ? and id not in (?)",
       @strotum.strota_type_id, @strotum.id) rescue []

@@ -41,7 +41,7 @@ sampradaya_list.each do | sampradaya |
   Sampradaya.create!(name: sampradaya) if Sampradaya.where(name: sampradaya).blank?
 end
 
-author_list = ['हित हरिवंश चंद्र जू', 'स्वामी श्री हरिदास', 'हरिराम व्यास जी', 'सूरदास', 'कुम्भनदास', 'चतुर्भुजदास', 'छीतस्वामी',
+author_list = ['हित हरिवंश', 'स्वामी श्री हरिदास', 'हरिराम व्यास', 'सूरदास', 'कुम्भनदास', 'चतुर्भुजदास', 'छीतस्वामी',
   'गोविंदस्वामी', 'कृष्णदास', 'नंददास', 'परमानन्ददास', 'अज्ञात']
 author_list.each do | author |
   Author.create!(name: author, is_approved: true, is_saint: true, user_id: 1) if Author.where(name: author).blank?

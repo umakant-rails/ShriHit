@@ -1,14 +1,23 @@
 <div class="card mb-2">
-  <div class="page-subject-header-purple mb-5">
+  <div class="page-subject-header-purple mb-3">
     <span class="fnt-sz-26"><%= @strotum.title %> </span>
   </div>
   <div class="card-body h-100 pb-2" id="article-list">
     <div class="row" data-scripture-target="pageParent">
-      <div class="col-md-8 fnt-sz-24">
+      <div class="col-md-8 fnt-sz-22">
         <div class="article-pad" data-scripture-target="page" >
-          <% @articles.each do | article | %>
-            <div class="fnt-sz-22">
-              <%= raw article.content %>
+          <% @articles.each_with_index do | article, index | %>
+            <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-success" : "text-primary" %>">
+              <% indexing = "॥#{(index+1).to_s}॥" %>
+              <% if article.content.index(indexing).blank? %>
+                <% contnt = article.content.gsub("॥", indexing) %>
+                <%= raw article.content %>
+              <% else %>
+                <%= raw article.content %>
+              <% end %>
+            </div>
+            <div class="mb-3 fnt-sz-18">
+              <%= raw article.interpretation %>
             </div>
           <% end %>
         </div>
