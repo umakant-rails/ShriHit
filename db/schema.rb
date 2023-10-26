@@ -63,15 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_072353) do
     t.string "name_eng"
   end
 
-  create_table "bhakti_prasangs", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.integer "parent_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "chapters", force: :cascade do |t|
     t.integer "scripture_id"
     t.string "name"
@@ -102,15 +93,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_072353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
-  end
-
-  create_table "compiled_scriptures", force: :cascade do |t|
-    t.integer "scripture_id"
-    t.integer "chapter_id"
-    t.integer "article_id"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "contexts", force: :cascade do |t|
@@ -208,28 +190,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_072353) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "saint_biographies", force: :cascade do |t|
-    t.string "title"
-    t.text "event"
-    t.integer "user_id"
-    t.integer "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "sampradayas", force: :cascade do |t|
     t.string "name"
     t.string "originator"
     t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sant_biographies", force: :cascade do |t|
-    t.string "title"
-    t.text "event"
-    t.integer "user_id"
-    t.integer "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -284,19 +248,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_072353) do
   end
 
   create_table "strota", force: :cascade do |t|
-    t.string "name"
+    t.string "title"
     t.text "source"
     t.integer "strota_type_id"
+    t.string "keyword"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "strota_articles", force: :cascade do |t|
     t.integer "strotum_id"
-    t.integer "article_type_id"
     t.integer "index"
     t.text "content"
     t.text "interpretation"
+    t.integer "article_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

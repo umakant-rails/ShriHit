@@ -5,6 +5,7 @@ class CreateStrotaArticles < ActiveRecord::Migration[7.0]
       t.integer :index
       t.text :content
       t.text :interpretation
+      t.integer :article_type_id
 
       t.timestamps
     end

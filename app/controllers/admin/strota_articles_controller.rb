@@ -14,12 +14,19 @@ class Admin::StrotaArticlesController < ApplicationController
 
   # GET /strota_articles/new
   def new
-    @article = StrotaArticle.find(params[:article_id]) rescue nil
     @strota = Strotum.all
+    article = nil
 
-    if @article.present?
+    if @strotum && @strota_article.blank?
+      article = @strotum.strota_articles.last rescue nil
+    elsif @strota_article.present?
+      article = @strota_article
+    end
+
+    if article.present?
       @strota_article = StrotaArticle.new(
         strotum_id: @article.strotum_id, 
+        article_type_id: article.article_type_id,
         index: @article.index+1)
     else
       @strota_article = StrotaArticle.new

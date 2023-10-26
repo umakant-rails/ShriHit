@@ -11,7 +11,7 @@
               <% indexing = "॥#{(index+1).to_s}॥" %>
               <% if article.content.index(indexing).blank? %>
                 <% contnt = article.content.gsub("॥", indexing) %>
-                <%= raw article.content %>
+                <%= raw contnt %>
               <% else %>
                 <%= raw article.content %>
               <% end %>
