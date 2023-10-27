@@ -8,9 +8,13 @@
         <div class="article-pad" data-scripture-target="page" >
           <% @articles.each_with_index do | article, index | %>
             <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-success" : "text-primary" %>">
-              <% indexing = "॥#{(index+1).to_s}॥" %>
-              <% if article.content.index(indexing).blank? %>
-                <% contnt = article.content.gsub("॥", indexing) %>
+              <% indexing1 = "॥#{(index+1).to_s}॥" %>
+              <% indexing2 = "।।#{(index+1).to_s}।।"%>
+              <% if article.content.index(indexing1).blank? and article.content.index("॥").present? %>
+                <% contnt = article.content.gsub("॥", indexing1) %>
+                <%= raw contnt %>
+              <% elsif article.content.index(indexing2).blank? and article.content.index("।।").present?%>
+                <% contnt = article.content.gsub("।।", indexing2) %>
                 <%= raw contnt %>
               <% else %>
                 <%= raw article.content %>
