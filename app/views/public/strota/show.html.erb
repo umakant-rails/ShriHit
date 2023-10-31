@@ -5,7 +5,7 @@
   <div class="card-body h-100 pb-2" id="article-list">
     <div class="row" data-scripture-target="pageParent">
       <div class="col-md-8 fnt-sz-22">
-        <div class="article-pad" data-scripture-target="page" >
+        <div class="article-pad text-center" data-scripture-target="page" >
           <% article_type = nil %>
           <% @articles.each_with_index do | article, index | %>
             <% if @strotum.strota_type.name != "आरती" %>
@@ -16,15 +16,10 @@
                 <% article_type = article.article_type.name %>
               <% end %>
             <% end %>
-            <% if @strotum.strota_type.name == "आरती" %>
-              <div class="mb-1 fnt-b <%#= (index % 2) == 0 ? "text-success" : "text-primary" %>">
-                <%= raw article.content %>
-              </div>
-            <% else %>
-              <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-primary" : "text-info" %>">
-                <%= raw get_strota_content(article.content, index) %>
-              </div>  
-            <% end %>
+
+            <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-primary" : "text-info" %>">
+              <%= raw get_strota_content(article.content, index) %>
+            </div>  
             <div class="mb-3 fnt-sz-18">
               <%= raw article.interpretation %>
             </div>
