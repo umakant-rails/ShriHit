@@ -6,23 +6,39 @@
     <div class="row" data-scripture-target="pageParent">
       <div class="col-md-8 fnt-sz-22">
         <div class="article-pad" data-scripture-target="page" >
+          <% article_type = nil %>
           <% @articles.each_with_index do | article, index | %>
-            <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-success" : "text-primary" %>">
-              <% indexing1 = "॥#{(index+1).to_s}॥" %>
-              <% indexing2 = "।।#{(index+1).to_s}।।"%>
-              <% if article.content.index(indexing1).blank? and article.content.index("॥").present? %>
-                <% contnt = article.content.gsub("॥", indexing1) %>
-                <%= raw contnt %>
-              <% elsif article.content.index(indexing2).blank? and article.content.index("।।").present?%>
-                <% contnt = article.content.gsub("।।", indexing2) %>
-                <%= raw contnt %>
-              <% else %>
+            <% if article_type.blank? || article_type != article.article_type.name %>
+              <div class="page-subject-header-violet text-center fnt-b mb-3 "> 
+                <%= article.article_type.name %>
+              </div>
+              <% article_type = article.article_type.name %>
+            <% end %>
+            <% if @strotum.strota_type.name == "आरती" %>
+              <div class="mb-1 fnt-b <%#= (index % 2) == 0 ? "text-success" : "text-primary" %>">
                 <%= raw article.content %>
-              <% end %>
-            </div>
-            <div class="mb-3 fnt-sz-18">
-              <%= raw article.interpretation %>
-            </div>
+              </div>
+              <div class="mb-3 fnt-sz-18">
+                <%= raw article.interpretation %>
+              </div> 
+            <% else %>
+              <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-success" : "text-primary" %>">
+                <% indexing1 = "॥#{(index+1).to_s}॥" %>
+                <% indexing2 = "।।#{(index+1).to_s}।।"%>
+                <% if article.content.index(indexing1).blank? and article.content.index("॥").present? %>
+                  <% contnt = article.content.gsub("॥", indexing1) %>
+                  <%= raw contnt %>
+                <% elsif article.content.index(indexing2).blank? and article.content.index("।।").present?%>
+                  <% contnt = article.content.gsub("।।", indexing2) %>
+                  <%= raw contnt %>
+                <% else %>
+                  <%= raw article.content %>
+                <% end %>
+              </div>
+              <div class="mb-3 fnt-sz-18">
+                <%= raw article.interpretation %>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

@@ -161,6 +161,7 @@ Rails.application.routes.draw do
 
     resources :strota
     resources :strota_articles do 
+      get '/add_aarti' => 'strota_articles#new', as: :add_aarti, on: :member
       get '/get_strota_articles' => 'strota_articles#get_strota_articles', as: :get_strota_articles, on: :member
       get '/get_index' => "strota_articles#get_index", as: :get_index, on: :collection
       get '/edit_article_index' => "strota_articles#edit_article_index", as: :edit_article_index, on: :collection

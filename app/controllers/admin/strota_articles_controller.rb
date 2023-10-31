@@ -1,7 +1,7 @@
 class Admin::StrotaArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_admin
-  before_action :set_strota_article, only: %i[ show edit update destroy ]
+  before_action :set_strota_article, only: %i[show edit update destroy ]
 
   # GET /strota_articles or /strota_articles.json
   def index
@@ -16,18 +16,19 @@ class Admin::StrotaArticlesController < ApplicationController
   def new
     @strota = Strotum.all
     article = nil
+    @strotum = Strotum.find(params[:id]) if params[:id].present?
 
     if @strotum && @strota_article.blank?
-      article = @strotum.strota_articles.last rescue nil
+      article = @strotum.strota_articles.order("index ASC").last rescue nil
     elsif @strota_article.present?
       article = @strota_article
     end
 
     if article.present?
       @strota_article = StrotaArticle.new(
-        strotum_id: @article.strotum_id, 
+        strotum_id: article.strotum_id, 
         article_type_id: article.article_type_id,
-        index: @article.index+1)
+        index: article.index+1)
     else
       @strota_article = StrotaArticle.new
     end
@@ -41,6 +42,7 @@ class Admin::StrotaArticlesController < ApplicationController
 
   # POST /strota_articles or /strota_articles.json
   def create
+    params[:strota_article][:article_type_id] = 6 if params[:strota_article][:article_type_id].blank?
     @strota_article = StrotaArticle.new(strota_article_params)
 
     respond_to do |format|

@@ -5,6 +5,7 @@
       <th>स्त्रोत/आरती का शीर्षक</th>
       <th>मूल ग्रन्थ (स्रोत)</th>
       <th>स्त्रोत/आरती का प्रकार</th>
+      <th>Add Articles</th>
       <th>गतिविधि</th>
     </tr>
   </thead>
@@ -30,6 +31,9 @@
           </td>
           <td>
             <%= strotum.strota_type.name %>
+          </td>
+          <td>
+            <%= link_to "Add Articles", add_aarti_admin_strota_article_path(strotum.id) %>
           </td>
           <td>
             <%= link_to edit_admin_strotum_path(strotum) do %>
