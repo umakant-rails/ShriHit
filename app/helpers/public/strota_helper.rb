@@ -1,8 +1,8 @@
 module Public::StrotaHelper
   
   def get_strota_content(content, indx=nil)
-    indexing1 = "॥#{(indx+1).to_s}॥"
-    indexing2 = "।।#{(indx+1).to_s}।।"
+    indexing1 = "॥#{(indx+1).to_s}॥" if indx.present?
+    indexing2 = "।।#{(indx+1).to_s}।।" if indx.present?
 
     if indx.present? && content.index(indexing1).blank? and content.index("॥").present?
       content.gsub("॥", indexing1)

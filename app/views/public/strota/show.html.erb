@@ -18,7 +18,11 @@
             <% end %>
 
             <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-primary" : "text-info" %>">
-              <%= raw get_strota_content(article.content, index) %>
+              <% if @strotum.strota_type.name == "आरती" %>
+                <%= raw get_strota_content(article.content, nil) %>
+              <% else %>
+                <%= raw get_strota_content(article.content, index) %>
+              <% end %>
             </div>  
             <div class="mb-3 fnt-sz-18">
               <%= raw article.interpretation %>
