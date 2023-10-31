@@ -5,7 +5,14 @@ class Admin::StrotaArticlesController < ApplicationController
 
   # GET /strota_articles or /strota_articles.json
   def index
-    @strota_articles = StrotaArticle.order("created_at DESC").page(params[:page])
+    @strota = Strotum.all
+    
+    if params[:id].present?
+      @strotum = Strotum.find(params[:id])
+      @strota_articles = @strotum.strota_articles.order("index ASC").page(params[:page])
+    else
+      @strota_articles = StrotaArticle.order("created_at DESC").page(params[:page])
+    end
   end
 
   # GET /strota_articles/1 or /strota_articles/1.json
@@ -81,7 +88,7 @@ class Admin::StrotaArticlesController < ApplicationController
 
   def get_strota_articles
     @strotum = Strotum.find(params[:id])
-    @articles = @strotum.strota_articles.order("index ASC").page(params[:page])
+    @articles = @strotum.strota_articles.order("index ASC").page(params[:page]) rescue []
   end
 
   def get_index

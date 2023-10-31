@@ -19,10 +19,16 @@ export default class extends ApplicationController {
   getStrotumArticles(){
     this.params = {};
     let strotaId = event.target.value;
+    let pageName = event.target.data.page;
     let url = '/admin/strota_articles/'+ strotaId+'/get_strota_articles';
 
     if(strotaId == ''){ return; }
     this.get_data('get', url, this.params)
+  }
+
+  selectStrotum(){
+    let strotumId = event.target.value;
+    window.location.href = '/admin/strota_articles?id='+strotumId;
   }
 
   updateArticleIndex(){

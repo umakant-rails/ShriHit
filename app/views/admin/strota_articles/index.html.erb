@@ -1,12 +1,22 @@
 <div class="row">
   <div class="col-md-12">
-    <div class="card">
+    <div class="card" data-controller="admin-str-article">
       <div class="card-body">
-        <div class="col-md-12 page-subject-header">
+        <div class="col-md-12 page-subject-header" data-controller="admin-str-article">
           स्त्रोत/आरती रचना सूची
         </div>
         <div class="dropdown-divider"></div>
-        <div class="m-sm-4" data-controller="admin-chapter">
+        <div class="m-sm-4 row">
+          <div class="col-md-3">
+            <label class='form-label'>
+              स्त्रोत/आरती
+            </label>
+          </div>
+          <div class="col-md-9">
+            <%= select_tag 'scripture', options_from_collection_for_select(@strota, "id", "title", params[:id]), prompt: "स्त्रोत/आरती चुने", class:"form-control", 'data-action': 'change->admin-str-article#selectStrotum' %>
+          </div>
+        </div>
+        <div class="m-sm-4" data-controller="admin-chapter" id="article-list">
           <%= render "strota_article", strota_articles: @strota_articles %>
         </div>
         <div class="dropdown-divider"></div>
@@ -16,5 +26,5 @@
   </div>
 </div>
 <% content_for :head do %>
-  <%= javascript_import_module_tag "custom/strota-article-custom" %>
+  <%#= javascript_import_module_tag "custom/strota-article-custom" %>
 <% end %>

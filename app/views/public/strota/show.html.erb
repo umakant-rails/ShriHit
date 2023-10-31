@@ -10,7 +10,7 @@
           <% @articles.each_with_index do | article, index | %>
             <% if @strotum.strota_type.name != "आरती" %>
               <% if article_type.blank? || article_type != article.article_type.name  %>
-                <div class="page-subject-header-violet text-center fnt-b mb-3 "> 
+                <div class="page-subject-header-green text-center fnt-b mb-3 "> 
                   <%= article.article_type.name %>
                 </div>
                 <% article_type = article.article_type.name %>
@@ -21,7 +21,7 @@
                 <%= raw article.content %>
               </div>
             <% else %>
-              <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-success" : "text-primary" %>">
+              <div class="mb-1 fnt-b <%= (index % 2) == 0 ? "text-primary" : "text-info" %>">
                 <%= raw get_strota_content(article.content, index) %>
               </div>  
             <% end %>
