@@ -18,7 +18,7 @@ state_list.each do | state |
   State.create!(name: state) if State.where(name: state).blank?
 end 
 
-article_type_list = ['पद', 'कवित्त', 'सवैया', 'दोहा', 'भजन', 'अन्य' ]
+article_type_list = ['पद', 'कवित्त', 'सवैया', 'दोहा', 'भजन', 'अन्य','सोरठा' ]
 article_type_list.each do | article_type | 
   ArticleType.create!(name: article_type, user_id: 1) if ArticleType.where(name: article_type).blank?
 end

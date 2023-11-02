@@ -162,17 +162,18 @@ class ArticlesController < ApplicationController
     @scriptures = Scripture.all
     @c_articles = ContributedArticle.where("is_read = ? and is_hold = ?", false, false)
     @c_article = ContributedArticle.where("is_read = ? and is_hold = ?", false, false).first
-    context_id = @c_article.context_id.blank? ? context_id : @c_article.context_id
-    author_id = @c_article.author_id.blank? ? author_id : @c_article.author_id
+  
 
     if @c_article.present?
+      context_id = @c_article.context_id.blank? ? context_id : @c_article.context_id
+      author_id = @c_article.author_id.blank? ? author_id : @c_article.author_id
       @article = Article.new({
         article_type_id: @c_article.article_type_id, scripture_id: @c_article.scripture_id,
         index: @c_article.article_index, raag_id: @c_article.raag_id, hindi_title: @c_article.hindi_title,
         author_id: author_id, context_id:context_id, content: @c_article.content
       })
     else
-      @article = Article.new({author_id: author.id, context_id: context.id, user_id: current_user.id})
+      @article = Article.new({author_id: author_id, context_id: context_id, user_id: current_user.id})
     end
   end
 

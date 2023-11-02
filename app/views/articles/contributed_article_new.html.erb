@@ -33,7 +33,7 @@
               <% end %>
               <button type="button" class="btn-close" onclick="$('.alert').hide()" aria-label="Close" style="font-size: 12px; "></button>
             </div>
-            <%= hidden_field_tag "contributed_article_id", @c_article.id %>
+            <%= hidden_field_tag "contributed_article_id", @c_article.id rescue nil %>
             <div class="row">
               <div class="col-md-6">
                 <div class='mb-3'>
