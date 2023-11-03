@@ -62,7 +62,7 @@ class Admin::StrotaArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @strota_article.update(strota_article_params)
-        format.html { redirect_to admin_strota_article_url(@strota_article), notice: "Strota article was successfully updated." }
+        format.html { redirect_to admin_strotum_strota_article_url(params[:strotum_id], @strota_article.id), notice: "Strota article was successfully updated." }
         format.json { render :show, status: :ok, location: @strota_article }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -76,7 +76,7 @@ class Admin::StrotaArticlesController < ApplicationController
     @strota_article.destroy
 
     respond_to do |format|
-      format.html { redirect_to strota_articles_url, notice: "Strota article was successfully destroyed." }
+      format.html { redirect_to admin_strotum_strota_articles_url(params[:strotum_id]), notice: "Strota article was successfully destroyed." }
       format.json { head :no_content }
     end
   end
