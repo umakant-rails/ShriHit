@@ -23,7 +23,7 @@
           <td>
             <strong>
               <% content_text = Nokogiri::HTML(article.content).text %>
-              <%= link_to admin_strota_article_path(article) do %>
+              <%= link_to admin_strotum_strota_article_path(article.strotum_id, article.id) do %>
                 <%= truncate(content_text, length: 50) %>
               <% end %>
             </strong>
@@ -35,13 +35,13 @@
             <%= article.index %>
           </td>
           <td>
-            <%= link_to admin_strota_article_path(article) do %>
+            <%= link_to admin_strotum_strota_article_path(article.strotum_id, article.id) do %>
               <i class="fa fa-eye"></i>
             <% end %>
-            <%= link_to edit_admin_strota_article_path(article) do %>
+            <%= link_to edit_admin_strotum_strota_article_path(article.strotum_id, article.id) do %>
               <i class="fa fa-edit"></i>
             <% end %>
-            <%= button_to '<i class="fa fa-trash" style="color:red;"></i>'.html_safe, admin_strota_article_path(article), method: :delete, style: "border: 0px", form: {class: 'ps-0 pe-0', style: "display:inline-block; font-size: 18px;"} %>
+            <%= button_to '<i class="fa fa-trash" style="color:red;"></i>'.html_safe, admin_strotum_strota_article_path(article.strotum_id, article.id), method: :delete, style: "border: 0px", form: {class: 'ps-0 pe-0', style: "display:inline-block; font-size: 18px;"} %>
           </td>
         </tr>
       <% end %>

@@ -6,6 +6,16 @@
           स्त्रोत/आरती सूची
         </div>
         <div class="dropdown-divider"></div>
+        <div class="m-sm-4 row">
+          <div class="col-md-3">
+            <label class='form-label'>
+              स्त्रोत/आरती
+            </label>
+          </div>
+          <div class="col-md-9" data-controller="admin-str-article">
+            <%= select_tag 'scripture', options_from_collection_for_select(@strota, "id", "title", params[:id]), prompt: "स्त्रोत/आरती चुने", class:"form-control", 'data-action': 'change->admin-str-article#selectStrotum' %>
+          </div>
+        </div>
         <div id="strota_list">
           <%= render "strotum", strota: @strota %>
           <%= link_to "नया स्त्रोत/आरती", new_admin_strotum_path %>

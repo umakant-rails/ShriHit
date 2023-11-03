@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" id="strota-list">
   <thead class="table-primary">
     <tr>
       <th>S. No.</th>
@@ -23,7 +23,8 @@
           </td>
           <td>
             <strong>
-              <%= strotum.title %>
+              <%#= link_to strotum.title, admin_strota_articles_path(id:strotum.id) %>
+              <%= link_to strotum.title, admin_strotum_strota_articles_path(strotum.id) %>
             </strong>
           </td>
           <td>
@@ -33,7 +34,8 @@
             <%= strotum.strota_type.name %>
           </td>
           <td>
-            <%= link_to "Add Articles", add_aarti_admin_strota_article_path(strotum.id) %>
+            <%= link_to "Add Articles", new_admin_strotum_strota_article_path(strotum.id) %>
+            <%= link_to "Edit Index", edit_article_index_admin_strotum_strota_articles_path(strotum.id) %>
           </td>
           <td>
             <%= link_to edit_admin_strotum_path(strotum) do %>

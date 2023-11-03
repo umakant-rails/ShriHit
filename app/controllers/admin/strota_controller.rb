@@ -5,7 +5,11 @@ class Admin::StrotaController < ApplicationController
 
   # GET /strota or /strota.json
   def index
-    @strota = Strotum.order("updated_at DESC").page(params[:page])
+    if params[:id].blank?
+      @strota = Strotum.order("updated_at DESC").page(params[:page])
+    else
+      @strota = Strotum.where("id=?", params[:id]).page(params[:page])
+    end
   end
 
   # GET /strota/1 or /strota/1.json

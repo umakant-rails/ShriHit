@@ -1,7 +1,0 @@
-<% if @article.present? %>
-  $("#strota_article_article_type_id").val("<%= @article.article_type_id %>");
-  $("#strota_article_index").val("<%= @article.index + 1 %>");
-<% else %>
-  $("#strota_article_article_type_id").val("")
-  $("#strota_article_index").val("0");
-<% end %>

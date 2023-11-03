@@ -1,18 +1,14 @@
 class Admin::StrotaArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :verify_admin
+  before_action :set_strotum
   before_action :set_strota_article, only: %i[show edit update destroy ]
 
   # GET /strota_articles or /strota_articles.json
   def index
     @strota = Strotum.all
     
-    if params[:id].present?
-      @strotum = Strotum.find(params[:id])
-      @strota_articles = @strotum.strota_articles.order("index ASC").page(params[:page])
-    else
-      @strota_articles = StrotaArticle.order("created_at DESC").page(params[:page])
-    end
+    @strota_articles = @strotum.strota_articles.order("created_at DESC").page(params[:page])
   end
 
   # GET /strota_articles/1 or /strota_articles/1.json
@@ -23,7 +19,7 @@ class Admin::StrotaArticlesController < ApplicationController
   def new
     @strota = Strotum.all
     article = nil
-    @strotum = Strotum.find(params[:id]) if params[:id].present?
+    # @strotum = Strotum.find(params[:id]) if params[:id].present?
 
     if @strotum && @strota_article.blank?
       article = @strotum.strota_articles.order("index ASC").last rescue nil
@@ -32,12 +28,11 @@ class Admin::StrotaArticlesController < ApplicationController
     end
 
     if article.present?
-      @strota_article = StrotaArticle.new(
-        strotum_id: article.strotum_id, 
+      @strota_article = @strotum.strota_articles.new(
         article_type_id: article.article_type_id,
         index: article.index+1)
     else
-      @strota_article = StrotaArticle.new
+      @strota_article = @strotum.strota_articles.new(index: 1)
     end
   end
 
@@ -54,7 +49,7 @@ class Admin::StrotaArticlesController < ApplicationController
 
     respond_to do |format|
       if @strota_article.save
-        format.html { redirect_to new_admin_strota_article_url(article_id: @strota_article.id), notice: "Strota article was successfully created." }
+        format.html { redirect_to new_admin_strotum_strota_article_url(article_id: @strota_article.id), notice: "Strota article was successfully created." }
         format.json { render :show, status: :created, location: @strota_article }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -86,18 +81,9 @@ class Admin::StrotaArticlesController < ApplicationController
     end
   end
 
-  def get_strota_articles
-    @strotum = Strotum.find(params[:id])
-    @articles = @strotum.strota_articles.order("index ASC").page(params[:page]) rescue []
-  end
-
-  def get_index
-    @strotum = Strotum.find(params[:strota_id])
-    @article = @strotum.strota_articles.order("index ASC").last rescue nil
-  end
-
   def edit_article_index
     @strota = Strotum.all
+    @strota_articles = @strotum.strota_articles.order("index ASC").page(params[:page]) rescue []
   end
 
   def update_article_index
@@ -114,6 +100,10 @@ class Admin::StrotaArticlesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_strotum
+      @strotum = Strotum.find(params[:strotum_id]) rescue nil
+    end
+
     def set_strota_article
       @strota_article = StrotaArticle.find(params[:id])
     end

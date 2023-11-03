@@ -280,31 +280,10 @@
       </span>
     </a>
   </li>
-  <li class="sidebar-item <%= set_active("admin/strota", other_actions) %>">
+  <li class="sidebar-item <%= set_active("admin/strota,admin/strota_articles", other_actions) %>">
     <a class="sidebar-link" href="<%= admin_strota_path %>">
       <span class="align-middle">
         स्त्रोत/आरती सूची
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_active("admin/strota_articles", new_actions) %>">
-    <a class="sidebar-link" href="<%= new_admin_strota_article_path %>">
-      <span class="align-middle">
-        स्त्रोत/आरती रचना जोड़े
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_active("admin/strota_articles", other_actions) %>">
-    <a class="sidebar-link" href="<%= admin_strota_articles_path %>">
-      <span class="align-middle">
-        स्त्रोत/आरती रचना सूची
-      </span>
-    </a>
-  </li>
-  <li class="sidebar-item <%= set_active("admin/strota_articles", ['edit_article_index']) %>">
-    <a class="sidebar-link" href="<%= edit_article_index_admin_strota_articles_path %>">
-      <span class="align-middle">
-        रचना अनुक्रम का अद्यतन
       </span>
     </a>
   </li>

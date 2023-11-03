@@ -1,4 +1,4 @@
-<%= form_with(model: [:admin, strota_article]) do |form| %>
+<%= form_with(model: [:admin, strotum, strota_article]) do |form| %>
   <div class="row">
     <div class="mb-3 alert alert-danger alert-dismissible fade show" style="display:  <%= strota_article.errors.present? ? 'block' : 'none' %>;" role="alert">
       <% strota_article.errors.each do |error| %>
@@ -14,7 +14,7 @@
             स्त्रोत/आरती <i class="fa fa-asterisk req-field" aria-hidden="true"></i>
           </label>
           <% strota_list = strota.collect{|s| [s.title, s.id]} %>
-          <%= form.select :strotum_id, options_for_select(strota_list, form.object.strotum_id), 
+          <%= form.select :strotum_id, options_for_select(strota_list, params[:strotum_id]), 
             {prompt: 'स्त्रोत/आरती को चुनिये'}, class: 'form-control', 'data-action': 'change->admin-str-article#getIndex' %>
         </div>
          <div class="col-md-4">

@@ -23,7 +23,7 @@
           </td>
           <td>
             <%= number_field_tag "index", str_article.index, style: "width: 60px", 'data-admin-str-article-target': 'articleIndex', id: "article_index_#{str_article.id}" %>
-            <%= button_tag 'अनुक्रम अद्यतित करे', type:"button", class: "btn btn-primary", style:"display:inline-block;", 'data-articleId': str_article.id,
+            <%= button_tag 'अनुक्रम अद्यतित करे', type:"button", class: "btn btn-primary", style:"display:inline-block;", 'data-strotumId': str_article.strotum_id, 'data-articleId': str_article.id,
               'data-action': 'click->admin-str-article#updateArticleIndex' %>
           </td>
         </tr>
@@ -38,6 +38,6 @@
   </tbody>
 </table>
 <% if strota_articles.present? && paginate(strota_articles).present? %>
-  <%= paginate strota_articles, remote: true %>
+  <%= paginate strota_articles %>
   <div class="dropdown-divider"></div>
 <% end %>

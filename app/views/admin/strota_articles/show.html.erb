@@ -22,9 +22,9 @@
           </div>
         </div>
         <div class="dropdown-divider"></div>
-        <%= link_to "रचना सूची देखें", admin_strota_articles_path %> | 
-        <%= link_to "रचना अद्यतन करें", edit_admin_strota_article_path(@strota_article) %> |
-        <%= button_to("रचना डिलीट करे", admin_strota_article_path(@strota_article), method: :delete, :class => "btn text-danger btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
+        <%= link_to "रचना सूची देखें", admin_strotum_strota_articles_path(@strota_article.strotum_id) %> | 
+        <%= link_to "रचना अद्यतन करें", edit_admin_strotum_strota_article_path(@strota_article.strotum_id, @strota_article.id) %> |
+        <%= button_to("रचना डिलीट करे", admin_strotum_strota_article_path(@strota_article.strotum_id, @strota_article.id), method: :delete, :class => "btn text-danger btn-link ps-0", form_class: 'btn ps-0 pe-0') %>
       </div>
     </div>
   </div>
