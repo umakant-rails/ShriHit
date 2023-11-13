@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="page-subject-header-purple mb-5 fnt-sz-26">
+  <div class="page-subject-header-purple mb-2 fnt-sz-26">
     <%= @story.title %>
   </div>
   <div class="card-body h-100 pb-2" id="article-list">
@@ -7,7 +7,7 @@
       
       <div class="col-md-8 fnt-sz-24">
         <div class="article-pad" data-scripture-target="page" >
-          <div class="fnt-sz-22">
+          <div class="fnt-sz-22 text-indent-1">
             <%= raw @story.story %>
           </div>
         </div>
@@ -18,11 +18,19 @@
         </div>
         <% if @stories.present? %>
           <ul class="list-group list-group-flush mb-4">
-            <% @stories.each_with_index do | story, index | %>
+            <% @stories.limit(10).each_with_index do | story, index | %>
               <li class="list-group-item">
                 <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
                 <%= story.title %>
               </li>
+            <% end %>
+            <%if @stories.length > 10 %>
+              <%= link_to public_stories_path do%>
+                <li class="list-group-item">
+                  <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
+                  View more ...
+                </li>
+              <% end %>
             <% end %>
           </ul>
         <% else %>
