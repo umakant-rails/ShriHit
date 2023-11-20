@@ -7,8 +7,10 @@
         <% if scriptures.length > 0 %>
           <!-- <div class="page-subject-header-blue mb-3"><%#= type.name %></div> -->
           <% scriptures.each_with_index do | scripture, index | %>
-            <%= link_to public_scripture_path(scripture.name_eng) do %>
-              <img class="scripture-img" src="/assets/<%= string_format(scripture.name_eng) %>.png" width="180px">
+            <% if scripture.scripture_type.name == "रसिक वाणी" %>
+              <%= link_to public_scripture_path(scripture.name_eng) do %>
+                <img class="scripture-img" src="/assets/<%= string_format(scripture.name_eng) %>.png" width="180px">
+              <% end %>
             <% end %>
           <% end %>
         <% end %>

@@ -43,20 +43,29 @@
       </div>
       <div class="col-md-4">
         <div class="page-subject-header-lemon">
-          रसिक वाणी
+          कथा संग्रह
         </div>
-        <% if @scriptures.present? %>
+        <% if @stories_books.present? %>
           <ul class="list-group list-group-flush mb-4">
-            <% @scriptures.each_with_index do | scr | %>
+            <% @stories_books.each_with_index do | scr | %>
               <li class="list-group-item">
                 <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
                 <%= scr.name %>
               </li>
             <% end %>
           </ul>
-        <% else %>
+        <% end %>
+        <div class="page-subject-header-lemon">
+          रसिक वाणी
+        </div>
+        <% if @rasik_vanis.present? %>
           <ul class="list-group list-group-flush mb-4">
-            <li class="list-group-item">There is no data available.</li>
+            <% @rasik_vanis.each_with_index do | scr | %>
+              <li class="list-group-item">
+                <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
+                <%= scr.name %>
+              </li>
+            <% end %>
           </ul>
         <% end %>
         <div class="page-subject-header-lemon">

@@ -14,7 +14,8 @@ class Public::StoriesController < ApplicationController
     
     def set_required_data
       @sants = Author.where("biography!= ''").limit(5) rescue []
-      @scriptures = Scripture.all.limit(5)
+      @rasik_vanis = Scripture.joins(:scripture_type).where("scripture_types.name =? ", "रसिक वाणी").limit(6)
+      @stories_books  = Scripture.joins(:scripture_type).where("scripture_types.name =? ", "कथायें").limit(6)
     end
 
 end
