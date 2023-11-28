@@ -19,53 +19,36 @@
                     <% end %>
                   </div>
                 </div>
-                <div class="row pb-2">
+                <div class="row pb-3">
                   <%= link_to public_story_path(story.title) do %>
                     <div class="article-text">
                       <%= raw story.story %>
                     </div>
                   <% end %>
                 </div>
-
-                <div class="">
-                  <% if story.scripture.present? %>
-                    स्त्रोत:  <%= link_to story.scripture.name ,public_story_path(story.title) %>
-                  <% else %>
-                    स्त्रोत:  <%= link_to 'उपलब्ध नहीं' ,"#" %>
-                  <% end %>
-                </div>
               </div>
             </div>
-            <hr>
+            <hr> 
           <% end %>
+          <%= paginate @stories %>
         <% end %>
-        <%= paginate @stories %>
       </div>
       <div class="col-md-4">
         <div class="page-subject-header-lemon">
-          कथा संग्रह
+          रसिक वाणी
         </div>
-        <% if @stories_books.present? %>
+        <% if @scriptures.present? %>
           <ul class="list-group list-group-flush mb-4">
-            <% @stories_books.each_with_index do | scr | %>
+            <% @scriptures.each_with_index do | scr | %>
               <li class="list-group-item">
                 <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
                 <%= scr.name %>
               </li>
             <% end %>
           </ul>
-        <% end %>
-        <div class="page-subject-header-lemon">
-          रसिक वाणी
-        </div>
-        <% if @rasik_vanis.present? %>
+        <% else %>
           <ul class="list-group list-group-flush mb-4">
-            <% @rasik_vanis.each_with_index do | scr | %>
-              <li class="list-group-item">
-                <i class="fa-solid fa-book me-2 user-icon text-primary"></i>
-                <%= scr.name %>
-              </li>
-            <% end %>
+            <li class="list-group-item">There is no data available.</li>
           </ul>
         <% end %>
         <div class="page-subject-header-lemon">

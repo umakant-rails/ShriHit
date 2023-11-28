@@ -7,7 +7,7 @@ class Public::StoriesController < ApplicationController
 
   def show
     @story = Story.where(title: params[:id])[0] rescue nil
-    @stories = Story.where("id not in(?)", @story.id)
+    @stories = @story.present? ? Story.where("id not in(?)", @story.id).first(10) : Story.first(10)
   end
 
   private
