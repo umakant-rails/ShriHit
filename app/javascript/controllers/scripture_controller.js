@@ -49,12 +49,12 @@ export default class extends ApplicationController {
   displayPageIndexing(event){
     var isHideIndexingPage = this.indexingPageTarget.classList.contains('hide');
     if(isHideIndexingPage){
-      // this.pageParentTarget.classList.add('hide');
+      this.pageParentTarget.classList.add('hide');
       this.indexingPageTarget.classList.remove('hide');
       this.pageParentTarget.classList.remove('col-md-12');
       this.pageParentTarget.classList.add('col-md-8');
     } else {
-      // this.pageParentTarget.classList.remove('hide');
+      this.pageParentTarget.classList.remove('hide');
       this.indexingPageTarget.classList.add('hide');
       this.pageParentTarget.classList.remove('col-md-8');
       this.pageParentTarget.classList.add('col-md-12');
