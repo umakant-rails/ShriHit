@@ -25,6 +25,9 @@ pin "chartkick", to: "chartkick.js"
 pin "Chart.bundle", to: "Chart.bundle.js"
 pin "swiper", to: "https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"
 pin "@rails/ujs", to: "https://ga.jspm.io/npm:@rails/ujs@7.0.3-1/lib/assets/compiled/rails-ujs.js"
+pin "datatables.net", to: "https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.mjs"
+pin "datatables.net-bs5", to: "https://cdn.datatables.net/1.13.8/js/dataTables.bootstrap5.mjs"
+
 
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin_all_from "app/javascript/custom", under: "custom"

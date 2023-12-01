@@ -1,7 +1,7 @@
 class Public::AuthorsController < ApplicationController
 
   def index
-    @authors = Author.where("name != 'अज्ञात'").order("name ASC").page(params[:page]).page(params[:page])
+    @authors = Author.where("name != 'अज्ञात'").order("name ASC") #.page(params[:page]).page(params[:page])
   end
 
   def show

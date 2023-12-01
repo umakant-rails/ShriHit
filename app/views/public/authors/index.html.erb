@@ -1,15 +1,14 @@
 <%#= render partial: 'search_bar'%>
-
 <div class="card">
   <div class="page-subject-header">
     रचनाकार / कवि / भक्त सूची
   </div>
-  <div class="card-body h-100" style="min-height: 545px;">
-    <table class="table">
+  <div class="card-body h-100">
+    <table class="table display" id="author-list">
       <thead class="table-primary">
         <tr>
           <th scope="col">#</th>
-          <th scope="col">नाम    </th>
+          <th scope="col">नाम</th>
           <th scope="col">सम्प्रदाय</th>
           <th scope="col">रचनायें</th>
         </tr>
@@ -22,7 +21,7 @@
         <% if @authors.present? %>
           <% @authors.each_with_index do | author, index | %>
             <tr>
-              <th scope="row"><%= (page * page_size) + (index + 1) %></th>
+              <th scope="row"><%= (index + 1) %></th>
               <td>
                 <a href="<%= public_author_path(author.id)%>">
                   <%= author.name %>
@@ -43,6 +42,10 @@
         <% end %>
       </tbody>
     </table>
-    <%= paginate @authors if @authors.present? %>
+    <%#= paginate @authors if @authors.present? %>
   </div>
 </div>
+<% content_for :head do %>
+  <%= javascript_import_module_tag "custom/author-datatable-custom" %>
+<% end %>
+
