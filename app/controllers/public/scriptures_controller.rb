@@ -9,8 +9,10 @@ class Public::ScripturesController < ApplicationController
 
   def show
     @scripture = Scripture.where(name_eng: params[:id].strip).first rescue nil
-    if @scripture.present?
+    if @scripture.present? && @scripture.scripture_type.name == "रसिक वाणी"
       @articles = @scripture.articles.order("index")
+    elsif @scripture.present? && @scripture.scripture_type.name == "कथायें"
+      @articles = @scripture.stories.order("index")
     end
 
     respond_to do |format|
