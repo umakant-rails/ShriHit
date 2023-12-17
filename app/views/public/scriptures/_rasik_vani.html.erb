@@ -11,22 +11,13 @@
       <div class="fRight text-danger" data-action="click->scripture#displayPageIndexing"><i class="fa-regular fa-circle-xmark"></i></div>
     </div>
     <div class="row">
-      <% len = (@articles.length/2.0).ceil %>
-      <% len.times do | index | %>
-        <div class="col-md-6 fnt-b fnt-sz-16 pt-3 ps-3" style="border-right: 1px solid lightgray;" >
+      <% @articles.each_with_index do | article, index | %>
+        <div class="col-md-6 fnt-b fnt-sz-20 pt-2 pb-2 ps-3 bdr-bottom <%= 'bdr-right' if index%2 == 0%>" >
           <%= index + 1 %>. 
           <a href="javascript:void(0);" data-index="<%= index + 1 %>" data-action="click->scripture#displayPage">
             <%= @articles[index].hindi_title %>
           </a>
         </div>
-        <% if @articles[len + index].present? %>
-          <div class="col-md-6 fnt-b fnt-sz-16 pt-3 ps-3" >
-            <%= len + index + 1 %>. 
-            <a href="javascript:void(0);" data-index="<%= len + index + 1 %>" data-action="click->scripture#displayPage">
-              <%= @articles[len + index].hindi_title %>
-            </a>
-          </div>
-        <% end %>
       <% end %>
     </div>
   </div>
@@ -37,25 +28,25 @@
         <i class="fa-solid fa-chevron-left fnt-sz-30" data-action="click->scripture#navigationPrevious" data-scripture-target="previous"></i>
       </div>
       <div class="col-md-10 fnt-sz-24" data-action="click->scripture#navigation">
-        <center>
+        <div class="text">
           <% @articles.each_with_index do | article, index | %>
             <% if index == 0 %>
               <div class="article-pad1" id="pad-<%= index %>" data-scripture-target="page" data-page="<%= index + 1 %>">
-                <div class="mb-5 fnt-sz-22 fnt-b title-text mt-3 ">
+                <div class="mb-5 fnt-sz-24 fnt-b title-text mt-3 text-center">
                   <span><%= index + 1 %>. <%= article.hindi_title %></span>
                 </div>
-                <div class="fnt-sz-20"><%= raw article.content %></div>
+                <div class="fnt-sz-24"><%= raw article.content %></div>
               </div>
             <% else %>
               <div class="article-pad hide" data-scripture-target="page" data-page="<%= index + 1 %>">
-                <div class="mb-5 fnt-sz-22 fnt-b title-text mt-3">
+                <div class="mb-5 fnt-sz-24 fnt-b title-text mt-3 text-center">
                   <%= index + 1 %>. <%= article.hindi_title %>
                 </div>
-                <div class="fnt-sz-20"><%= raw article.content %></div>
+                <div class="fnt-sz-24"><%= raw article.content %></div>
               </div>
             <% end %>
           <% end %>
-        </center>
+        </div>
       </div>
       <div class="col-md-1 vm-align">
         <i class="fa-solid fa-chevron-right fnt-sz-30" data-action="click->scripture#navigationNext"  data-scripture-target="next"></i>

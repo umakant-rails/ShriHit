@@ -41,17 +41,17 @@
         <% @articles.each_with_index do | article, index | %>
           <% if index == 0 %>
             <div class="article-pad" id="pad-<%= index %>" data-scripture-target="page" data-page="<%= index + 1 %>">
-              <div class="mb-5 fnt-sz-22 fnt-b title-text mt-3 ">
+              <div class="mb-5 fnt-sz-24 fnt-b title-text mt-3 ">
                 <center><span><%= index + 1 %>. <%= article.title %></span></center>
               </div>
-              <div class="fnt-sz-20"><%= raw article.story %></div>
+              <div class="fnt-sz-22"><%= raw article.story %></div>
             </div>
           <% else %>
             <div class="article-pad hide" data-scripture-target="page" data-page="<%= index + 1 %>">
-              <div class="mb-5 fnt-sz-22 fnt-b title-text mt-3">
+              <div class="mb-5 fnt-sz-24 fnt-b title-text mt-3">
                 <center><span><%= index + 1 %>. <%= article.title %></span></center>
               </div>
-              <div class="fnt-sz-20"><%= raw article.story %></div>
+              <div class="fnt-sz-22"><%= raw article.story %></div>
             </div>
           <% end %>
         <% end %>
