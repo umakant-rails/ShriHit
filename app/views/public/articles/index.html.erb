@@ -10,7 +10,7 @@
   	<% @articles && @articles.each do | article | %>
       <swiper-slide>
     		<div class="col-md">
-    			<a href="<%= public_article_path(article) %>">
+    			<a href="<%= public_article_path(article.hindi_title) %>">
       			<div class="card">
       			  <img src="/assets/shriji_charan.png" class="card-img-top" alt="Shrihit" style="border-bottom:2px solid #D3D3D3;">
       			  <div class="card-body">
@@ -39,7 +39,7 @@
                   )
                 </div>
                 <div class="dropdown-divider mb-4"></div>
-      			    <a href="<%= public_article_path(article) %>" class="btn btn-warning">रचना देखें</a>
+      			    <a href="<%= public_article_path(article.hindi_title) %>" class="btn btn-warning">रचना देखें</a>
       			  </div>
       			</div>
       		</a>
@@ -55,7 +55,7 @@
     <% @articles && @articles.each do | article | %>
       <swiper-slide>
         <div class="col-md">
-          <a href="<%= public_article_path(article) %>">
+          <a href="<%= public_article_path(article.hindi_title) %>">
             <div class="card">
               <img src="/assets/shriji_charan.png" class="card-img-top" alt="Shrihit" style="border-bottom:2px solid #D3D3D3;">
               <div class="card-body">
@@ -84,7 +84,7 @@
                   )
                 </div>
                 <div class="dropdown-divider mb-4"></div>
-                <a href="<%= public_article_path(article) %>" class="btn btn-warning">रचना देखें</a>
+                <a href="<%= public_article_path(article.hindi_title) %>" class="btn btn-warning">रचना देखें</a>
               </div>
             </div>
           </a>
